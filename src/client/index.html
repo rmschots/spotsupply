@@ -7,8 +7,6 @@
   <title><%= APP_TITLE %></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="<%= APP_BASE %>assets/favicon/favicon-<%= ENV_CONFIG.ENV %>.ico" type="image/x-icon">
-
   <!-- inject:css -->
   <!-- endinject -->
 </head>
@@ -39,7 +37,7 @@
   System.import('<%= BOOTSTRAP_MODULE %>')
     .catch(function (e) {
       console.error(e.stack || e,
-        'Not expecting this error? Report it at https://github.com/mgechev/angular-seed/issues');
+        'Not expecting this error? Report it at https://github.com/mgechev/angular2-seed/issues');
     });
   </script>
   <% } %>

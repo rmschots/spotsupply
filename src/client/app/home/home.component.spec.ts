@@ -1,27 +1,39 @@
+import { Component } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import {
-  async,
-  TestBed
- } from '@angular/core/testing';
+  async
+} from '@angular/core/testing';
+import {
+  BaseRequestOptions,
+  ConnectionBackend,
+  Http, HttpModule
+} from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 
-import { Observable } from 'rxjs/Observable';
-
-import { HomeComponent } from './home.component';
-import { NameListService } from '../shared/name-list/name-list.service';
+import { NameListService } from '../shared/index';
+import { HomeModule } from './home.module';
 
 export function main() {
   describe('Home component', () => {
-
+    // setting module for testing
+    // Disable old forms
     beforeEach(() => {
-
       TestBed.configureTestingModule({
-        imports: [FormsModule],
-        declarations: [HomeComponent],
+        imports: [FormsModule, RouterModule, HttpModule, HomeModule],
+        declarations: [TestComponent],
         providers: [
-          { provide: NameListService, useValue: new MockNameListService() }
+          NameListService,
+          BaseRequestOptions,
+          MockBackend,
+          {provide: Http, useFactory: function (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) {
+              return new Http(backend, defaultOptions);
+            },
+            deps: [MockBackend, BaseRequestOptions]
+          },
         ]
       });
-
     });
 
     it('should work',
@@ -29,41 +41,30 @@ export function main() {
         TestBed
           .compileComponents()
           .then(() => {
-            let fixture = TestBed.createComponent(HomeComponent);
-            let homeInstance = fixture.debugElement.componentInstance;
-            let homeDOMEl = fixture.debugElement.nativeElement;
-            let mockNameListService = <MockNameListService>fixture.debugElement.injector.get(NameListService);
-            let nameListServiceSpy = spyOn(mockNameListService, 'get').and.callThrough();
-
-            mockNameListService.returnValue = ['1', '2', '3'];
-
+            let fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
 
-            expect(homeInstance.nameListService).toEqual(jasmine.any(MockNameListService));
-            expect(homeDOMEl.querySelectorAll('li').length).toEqual(3);
-            expect(nameListServiceSpy.calls.count()).toBe(1);
+            let homeInstance = fixture.debugElement.children[0].componentInstance;
+            let homeDOMEl = fixture.debugElement.children[0].nativeElement;
+
+            expect(homeInstance.nameListService).toEqual(jasmine.any(NameListService));
+            expect(homeDOMEl.querySelectorAll('li').length).toEqual(0);
 
             homeInstance.newName = 'Minko';
             homeInstance.addName();
 
             fixture.detectChanges();
 
-            expect(homeDOMEl.querySelectorAll('li').length).toEqual(4);
-            expect(homeDOMEl.querySelectorAll('li')[3].textContent).toEqual('Minko');
+            expect(homeDOMEl.querySelectorAll('li').length).toEqual(1);
+            expect(homeDOMEl.querySelectorAll('li')[0].textContent).toEqual('Minko');
           });
 
       }));
   });
 }
 
-class MockNameListService {
-
-  returnValue: string[];
-
-  get(): Observable<string[]> {
-    return Observable.create((observer: any) => {
-      observer.next(this.returnValue);
-      observer.complete();
-    });
-  }
-}
+@Component({
+  selector: 'test-cmp',
+  template: '<sd-home></sd-home>'
+})
+class TestComponent { }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NameListService } from '../shared/name-list/name-list.service';
+import { NameListService } from '../shared/index';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -10,6 +10,7 @@ import { NameListService } from '../shared/name-list/name-list.service';
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
 })
+
 export class HomeComponent implements OnInit {
 
   newName: string = '';
@@ -38,7 +39,7 @@ export class HomeComponent implements OnInit {
     this.nameListService.get()
       .subscribe(
         names => this.names = names,
-        error => this.errorMessage = <any>error
+        error =>  this.errorMessage = <any>error
       );
   }
 

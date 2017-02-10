@@ -3,13 +3,16 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 
 import Config from '../../config';
-import { makeTsProject, TemplateLocalsBuilder } from '../../utils';
+import { makeTsProject, templateLocals } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
 
 /**
  * Executes the build process, transpiling the TypeScript files within the `tools` directory.
  */
+
+const locals = templateLocals();
+
 export = () => {
 
   let tsProject = makeTsProject();
@@ -25,7 +28,7 @@ export = () => {
     .pipe(tsProject());
 
   return result.js
-    .pipe(plugins.template(new TemplateLocalsBuilder().build()))
+    .pipe(plugins.template(locals))
     .pipe(plugins.sourcemaps.write())
     .pipe(gulp.dest('./'));
 };
