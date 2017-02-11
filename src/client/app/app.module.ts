@@ -23,7 +23,10 @@ import { Ng2MapModule } from 'ng2-map';
         HomeModule,
         SharedModule.forRoot(),
         MaterialModule.forRoot(),
-        Ng2MapModule.forRoot()
+        Ng2MapModule.forRoot({
+            apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBtYO0eJfiqw2AqMRu-0_X8gBVSUWiIymg' +
+            '&libraries=visualization,places,drawing',
+        })
     ],
     declarations: [AppComponent],
     providers: [{
