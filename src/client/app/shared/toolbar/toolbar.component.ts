@@ -4,23 +4,23 @@ import { Component } from '@angular/core';
  * This class represents the toolbar component.
  */
 @Component({
-  moduleId: module.id,
-  selector: 'sd-toolbar',
-  templateUrl: 'toolbar.component.html',
-  styleUrls: ['toolbar.component.css']
+    moduleId: module.id,
+    selector: 'sd-toolbar',
+    templateUrl: 'toolbar.component.html',
+    styleUrls: ['toolbar.component.css']
 })
 
 export class ToolbarComponent {
-  menuIsVisible: boolean = false;
+    menuIsVisible: boolean = false;
 
-  model = {
-    left: true,
-    middle: false,
-    right: false
-  };
+    model = {
+        left: true,
+        middle: false,
+        right: false
+    };
 
-  menuToggled(){
-    this.menuIsVisible = !this.menuIsVisible;
-  }
+    menuToggled() {
+        this.menuIsVisible = !this.menuIsVisible;
+    }
 }
 
