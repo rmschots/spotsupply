@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './home.component';
-import { NameListService } from '../shared/name-list/index';
+import { Ng2MapModule } from 'ng2-map';
 
 @NgModule({
-  imports: [CommonModule, SharedModule],
-  declarations: [HomeComponent],
-  exports: [HomeComponent],
-  providers: [NameListService]
+    imports: [CommonModule, SharedModule, Ng2MapModule],
+    declarations: [HomeComponent],
+    exports: [HomeComponent],
+    providers: []
 })
-export class HomeModule { }
+export class HomeModule {
+}

@@ -46,6 +46,15 @@ export class ProjectConfig extends SeedConfig {
             }
         });
 
+        this.addPackageBundles({
+            name: 'ng2-map',
+            path: 'node_modules/ng2-map/dist/index.js',
+            packageMeta: {
+                main: 'ng2-map.umd.js',
+                defaultExtension: 'js'
+            }
+        });
+
         /* Add to or override NPM module configurations: */
         // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
     }

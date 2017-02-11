@@ -11,16 +11,15 @@
         <h5 class="centered-title">Look if we're supplying at your spot!</h5>
     </div>
     <div class="images">
-        <div class="image-banner">
-            <img src="/assets/img/oostende.jpg"/>
-            <div class="image-overlay">
-                <h4>OOSTENDE</h4>
+        <div class="spot" *ngFor="let spot of spots">
+            <div class="image-banner" [ngStyle]="{'background-image': 'url(/assets/img/oostende.jpg)'}"
+                 (click)="selectSpot(spot)">
+                <div class="image-overlay">
+                    <h4>{{spot}}</h4>
+                </div>
             </div>
-        </div>
-        <div class="image-banner">
-            <img src="/assets/img/oostende.jpg"/>
-            <div class="image-overlay">
-                <h4>ANDERE BADPLAATS</h4>
+            <div *ngIf="selectedSpot == spot">
+                <ng2-map center="Oostende, Belgium"></ng2-map>
             </div>
         </div>
     </div>

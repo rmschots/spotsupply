@@ -61,3 +61,7 @@ button {
 button:hover {
   background-color: #28739e;
 }
+
+.sebm-google-map-container {
+  height: 300px;
+}

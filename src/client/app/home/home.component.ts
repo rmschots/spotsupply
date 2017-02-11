@@ -1,57 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { NameListService } from '../shared/index';
+import { Component } from '@angular/core';
+
 
 /**
  * This class represents the lazy loaded HomeComponent.
  */
 @Component({
-  moduleId: module.id,
-  selector: 'sd-home',
-  templateUrl: 'home.component.html',
-  styleUrls: ['home.component.css'],
+    moduleId: module.id,
+    selector: 'sd-home',
+    templateUrl: 'home.component.html',
+    styleUrls: ['home.component.css'],
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  newName: string = '';
-  errorMessage: string;
-  names: any[] = [];
+    spots: string[] = ['OOSTENDE', 'ANDERE BADPLAATS'];
 
-  /**
-   * Creates an instance of the HomeComponent with the injected
-   * NameListService.
-   *
-   * @param {NameListService} nameListService - The injected NameListService.
-   */
-  constructor(public nameListService: NameListService) {}
+    selectedSpot: string;
 
-  /**
-   * Get the names OnInit
-   */
-  ngOnInit() {
-    this.getNames();
-  }
+    lat: number = 51.678418;
+    lng: number = 7.809007;
 
-  /**
-   * Handle the nameListService observable
-   */
-  getNames() {
-    this.nameListService.get()
-      .subscribe(
-        names => this.names = names,
-        error =>  this.errorMessage = <any>error
-      );
-  }
+    constructor() {
+    }
 
-  /**
-   * Pushes a new name onto the names array
-   * @return {boolean} false to prevent default form submit behavior to refresh the page.
-   */
-  addName(): boolean {
-    // TODO: implement nameListService.post
-    this.names.push(this.newName);
-    this.newName = '';
-    return false;
-  }
-
+    selectSpot(spot: string) {
+        if (this.selectedSpot === spot) {
+            this.selectedSpot = null;
+        } else {
+            this.selectedSpot = spot;
+        }
+    }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 /**
  * This class represents the toolbar component.
@@ -10,17 +10,21 @@ import { Component } from '@angular/core';
     styleUrls: ['toolbar.component.css']
 })
 
-export class ToolbarComponent {
-    menuIsVisible: boolean = false;
+export class ToolbarComponent implements OnInit {
 
-    model = {
-        left: true,
-        middle: false,
-        right: false
-    };
+    menuIsVisible: boolean = false;
 
     menuToggled() {
         this.menuIsVisible = !this.menuIsVisible;
+    }
+
+    ngOnInit(): void {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini|Mobile/i
+                .test(navigator.userAgent)) {
+            console.log('mobile');
+        } else {
+            console.log('non-mobile');
+        }
     }
 }
 

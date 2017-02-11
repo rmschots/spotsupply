@@ -29,22 +29,30 @@ ul {
   padding-top: 30px;
 }
 
-.images > .image-banner {
-  width: 100%;
-  position: relative;
-  margin-bottom: 5px;
-}
-
-.images > .image-banner > img {
-  width: 100%;
+.images > .spot {
   padding: 5px;
   background-color: white;
   box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
   -moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
   -webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+  margin-bottom: 5px;
 }
 
-.images > .image-banner > .image-overlay {
+.images > .spot > .image-banner {
+  width: 100%;
+  position: relative;
+  height: 80px;
+  overflow: hidden;
+  background: no-repeat left center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.images > .spot > .image-banner > img {
+  width: 100%;
+}
+
+.images > .spot > .image-banner > .image-overlay {
   position: absolute;
   top: 0;
   height: 100%;
@@ -54,7 +62,12 @@ ul {
   align-items: center;
 }
 
-.images > .image-banner > .image-overlay > h4 {
+.images > .spot > .image-banner > .image-overlay > h4 {
   background-color: rgba(0, 0, 0, 0.50);
   color: white;
+  margin-bottom: 0;
+}
+
+.sebm-google-map-container {
+  height: 300px;
 }
