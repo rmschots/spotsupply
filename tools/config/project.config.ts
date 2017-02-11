@@ -24,7 +24,7 @@ export class ProjectConfig extends SeedConfig {
         // Add `NPM` third-party libraries to be injected/bundled.
         this.NPM_DEPENDENCIES = [
             ...this.NPM_DEPENDENCIES,
-            {src: 'bootstrap/dist/js/bootstrap.js', inject: 'libs'},
+            // {src: 'bootstrap/dist/js/bootstrap.js', inject: 'libs'},
             {src: 'bootstrap/dist/css/bootstrap.css', inject: true},
             {src: '@angular/material/core/theming/prebuilt/deeppurple-amber.css', inject: true},
             {src: 'font-awesome/css/font-awesome.css', inject: true}
