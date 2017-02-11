@@ -1,10 +1,27 @@
-<p>Howdy! Here's a list of awesome computer scientists. Do you know any others? Add to the list yourself.</p>
-
-<form (submit)="addName()">
-  <input [(ngModel)]="newName" name="newName" placeholder="Awesome Computer Scientist">
-  <button type="submit">Add</button>
-</form>
-
-<ul>
-  <li *ngFor="let name of names">{{name}}</li>
-</ul>
+<div class="container-fluid">
+    <div class="padded-row row">
+        <div class="col col-6">
+            <button md-raised-button class="btn-block">Orders</button>
+        </div>
+        <div class="col col-6">
+            <button md-raised-button class="btn-block">Account</button>
+        </div>
+    </div>
+    <div class="padded-row-xl row text-center">
+        <h5 class="centered-title">Look if we're supplying at your spot!</h5>
+    </div>
+    <div class="images">
+        <div class="image-banner">
+            <img src="/assets/img/oostende.jpg"/>
+            <div class="image-overlay">
+                <h4>OOSTENDE</h4>
+            </div>
+        </div>
+        <div class="image-banner">
+            <img src="/assets/img/oostende.jpg"/>
+            <div class="image-overlay">
+                <h4>ANDERE BADPLAATS</h4>
+            </div>
+        </div>
+    </div>
+</div>

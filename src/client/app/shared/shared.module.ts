@@ -1,10 +1,10 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from '@angular/material';
 
 import { ToolbarComponent } from './toolbar/index';
-import { NavbarComponent } from './navbar/index';
 import { NameListService } from './name-list/index';
 
 /**
@@ -12,16 +12,16 @@ import { NameListService } from './name-list/index';
  */
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
-  declarations: [ToolbarComponent, NavbarComponent],
-  exports: [ToolbarComponent, NavbarComponent,
-    CommonModule, FormsModule, RouterModule]
+    imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, MaterialModule],
+    declarations: [ToolbarComponent],
+    exports: [ToolbarComponent,
+        CommonModule, FormsModule, RouterModule, MaterialModule]
 })
 export class SharedModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: SharedModule,
-      providers: [NameListService]
-    };
-  }
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: SharedModule,
+            providers: [NameListService]
+        };
+    }
 }

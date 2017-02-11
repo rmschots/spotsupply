@@ -11,3 +11,50 @@ ul {
   list-style-type: none;
   padding: 0 0 0 8px;
 }
+
+.centered-title {
+  width: 100%;
+}
+
+.btn-half-screen {
+  width: 50%;
+}
+
+.padded-row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.padded-row-xl {
+  padding-top: 30px;
+}
+
+.images > .image-banner {
+  width: 100%;
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.images > .image-banner > img {
+  width: 100%;
+  padding: 5px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+  -moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
+  -webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+
+.images > .image-banner > .image-overlay {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.images > .image-banner > .image-overlay > h4 {
+  background-color: rgba(0, 0, 0, 0.50);
+  color: white;
+}

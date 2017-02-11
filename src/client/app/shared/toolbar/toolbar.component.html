@@ -1,2 +1,11 @@
-<h1>Angular 2 Seed</h1>
-<div class="more"></div>
+<h1>SpotSupply</h1>
+<div class="more-parent" [ngClass]="{'selected-background': menuIsVisible}" (click)="menuToggled()">
+    <div class="more"></div>
+</div>
+
+<nav *ngIf="menuIsVisible">
+    <a [routerLink]="['/']" [routerLinkActive]="['router-link-active']"
+       [routerLinkActiveOptions]="{exact:true}" (click)="menuToggled()">HOME</a>
+    <a [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"
+       (click)="menuToggled()">ABOUT</a>
+</nav>
