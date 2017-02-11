@@ -20,9 +20,6 @@ export class HomeComponent {
     lat: number = 51.678418;
     lng: number = 7.809007;
 
-    constructor() {
-    }
-
     selectSpot(spot: string) {
         if (this.selectedSpot === spot) {
             this.selectedSpot = null;
