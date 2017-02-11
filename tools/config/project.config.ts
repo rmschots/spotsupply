@@ -24,7 +24,7 @@ export class ProjectConfig extends SeedConfig {
         // Add `NPM` third-party libraries to be injected/bundled.
         this.NPM_DEPENDENCIES = [
             ...this.NPM_DEPENDENCIES,
-            // {src: 'bootstrap/dist/js/bootstrap.js', inject: 'libs'},
+            {src: 'bootstrap/dist/js/bootstrap.js', inject: 'libs'},
             {src: 'bootstrap/dist/css/bootstrap.css', inject: true},
             {src: '@angular/material/core/theming/prebuilt/deeppurple-amber.css', inject: true},
             {src: 'font-awesome/css/font-awesome.css', inject: true}
@@ -36,15 +36,6 @@ export class ProjectConfig extends SeedConfig {
             // {src: `${this.APP_SRC}/your-path-to-lib/libs/jquery-ui.js`, inject: true, vendor: false}
             // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
         ];
-
-        this.addPackageBundles({
-            name: '@ng-bootstrap/ng-bootstrap',
-            path: 'node_modules/@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
-            packageMeta: {
-                main: 'index.js',
-                defaultExtension: 'js'
-            }
-        });
 
         this.addPackageBundles({
             name: '@angular/material',

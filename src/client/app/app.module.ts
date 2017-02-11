@@ -5,14 +5,13 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AboutModule } from './about/about.module';
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from '@angular/material';
 
 @NgModule({
-    imports: [BrowserModule, HttpModule, RouterModule.forRoot(routes), NgbModule.forRoot(), AboutModule, HomeModule,
+    imports: [BrowserModule, HttpModule, RouterModule.forRoot(routes), AboutModule, HomeModule,
         SharedModule.forRoot(), MaterialModule.forRoot()],
     declarations: [AppComponent],
     providers: [{
