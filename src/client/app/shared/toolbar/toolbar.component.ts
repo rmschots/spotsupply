@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { TranslateService } from 'ng2-translate';
+import { Language } from './language';
 
 /**
  * This class represents the toolbar component.
@@ -14,15 +16,25 @@ export class ToolbarComponent implements OnInit {
 
     @Output() menuOpen = new EventEmitter<boolean>();
 
-    languages: string[] = ['eng', 'be-nl', 'be-fr'];
-    language: string = this.languages[0];
+    languages: Language[] = [
+        new Language('en', 'English'),
+        new Language('be-nl', 'Nederlands'),
+        new Language('be-fr', 'Français')
+    ];
+    selectedLanguage: Language = this.languages[0];
+
+    constructor(private translate: TranslateService) {
+        translate.setDefaultLang(this.selectedLanguage.code);
+        translate.use(this.selectedLanguage.code);
+    }
 
     menuOpened() {
         this.menuOpen.next();
     }
 
-    languageSelected(selectedLanguage: string) {
-        this.language = selectedLanguage;
+    languageSelected(language: Language) {
+        this.selectedLanguage = language;
+        this.translate.use(this.selectedLanguage.code);
     }
 
     ngOnInit(): void {

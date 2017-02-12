@@ -63,6 +63,16 @@ export class ProjectConfig extends SeedConfig {
                 defaultExtension: 'js'
             }
         });
+
+        this.addPackageBundles({
+            name: 'ng2-translate',
+            path: 'node_modules/ng2-translate/bundles/ng2-translate.umd.js',
+            packageMeta: {
+                main: 'ng2-translate.js',
+                defaultExtension: 'js'
+            }
+        });
+
         //
         // this.addPackageBundles({
         //     name: 'ng2-page-scroll/ng2-page-scroll',

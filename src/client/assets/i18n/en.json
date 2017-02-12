@@ -1,0 +1,10 @@
+{
+  "OSTEND": "OSTEND",
+  "OTHER_BEACH": "OTHER BEACH",
+  "HOME": {
+    "lookForSupplyAtSpot": "Look if we're Supplying at your Spot!",
+    "orders": "Orders",
+    "account": "Account",
+    "takeMyOrder": "Take my order"
+  }
+}

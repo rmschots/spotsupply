@@ -2,6 +2,7 @@ import { Component, ViewChild, Inject, ElementRef } from '@angular/core';
 import { Ng2MapComponent, NavigatorGeolocation } from 'ng2-map';
 import { PageScrollService, PageScrollInstance, PageScrollConfig } from 'ng2-page-scroll/ng2-page-scroll';
 import { DOCUMENT } from '@angular/platform-browser';
+import { TranslateService } from 'ng2-translate';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -17,7 +18,7 @@ export class HomeComponent {
 
     map: google.maps.Map;
 
-    spots: string[] = ['OOSTENDE', 'ANDERE BADPLAATS'];
+    spots: string[] = ['OSTEND', 'OTHER_BEACH'];
 
     selectedSpot: string;
 

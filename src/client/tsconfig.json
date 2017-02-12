@@ -28,7 +28,8 @@
       "systemjs",
       "ng2-map",
       "ng2-page-scroll",
-      "hammerjs"
+      "hammerjs",
+      "ng2-translate"
     ]
   },
   "exclude": [

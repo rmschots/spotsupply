@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http } from '@angular/http';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { AboutModule } from './about/about.module';
@@ -12,6 +12,12 @@ import { MaterialModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { Ng2MapModule } from 'ng2-map';
 import { Ng2PageScrollModule } from 'ng2-page-scroll/ng2-page-scroll';
+import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate';
+
+export function createTranslateLoader(http: Http) {
+    return new TranslateStaticLoader(http, '/assets/i18n', '.json');
+}
+
 
 @NgModule({
     imports: [
@@ -28,7 +34,12 @@ import { Ng2PageScrollModule } from 'ng2-page-scroll/ng2-page-scroll';
             apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBtYO0eJfiqw2AqMRu-0_X8gBVSUWiIymg' +
             '&libraries=visualization,places,drawing',
         }),
-        Ng2PageScrollModule.forRoot()
+        Ng2PageScrollModule.forRoot(),
+        TranslateModule.forRoot({
+            provide: TranslateLoader,
+            useFactory: (createTranslateLoader),
+            deps: [Http]
+        })
     ],
     declarations: [AppComponent],
     providers: [{

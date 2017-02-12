@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
-
 import { ToolbarComponent } from './toolbar/index';
 import { NameListService } from './name-list/index';
+import { TranslateModule } from 'ng2-translate';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -14,7 +14,7 @@ import { NameListService } from './name-list/index';
 @NgModule({
     imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, MaterialModule],
     declarations: [ToolbarComponent],
-    exports: [ToolbarComponent,
+    exports: [ToolbarComponent, TranslateModule,
         CommonModule, FormsModule, RouterModule, MaterialModule]
 })
 export class SharedModule {
