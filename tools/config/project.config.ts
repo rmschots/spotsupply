@@ -55,6 +55,15 @@ export class ProjectConfig extends SeedConfig {
             }
         });
 
+        this.addPackageBundles({
+            name: 'ng2-page-scroll/ng2-page-scroll',
+            path: 'node_modules/ng2-page-scroll/bundles/ng2-page-scroll.umd.js',
+            packageMeta: {
+                main: 'ng2-page-scroll.js',
+                defaultExtension: 'js'
+            }
+        });
+
         /* Add to or override NPM module configurations: */
         // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
     }

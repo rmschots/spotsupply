@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { Ng2MapModule } from 'ng2-map';
+import { Ng2PageScrollModule } from 'ng2-page-scroll/ng2-page-scroll';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { Ng2MapModule } from 'ng2-map';
         Ng2MapModule.forRoot({
             apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBtYO0eJfiqw2AqMRu-0_X8gBVSUWiIymg' +
             '&libraries=visualization,places,drawing',
-        })
+        }),
+        Ng2PageScrollModule.forRoot()
     ],
     declarations: [AppComponent],
     providers: [{

@@ -20,7 +20,6 @@ nav {
   position: fixed;
   width: 100%;
   background: white;
-  z-index: 999999;
 }
 
 .more {

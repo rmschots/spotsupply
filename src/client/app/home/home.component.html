@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div id="home" class="container-fluid">
     <div class="padded-row row">
         <div class="col col-6">
             <button md-raised-button class="btn-block">Orders</button>
@@ -11,15 +11,16 @@
         <h5 class="centered-title">Look if we're supplying at your spot!</h5>
     </div>
     <div class="images">
-        <div class="spot" *ngFor="let spot of spots">
+        <div class="spot" *ngFor="let spot of spots" [id]="spot">
             <div class="image-banner" [ngStyle]="{'background-image': 'url(/assets/img/oostende.jpg)'}"
                  (click)="selectSpot(spot)">
-                <div class="image-overlay">
+                <a class="image-overlay" [href]="'#'+spot">
                     <h4>{{spot}}</h4>
-                </div>
+                </a>
             </div>
             <div *ngIf="selectedSpot == spot">
-                <ng2-map center="Oostende, Belgium"></ng2-map>
+                <ng2-map #someVar center="Oostende, Belgium"></ng2-map>
+                <button md-raised-button class="btn-block">Take my order</button>
             </div>
         </div>
     </div>
