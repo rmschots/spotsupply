@@ -68,8 +68,8 @@ export class HomeComponent {
         }
     }
 
-    displayUserLocation(){
-        if(this.map && this.lastKnownPosition){
+    displayUserLocation() {
+        if (this.map && this.lastKnownPosition) {
             this.map.setCenter(this.lastKnownPosition);
             new google.maps.Marker({
                 position: this.lastKnownPosition,
