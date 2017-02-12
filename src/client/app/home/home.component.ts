@@ -1,5 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Inject, ElementRef } from '@angular/core';
 import { Ng2MapComponent, NavigatorGeolocation } from 'ng2-map';
+import { PageScrollService, PageScrollInstance, PageScrollConfig } from 'ng2-page-scroll/ng2-page-scroll';
+import { DOCUMENT } from '@angular/platform-browser';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -24,7 +26,11 @@ export class HomeComponent {
 
     @ViewChild('someVar') private ng2MapComponent: Ng2MapComponent;
 
-    constructor(private geolocation: NavigatorGeolocation) {
+    constructor(private geolocation: NavigatorGeolocation,
+                private pageScrollService: PageScrollService,
+                @Inject(DOCUMENT) private document: Document,
+                private elRef: ElementRef) {
+        PageScrollConfig.defaultDuration = 0;
     }
 
     selectSpot(spot: string) {
@@ -59,6 +65,14 @@ export class HomeComponent {
                             console.error(error);
                         });
                 });
+            }, 1);
+            setTimeout(() => {
+                console.log(this.elRef.nativeElement.parentElement);
+                let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineInstance(
+                    this.document,
+                    '#' + this.selectedSpot,
+                    this.elRef.nativeElement.parentElement);
+                this.pageScrollService.start(pageScrollInstance);
             }, 1);
         }
     }

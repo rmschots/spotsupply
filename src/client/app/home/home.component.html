@@ -14,9 +14,9 @@
         <div class="spot" *ngFor="let spot of spots" [id]="spot">
             <div class="image-banner" [ngStyle]="{'background-image': 'url(/assets/img/oostende.jpg)'}"
                  (click)="selectSpot(spot)">
-                <a class="image-overlay" pageScroll [href]="'#'+spot">
+                <div class="image-overlay">
                     <h4>{{spot}}</h4>
-                </a>
+                </div>
             </div>
             <div *ngIf="selectedSpot == spot">
                 <ng2-map #someVar center="Oostende, Belgium"></ng2-map>
