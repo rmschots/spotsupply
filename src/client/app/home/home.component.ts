@@ -43,7 +43,20 @@ export class HomeComponent {
                     this.map = map;
                     this.geolocation.getCurrentPosition().subscribe(
                         (location) => {
-                            this.map.setCenter(new google.maps.LatLng(location.coords.latitude, location.coords.longitude));
+                            let latLng = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
+                            this.map.setCenter(latLng);
+                            new google.maps.Marker({
+                                position: latLng,
+                                icon: {
+                                    path: google.maps.SymbolPath.CIRCLE,
+                                    scale: 10,
+                                    strokeColor: '#106cc8',
+                                    strokeOpacity: 0.5,
+                                    strokeWeight: 10
+                                },
+                                draggable: true,
+                                map: this.map
+                            });
                         },
                         (error) => {
                             console.error(error);
