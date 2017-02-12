@@ -19,7 +19,7 @@ import { Ng2PageScrollModule } from 'ng2-page-scroll/ng2-page-scroll';
         CommonModule,
         FormsModule,
         HttpModule,
-        RouterModule.forRoot(routes),
+        RouterModule.forRoot(routes, {useHash: true}),
         AboutModule,
         HomeModule,
         SharedModule.forRoot(),
