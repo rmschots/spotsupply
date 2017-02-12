@@ -44,7 +44,7 @@ export class HomeComponent {
             setTimeout(() => {
                 this.ng2MapComponent.mapReady$.subscribe((map: google.maps.Map) => {
                     this.map = map;
-                    this.geolocation.getCurrentPosition().subscribe(
+                    this.geolocation.getCurrentPosition({timeout: 10000, enableHighAccuracy: true}).subscribe(
                         (location) => {
                             let latLng = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
                             this.map.setCenter(latLng);
