@@ -26,6 +26,8 @@ export class HomeComponent {
 
     @ViewChild('someVar') private ng2MapComponent: Ng2MapComponent;
 
+    private lastKnownPosition: google.maps.LatLng;
+
     constructor(private geolocation: NavigatorGeolocation,
                 private pageScrollService: PageScrollService,
                 @Inject(DOCUMENT) private document: Document,
@@ -44,22 +46,11 @@ export class HomeComponent {
             setTimeout(() => {
                 this.ng2MapComponent.mapReady$.subscribe((map: google.maps.Map) => {
                     this.map = map;
-                    this.geolocation.getCurrentPosition({timeout: 10000, enableHighAccuracy: true}).subscribe(
+                    this.displayUserLocation();
+                    this.geolocation.getCurrentPosition({timeout: 20000, enableHighAccuracy: true}).subscribe(
                         (location) => {
-                            let latLng = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
-                            this.map.setCenter(latLng);
-                            new google.maps.Marker({
-                                position: latLng,
-                                icon: {
-                                    path: google.maps.SymbolPath.CIRCLE,
-                                    scale: 10,
-                                    strokeColor: '#106cc8',
-                                    strokeOpacity: 0.5,
-                                    strokeWeight: 10
-                                },
-                                draggable: true,
-                                map: this.map
-                            });
+                            this.lastKnownPosition = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
+                            this.displayUserLocation();
                         },
                         (error) => {
                             console.error(error);
@@ -77,7 +68,21 @@ export class HomeComponent {
         }
     }
 
-    determineLocation() {
-        console.log(this.map.getCenter());
+    displayUserLocation(){
+        if(this.map && this.lastKnownPosition){
+            this.map.setCenter(this.lastKnownPosition);
+            new google.maps.Marker({
+                position: this.lastKnownPosition,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 10,
+                    strokeColor: '#106cc8',
+                    strokeOpacity: 0.5,
+                    strokeWeight: 10
+                },
+                draggable: true,
+                map: this.map
+            });
+        }
     }
 }
