@@ -8,12 +8,12 @@ import { Ng2MapComponent, NavigatorGeolocation } from 'ng2-map';
     moduleId: module.id,
     selector: 'sd-home',
     templateUrl: 'home.component.html',
-    styleUrls: ['home.component.css'],
+    styleUrls: ['home.component.css']
 })
 
 export class HomeComponent {
 
-    @ViewChild('someVar') ng2MapComponent: Ng2MapComponent;
+    @ViewChild('someVar') private ng2MapComponent: Ng2MapComponent;
 
     public map: google.maps.Map;
 
@@ -24,10 +24,7 @@ export class HomeComponent {
     lat: number = 51.678418;
     lng: number = 7.809007;
 
-    private geolocation: NavigatorGeolocation;
-
-    constructor(geolocation: NavigatorGeolocation) {
-        this.geolocation = geolocation;
+    constructor(private geolocation: NavigatorGeolocation) {
     }
 
     selectSpot(spot: string) {
