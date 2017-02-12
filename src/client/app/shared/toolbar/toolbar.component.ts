@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 /**
  * This class represents the toolbar component.
@@ -12,10 +12,17 @@ import { Component, OnInit } from '@angular/core';
 
 export class ToolbarComponent implements OnInit {
 
-    menuIsVisible: boolean = false;
+    @Output() menuOpen = new EventEmitter<boolean>();
 
-    menuToggled() {
-        this.menuIsVisible = !this.menuIsVisible;
+    languages: string[] = ['eng', 'be-nl', 'be-fr'];
+    language: string = this.languages[0];
+
+    menuOpened() {
+        this.menuOpen.next();
+    }
+
+    languageSelected(selectedLanguage: string) {
+        this.language = selectedLanguage;
     }
 
     ngOnInit(): void {

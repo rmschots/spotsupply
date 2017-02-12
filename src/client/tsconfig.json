@@ -27,7 +27,8 @@
       "protractor",
       "systemjs",
       "ng2-map",
-      "ng2-page-scroll"
+      "ng2-page-scroll",
+      "hammerjs"
     ]
   },
   "exclude": [

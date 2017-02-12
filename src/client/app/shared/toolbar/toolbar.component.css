@@ -22,21 +22,43 @@ nav {
   background: white;
 }
 
-.more {
-  background: url("./assets/svg/more.svg");
-  height: 24px;
-  margin-top: 12px;
-  width: 24px;
+.btn-sidenav-icon {
+  line-height: 48px;
 }
 
-.selected-background {
-  background-color: #025aa5;
-}
-
-.more-parent {
-  float: right;
+.btn-sidenav {
+  float: left;
   height: 48px;
   padding-left: 10px;
   padding-right: 10px;
+  left: 0;
+}
+
+.btn-language-icon {
+  line-height: 38px;
+  width: 30px;
+}
+
+.btn-language {
+  float: right;
+  height: 38px;
+  width: 38px;
+  padding-left: 10px;
+  padding-right: 10px;
   right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3px;
+}
+
+.menu-language-icon {
+  width: 30px;
+}
+
+h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }

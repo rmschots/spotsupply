@@ -1,11 +1,21 @@
-<h1>SpotSupply</h1>
-<div class="more-parent" [ngClass]="{'selected-background': menuIsVisible}" (click)="menuToggled()">
-    <div class="more"></div>
+<div class="btn-sidenav" (click)="menuOpened()">
+    <i class="btn-sidenav-icon fa fa-bars fa-lg" aria-hidden="true"></i>
 </div>
-
-<nav *ngIf="menuIsVisible">
-    <a [routerLink]="['/']" [routerLinkActive]="['router-link-active']"
-       [routerLinkActiveOptions]="{exact:true}" (click)="menuToggled()">HOME</a>
-    <a [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}"
-       (click)="menuToggled()">ABOUT</a>
-</nav>
+<h1>SpotSupply</h1>
+<button md-icon-button [mdMenuTriggerFor]="menu" class="btn-language">
+    <img class="btn-language-icon" src="/assets/img/eng.jpg"/>
+</button>
+<md-menu class="language-menu" #menu="mdMenu" >
+    <button md-menu-item>
+        <md-icon><img class="menu-language-icon" src="/assets/img/eng.jpg"/></md-icon>
+        <span>English</span>
+    </button>
+    <button md-menu-item>
+        <md-icon><img class="menu-language-icon" src="/assets/img/be-nl.jpg"/></md-icon>
+        <span>Nederlands</span>
+    </button>
+    <button md-menu-item>
+        <md-icon><img class="menu-language-icon" src="/assets/img/be-fr.jpg"/></md-icon>
+        <span>Français</span>
+    </button>
+</md-menu>

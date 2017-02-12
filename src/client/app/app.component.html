@@ -1,4 +1,25 @@
-<sd-toolbar></sd-toolbar>
-<div id="main-content">
-    <router-outlet></router-outlet>
-</div>
+<md-sidenav-container id="main-parent">
+    <md-sidenav mode="over" [opened]="menuOpen" (close)="sideNavClosed()">
+        <div #navParent id="sidenav"
+             [ngStyle]="{'margin-left': marginLeft+'px'}">
+            <nav>
+                <ul (swipe)="menuSwiped($event)" (slide)="menuSlide($event)">
+                    <li>
+                        <a [routerLink]="['/']" [routerLinkActive]="['router-link-active']"
+                           [routerLinkActiveOptions]="{exact:true}" (click)="navigated()">HOME</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/about']" [routerLinkActive]="['router-link-active']"
+                           [routerLinkActiveOptions]="{exact:true}"
+                           (click)="navigated()">ABOUT</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </md-sidenav>
+    <sd-toolbar (menuOpen)="menuOpened()"></sd-toolbar>
+    <div id="main-content">
+        <router-outlet></router-outlet>
+    </div>
+</md-sidenav-container>
+
