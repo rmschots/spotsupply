@@ -13,9 +13,7 @@ import { Ng2MapComponent, NavigatorGeolocation } from 'ng2-map';
 
 export class HomeComponent {
 
-    @ViewChild('someVar') private ng2MapComponent: Ng2MapComponent;
-
-    public map: google.maps.Map;
+    map: google.maps.Map;
 
     spots: string[] = ['OOSTENDE', 'ANDERE BADPLAATS'];
 
@@ -23,6 +21,8 @@ export class HomeComponent {
 
     lat: number = 51.678418;
     lng: number = 7.809007;
+
+    @ViewChild('someVar') private ng2MapComponent: Ng2MapComponent;
 
     constructor(private geolocation: NavigatorGeolocation) {
     }
