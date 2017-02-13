@@ -4,7 +4,7 @@
   "HOME": {
     "lookForSupplyAtSpot": "Look if we're Supplying at your Spot!",
     "orders": "Orders",
-    "account": "Account",
+    "account": "Settings",
     "takeMyOrder": "Take my order"
   }
 }
