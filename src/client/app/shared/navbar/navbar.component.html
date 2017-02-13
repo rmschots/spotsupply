@@ -1,0 +1,15 @@
+<div #navRoot id="sidenav">
+    <nav>
+        <ul (swipe)="menuSwiped($event)" (slide)="menuSlide($event)">
+            <li>
+                <a [routerLink]="['/']" [routerLinkActive]="['router-link-active']"
+                   [routerLinkActiveOptions]="{exact:true}" (click)="navigated()">HOME</a>
+            </li>
+            <li>
+                <a [routerLink]="['/about']" [routerLinkActive]="['router-link-active']"
+                   [routerLinkActiveOptions]="{exact:true}"
+                   (click)="navigated()">ABOUT</a>
+            </li>
+        </ul>
+    </nav>
+</div>

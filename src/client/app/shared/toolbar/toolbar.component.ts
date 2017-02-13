@@ -7,7 +7,7 @@ import { Language } from './language';
  */
 @Component({
     moduleId: module.id,
-    selector: 'sd-toolbar',
+    selector: 'ss-toolbar',
     templateUrl: 'toolbar.component.html',
     styleUrls: ['toolbar.component.css']
 })

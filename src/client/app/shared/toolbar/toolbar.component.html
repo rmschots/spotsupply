@@ -1,13 +1,17 @@
-<div class="btn-sidenav" (click)="menuOpened()">
-    <i class="btn-sidenav-icon fa fa-bars fa-lg" aria-hidden="true"></i>
-</div>
-<h1>SpotSupply</h1>
-<button md-icon-button [mdMenuTriggerFor]="menu" class="btn-language">
-    <img class="btn-language-icon" src="/assets/img/{{selectedLanguage.code}}.jpg"/>
-</button>
-<md-menu class="language-menu" #menu="mdMenu" >
-    <button md-menu-item *ngFor="let language of languages" (click)="languageSelected(language)">
-        <md-icon><img class="menu-language-icon" src="/assets/img/{{language.code}}.jpg"/></md-icon>
-        <span>{{language.name}}</span>
+<md-toolbar color="primary" class="md-elevation-z6">
+    <div class="btn-sidenav" (click)="menuOpened()"><md-icon class="menu-icon">menu</md-icon></div>
+    <span><h3>SpotSupply</h3></span>
+
+    <!-- This fills the remaining space of the current row -->
+    <span class="toolbar-title-fill-remaining-space"></span>
+
+    <button md-button [mdMenuTriggerFor]="menu" class="btn-language">
+        <img src="/assets/img/{{selectedLanguage.code}}.jpg"/>
     </button>
-</md-menu>
+    <md-menu #menu="mdMenu">
+        <button md-menu-item *ngFor="let language of languages" (click)="languageSelected(language)">
+            <md-icon><img src="/assets/img/{{language.code}}.jpg"/></md-icon>
+            <span>{{language.name}}</span>
+        </button>
+    </md-menu>
+</md-toolbar>

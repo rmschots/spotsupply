@@ -62,10 +62,11 @@ ul {
   align-items: center;
 }
 
-.images > .spot > .image-banner > .image-overlay > h4 {
-  background-color: rgba(0, 0, 0, 0.50);
+.images > .spot > .image-banner > .image-overlay > h2 {
+  background-color: rgba(125, 125, 125, 0.50);
+  color: rgba(255, 255, 255, 0.87);
   color: white;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .sebm-google-map-container {

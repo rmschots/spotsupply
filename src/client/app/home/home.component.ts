@@ -2,14 +2,10 @@ import { Component, ViewChild, Inject, ElementRef } from '@angular/core';
 import { Ng2MapComponent, NavigatorGeolocation } from 'ng2-map';
 import { PageScrollService, PageScrollInstance, PageScrollConfig } from 'ng2-page-scroll/ng2-page-scroll';
 import { DOCUMENT } from '@angular/platform-browser';
-import { TranslateService } from 'ng2-translate';
 
-/**
- * This class represents the lazy loaded HomeComponent.
- */
 @Component({
     moduleId: module.id,
-    selector: 'sd-home',
+    selector: 'ss-home',
     templateUrl: 'home.component.html',
     styleUrls: ['home.component.css']
 })
