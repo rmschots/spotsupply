@@ -1,15 +1,10 @@
-<div #navRoot id="sidenav">
-    <nav>
-        <ul (swipe)="menuSwiped($event)" (slide)="menuSlide($event)">
-            <li>
-                <a [routerLink]="['/']" [routerLinkActive]="['router-link-active']"
-                   [routerLinkActiveOptions]="{exact:true}" (click)="navigated()">HOME</a>
-            </li>
-            <li>
-                <a [routerLink]="['/about']" [routerLinkActive]="['router-link-active']"
-                   [routerLinkActiveOptions]="{exact:true}"
-                   (click)="navigated()">ABOUT</a>
-            </li>
-        </ul>
-    </nav>
+<div #navRoot id="sidenav" (swipe)="menuSwiped($event)" (slide)="menuSlide($event)">
+    <md-nav-list>
+        <h3 md-subheader>Menu</h3>
+        <a class="menu-item" md-list-item [routerLink]="['/']" [routerLinkActive]="['router-link-active']"
+           [routerLinkActiveOptions]="{exact:true}" (click)="navigated()">HOME</a>
+        <a class="menu-item" md-list-item [routerLink]="['/about']" [routerLinkActive]="['router-link-active']"
+           [routerLinkActiveOptions]="{exact:true}"
+           (click)="navigated()">ABOUT</a>
+    </md-nav-list>
 </div>
