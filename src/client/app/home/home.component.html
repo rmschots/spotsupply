@@ -11,7 +11,20 @@
                 </div>
             </div>
             <div *ngIf="selectedSpot == spot">
-                <ng2-map #someVar center="Oostende, Belgium"></ng2-map>
+                <div class="map-parent">
+                    <ng2-map #someVar center="Oostende, Belgium"></ng2-map>
+                    <div *ngIf="overlayError" class="map-overlay-box">
+                        <md-chip-list class="md-chip-list-stacked">
+                            <md-chip
+                                    [ngClass]="{'warn-color': overlayError.type === 'error', 'accent-color': overlayError.type === 'warning'}"
+                                    class="overlay-chip"
+                                    selected="true">
+                                {{'map.errorCode.'+overlayError.code|translate}}
+                            </md-chip>
+                        </md-chip-list>
+                    </div>
+                </div>
+
                 <button md-raised-button class="btn-block">{{'HOME.takeMyOrder'|translate}}</button>
             </div>
         </div>

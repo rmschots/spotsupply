@@ -1,7 +1,8 @@
-import { Component, ViewChild, Inject, ElementRef } from '@angular/core';
+import { Component, ViewChild, Inject, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { Ng2MapComponent, NavigatorGeolocation } from 'ng2-map';
 import { PageScrollService, PageScrollInstance, PageScrollConfig } from 'ng2-page-scroll/ng2-page-scroll';
 import { DOCUMENT } from '@angular/platform-browser';
+import { PositionError } from './position-error';
 
 @Component({
     moduleId: module.id,
@@ -21,6 +22,8 @@ export class HomeComponent {
     lat: number = 51.678418;
     lng: number = 7.809007;
 
+    overlayError: PositionError = null;
+
     @ViewChild('someVar') private ng2MapComponent: Ng2MapComponent;
 
     private lastKnownPosition: google.maps.LatLng;
@@ -28,7 +31,8 @@ export class HomeComponent {
     constructor(private geolocation: NavigatorGeolocation,
                 private pageScrollService: PageScrollService,
                 @Inject(DOCUMENT) private document: Document,
-                private elRef: ElementRef) {
+                private elRef: ElementRef,
+                private changeDetector: ChangeDetectorRef) {
         PageScrollConfig.defaultDuration = 0;
     }
 
@@ -39,6 +43,7 @@ export class HomeComponent {
 
         } else {
             this.map = null;
+            this.overlayError = null;
             this.selectedSpot = spot;
             setTimeout(() => {
                 this.ng2MapComponent.mapReady$.subscribe((map: google.maps.Map) => {
@@ -49,8 +54,9 @@ export class HomeComponent {
                             this.lastKnownPosition = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
                             this.displayUserLocation();
                         },
-                        (error) => {
+                        (error: PositionError) => {
                             console.error(error);
+                            this.updateLocationError(error);
                         });
                 });
             }, 1);
@@ -81,5 +87,22 @@ export class HomeComponent {
                 map: this.map
             });
         }
+    }
+
+    private updateLocationError(error: PositionError) {
+        let type: string = null;
+        switch (error.code) {
+            case PositionError.PERMISSION_DENIED:
+                type = 'error';
+                break;
+            case PositionError.POSITION_UNAVAILABLE:
+            case PositionError.TIMEOUT:
+                type = 'warning';
+                break;
+        }
+        error.type = type;
+        this.overlayError = error;
+        this.changeDetector.detectChanges();
+
     }
 }

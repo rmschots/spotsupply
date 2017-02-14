@@ -1,10 +1,17 @@
 {
-  "OSTEND": "OSTEND",
-  "OTHER_BEACH": "OTHER BEACH",
   "HOME": {
+    "account": "Settings",
     "lookForSupplyAtSpot": "Look if we're Supplying at your Spot!",
     "orders": "Orders",
-    "account": "Settings",
     "takeMyOrder": "Take my order"
+  },
+  "OSTEND": "OSTEND",
+  "OTHER_BEACH": "OTHER BEACH",
+  "map": {
+    "errorCode": {
+      "1": "You need to enable location detection for detecting distance to our delivery area",
+      "2": "Position unavailable",
+      "3": "Position detection timed out"
+    }
   }
 }

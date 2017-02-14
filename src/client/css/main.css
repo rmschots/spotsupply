@@ -90,3 +90,18 @@ body {
 .text-center {
   text-align: center;
 }
+
+.warn-color {
+  background-color: #f44336 !important;
+  color: #fff !important;
+}
+
+.primary-color {
+  background-color: #673ab7 !important;
+  color: rgba(255,255,255,.87) !important;
+}
+
+.accent-color {
+  background-color: #ffc107 !important;
+  color: rgba(0,0,0,.87) !important;
+}

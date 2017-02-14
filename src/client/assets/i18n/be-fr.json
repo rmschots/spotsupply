@@ -1,10 +1,10 @@
 {
-  "OSTEND": "OSTENDE",
-  "OTHER_BEACH": "AUTRE PLAGE",
   "HOME": {
-    "lookForSupplyAtSpot": "Regardez si nous Supplions à votre Spot!",
+    "account": "ParamÃ¨tres",
+    "lookForSupplyAtSpot": "Regardez si nous Supplions Ã  votre Spot!",
     "orders": "Ordres",
-    "account": "Paramètres",
     "takeMyOrder": "Faire une commande"
-  }
+  },
+  "OSTEND": "OSTENDE",
+  "OTHER_BEACH": "AUTRE PLAGE"
 }

@@ -1,10 +1,10 @@
 {
-  "OSTEND": "OOSTENDE",
-  "OTHER_BEACH": "ANDERE BADPLAATS",
   "HOME": {
+    "account": "Instellingen",
     "lookForSupplyAtSpot": "Kijk of we ook Supply-en op jouw Spot!",
     "orders": "Bestellingen",
-    "account": "Instellingen",
     "takeMyOrder": "Neem mijn bestelling"
-  }
+  },
+  "OSTEND": "OOSTENDE",
+  "OTHER_BEACH": "ANDERE BADPLAATS"
 }
