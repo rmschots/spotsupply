@@ -54,7 +54,6 @@
   System.import('<%= BOOTSTRAP_MODULE %>')
     .then(
       function handleResolve() {
-        window.loading_screen.finish();
         console.info("System.js successfully bootstrapped app.");
       })
     .catch(function (e) {
