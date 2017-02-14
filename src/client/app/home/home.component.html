@@ -12,7 +12,7 @@
             </div>
             <div *ngIf="selectedSpot == spot">
                 <div class="map-parent">
-                    <ng2-map #someVar center="Oostende, Belgium"></ng2-map>
+                    <ng2-map #someVar center="Oostende, Belgium" disableDefaultUI="true"></ng2-map>
                     <div *ngIf="overlayError" class="map-overlay-box">
                         <md-chip-list class="md-chip-list-stacked">
                             <md-chip
