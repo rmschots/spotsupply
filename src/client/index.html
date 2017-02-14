@@ -7,6 +7,8 @@
     <title><%= APP_TITLE %></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/assets/css/please-wait.css" rel="stylesheet">
+    <link href="/assets/css/wave.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- inject:css -->
@@ -14,7 +16,19 @@
 </head>
 <body>
 
-<sd-app>Loading...</sd-app>
+<sd-app>
+    <script type="text/javascript" src="/assets/js/please-wait.min.js"></script>
+    <script type="text/javascript">
+      window.loading_screen = window.pleaseWait({
+        logo: "/assets/img/logo.png",
+        backgroundColor: '#673ab7',
+        loadingHtml: "" +
+        "<p style='color: rgba(255,255,255,.87)' class='loading-message'>A good day to you fine user!</p>" +
+        "<div class='sk-wave'><div class='sk-rect sk-rect1'></div><div class='sk-rect sk-rect2'></div><div class='sk-rect sk-rect3'></div><div class='sk-rect sk-rect4'></div><div class='sk-rect sk-rect5'></div></div>"
+      });
+    </script>
+</sd-app>
+
 
 <script>
   // Fixes undefined module function in SystemJS bundle
@@ -38,6 +52,11 @@
 <% if (BUILD_TYPE === 'dev') { %>
 <script>
   System.import('<%= BOOTSTRAP_MODULE %>')
+    .then(
+      function handleResolve() {
+        window.loading_screen.finish();
+        console.info("System.js successfully bootstrapped app.");
+      })
     .catch(function (e) {
       console.error(e.stack || e,
         'Not expecting this error? Report it at https://github.com/mgechev/angular2-seed/issues');
