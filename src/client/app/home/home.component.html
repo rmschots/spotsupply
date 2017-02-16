@@ -1,16 +1,27 @@
 <div id="home">
     <div class="flex-container padded-row-xl text-center">
         <h3 class="centered-title">{{'HOME.lookForSupplyAtSpot'|translate}}</h3>
+        <button md-raised-button color="primary">{{'HOME.checkIt'|translate}}</button>
     </div>
-    <div class="images">
-        <div class="spot" *ngFor="let spot of spots" [id]="spot">
-            <div class="image-banner" [ngStyle]="{'background-image': 'url(/assets/img/oostende.jpg)'}"
+
+    <div class="flex-container padded-row-xl text-center">
+        <md-card *ngFor="let spot of spots" [id]="spot" class="spot-card"
+                 [ngClass]="{'unpadded-card': selectedSpot !== spot}">
+            <div md-card-image class="image-banner clickable"
+                 [ngStyle]="{'background-image': 'url(/assets/img/oostende.jpg)'}"
                  (click)="selectSpot(spot)">
-                <div class="image-overlay">
-                    <h2>{{spot | translate}}</h2>
-                </div>
             </div>
-            <div *ngIf="selectedSpot == spot">
+            <md-card-header class="clickable spot-header" (click)="selectSpot(spot)">
+                <md-card-title class="spot-title">
+                    <b>{{spot | translate}}</b>
+                    <small>(25 km)</small>
+                </md-card-title>
+                <md-icon class="collapse-icon">{{selectedSpot == spot? 'keyboard_arrow_up':'keyboard_arrow_down'}}</md-icon>
+
+                <!--<md-card-subtitle>Dog Breed</md-card-subtitle>-->
+            </md-card-header>
+
+            <md-card-content class="no-margin-bottom" *ngIf="selectedSpot == spot">
                 <div class="map-parent">
                     <ng2-map #someVar center="Oostende, Belgium" disableDefaultUI="true"></ng2-map>
                     <div *ngIf="overlayError" class="map-overlay-box">
@@ -24,9 +35,8 @@
                         </md-chip-list>
                     </div>
                 </div>
-
-                <button md-raised-button class="btn-block">{{'HOME.takeMyOrder'|translate}}</button>
-            </div>
-        </div>
+            </md-card-content>
+            <button *ngIf="selectedSpot == spot" md-fab class="hover-button"><md-icon>shopping_cart</md-icon></button>
+        </md-card>
     </div>
 </div>

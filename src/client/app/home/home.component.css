@@ -95,3 +95,47 @@ ul {
 md-chip {
   opacity: 0.75;
 }
+
+
+.image-banner {
+  height: 80px;
+  overflow: hidden;
+  background: no-repeat left center;
+  background-size: cover;
+}
+
+.spot-card {
+  margin-bottom: 40px;
+}
+
+.unpadded-card {
+   padding-bottom: 0;
+}
+
+.spot-title {
+  font-size: 25px;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.hover-button {
+  position: absolute;
+  right: 65px;
+  bottom: -28px;
+}
+
+md-card-header {
+  margin-bottom: 0;
+}
+
+.spot-header {
+  position: relative;
+}
+
+.collapse-icon {
+  position: absolute;
+  right: 0;
+  font-size: 35px;
+}

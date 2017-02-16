@@ -62,13 +62,6 @@ button:hover {
   background-color: #28739e;
 }
 
-sd-toolbar {
-  position: fixed;
-  width: 100%;
-  height: 56px;
-  z-index: 9999999999;
-}
-
 #main-parent {
   height: 100%;
   position: fixed;
@@ -76,7 +69,6 @@ sd-toolbar {
 }
 
 #main-content {
-  top: 56px;
   position: fixed;
   width: 100%;
   overflow: auto;
@@ -104,4 +96,8 @@ body {
 .accent-color {
   background-color: #ffc107 !important;
   color: rgba(0,0,0,.87) !important;
+}
+
+.clickable {
+  cursor: pointer;
 }
