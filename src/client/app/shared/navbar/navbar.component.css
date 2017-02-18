@@ -14,3 +14,9 @@
 .menu-item {
   outline: none;
 }
+
+.navbar-footer {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+}

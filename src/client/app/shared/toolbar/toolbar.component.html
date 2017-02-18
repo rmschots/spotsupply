@@ -1,17 +1,19 @@
 <md-toolbar color="primary" class="md-elevation-z6 toolbar-decoration">
-    <div class="btn-sidenav" (click)="menuOpened()"><md-icon class="menu-icon">menu</md-icon></div>
-    <span><h3>SpotSupply</h3></span>
+  <div class="btn-sidenav" (click)="menuOpened()">
+    <md-icon class="menu-icon">menu</md-icon>
+  </div>
+  <span><h3>SpotSupply</h3></span>
 
-    <!-- This fills the remaining space of the current row -->
-    <span class="toolbar-title-fill-remaining-space"></span>
+  <!-- This fills the remaining space of the current row -->
+  <span class="toolbar-title-fill-remaining-space"></span>
 
-    <button md-button [mdMenuTriggerFor]="menu" class="btn-language">
-        <img src="/assets/img/{{selectedLanguage.code}}.jpg"/>
+  <button md-button [mdMenuTriggerFor]="menu" class="btn-language">
+    <img src="/assets/img/{{selectedLanguage.code}}.jpg"/>
+  </button>
+  <md-menu #menu="mdMenu">
+    <button md-menu-item *ngFor="let language of languages" (click)="languageSelected(language)">
+      <md-icon><img src="/assets/img/{{language.code}}.jpg"/></md-icon>
+      <span>{{language.name}}</span>
     </button>
-    <md-menu #menu="mdMenu">
-        <button md-menu-item *ngFor="let language of languages" (click)="languageSelected(language)">
-            <md-icon><img src="/assets/img/{{language.code}}.jpg"/></md-icon>
-            <span>{{language.name}}</span>
-        </button>
-    </md-menu>
+  </md-menu>
 </md-toolbar>
