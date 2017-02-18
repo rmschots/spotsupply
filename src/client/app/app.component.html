@@ -1,10 +1,11 @@
 <md-sidenav-container id="main-parent">
-    <md-sidenav mode="over" [opened]="menuOpen" (close)="sideNavClosed(true)" [ngStyle]="{'margin-left': marginLeft+'px'}">
-        <ss-navbar [menuOpen]="menuOpen" (menuClose)="sideNavClosed(false)" (margin)="marginLeft=$event"></ss-navbar>
-    </md-sidenav>
-    <ss-toolbar (menuOpen)="menuOpened()"></ss-toolbar>
-    <div id="main-content">
-        <router-outlet></router-outlet>
-    </div>
+  <md-sidenav mode="over" [opened]="menuOpen" (close)="sideNavClosed(true)"
+              [ngStyle]="{'margin-left': marginLeft+'px'}">
+    <ss-navbar [menuOpen]="menuOpen" (menuClose)="sideNavClosed(false)" (margin)="marginLeft=$event"></ss-navbar>
+  </md-sidenav>
+  <ss-toolbar (menuOpen)="menuOpened()"></ss-toolbar>
+  <div id="main-content">
+    <router-outlet></router-outlet>
+  </div>
 </md-sidenav-container>
 
