@@ -1,5 +1,5 @@
-import * as gulp from "gulp";
-import Config from "../../config";
+import * as gulp from 'gulp';
+import Config from '../../config';
 
 export = () => {
   return gulp.src(Config.FONTS_SRC)

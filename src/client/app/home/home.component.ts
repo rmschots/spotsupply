@@ -1,8 +1,8 @@
-import { Component, ViewChild, Inject, ElementRef, ChangeDetectorRef } from "@angular/core";
-import { Ng2MapComponent, NavigatorGeolocation } from "ng2-map";
-import { PageScrollService, PageScrollInstance, PageScrollConfig } from "ng2-page-scroll/ng2-page-scroll";
-import { DOCUMENT } from "@angular/platform-browser";
-import { PositionError } from "./position-error";
+import { Component, ViewChild, Inject, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Ng2MapComponent, NavigatorGeolocation } from 'ng2-map';
+import { PageScrollService, PageScrollInstance, PageScrollConfig } from 'ng2-page-scroll/ng2-page-scroll';
+import { DOCUMENT } from '@angular/platform-browser';
+import { PositionError } from './position-error';
 
 @Component({
   moduleId: module.id,

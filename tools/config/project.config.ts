@@ -1,5 +1,5 @@
-import { join } from "path";
-import { SeedConfig } from "./seed.config";
+import { join } from 'path';
+import { SeedConfig } from './seed.config';
 
 /**
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found

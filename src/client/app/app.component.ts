@@ -1,7 +1,7 @@
-import { Component, ViewChild } from "@angular/core";
-import { Config } from "./shared/index";
-import "./operators";
-import { NavbarComponent } from "./shared/navbar/navbar.component";
+import { Component, ViewChild } from '@angular/core';
+import { Config } from './shared/index';
+import './operators';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 @Component({
   moduleId: module.id,
