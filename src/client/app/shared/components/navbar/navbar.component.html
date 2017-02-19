@@ -3,9 +3,9 @@
     <h3 md-subheader>Menu</h3>
     <a class="menu-item" md-list-item [routerLink]="['/']" [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}" (click)="navigated()">{{'NAVBAR.items.home' | translate}}</a>
-    <a class="menu-item" md-list-item [routerLink]="['/product-list']" [routerLinkActive]="['router-link-active']"
+    <a class="menu-item" md-list-item [routerLink]="['/products']" [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}"
-       (click)="navigated()">{{'NAVBAR.items.productList' | translate}}</a>
+       (click)="navigated()">{{'NAVBAR.items.products' | translate}}</a>
     <a class="menu-item" md-list-item [routerLink]="['/faq']" [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}"
        (click)="navigated()">{{'NAVBAR.items.faq' | translate}}</a>

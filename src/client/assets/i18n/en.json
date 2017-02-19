@@ -13,7 +13,7 @@
       "home": "Home",
       "logOut": "Log out",
       "paymentMethods": "Payment methods",
-      "productList": "What do we offer?",
+      "products": "What do we offer?",
       "settings": "Settings"
     }
   },
@@ -24,8 +24,9 @@
       "contact": "Contact",
       "faq": "FAQ",
       "home": "SpotSupply",
-      "productList": "Product list",
-      "settings": "Settings"
+      "products": "Product list",
+      "settings": "Settings",
+      "store": "Store"
     }
   },
   "map": {

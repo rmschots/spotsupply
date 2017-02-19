@@ -1,0 +1,10 @@
+<md-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="tabSelected($event)">
+  <md-tab *ngFor="let category of categories" [label]="category.name">
+    <div *ngFor="let type of category.types" (swipe)="tabSwiped($event)">
+      <h4>{{type.name}}</h4>
+      <div *ngFor="let product of type.products">
+        <p>{{product.name}}</p>
+      </div>
+    </div>
+  </md-tab>
+</md-tab-group>

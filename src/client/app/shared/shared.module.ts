@@ -5,9 +5,10 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { NavigationService } from './services/navigation/index';
 import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate';
-import { NavbarComponent } from './navbar/navbar.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { Http } from '@angular/http';
+import { ProductListComponent } from './components/product-list/product-list.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -30,9 +31,9 @@ export function createTranslateLoader(http: Http) {
       deps: [Http]
     })
   ],
-  declarations: [ToolbarComponent, NavbarComponent],
+  declarations: [ToolbarComponent, NavbarComponent, ProductListComponent],
   exports: [ToolbarComponent, NavbarComponent, TranslateModule,
-    CommonModule, FormsModule, RouterModule, MaterialModule]
+    CommonModule, FormsModule, RouterModule, MaterialModule, ProductListComponent]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

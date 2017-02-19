@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
-import { HttpModule, Http } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { SettingsModule } from './settings/settings.module';
 import { HomeModule } from './home/home.module';
@@ -10,11 +10,11 @@ import { MaterialModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { Ng2MapModule } from 'ng2-map';
 import { Ng2PageScrollModule } from 'ng2-page-scroll/ng2-page-scroll';
-import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate';
-import { ProductListModule } from './product-list/product-list.module';
+import { ProductsModule } from './products/products.module';
 import { FAQModule } from './faq/faq.module';
 import { ContactModule } from './contact/contact.module';
 import { AppRoutingModule } from './app-routing.module';
+import { StoreModule } from './store/store.module';
 
 @NgModule({
   imports: [
@@ -25,9 +25,10 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     SettingsModule,
     HomeModule,
-    ProductListModule,
+    ProductsModule,
     FAQModule,
     ContactModule,
+    StoreModule,
     SharedModule.forRoot(),
     MaterialModule.forRoot(),
     Ng2MapModule.forRoot({

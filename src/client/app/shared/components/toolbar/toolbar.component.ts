@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TranslateService } from 'ng2-translate';
 import { Language } from './language';
-import { NavigationService } from '../services/navigation/navigation.service';
+import { NavigationService } from '../../services/navigation/navigation.service';
 
 /**
  * This class represents the toolbar component.
@@ -30,7 +30,7 @@ export class ToolbarComponent implements OnInit {
     translate.setDefaultLang(this.selectedLanguage.code);
     translate.use(this.selectedLanguage.code);
     this.title = this.navigationService.getTitle();
-    this.navigationService.titleSubscription(title => {
+    this.navigationService.titleSubscription((title: string) => {
       this.title = title;
     });
   }

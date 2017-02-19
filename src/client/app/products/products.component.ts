@@ -3,12 +3,12 @@ import { NavigationService } from '../shared/services/navigation/navigation.serv
 
 @Component({
   moduleId: module.id,
-  selector: 'ss-product-list',
-  templateUrl: 'product-list.component.html',
-  styleUrls: ['product-list.component.css']
+  selector: 'ss-products',
+  templateUrl: 'products.component.html',
+  styleUrls: ['products.component.css']
 })
-export class ProductListComponent {
+export class ProductsComponent {
   constructor(private navigationService: NavigationService) {
-    navigationService.setTitle('productList');
+    navigationService.setTitle('products');
   }
 }
