@@ -2,23 +2,23 @@
   <md-nav-list>
     <h3 md-subheader>Menu</h3>
     <a class="menu-item" md-list-item [routerLink]="['/']" [routerLinkActive]="['router-link-active']"
-       [routerLinkActiveOptions]="{exact:true}" (click)="navigated()">Home</a>
+       [routerLinkActiveOptions]="{exact:true}" (click)="navigated()">{{'NAVBAR.items.home' | translate}}</a>
     <a class="menu-item" md-list-item [routerLink]="['/product-list']" [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}"
-       (click)="navigated()">What do we offer?</a>
+       (click)="navigated()">{{'NAVBAR.items.productList' | translate}}</a>
     <a class="menu-item" md-list-item [routerLink]="['/faq']" [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}"
-       (click)="navigated()">FAQ?</a>
+       (click)="navigated()">{{'NAVBAR.items.faq' | translate}}</a>
     <a class="menu-item" md-list-item [routerLink]="['/settings']" [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}"
-       (click)="navigated()">Settings</a>
-    <md-list-item (click)="logOut()">Log out</md-list-item>
+       (click)="navigated()">{{'NAVBAR.items.settings' | translate}}</a>
+    <md-list-item (click)="logOut()">{{'NAVBAR.items.logOut' | translate}}</md-list-item>
   </md-nav-list>
 
   <div class="navbar-footer">
     <div>
       <div>
-        <div class="text-center">Payment methods</div>
+        <div class="text-center">{{'NAVBAR.items.paymentMethods' | translate}}</div>
         <div>
           <div>img1</div>
           <div>img2</div>
@@ -28,7 +28,7 @@
     <md-nav-list>
       <a class="menu-item" md-list-item [routerLink]="['/contact']" [routerLinkActive]="['router-link-active']"
          [routerLinkActiveOptions]="{exact:true}"
-         (click)="navigated()">Contact us</a>
+         (click)="navigated()">{{'NAVBAR.items.contact' | translate}}</a>
     </md-nav-list>
   </div>
 </div>

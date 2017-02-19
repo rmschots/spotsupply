@@ -16,10 +16,6 @@ import { FAQModule } from './faq/faq.module';
 import { ContactModule } from './contact/contact.module';
 import { AppRoutingModule } from './app-routing.module';
 
-export function createTranslateLoader(http: Http) {
-  return new TranslateStaticLoader(http, '/assets/i18n', '.json');
-}
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -38,12 +34,7 @@ export function createTranslateLoader(http: Http) {
       apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBtYO0eJfiqw2AqMRu-0_X8gBVSUWiIymg' +
       '&libraries=visualization,places,drawing',
     }),
-    Ng2PageScrollModule.forRoot(),
-    TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: (createTranslateLoader),
-      deps: [Http]
-    })
+    Ng2PageScrollModule.forRoot()
   ],
   declarations: [AppComponent],
   providers: [{

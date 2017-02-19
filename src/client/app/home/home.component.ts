@@ -3,6 +3,7 @@ import { Ng2MapComponent, NavigatorGeolocation } from 'ng2-map';
 import { PageScrollService, PageScrollInstance, PageScrollConfig } from 'ng2-page-scroll/ng2-page-scroll';
 import { DOCUMENT } from '@angular/platform-browser';
 import { PositionError } from './position-error';
+import { NavigationService } from '../shared/services/navigation/navigation.service';
 
 @Component({
   moduleId: module.id,
@@ -32,7 +33,9 @@ export class HomeComponent {
               private pageScrollService: PageScrollService,
               @Inject(DOCUMENT) private document: Document,
               private elRef: ElementRef,
-              private changeDetector: ChangeDetectorRef) {
+              private changeDetector: ChangeDetectorRef,
+              private navigationService: NavigationService) {
+    navigationService.setTitle('home');
     PageScrollConfig.defaultDuration = 0;
   }
 

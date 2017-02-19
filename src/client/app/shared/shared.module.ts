@@ -3,17 +3,33 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
-import { NameListService } from './name-list/index';
-import { TranslateModule } from 'ng2-translate';
+import { NavigationService } from './services/navigation/index';
+import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { Http } from '@angular/http';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
+export function createTranslateLoader(http: Http) {
+  return new TranslateStaticLoader(http, '/assets/i18n', '.json');
+}
+
 @NgModule({
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, MaterialModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    TranslateModule.forRoot({
+      provide: TranslateLoader,
+      useFactory: (createTranslateLoader),
+      deps: [Http]
+    })
+  ],
   declarations: [ToolbarComponent, NavbarComponent],
   exports: [ToolbarComponent, NavbarComponent, TranslateModule,
     CommonModule, FormsModule, RouterModule, MaterialModule]
@@ -22,7 +38,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [NameListService]
+      providers: [NavigationService]
     };
   }
 }

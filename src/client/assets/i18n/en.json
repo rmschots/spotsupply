@@ -6,8 +6,28 @@
     "orders": "Orders",
     "takeMyOrder": "Take my order"
   },
+  "NAVBAR": {
+    "items": {
+      "contact": "Contact us",
+      "faq": "FAQ",
+      "home": "Home",
+      "logOut": "Log out",
+      "paymentMethods": "Payment methods",
+      "productList": "What do we offer?",
+      "settings": "Settings"
+    }
+  },
   "OSTEND": "OSTEND",
   "OTHER_BEACH": "OTHER BEACH",
+  "TOOLBAR": {
+    "title": {
+      "contact": "Contact",
+      "faq": "FAQ",
+      "home": "SpotSupply",
+      "productList": "Product list",
+      "settings": "Settings"
+    }
+  },
   "map": {
     "errorCode": {
       "1": "You need to enable location detection for detecting distance to our delivery area",

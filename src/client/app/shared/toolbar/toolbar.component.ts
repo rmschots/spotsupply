@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TranslateService } from 'ng2-translate';
 import { Language } from './language';
+import { NavigationService } from '../services/navigation/navigation.service';
 
 /**
  * This class represents the toolbar component.
@@ -16,6 +17,8 @@ export class ToolbarComponent implements OnInit {
 
   @Output() menuOpen = new EventEmitter<boolean>();
 
+  title: string;
+
   languages: Language[] = [
     new Language('en', 'English'),
     new Language('be-nl', 'Nederlands'),
@@ -23,9 +26,13 @@ export class ToolbarComponent implements OnInit {
   ];
   selectedLanguage: Language = this.languages[0];
 
-  constructor(private translate: TranslateService) {
+  constructor(private translate: TranslateService, private navigationService: NavigationService) {
     translate.setDefaultLang(this.selectedLanguage.code);
     translate.use(this.selectedLanguage.code);
+    this.title = this.navigationService.getTitle();
+    this.navigationService.titleSubscription(title => {
+      this.title = title;
+    });
   }
 
   menuOpened() {
@@ -39,7 +46,7 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit(): void {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini|Mobile/i
-      .test(navigator.userAgent)) {
+        .test(navigator.userAgent)) {
       console.log('mobile');
     } else {
       console.log('non-mobile');

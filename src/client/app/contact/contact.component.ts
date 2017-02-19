@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavigationService } from '../shared/services/navigation/navigation.service';
 
 @Component({
   moduleId: module.id,
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['contact.component.css']
 })
 export class ContactComponent {
+  constructor(private navigationService: NavigationService) {
+    navigationService.setTitle('contact');
+  }
 }
