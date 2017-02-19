@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { HttpModule, Http } from '@angular/http';
 import { AppComponent } from './app.component';
-import { routes } from './app.routes';
 import { SettingsModule } from './settings/settings.module';
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
@@ -16,6 +14,7 @@ import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-tra
 import { ProductListModule } from './product-list/product-list.module';
 import { FAQModule } from './faq/faq.module';
 import { ContactModule } from './contact/contact.module';
+import { AppRoutingModule } from './app-routing.module';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, '/assets/i18n', '.json');
@@ -27,7 +26,7 @@ export function createTranslateLoader(http: Http) {
     CommonModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(routes, {useHash: true}),
+    AppRoutingModule,
     SettingsModule,
     HomeModule,
     ProductListModule,

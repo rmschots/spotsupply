@@ -1,9 +1,3 @@
-// Feel free to extend this interface
-// depending on your app specific config.
-export interface EnvConfig {
-  API?: string;
-  ENV?: string;
-}
+import { EnvConfig } from '../../../../../tools/env/env-config.interface';
 
 export const Config: EnvConfig = JSON.parse('<%= ENV_CONFIG %>');
-
