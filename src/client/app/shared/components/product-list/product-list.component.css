@@ -1,3 +1,12 @@
 :host {
 
 }
+
+.md-tab-group {
+  height: 100%;
+}
+
+.amount-text {
+  text-align: center;
+  display: inline-block;
+}

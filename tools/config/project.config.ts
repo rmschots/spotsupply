@@ -73,6 +73,15 @@ export class ProjectConfig extends SeedConfig {
       }
     });
 
+    this.addPackageBundles({
+      name: 'typescript-collections',
+      path: 'node_modules/typescript-collections/dist/lib/index.js',
+      packageMeta: {
+        main: 'index.js',
+        defaultExtension: 'js'
+      }
+    });
+
     // Add packages (e.g. ng2-translate)
     // let additionalPackages: ExtendPackages[] = [{
     //   name: 'ng2-translate',

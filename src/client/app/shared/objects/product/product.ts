@@ -1,6 +1,11 @@
 export class Product {
-  constructor(public name: string,
+  constructor(public id: number,
+              public name: string,
               public extraInfo: string,
               public price: number) {
+  }
+
+  toString() {
+    return this.id;
   }
 }

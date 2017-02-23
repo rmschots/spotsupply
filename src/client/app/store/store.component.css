@@ -1,2 +1,10 @@
 :host {
 }
+
+.store-bar {
+  height: 40px;
+  bottom: 0;
+  background-color: #00AAAA;
+  position: fixed;
+  width: 100%;
+}

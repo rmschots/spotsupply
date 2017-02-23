@@ -1,10 +1,17 @@
 <md-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="tabSelected($event)">
   <md-tab *ngFor="let category of categories" [label]="category.name">
-    <div *ngFor="let type of category.types" (swipe)="tabSwiped($event)">
+    <div *ngFor="let type of category.types" (swipe)="tabSwiped($event)" class="md-elevation-z6">
       <h4>{{type.name}}</h4>
-      <div *ngFor="let product of type.products">
-        <p>{{product.name}}</p>
-      </div>
+      <ul>
+        <li *ngFor="let product of type.products">
+          <div>{{product.name}}</div>
+          <div *ngIf="shop">
+            <md-icon fontSet="fa" fontIcon="fa-minus" class="text-center" (click)="removeProduct(product)"></md-icon>
+            <div class="amount-text">{{getProductAmount(product)}}</div>
+            <md-icon fontSet="fa" fontIcon="fa-plus" class="text-center" (click)="addProduct(product)"></md-icon>
+          </div>
+        </li>
+      </ul>
     </div>
   </md-tab>
 </md-tab-group>
