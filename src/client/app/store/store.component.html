@@ -8,7 +8,7 @@
   </div>
   <div class="store-bar-middle">Total &#8364; {{productTotal}}</div>
   <div class="store-bar-right">
-    <div (click)="onNextClicked()">
+    <div *ngIf="productTotal > 0" (click)="onNextClicked()">
       <div>Next</div>
       <md-icon class="next-icon">keyboard_arrow_right</md-icon>
     </div>
