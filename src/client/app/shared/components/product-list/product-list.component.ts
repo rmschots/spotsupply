@@ -62,6 +62,23 @@ export class ProductListComponent {
       new ProductCategory('Drinks', [
         new ProductType(2, 'Soft drinks', true, [
           new Product(1, 'Coca Cola', '33cl', 2.5),
+          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
+          new Product(1, 'Coca Cola', '33cl', 2.5),
+          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
+          new Product(1, 'Coca Cola', '33cl', 2.5),
+          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
+          new Product(1, 'Coca Cola', '33cl', 2.5),
+          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
+          new Product(1, 'Coca Cola', '33cl', 2.5),
+          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
+          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
+          new Product(1, 'Coca Cola', '33cl', 2.5),
+          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
+          new Product(1, 'Coca Cola', '33cl', 2.5),
+          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
+          new Product(1, 'Coca Cola', '33cl', 2.5),
+          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
+          new Product(1, 'Coca Cola', '33cl', 2.5),
           new Product(2, 'Coca Cola Zero', '33cl', 2.5)
         ]),
         new ProductType(3, 'Beers', true, [

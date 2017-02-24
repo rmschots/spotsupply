@@ -21,4 +21,12 @@ export class StoreComponent {
       this.productTotal = total;
     });
   }
+
+  onClearCartClicked() {
+    this.shoppingCartService.removeAllProducts();
+  }
+
+  onNextClicked() {
+    console.log('next clicked');
+  }
 }

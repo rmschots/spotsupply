@@ -1,2 +1,16 @@
-<ss-product-list [shop]="true"> </ss-product-list>
-<div class="store-bar text-center">{{productTotal}}</div>
+<ss-product-list [shop]="true" class="product-list"> </ss-product-list>
+<div class="store-bar primary-color">
+  <div class="store-bar-left">
+    <div *ngIf="productTotal > 0" (click)="onClearCartClicked()">
+      <md-icon class="delete-icon">delete</md-icon>
+      <div>Clear cart</div>
+    </div>
+  </div>
+  <div class="store-bar-middle">Total &#8364; {{productTotal}}</div>
+  <div class="store-bar-right">
+    <div (click)="onNextClicked()">
+      <div>Next</div>
+      <md-icon class="next-icon">keyboard_arrow_right</md-icon>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,43 @@
 :host {
-
-}
-
-.md-tab-group {
   height: 100%;
+  width: 100%;
+  position: absolute;
 }
 
 .amount-text {
   text-align: center;
   display: inline-block;
+}
+
+.product-parent {
+  display: flex;
+  align-items: baseline;
+  line-height: 25px;
+}
+
+.product-name {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.product-price {
+  margin-right: 10px;
+}
+
+.product-control {
+  flex-basis: 80px;
+}
+
+.product-extra-info {
+  font-size: 0.8em;
+  line-height: normal;
+  margin-left: 10px;
+}
+
+.product-list-title {
+  margin-left: 5px;
+}
+
+.action-disabled {
+  opacity: 0.2;
 }

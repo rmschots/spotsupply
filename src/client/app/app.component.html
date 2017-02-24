@@ -3,9 +3,11 @@
               [ngStyle]="{'margin-left': marginLeft+'px'}">
     <ss-navbar [menuOpen]="menuOpen" (menuClose)="sideNavClosed(false)" (margin)="marginLeft=$event"></ss-navbar>
   </md-sidenav>
-  <ss-toolbar (menuOpen)="menuOpened()"></ss-toolbar>
-  <div id="main-content">
-    <router-outlet></router-outlet>
+  <div class="sidenav-content">
+    <ss-toolbar class="header" (menuOpen)="menuOpened()"></ss-toolbar>
+    <div id="main-content">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </md-sidenav-container>
 

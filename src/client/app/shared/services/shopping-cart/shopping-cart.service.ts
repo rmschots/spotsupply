@@ -47,6 +47,11 @@ export class ShoppingCartService {
     }
   }
 
+  removeAllProducts() {
+    this.cart.clear();
+    this.calculateNewTotal();
+  }
+
   private calculateNewTotal() {
     let totalTmp = 0;
     this.cart.forEach((product, amount) => {

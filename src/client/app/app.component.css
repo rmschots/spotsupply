@@ -3,3 +3,27 @@
   display: flex;
   flex-flow: column;
 }
+
+#main-parent {
+  height: 100%;
+  position: fixed;
+  width: 100%;
+}
+
+.sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+#main-content {
+  width: 100%;
+  overflow: auto;
+  flex: 1 1 auto;
+  position: relative;/* need this to position inner content */
+}
+
+.header {
+  flex: 0 0 auto;
+}

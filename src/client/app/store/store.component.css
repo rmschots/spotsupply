@@ -1,10 +1,56 @@
 :host {
 }
 
+.product-list {
+  width: 100%;
+  height: calc(100% - 96px);
+  position: fixed;
+}
+
 .store-bar {
   height: 40px;
   bottom: 0;
-  background-color: #00AAAA;
   position: fixed;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.store-bar > * {
+  line-height: 24px;
+}
+
+.store-bar-left {
+  flex-grow: 1;
+  flex-basis: 10px;
+}
+
+.store-bar-left > * {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.store-bar-middle {
+
+}
+
+.store-bar-right {
+  flex-grow: 1;
+  flex-basis: 10px;
+  text-align: right;
+}
+
+.store-bar-right > * {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete-icon {
+  float: left;
+}
+
+.next-icon {
+  float: right;
 }
