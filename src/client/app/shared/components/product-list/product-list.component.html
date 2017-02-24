@@ -3,7 +3,7 @@
   <md-tab *ngFor="let category of categories" [label]="category.name">
     <div class="tab-content">
       <div *ngFor="let type of category.types" class="md-elevation-z6">
-        <h4 *ngIf="type.hasTitle" class="header-small-margin product-list-title">{{type.name}}</h4>
+        <h4 *ngIf="type.hasTitle" class="header-small-margin product-list-title primary-text">{{type.name}}</h4>
         <div>
           <div *ngFor="let product of type.products" class="product-parent">
             <div class="product-name">
@@ -14,11 +14,11 @@
             </div>
             <div class="product-price">&#8364; {{product.price}}</div>
             <div class="product-control" *ngIf="shop">
-              <md-icon fontSet="fa" fontIcon="fa-minus" class="text-center"
+              <md-icon fontSet="fa" fontIcon="fa-minus" class="text-center primary-text"
                        [ngClass]="{'action-disabled': getProductAmount(product) < 1}"
                        (click)="removeProduct(product)"></md-icon>
               <div class="amount-text">{{getProductAmount(product)}}</div>
-              <md-icon fontSet="fa" fontIcon="fa-plus" class="text-center" (click)="addProduct(product)"></md-icon>
+              <md-icon fontSet="fa" fontIcon="fa-plus" class="text-center primary-text" (click)="addProduct(product)"></md-icon>
             </div>
           </div>
         </div>

@@ -43,6 +43,18 @@ body {
   color: rgba(0,0,0,.87) !important;
 }
 
+.warn-text {
+  color: #f44336;
+}
+
+.primary-text {
+  color: #673ab7;
+}
+
+.accent-text {
+  color: #ffc107;
+}
+
 .clickable {
   cursor: pointer;
 }
