@@ -58,3 +58,7 @@
 .next-icon {
   float: right;
 }
+
+.actions-opaque {
+  opacity: 0.2;
+}

@@ -23,10 +23,14 @@ export class StoreComponent {
   }
 
   onClearCartClicked() {
-    this.shoppingCartService.removeAllProducts();
+    if (this.productTotal > 0) {
+      this.shoppingCartService.removeAllProducts();
+    }
   }
 
   onNextClicked() {
-    console.log('next clicked');
+    if (this.productTotal > 0) {
+      console.log('next clicked');
+    }
   }
 }
