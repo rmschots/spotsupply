@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Config } from './shared/config/env.config';
 import './operators';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
@@ -10,8 +10,9 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
   styleUrls: ['app.component.css'],
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 
+  isDesktop: boolean = false;
   menuOpen: boolean = false;
   marginLeft: number = 0;
 
@@ -32,4 +33,15 @@ export class AppComponent {
       this.navbar.setMenuClosed();
     }
   }
+
+  ngOnInit(): void {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini|Mobile/i
+        .test(navigator.userAgent)) {
+      console.log('mobile');
+    } else {
+      console.log('desktop');
+      this.isDesktop = true;
+    }
+  }
+
 }

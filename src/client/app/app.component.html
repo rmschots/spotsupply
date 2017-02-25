@@ -1,4 +1,4 @@
-<md-sidenav-container id="main-parent">
+<md-sidenav-container id="main-parent" [ngClass]="{'mobile-view': isDesktop}">
   <md-sidenav mode="over" [opened]="menuOpen" (close)="sideNavClosed(true)"
               [ngStyle]="{'margin-left': marginLeft+'px'}">
     <ss-navbar [menuOpen]="menuOpen" (menuClose)="sideNavClosed(false)" (margin)="marginLeft=$event"></ss-navbar>

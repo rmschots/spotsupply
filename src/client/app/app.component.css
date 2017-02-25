@@ -4,6 +4,13 @@
   flex-flow: column;
 }
 
+.mobile-view {
+  height: 600px !important;
+  width: 350px !important;
+  left: 50% !important;
+  margin-left: -175px !important;
+}
+
 #main-parent {
   height: 100%;
   position: fixed;
