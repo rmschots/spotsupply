@@ -28,6 +28,10 @@ body {
   text-align: center;
 }
 
+.full-width {
+  width: 100%;
+}
+
 .warn-color {
   background-color: #f44336 !important;
   color: #fff !important;

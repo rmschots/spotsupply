@@ -18,6 +18,10 @@ export class ShoppingCartService {
     return this.productTotal;
   }
 
+  getCart(): Collections.Dictionary<Product, number> {
+    return this.cart;
+  }
+
   productTotalSubscription(obs: ((value: number) => void)) {
     this.productTotalSubject.subscribe(obs);
   }

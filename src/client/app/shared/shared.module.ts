@@ -10,6 +10,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { Http } from '@angular/http';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ShoppingCartService } from './services/shopping-cart/shopping-cart.service';
+import { CartComponent } from './components/cart/cart.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -32,9 +33,9 @@ export function createTranslateLoader(http: Http) {
       deps: [Http]
     })
   ],
-  declarations: [ToolbarComponent, NavbarComponent, ProductListComponent],
+  declarations: [ToolbarComponent, NavbarComponent, ProductListComponent, CartComponent],
   exports: [ToolbarComponent, NavbarComponent, TranslateModule,
-    CommonModule, FormsModule, RouterModule, MaterialModule, ProductListComponent]
+    CommonModule, FormsModule, RouterModule, MaterialModule, ProductListComponent, CartComponent]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

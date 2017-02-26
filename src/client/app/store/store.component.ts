@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
 import { ProductCategory } from '../shared/objects/product/product-category';
 import { ShoppingCartService } from '../shared/services/shopping-cart/shopping-cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -14,7 +15,8 @@ export class StoreComponent {
   categories: ProductCategory[] = [];
   productTotal: number;
 
-  constructor(private navigationService: NavigationService, private shoppingCartService: ShoppingCartService) {
+  constructor(private navigationService: NavigationService, private shoppingCartService: ShoppingCartService,
+              private router: Router) {
     navigationService.setTitle('store');
     this.productTotal = shoppingCartService.getProductTotal();
     shoppingCartService.productTotalSubscription(total => {
@@ -30,7 +32,7 @@ export class StoreComponent {
 
   onNextClicked() {
     if (this.productTotal > 0) {
-      console.log('next clicked');
+      this.router.navigate(['/order-info']);
     }
   }
 }
