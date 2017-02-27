@@ -51,12 +51,6 @@
   opacity: 0.5;
 }
 
-.truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .price-total {
   width: 100%;
   text-align: center;

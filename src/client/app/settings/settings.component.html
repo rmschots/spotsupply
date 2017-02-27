@@ -1,1 +1,21 @@
-<p>Settings</p>
+<nav md-tab-nav-bar>
+  <a md-tab-link
+     [routerLink]="'current-order'"
+     routerLinkActive #rla="routerLinkActive"
+     [active]="rla.isActive">
+    {{'SETTINGS.CURRENT_ORDER.title'|translate}}
+  </a>
+  <a md-tab-link
+     [routerLink]="'order-history'"
+     routerLinkActive #rla2="routerLinkActive"
+     [active]="rla2.isActive">
+    {{'SETTINGS.ORDER_HISTORY.title'|translate}}
+  </a>
+  <a md-tab-link
+     [routerLink]="'preferences'"
+     routerLinkActive #rla3="routerLinkActive"
+     [active]="rla3.isActive">
+    {{'SETTINGS.PREFERENCES.title'|translate}}
+  </a>
+</nav>
+<router-outlet></router-outlet>

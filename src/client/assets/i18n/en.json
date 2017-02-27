@@ -19,6 +19,17 @@
   },
   "OSTEND": "OSTEND",
   "OTHER_BEACH": "OTHER BEACH",
+  "SETTINGS": {
+    "CURRENT_ORDER": {
+      "title": "Current order"
+    },
+    "ORDER_HISTORY": {
+      "title": "Order history"
+    },
+    "PREFERENCES": {
+      "title": "Preferences"
+    }
+  },
   "TOOLBAR": {
     "title": {
       "contact": "Contact",

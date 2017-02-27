@@ -32,7 +32,7 @@ import { OrderInfoModule } from './order-info/order-info.module';
     StoreModule,
     OrderInfoModule,
     SharedModule.forRoot(),
-    MaterialModule.forRoot(),
+    MaterialModule,
     Ng2MapModule.forRoot({
       apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBtYO0eJfiqw2AqMRu-0_X8gBVSUWiIymg' +
       '&libraries=visualization,places,drawing',
