@@ -14,6 +14,9 @@ export class ShoppingCartService {
   private productTotal: number = 0;
   private productTotalSubject = new Subject<number>();
 
+  private ordered: boolean = false;
+  private orderedSubject = new Subject<boolean>();
+
   getProductTotal(): number {
     return this.productTotal;
   }
@@ -22,12 +25,25 @@ export class ShoppingCartService {
     return this.cart;
   }
 
+  getProductAmount(product: Product): number {
+    return this.cart.containsKey(product) ? this.cart.getValue(product) : 0;
+  }
+
+  isOrdered(): boolean {
+    return this.ordered;
+  }
+
+  placeOrder() {
+    this.ordered = true;
+    this.orderedSubject.next(true);
+  }
+
   productTotalSubscription(obs: ((value: number) => void)) {
     this.productTotalSubject.subscribe(obs);
   }
 
-  getProductAmount(product: Product): number {
-    return this.cart.containsKey(product) ? this.cart.getValue(product) : 0;
+  orderedSubscription(obs: ((value: boolean) => void)) {
+    this.orderedSubject.subscribe(obs);
   }
 
   addProduct(product: Product) {

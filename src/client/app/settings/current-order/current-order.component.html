@@ -1,1 +1,6 @@
-<p>Current Order</p>
+<div *ngIf="!ordered">
+  <p>No current order</p>
+</div>
+<div *ngIf="ordered">
+  <ss-cart [cart]="getCurrentCart()"></ss-cart>
+</div>

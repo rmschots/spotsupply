@@ -56,19 +56,6 @@
   text-align: center;
 }
 
-.bring-it-button-parent {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  display: flex;
-}
-
 .total-text {
   font-size: 12pt !important;
-}
-
-.bring-it-button {
-  width: 100%;
-  margin-left: 10px;
-  margin-right: 10px;
-  font-size: 15pt;
 }

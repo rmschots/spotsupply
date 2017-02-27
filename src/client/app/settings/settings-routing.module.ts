@@ -12,6 +12,11 @@ import { PreferencesComponent } from './preferences/preferences.component';
         component: SettingsComponent,
         children: [
           {
+            path: '',
+            redirectTo: '/settings/preferences',
+            pathMatch: 'full'
+          },
+          {
             path: 'current-order',
             component: CurrentOrderComponent
           },

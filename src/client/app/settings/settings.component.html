@@ -1,19 +1,22 @@
 <nav md-tab-nav-bar>
   <a md-tab-link
-     [routerLink]="'current-order'"
-     routerLinkActive #rla="routerLinkActive"
+     [routerLink]="'./current-order'"
+     [routerLinkActive] #rla="routerLinkActive"
+     [routerLinkActiveOptions]="{exact:true}"
      [active]="rla.isActive">
     {{'SETTINGS.CURRENT_ORDER.title'|translate}}
   </a>
   <a md-tab-link
-     [routerLink]="'order-history'"
-     routerLinkActive #rla2="routerLinkActive"
+     [routerLink]="'./order-history'"
+     [routerLinkActive] #rla2="routerLinkActive"
+     [routerLinkActiveOptions]="{exact:true}"
      [active]="rla2.isActive">
     {{'SETTINGS.ORDER_HISTORY.title'|translate}}
   </a>
   <a md-tab-link
-     [routerLink]="'preferences'"
-     routerLinkActive #rla3="routerLinkActive"
+     [routerLink]="'./preferences'"
+     [routerLinkActive] #rla3="routerLinkActive"
+     [routerLinkActiveOptions]="{exact:true}"
      [active]="rla3.isActive">
     {{'SETTINGS.PREFERENCES.title'|translate}}
   </a>

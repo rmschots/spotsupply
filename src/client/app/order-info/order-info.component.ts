@@ -4,6 +4,7 @@ import { ShoppingCartService } from '../shared/services/shopping-cart/shopping-c
 import { OrderInfo } from './order-info';
 import { Product } from '../shared/objects/product/product';
 import * as Collections from 'typescript-collections';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -18,8 +19,15 @@ export class OrderInfoComponent {
   times = ['Bring now', '10:30', '10:45', '11:00'];
   paymentMethods = ['Cash'];
 
-  constructor(private navigationService: NavigationService, private shoppingCartService: ShoppingCartService) {
+  constructor(private navigationService: NavigationService,
+              private shoppingCartService: ShoppingCartService,
+              private router: Router) {
     navigationService.setTitle('order-info');
     this.cart = shoppingCartService.getCart();
+  }
+
+  placeOrder() {
+    this.shoppingCartService.placeOrder();
+    this.router.navigate(['/settings/current-order']);
   }
 }
