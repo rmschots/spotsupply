@@ -1,2 +1,11 @@
 :host {
 }
+
+.mat-input-wrapper {
+  margin: 1em 0;
+  padding-bottom: 6px;
+}
+
+.preferences-form {
+  margin: 10px;
+}

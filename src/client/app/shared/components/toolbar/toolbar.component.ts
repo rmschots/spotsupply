@@ -1,11 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { TranslateService } from 'ng2-translate';
 import { Language } from './language';
 import { NavigationService } from '../../services/navigation/navigation.service';
+import { LanguageService } from '../../services/language/language.service';
 
-/**
- * This class represents the toolbar component.
- */
 @Component({
   moduleId: module.id,
   selector: 'ss-toolbar',
@@ -18,20 +15,20 @@ export class ToolbarComponent {
   @Output() menuOpen = new EventEmitter<boolean>();
 
   title: string;
+  languages: Language[];
+  selectedLanguage: Language;
 
-  languages: Language[] = [
-    new Language('en', 'English'),
-    new Language('be-nl', 'Nederlands'),
-    new Language('be-fr', 'Français')
-  ];
-  selectedLanguage: Language = this.languages[0];
-
-  constructor(private translate: TranslateService, private navigationService: NavigationService) {
-    translate.setDefaultLang(this.selectedLanguage.code);
-    translate.use(this.selectedLanguage.code);
+  constructor(private navigationService: NavigationService,
+              private languageService: LanguageService) {
     this.title = this.navigationService.getTitle();
+    this.languages = languageService.getLanguages();
+    this.selectedLanguage = languageService.getActiveLanguage();
+
     this.navigationService.titleSubscription((title: string) => {
       this.title = title;
+    });
+    languageService.languageSubscription(language => {
+      this.selectedLanguage = language;
     });
   }
 
@@ -40,8 +37,7 @@ export class ToolbarComponent {
   }
 
   languageSelected(language: Language) {
-    this.selectedLanguage = language;
-    this.translate.use(this.selectedLanguage.code);
+    this.languageService.setLanguage(language);
   }
 }
 

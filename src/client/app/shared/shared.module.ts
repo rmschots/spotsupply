@@ -11,6 +11,7 @@ import { Http } from '@angular/http';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ShoppingCartService } from './services/shopping-cart/shopping-cart.service';
 import { CartComponent } from './components/cart/cart.component';
+import { LanguageService } from './services/language/language.service';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -41,7 +42,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [NavigationService, ShoppingCartService]
+      providers: [NavigationService, ShoppingCartService, LanguageService]
     };
   }
 }

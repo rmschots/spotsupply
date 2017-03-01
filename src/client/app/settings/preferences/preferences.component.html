@@ -1,1 +1,11 @@
-<p>Preferences</p>
+<form class="preferences-form">
+  <md-input-container class="full-width" floatPlaceholder="always">
+    <input mdInput [(ngModel)]="orderInfo.spot" placeholder="Phone number" name="phoneNumber"/>
+  </md-input-container>
+  <md-select placeholder="Language" class="full-width mat-input-wrapper" [(ngModel)]="selectedLanguage"
+             name="language">
+    <md-option *ngFor="let language of languages" [value]="language" (click)="languageSelected(language)">
+      {{ language.name }}
+    </md-option>
+  </md-select>
+</form>
