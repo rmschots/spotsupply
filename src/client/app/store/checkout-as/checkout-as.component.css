@@ -1,0 +1,11 @@
+:host {
+}
+
+.buttons-parent {
+  text-align: center;
+}
+
+.checkout-as-button {
+  margin-bottom: 10px;
+  width: 100%;
+}

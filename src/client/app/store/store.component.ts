@@ -3,6 +3,8 @@ import { NavigationService } from '../shared/services/navigation/navigation.serv
 import { ProductCategory } from '../shared/objects/product/product-category';
 import { ShoppingCartService } from '../shared/services/shopping-cart/shopping-cart.service';
 import { Router } from '@angular/router';
+import { MdDialog } from '@angular/material';
+import { CheckoutAsComponent } from './checkout-as/checkout-as.component';
 
 @Component({
   moduleId: module.id,
@@ -16,7 +18,7 @@ export class StoreComponent {
   productTotal: number;
 
   constructor(private navigationService: NavigationService, private shoppingCartService: ShoppingCartService,
-              private router: Router) {
+              private router: Router, public dialog: MdDialog) {
     navigationService.setTitle('store');
     this.productTotal = shoppingCartService.getProductTotal();
     shoppingCartService.productTotalSubscription(total => {
@@ -32,7 +34,23 @@ export class StoreComponent {
 
   onNextClicked() {
     if (this.productTotal > 0) {
-      this.router.navigate(['/order-info']);
+      this.openCheckoutAsDialog();
     }
+  }
+
+  openCheckoutAsDialog() {
+    let dialogRef = this.dialog.open(CheckoutAsComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      switch(result) {
+        case 'no-account':
+        case 'login':
+        case 'create-account':
+          // todo: create other dialog
+          this.router.navigate(['/order-info']);
+          break;
+        case undefined:
+          break;
+      }
+    });
   }
 }

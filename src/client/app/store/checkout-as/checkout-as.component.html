@@ -1,0 +1,13 @@
+<div class="buttons-parent">
+  <button md-raised-button color="accent" class="checkout-as-button" (click)="dialogRef.close('no-account')">
+    Continue without account
+  </button>
+  <button md-raised-button color="accent" class="checkout-as-button" (click)="dialogRef.close('login')">
+    Log in
+  </button>
+  <hr>
+  <p>Don't have an account yet?</p>
+  <button md-raised-button color="primary" class="checkout-as-button" (click)="dialogRef.close('create-account')">
+    Create an account
+  </button>
+</div>
