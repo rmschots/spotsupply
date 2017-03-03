@@ -1,4 +1,7 @@
 import { Component, Output, EventEmitter, Input, ElementRef, ViewChild } from '@angular/core';
+import { UserService } from '../../services/user/user.service';
+import { LoginComponent } from '../login/login.component';
+import { MdDialog } from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -14,9 +17,27 @@ export class NavbarComponent {
   @Input() menuOpen: boolean;
   marginLeft: number;
   @ViewChild('navRoot') navParentElement: ElementRef;
+  isLoggedIn: boolean = false;
+
+  constructor(private userService: UserService, public dialog: MdDialog) {
+    this.isLoggedIn = userService.isLoggedIn();
+    userService.loginSubscription((loginDetails) => {
+      this.isLoggedIn = !!loginDetails;
+    });
+  }
+
+  logIn() {
+    let dialogRef = this.dialog.open(LoginComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'SUCCESS') {
+        this.navigated();
+      }
+    });
+  }
 
   logOut() {
     console.log('logging out');
+    this.userService.logOut();
     this.navigated();
   }
 

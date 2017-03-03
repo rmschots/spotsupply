@@ -16,6 +16,7 @@ import { ContactModule } from './contact/contact.module';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from './store/store.module';
 import { OrderInfoModule } from './order-info/order-info.module';
+import { CreateAccountModule } from './create-account/create-account.module';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { OrderInfoModule } from './order-info/order-info.module';
     ContactModule,
     StoreModule,
     OrderInfoModule,
+    CreateAccountModule,
     SharedModule.forRoot(),
     MaterialModule,
     Ng2MapModule.forRoot({

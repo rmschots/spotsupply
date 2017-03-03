@@ -11,6 +11,7 @@
       "contact": "Contact us",
       "faq": "FAQ",
       "home": "Home",
+      "logIn": "Log In",
       "logOut": "Log out",
       "paymentMethods": "Payment methods",
       "products": "What do we offer?",
@@ -33,6 +34,7 @@
   "TOOLBAR": {
     "title": {
       "contact": "Contact",
+      "createAccount": "Create Account",
       "faq": "FAQ",
       "home": "SpotSupply",
       "order-info": "My order",

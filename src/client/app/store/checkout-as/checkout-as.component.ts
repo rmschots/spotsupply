@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
+import { MdDialogRef, MdDialog } from '@angular/material';
+import { LoginComponent } from '../../shared/components/login/login.component';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -9,6 +11,15 @@ import { MdDialogRef } from '@angular/material';
 })
 export class CheckoutAsComponent {
 
-  constructor(public dialogRef: MdDialogRef<CheckoutAsComponent>) {
+  constructor(public dialogRef: MdDialogRef<CheckoutAsComponent>, public dialog: MdDialog) {
+  }
+
+  openLoginDialog() {
+    let dialogRef = this.dialog.open(LoginComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'SUCCESS') {
+        this.dialogRef.close('SUCCESS');
+      }
+    });
   }
 }

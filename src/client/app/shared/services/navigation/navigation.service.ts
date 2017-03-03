@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
-/**
- * This class provides the NameList service with methods to read names and add names.
- */
 @Injectable()
 export class NavigationService {
 

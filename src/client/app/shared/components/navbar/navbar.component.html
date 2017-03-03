@@ -11,7 +11,8 @@
        (click)="navigated()">{{'NAVBAR.items.faq' | translate}}</a>
     <a class="menu-item" md-list-item [routerLink]="['/settings']" [routerLinkActive]="['router-link-active']"
        (click)="navigated()">{{'NAVBAR.items.settings' | translate}}</a>
-    <md-list-item (click)="logOut()">{{'NAVBAR.items.logOut' | translate}}</md-list-item>
+    <md-list-item *ngIf="isLoggedIn" (click)="logOut()">{{'NAVBAR.items.logOut' | translate}}</md-list-item>
+    <md-list-item *ngIf="!isLoggedIn" (click)="logIn()">{{'NAVBAR.items.logIn' | translate}}</md-list-item>
   </md-nav-list>
 
   <div class="navbar-footer">

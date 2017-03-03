@@ -7,6 +7,7 @@
     {{'SETTINGS.CURRENT_ORDER.title'|translate}}
   </a>
   <a md-tab-link
+     *ngIf="isLoggedIn"
      [routerLink]="'./order-history'"
      [routerLinkActive] #rla2="routerLinkActive"
      [routerLinkActiveOptions]="{exact:true}"
