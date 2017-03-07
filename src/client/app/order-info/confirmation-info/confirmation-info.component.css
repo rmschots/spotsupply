@@ -1,0 +1,28 @@
+:host {
+}
+
+.buttons-parent {
+  text-align: center;
+}
+
+.check-list {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.check-list > div {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.check-list > div > * {
+  display: inline;
+}
+
+.check-icon {
+  color: #58b349;
+  float: left;
+  margin-right: 5px;
+  margin-left: -5px;
+}

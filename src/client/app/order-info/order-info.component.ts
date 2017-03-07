@@ -5,6 +5,8 @@ import { OrderInfo } from './order-info';
 import { Product } from '../shared/objects/product/product';
 import * as Collections from 'typescript-collections';
 import { Router } from '@angular/router';
+import { MdDialog } from '@angular/material';
+import { ConfirmationInfoComponent } from './confirmation-info/confirmation-info.component';
 
 @Component({
   moduleId: module.id,
@@ -21,13 +23,17 @@ export class OrderInfoComponent {
 
   constructor(private navigationService: NavigationService,
               private shoppingCartService: ShoppingCartService,
-              private router: Router) {
+              private router: Router,
+              private dialog: MdDialog) {
     navigationService.setTitle('order-info');
     this.cart = shoppingCartService.getCart();
   }
 
   placeOrder() {
     this.shoppingCartService.placeOrder();
-    this.router.navigate(['/settings/current-order']);
+    let dialogRef = this.dialog.open(ConfirmationInfoComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      this.router.navigate(['/settings/current-order']);
+    });
   }
 }
