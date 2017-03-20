@@ -1,6 +1,6 @@
 <div #navRoot id="sidenav" (swipe)="menuSwiped($event)" (slide)="menuSlide($event)">
   <md-nav-list>
-    <h3 md-subheader>Menu</h3>
+    <h3 md-subheader>SpotSupply</h3>
     <a class="menu-item" md-list-item [routerLink]="['/']" [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}" (click)="navigated()">{{'NAVBAR.items.home' | translate}}</a>
     <a class="menu-item" md-list-item [routerLink]="['/products']" [routerLinkActive]="['router-link-active']"
@@ -9,22 +9,13 @@
     <a class="menu-item" md-list-item [routerLink]="['/faq']" [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}"
        (click)="navigated()">{{'NAVBAR.items.faq' | translate}}</a>
-    <a class="menu-item" md-list-item [routerLink]="['/settings']" [routerLinkActive]="['router-link-active']"
-       (click)="navigated()">{{'NAVBAR.items.settings' | translate}}</a>
+    <a *ngIf="isLoggedIn" class="menu-item" md-list-item [routerLink]="['/settings']"
+       [routerLinkActive]="['router-link-active']" (click)="navigated()">{{'NAVBAR.items.settings' | translate}}</a>
     <md-list-item *ngIf="isLoggedIn" (click)="logOut()">{{'NAVBAR.items.logOut' | translate}}</md-list-item>
     <md-list-item *ngIf="!isLoggedIn" (click)="logIn()">{{'NAVBAR.items.logIn' | translate}}</md-list-item>
   </md-nav-list>
 
   <div class="navbar-footer">
-    <div>
-      <div>
-        <div class="text-center">{{'NAVBAR.items.paymentMethods' | translate}}</div>
-        <div>
-          <div>img1</div>
-          <div>img2</div>
-        </div>
-      </div>
-    </div>
     <md-nav-list>
       <a class="menu-item" md-list-item [routerLink]="['/contact']" [routerLinkActive]="['router-link-active']"
          [routerLinkActiveOptions]="{exact:true}"

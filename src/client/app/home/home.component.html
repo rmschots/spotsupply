@@ -1,7 +1,7 @@
 <div id="home">
   <div class="flex-container padded-row-xl text-center">
     <h3 class="centered-title">{{'HOME.lookForSupplyAtSpot'|translate}}</h3>
-    <button md-raised-button color="primary" (click)="selectSpot('OSTEND')">{{'HOME.checkIt'|translate}}</button>
+    <button md-raised-button color="primary" (click)="checkIt()">{{'HOME.checkIt'|translate}}</button>
   </div>
 
   <div class="flex-container padded-row-xl text-center">
@@ -22,24 +22,13 @@
       <md-card-content class="no-margin-bottom" *ngIf="selectedSpot == spot">
         <div class="map-parent">
           <ng2-map #someVar center="Oostende, Belgium" disableDefaultUI="true"></ng2-map>
-          <div *ngIf="overlayError" class="map-overlay-box">
-            <md-chip-list class="md-chip-list-stacked">
-              <md-chip
-                [ngClass]="{'warn-color': overlayError.type === 'error', 'accent-color': overlayError.type === 'warning'}"
-                class="overlay-chip"
-                selected="true">
-                {{'map.errorCode.'+overlayError.code|translate}}
-              </md-chip>
-            </md-chip-list>
-          </div>
         </div>
       </md-card-content>
-      <a *ngIf="selectedSpot == spot"
-         md-fab
-         class="hover-button"
-         [routerLink]="['/store']">
-        <md-icon>shopping_cart</md-icon>
-      </a>
     </md-card>
   </div>
+  <a md-fab
+     class="hover-button"
+     [routerLink]="['/store']">
+    <md-icon>shopping_cart</md-icon>
+  </a>
 </div>

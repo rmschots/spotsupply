@@ -4,7 +4,7 @@ import { ProductCategory } from '../shared/objects/product/product-category';
 import { ShoppingCartService } from '../shared/services/shopping-cart/shopping-cart.service';
 import { Router } from '@angular/router';
 import { MdDialog } from '@angular/material';
-import { CheckoutAsComponent } from './checkout-as/checkout-as.component';
+import { LoginOptionsComponent } from '../shared/components/login/login-options.component';
 import { UserService } from '../shared/services/user/user.service';
 
 @Component({
@@ -44,18 +44,6 @@ export class StoreComponent {
   }
 
   openCheckoutAsDialog() {
-    let dialogRef = this.dialog.open(CheckoutAsComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      switch (result) {
-        case 'CREATE_ACCOUNT':
-          this.router.navigate(['/create-account']);
-          break;
-        case 'SUCCESS':
-          this.router.navigate(['/order-info']);
-          break;
-        case undefined:
-          break;
-      }
-    });
+    this.router.navigate(['/order-info']);
   }
 }

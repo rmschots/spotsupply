@@ -7,6 +7,12 @@
   <!-- This fills the remaining space of the current row -->
   <span class="toolbar-title-fill-remaining-space"></span>
 
+  <div *ngIf="showCart" class="action-parent">
+    <md-icon class="btn-action" (click)="goToCart()">
+      shopping_cart
+    </md-icon>
+    <div *ngIf="productsAmount > 0" class="cart-size">{{productsAmount}}</div>
+  </div>
   <button md-button [mdMenuTriggerFor]="menu" class="btn-language">
     <img src="/assets/img/{{selectedLanguage.code}}.jpg"/>
   </button>
@@ -17,3 +23,6 @@
     </button>
   </md-menu>
 </md-toolbar>
+<div *ngIf="error" class="message-bar warn-color">
+  {{error|translate}}
+</div>

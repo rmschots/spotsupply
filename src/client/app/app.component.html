@@ -1,10 +1,10 @@
-<md-sidenav-container id="main-parent" [ngClass]="{'mobile-view': isDesktop}">
+<md-sidenav-container id="main-parent" [ngClass]="{'mobile-view': isDesktop}" (backdropClick)="menuOpen = false">
   <md-sidenav mode="over" [opened]="menuOpen" (close)="sideNavClosed(true)"
               [ngStyle]="{'margin-left': marginLeft+'px'}">
     <ss-navbar [menuOpen]="menuOpen" (menuClose)="sideNavClosed(false)" (margin)="marginLeft=$event"></ss-navbar>
   </md-sidenav>
   <div class="sidenav-content">
-    <ss-toolbar class="header" (menuOpen)="menuOpened()"></ss-toolbar>
+    <ss-toolbar class="header" (openMenu)="menuOpened()" [menuOpen]="menuOpen"></ss-toolbar>
     <div id="main-content">
       <router-outlet></router-outlet>
     </div>

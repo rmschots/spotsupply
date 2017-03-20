@@ -14,6 +14,10 @@ import { CartComponent } from './components/cart/cart.component';
 import { LanguageService } from './services/language/language.service';
 import { LoginComponent } from './components/login/login.component';
 import { UserService } from './services/user/user.service';
+import { AuthGuard } from './services/authguard/auth-guard.service';
+import { LoginOptionsComponent } from './components/login/login-options.component';
+import { LocationService } from './services/location/location.service';
+import { LocationLoadingComponent } from './services/location/components/location-loading.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -36,15 +40,17 @@ export function createTranslateLoader(http: Http) {
       deps: [Http]
     })
   ],
-  declarations: [ToolbarComponent, NavbarComponent, ProductListComponent, CartComponent, LoginComponent],
-  exports: [ToolbarComponent, NavbarComponent, TranslateModule,
-    CommonModule, FormsModule, RouterModule, MaterialModule, ProductListComponent, CartComponent, LoginComponent]
+  declarations: [ToolbarComponent, NavbarComponent, ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent,
+    LocationLoadingComponent],
+  exports: [ToolbarComponent, NavbarComponent, TranslateModule, CommonModule, FormsModule, RouterModule, MaterialModule,
+    ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent, LocationLoadingComponent],
+  entryComponents: [LocationLoadingComponent]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [NavigationService, ShoppingCartService, LanguageService, UserService]
+      providers: [NavigationService, ShoppingCartService, LanguageService, UserService, AuthGuard, LocationService]
     };
   }
 }

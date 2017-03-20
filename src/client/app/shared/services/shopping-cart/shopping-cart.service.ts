@@ -17,8 +17,15 @@ export class ShoppingCartService {
   private ordered: boolean = false;
   private orderedSubject = new Subject<boolean>();
 
+  private productsAmount: number = 0;
+  private productsAmountSubject = new Subject<number>();
+
   getProductTotal(): number {
     return this.productTotal;
+  }
+
+  getProductsAmount() {
+    return this.productsAmount;
   }
 
   getCart(): Collections.Dictionary<Product, number> {
@@ -40,6 +47,10 @@ export class ShoppingCartService {
 
   productTotalSubscription(obs: ((value: number) => void)) {
     this.productTotalSubject.subscribe(obs);
+  }
+
+  productsAmountSubscription(obs: ((value: number) => void)) {
+    this.productsAmountSubject.subscribe(obs);
   }
 
   orderedSubscription(obs: ((value: boolean) => void)) {
@@ -74,11 +85,15 @@ export class ShoppingCartService {
 
   private calculateNewTotal() {
     let totalTmp = 0;
+    let prodAmt = 0;
     this.cart.forEach((product, amount) => {
       totalTmp += product.price * amount;
+      prodAmt += amount;
     });
     this.productTotal = totalTmp;
     this.productTotalSubject.next(totalTmp);
+    this.productsAmount = prodAmt;
+    this.productsAmountSubject.next(prodAmt);
   }
 }
 

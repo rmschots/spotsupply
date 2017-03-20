@@ -28,10 +28,10 @@ export class AppComponent implements OnInit {
   }
 
   sideNavClosed(updateNavbar: boolean) {
-    this.menuOpen = false;
     if (updateNavbar) {
       this.navbar.setMenuClosed();
     }
+    this.menuOpen = false;
   }
 
   ngOnInit(): void {

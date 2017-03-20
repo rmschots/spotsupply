@@ -1,9 +1,9 @@
 import { Component, ViewChild, Inject, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { Ng2MapComponent, NavigatorGeolocation } from 'ng2-map';
+import { Ng2MapComponent } from 'ng2-map';
 import { PageScrollService, PageScrollInstance, PageScrollConfig } from 'ng2-page-scroll/ng2-page-scroll';
 import { DOCUMENT } from '@angular/platform-browser';
-import { PositionError } from './position-error';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
+import { LocationService } from '../shared/services/location/location.service';
 
 @Component({
   moduleId: module.id,
@@ -27,16 +27,29 @@ export class HomeComponent {
 
   @ViewChild('someVar') private ng2MapComponent: Ng2MapComponent;
 
-  private lastKnownPosition: google.maps.LatLng;
+  private lastKnownPosition: Position;
 
-  constructor(private geolocation: NavigatorGeolocation,
-              private pageScrollService: PageScrollService,
+  constructor(private pageScrollService: PageScrollService,
               @Inject(DOCUMENT) private document: Document,
               private elRef: ElementRef,
               private changeDetector: ChangeDetectorRef,
-              private navigationService: NavigationService) {
+              private navigationService: NavigationService,
+              private locationService: LocationService) {
     navigationService.setTitle('home');
     PageScrollConfig.defaultDuration = 0;
+    this.locationService.positionSubscription(position => {
+      this.lastKnownPosition = position;
+      this.selectSpot('OSTEND');
+      this.displayUserLocation();
+    });
+    this.locationService.positionErrorSubscription(positionError => {
+      this.overlayError = positionError;
+      this.changeDetector.detectChanges();
+    });
+  }
+
+  checkIt() {
+    this.locationService.startFetchingLocation();
   }
 
   selectSpot(spot: string) {
@@ -52,15 +65,6 @@ export class HomeComponent {
         this.ng2MapComponent.mapReady$.subscribe((map: google.maps.Map) => {
           this.map = map;
           this.displayUserLocation();
-          this.geolocation.getCurrentPosition({timeout: 20000, enableHighAccuracy: true}).subscribe(
-            (location) => {
-              this.lastKnownPosition = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
-              this.displayUserLocation();
-            },
-            (error: PositionError) => {
-              console.error(error);
-              this.updateLocationError(error);
-            });
         });
       }, 1);
       setTimeout(() => {
@@ -76,9 +80,10 @@ export class HomeComponent {
 
   displayUserLocation() {
     if (this.map && this.lastKnownPosition) {
-      this.map.setCenter(this.lastKnownPosition);
+      let gPos = new google.maps.LatLng(this.lastKnownPosition.coords.latitude, this.lastKnownPosition.coords.longitude);
+      this.map.setCenter(gPos);
       new google.maps.Marker({
-        position: this.lastKnownPosition,
+        position: gPos,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
           scale: 10,
@@ -86,26 +91,9 @@ export class HomeComponent {
           strokeOpacity: 0.5,
           strokeWeight: 10
         },
-        draggable: true,
+        draggable: false,
         map: this.map
       });
     }
-  }
-
-  private updateLocationError(error: PositionError) {
-    let type: string = null;
-    switch (error.code) {
-      case PositionError.PERMISSION_DENIED:
-        type = 'error';
-        break;
-      case PositionError.POSITION_UNAVAILABLE:
-      case PositionError.TIMEOUT:
-        type = 'warning';
-        break;
-    }
-    error.type = type;
-    this.overlayError = error;
-    this.changeDetector.detectChanges();
-
   }
 }

@@ -15,7 +15,25 @@
 
 .btn-language {
   padding: 0;
-  min-width: 50px;
+  min-width: 17px;
+  margin-left: 8px;
+}
+
+.action-parent {
+  position: relative;
+}
+
+.btn-action {
+  margin: 16px;
+  cursor: pointer;
+}
+
+.cart-size {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 2px;
+  font-size: 16px;
 }
 
 .menu-icon {
@@ -27,4 +45,10 @@
 .toolbar-decoration {
   position: relative;
   z-index: 9999999;
+}
+
+.message-bar {
+  flex-shrink: 1;
+  flex-basis: auto;
+  padding: 5px;
 }
