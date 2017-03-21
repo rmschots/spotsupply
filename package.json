@@ -155,6 +155,11 @@
     "hammerjs": "2.0.8",
     "@types/hammerjs": "2.0.34",
     "ng2-translate": "5.0.0",
-    "typescript-collections": "1.2.3"
+    "typescript-collections": "1.2.3",
+    "@ngrx/core": "^1.2.0",
+    "@ngrx/store": "^2.2.1",
+    "immutable": "^3.8.1",
+    "reflect-metadata": "^0.1.8",
+    "simple-peer": "^6.0.7"
   }
 }

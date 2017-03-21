@@ -37,50 +37,54 @@ export class ProjectConfig extends SeedConfig {
       // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
     ];
 
-    this.addPackageBundles({
+    this.addPackagesBundles([{
       name: '@angular/material',
       path: 'node_modules/@angular/material/bundles/material.umd.js',
       packageMeta: {
         main: 'index.js',
         defaultExtension: 'js'
       }
-    });
-
-    this.addPackageBundles({
+    }, {
       name: 'ng2-map',
       path: 'node_modules/ng2-map/dist/index.js',
       packageMeta: {
         main: 'ng2-map.umd.js',
         defaultExtension: 'js'
       }
-    });
-
-    this.addPackageBundles({
+    }, {
       name: 'ng2-page-scroll/ng2-page-scroll',
       path: 'node_modules/ng2-page-scroll/bundles/ng2-page-scroll.umd.js',
       packageMeta: {
         main: 'ng2-page-scroll.js',
         defaultExtension: 'js'
       }
-    });
-
-    this.addPackageBundles({
+    }, {
       name: 'ng2-translate',
       path: 'node_modules/ng2-translate/bundles/ng2-translate.umd.js',
       packageMeta: {
         main: 'ng2-translate.js',
         defaultExtension: 'js'
       }
-    });
-
-    this.addPackageBundles({
+    }, {
       name: 'typescript-collections',
       path: 'node_modules/typescript-collections/dist/lib/index.js',
       packageMeta: {
         main: 'index.js',
         defaultExtension: 'js'
       }
-    });
+    }, {
+      name: '@ngrx/store',
+      path: 'node_modules/@ngrx/store/bundles/store.umd.js'
+    }, {
+      name: '@ngrx/core',
+      path: 'node_modules/@ngrx/core/bundles/core.umd.js'
+    }, {
+      name: 'immutable',
+      path: 'node_modules/immutable/dist/immutable.js'
+    }, {
+      name: 'simple-peer',
+      path: 'node_modules/simple-peer/simplepeer.min.js'
+    }]);
 
     // Add packages (e.g. ng2-translate)
     // let additionalPackages: ExtendPackages[] = [{
