@@ -1,10 +1,10 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { NavigationService } from './services/navigation/index';
-import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate';
+import { TranslateLoader, TranslateModule, TranslateStaticLoader } from 'ng2-translate';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { Http } from '@angular/http';
@@ -18,6 +18,9 @@ import { AuthGuard } from './services/authguard/auth-guard.service';
 import { LoginOptionsComponent } from './components/login/login-options.component';
 import { LocationService } from './services/location/location.service';
 import { LocationLoadingComponent } from './services/location/components/location-loading.component';
+import { BeachModel } from './framework/models/beach.model';
+import { provideStore } from '@ngrx/store';
+import { RestfulGateway } from './framework/gateways/restful.gateway';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -44,7 +47,10 @@ export function createTranslateLoader(http: Http) {
     LocationLoadingComponent],
   exports: [ToolbarComponent, NavbarComponent, TranslateModule, CommonModule, FormsModule, RouterModule, MaterialModule,
     ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent, LocationLoadingComponent],
-  entryComponents: [LocationLoadingComponent]
+  entryComponents: [LocationLoadingComponent],
+  providers: [BeachModel, provideStore({
+  }), {provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>'},
+    RestfulGateway]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
