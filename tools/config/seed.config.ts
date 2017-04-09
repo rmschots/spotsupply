@@ -419,8 +419,7 @@ export class SeedConfig {
     base: this.PROJECT_ROOT,
     packageConfigPaths: [
       join('node_modules', '*', 'package.json'),
-      join('node_modules', '@angular', '*', 'package.json'),
-      join('node_modules', '@ngui', '*', 'package.json')
+      join('node_modules', '@angular', '*', 'package.json')
     ],
     paths: {
       // Note that for multiple apps this configuration need to be updated
@@ -471,11 +470,7 @@ export class SeedConfig {
       'rxjs': {
         main: 'Rx.js',
         defaultExtension: 'js'
-      },
-      '@ngui/map': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
+      }
     }
   };
 

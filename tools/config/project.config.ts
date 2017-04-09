@@ -21,6 +21,12 @@ export class ProjectConfig extends SeedConfig {
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
     // this.TYPED_COMPILE_INTERVAL = 5;
 
+    this.SYSTEM_BUILDER_CONFIG.packageConfigPaths = [
+      ...this.SYSTEM_BUILDER_CONFIG.packageConfigPaths,
+      join('node_modules', '@ngui', '*', 'package.json'),
+      join('node_modules', '@ngui', '*', 'package.json')
+    ];
+
     // Add `NPM` third-party libraries to be injected/bundled.
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
@@ -74,10 +80,18 @@ export class ProjectConfig extends SeedConfig {
       }
     }, {
       name: '@ngrx/store',
-      path: 'node_modules/@ngrx/store/bundles/store.umd.js'
+      path: 'node_modules/@ngrx/store/bundles/store.umd.js',
+      packageMeta: {
+        main: 'index.js',
+        defaultExtension: 'js'
+      }
     }, {
       name: '@ngrx/core',
-      path: 'node_modules/@ngrx/core/bundles/core.umd.js'
+      path: 'node_modules/@ngrx/core/bundles/core.umd.js',
+      packageMeta: {
+        main: 'index.js',
+        defaultExtension: 'js'
+      }
     }, {
       name: 'immutable',
       path: 'node_modules/immutable/dist/immutable.js'
