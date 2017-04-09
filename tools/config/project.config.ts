@@ -46,9 +46,9 @@ export class ProjectConfig extends SeedConfig {
       }
     }, {
       name: '@ngui/map',
-      path: 'node_modules/@ngui/map/dist/index.js',
+      path: 'node_modules/@ngui/map/dist/map.umd.js',
       packageMeta: {
-        main: '@ngui/map/dist/index.js',
+        main: 'index.js',
         defaultExtension: 'js'
       }
     }, {
