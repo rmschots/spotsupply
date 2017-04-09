@@ -46,7 +46,7 @@ export class ProjectConfig extends SeedConfig {
       }
     }, {
       name: '@ngui/map',
-      path: 'node_modules/@ngui/map/dist/ng2-map.umd.js'
+      path: 'node_modules/@ngui/map/dist/map.umd.js'
     }, {
       name: 'ng2-page-scroll/ng2-page-scroll',
       path: 'node_modules/ng2-page-scroll/bundles/ng2-page-scroll.umd.js',
