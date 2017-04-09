@@ -25,7 +25,7 @@
       "node",
       "jasmine",
       "systemjs",
-      "@ngui",
+      "@ngui/map",
       "ng2-page-scroll",
       "hammerjs",
       "ng2-translate"
