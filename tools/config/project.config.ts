@@ -45,8 +45,8 @@ export class ProjectConfig extends SeedConfig {
         defaultExtension: 'js'
       }
     }, {
-      name: 'ng2-map',
-      path: 'node_modules/ng2-map/dist/index.js',
+      name: '@ngui/map',
+      path: 'node_modules/@ngui/map/dist/index.js',
       packageMeta: {
         main: 'ng2-map.umd.js',
         defaultExtension: 'js'

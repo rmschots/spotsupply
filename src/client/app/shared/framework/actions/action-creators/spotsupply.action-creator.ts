@@ -1,12 +1,13 @@
 import { Action } from '@ngrx/store';
 
-import { GET_BEACHES } from '../spotsupply.actions';
+import { LOAD_BEACHES } from '../spotsupply.actions';
+import { Beach } from '../../../objects/beach/beach';
 
 export const SpotSupplyActions = {
-  getBeaches(): Action {
+  loadBeaches(payload: Array<Beach>): Action {
     return {
-      payload: null,
-      type: GET_BEACHES
+      type: LOAD_BEACHES,
+      payload: payload
     };
   }
 };

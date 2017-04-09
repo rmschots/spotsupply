@@ -18,9 +18,9 @@ import { AuthGuard } from './services/authguard/auth-guard.service';
 import { LoginOptionsComponent } from './components/login/login-options.component';
 import { LocationService } from './services/location/location.service';
 import { LocationLoadingComponent } from './services/location/components/location-loading.component';
-import { BeachModel } from './framework/models/beach.model';
-import { provideStore } from '@ngrx/store';
-import { RestfulGateway } from './framework/gateways/restful.gateway';
+import { SpotSupplyModel } from './framework/models/beach.model';
+import { StoreModule } from '@ngrx/store';
+import { beachReducer } from './framework/reducers/beach.reducer';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -41,22 +41,31 @@ export function createTranslateLoader(http: Http) {
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),
       deps: [Http]
-    })
+    }),
+    StoreModule.provideStore({
+      beaches: beachReducer
+    }),
   ],
   declarations: [ToolbarComponent, NavbarComponent, ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent,
     LocationLoadingComponent],
   exports: [ToolbarComponent, NavbarComponent, TranslateModule, CommonModule, FormsModule, RouterModule, MaterialModule,
     ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent, LocationLoadingComponent],
-  entryComponents: [LocationLoadingComponent],
-  providers: [BeachModel, provideStore({
-  }), {provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>'},
-    RestfulGateway]
+  entryComponents: [LocationLoadingComponent]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [NavigationService, ShoppingCartService, LanguageService, UserService, AuthGuard, LocationService]
+      providers: [
+        NavigationService,
+        ShoppingCartService,
+        LanguageService,
+        UserService,
+        AuthGuard,
+        LocationService,
+        SpotSupplyModel,
+        {provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>'}
+      ]
     };
   }
 }

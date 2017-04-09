@@ -1,1 +1,1 @@
-export const GET_BEACHES = 'spotsupply:getBeaches';
+export const LOAD_BEACHES = 'spotsupply:loadBeaches';

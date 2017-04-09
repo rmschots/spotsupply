@@ -1,57 +1,27 @@
-import { ChangeDetectorRef, Component, ElementRef, Inject, Provider, ViewChild } from '@angular/core';
-import { Ng2MapComponent } from 'ng2-map';
+import { ChangeDetectorRef, Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { PageScrollConfig, PageScrollInstance, PageScrollService } from 'ng2-page-scroll/ng2-page-scroll';
 import { DOCUMENT } from '@angular/platform-browser';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
 import { LocationService } from '../shared/services/location/location.service';
-import { Http } from '@angular/http';
-import { AsyncService } from '../shared/framework/async-services/base.async-service';
-import { SpotsupplyAPIService } from '../shared/framework/async-services/rest-api/rest-api.async-service';
-import { Gateway } from '../shared/framework/gateways/base.gateway';
-import { RestfulGateway } from '../shared/framework/gateways/restful.gateway';
-
-const providers: Provider[] = [
-
-  // Here we override the AsyncService multi-provider and
-  // introduce the GameP2PService service.
-  // This way we're using both GameServer and
-  // GameP2PService and so the user can send progress to both
-  // the application server and the user she is connected with.
-  { provide: AsyncService, multi: true, useClass: SpotsupplyAPIService },
-
-  // Without lazy-loading it doesn't matter where we declare
-  // the WebRTCGateway, Gateway and WS_CONFIG. However, notice that
-  // these provider are required by the GameP2PService
-  // so they should be available in the part of the component tree where
-  // we want to render the MultiPlayerComponent.
-  { provide: Gateway, useClass: RestfulGateway },
-  { provide: RestfulGateway, useExisting: Gateway }
-];
+import { SpotSupplyModel } from '../shared/framework/models/beach.model';
+import { Beach } from '../shared/objects/beach/beach';
 
 @Component({
   moduleId: module.id,
   selector: 'ss-home',
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
-  providers
+  providers: [SpotSupplyModel]
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   map: google.maps.Map;
-
-  spots: string[] = ['OSTEND', 'OTHER_BEACH'];
-
-  selectedSpot: string;
-
-  lat: number = 51.678418;
-  lng: number = 7.809007;
-
+  spots: Array<Beach> = [];
+  selectedSpot: number;
   overlayError: PositionError = null;
 
-  @ViewChild('someVar') private ng2MapComponent: Ng2MapComponent;
-
-  private lastKnownPosition: Position;
+  private _lastKnownPosition: Position;
 
   constructor(private pageScrollService: PageScrollService,
               @Inject(DOCUMENT) private document: Document,
@@ -59,44 +29,51 @@ export class HomeComponent {
               private changeDetector: ChangeDetectorRef,
               private navigationService: NavigationService,
               private locationService: LocationService,
-              private _restfulGateway: RestfulGateway) {
+              private _beachModel: SpotSupplyModel) {
     navigationService.setTitle('home');
     PageScrollConfig.defaultDuration = 0;
     this.locationService.positionSubscription(position => {
-      this.lastKnownPosition = position;
-      this.selectSpot('OSTEND');
+      this._lastKnownPosition = position;
+      this.selectSpot(this.spots[0]);
       this.displayUserLocation();
     });
     this.locationService.positionErrorSubscription(positionError => {
       this.overlayError = positionError;
       this.changeDetector.detectChanges();
     });
+    _beachModel.beaches$.subscribe(beaches => {
+      this.spots = beaches;
+    });
+  }
+
+  ngOnInit(): void {
+    this._beachModel.loadBeaches();
   }
 
   checkIt() {
     this.locationService.startFetchingLocation();
   }
 
-  selectSpot(spot: string) {
-    if (this.selectedSpot === spot) {
+  onMapReady(map: google.maps.Map) {
+    this.map = map;
+    setTimeout(() => {
+      this.displayUserLocation();
+    }, 1);
+  }
+
+  selectSpot(spot: Beach) {
+    if (this.selectedSpot === spot.id) {
       this.selectedSpot = null;
       this.map = null;
-
     } else {
       this.map = null;
       this.overlayError = null;
-      this.selectedSpot = spot;
-      setTimeout(() => {
-        this.ng2MapComponent.mapReady$.subscribe((map: google.maps.Map) => {
-          this.map = map;
-          this.displayUserLocation();
-        });
-      }, 1);
+      this.selectedSpot = spot.id;
       setTimeout(() => {
         console.log(this.elRef.nativeElement.parentElement);
         let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineInstance(
           this.document,
-          '#' + this.selectedSpot,
+          '#' + spot.name,
           this.elRef.nativeElement.parentElement);
         this.pageScrollService.start(pageScrollInstance);
       }, 1);
@@ -104,9 +81,9 @@ export class HomeComponent {
   }
 
   displayUserLocation() {
-    if (this.map && this.lastKnownPosition) {
-      let gPos = new google.maps.LatLng(this.lastKnownPosition.coords.latitude, this.lastKnownPosition.coords.longitude);
-      this.map.setCenter(gPos);
+    if (this.map && this._lastKnownPosition) {
+      let gPos = new google.maps.LatLng(this._lastKnownPosition.coords.latitude, this._lastKnownPosition.coords.longitude);
+      // this.map.setCenter(gPos);
       new google.maps.Marker({
         position: gPos,
         icon: {

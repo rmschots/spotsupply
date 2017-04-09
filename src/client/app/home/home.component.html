@@ -3,25 +3,32 @@
     <h3 class="centered-title">{{'HOME.lookForSupplyAtSpot'|translate}}</h3>
     <button md-raised-button color="primary" (click)="checkIt()">{{'HOME.checkIt'|translate}}</button>
   </div>
+  <div *ngFor="let item of (beaches|async)">
+    {{item}}
+  </div>
 
   <div class="flex-container padded-row-xl text-center">
-    <md-card *ngFor="let spot of spots" [id]="spot" class="spot-card"
-             [ngClass]="{'unpadded-card': selectedSpot !== spot}">
+    <md-card *ngFor="let spot of spots" [id]="spot.name" class="spot-card"
+             [ngClass]="{'unpadded-card': selectedSpot !== spot.id}">
       <div md-card-image class="image-banner clickable"
            [ngStyle]="{'background-image': 'url(/assets/img/oostende.jpg)'}"
            (click)="selectSpot(spot)">
       </div>
       <md-card-header class="clickable spot-header" (click)="selectSpot(spot)">
         <md-card-title class="spot-title">
-          <b>{{spot | translate}}</b>
+          <b>{{spot.name | translate}}</b>
           <small>(25 km)</small>
         </md-card-title>
-        <md-icon class="collapse-icon">{{selectedSpot == spot? 'keyboard_arrow_up':'keyboard_arrow_down'}}</md-icon>
+        <md-icon class="collapse-icon">{{selectedSpot == spot.id? 'keyboard_arrow_up':'keyboard_arrow_down'}}</md-icon>
       </md-card-header>
 
-      <md-card-content class="no-margin-bottom" *ngIf="selectedSpot == spot">
+      <md-card-content class="no-margin-bottom" *ngIf="selectedSpot == spot.id">
         <div class="map-parent">
-          <ng2-map #someVar center="Oostende, Belgium" disableDefaultUI="true"></ng2-map>
+          <ngui-map
+            center="{{spot.position.latitude}}, {{spot.position.longitude}}"
+            disableDefaultUI="true"
+            (mapReady$)="onMapReady($event)">
+          </ngui-map>
         </div>
       </md-card-content>
     </md-card>

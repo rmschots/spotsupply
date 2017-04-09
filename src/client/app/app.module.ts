@@ -8,7 +8,6 @@ import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
-import { Ng2MapModule } from 'ng2-map';
 import { Ng2PageScrollModule } from 'ng2-page-scroll/ng2-page-scroll';
 import { ProductsModule } from './products/products.module';
 import { FAQModule } from './faq/faq.module';
@@ -17,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from './store/store.module';
 import { OrderInfoModule } from './order-info/order-info.module';
 import { CreateAccountModule } from './create-account/create-account.module';
+import { NguiMapModule } from '@ngui/map';
 
 @NgModule({
   imports: [
@@ -35,10 +35,11 @@ import { CreateAccountModule } from './create-account/create-account.module';
     CreateAccountModule,
     SharedModule.forRoot(),
     MaterialModule,
-    Ng2MapModule.forRoot({
-      apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBtYO0eJfiqw2AqMRu-0_X8gBVSUWiIymg' +
-      '&libraries=visualization,places,drawing',
-    }),
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBtYO0eJfiqw2AqMRu-0_X8gBVSUWiIymg'}),
+    // Ng2MapModule.forRoot({
+    //   apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBtYO0eJfiqw2AqMRu-0_X8gBVSUWiIymg' +
+    //   '&libraries=visualization,places,drawing',
+    // }),
     Ng2PageScrollModule.forRoot()
   ],
   declarations: [AppComponent],

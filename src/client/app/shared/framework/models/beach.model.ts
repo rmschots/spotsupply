@@ -1,27 +1,26 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { AsyncService } from '../async-services/base.async-service';
-import { Model } from './base.model';
 import { SpotSupplyActions } from '../actions/action-creators/spotsupply.action-creator';
+import { Http } from '@angular/http';
+import { Config } from '../../config/env.config';
+import { Model } from './model';
+import { Beach } from '../../objects/beach/beach';
 
 @Injectable()
-export class BeachModel extends Model {
-  games$: Observable<any>;
-  game$: Observable<any>;
+export class SpotSupplyModel extends Model {
+  beaches$: Observable<Array<Beach>>;
 
   constructor(protected _store: Store<any>,
-              @Optional() @Inject(AsyncService) _services: AsyncService[]) {
-    super(_services || []);
-    this.games$ = this._store.select('beaches');
-    this.game$ = this._store.select('beach');
+              private http: Http) {
+    super();
+    this.beaches$ = this._store.select('beaches');
   }
 
-  getBeaches() {
-    this.performAsyncAction(SpotSupplyActions.getBeaches())
-      .subscribe((result: any) => {
-        console.log(result);
-      });
+  loadBeaches() {
+    this.http.get(Config.REST_API + '/beach').subscribe(data => {
+      this._store.dispatch(SpotSupplyActions.loadBeaches(this.convertRestResponse(data)));
+    });
   }
 }
