@@ -470,7 +470,11 @@ export class SeedConfig {
       'rxjs': {
         main: 'Rx.js',
         defaultExtension: 'js'
-      }
+      },
+      '@ngui/map': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
     }
   };
 
