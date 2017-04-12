@@ -1,11 +1,11 @@
 import { Action } from '@ngrx/store';
 
 import { initialState } from '../stores/spotsupply.store';
-import { LOAD_BEACHES } from '../actions/spotsupply.actions';
+import { BEACHES_LOAD } from '../actions/spotsupply.actions';
 
 export const beachReducer = (state: any = initialState.get('beaches'), action: Action) => {
   switch (action.type) {
-    case LOAD_BEACHES:
+    case BEACHES_LOAD:
       return action.payload;
   }
   return state;

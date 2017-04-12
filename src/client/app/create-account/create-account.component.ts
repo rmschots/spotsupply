@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
+import { LoginModel } from '../shared/framework/models/login.model';
+import { CreateUser } from '../shared/objects/account/create-user';
 
 @Component({
   moduleId: module.id,
@@ -11,11 +13,15 @@ export class CreateAccountComponent {
 
   created: boolean = false;
 
-  constructor(private navigationService: NavigationService) {
+  constructor(private navigationService: NavigationService,
+              private loginModel: LoginModel) {
     navigationService.setTitle('createAccount');
   }
 
   createAccount() {
-    this.created = true;
+    this.loginModel.createUser(new CreateUser('email', 'phoneNumber', 'password'))
+      .subscribe(() => {
+        this.created = true;
+      });
   }
 }

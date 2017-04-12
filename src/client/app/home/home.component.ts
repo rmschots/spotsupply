@@ -3,7 +3,7 @@ import { PageScrollConfig, PageScrollInstance, PageScrollService } from 'ng2-pag
 import { DOCUMENT } from '@angular/platform-browser';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
 import { LocationService } from '../shared/services/location/location.service';
-import { SpotSupplyModel } from '../shared/framework/models/beach.model';
+import { BeachModel } from '../shared/framework/models/beach.model';
 import { Beach } from '../shared/objects/beach/beach';
 
 @Component({
@@ -11,7 +11,7 @@ import { Beach } from '../shared/objects/beach/beach';
   selector: 'ss-home',
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
-  providers: [SpotSupplyModel]
+  providers: [BeachModel]
 })
 
 export class HomeComponent implements OnInit {
@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
               private changeDetector: ChangeDetectorRef,
               private navigationService: NavigationService,
               private locationService: LocationService,
-              private _beachModel: SpotSupplyModel) {
+              private _beachModel: BeachModel) {
     navigationService.setTitle('home');
     PageScrollConfig.defaultDuration = 0;
     this.locationService.positionSubscription(position => {

@@ -9,7 +9,7 @@ import { Model } from './model';
 import { Beach } from '../../objects/beach/beach';
 
 @Injectable()
-export class SpotSupplyModel extends Model {
+export class BeachModel extends Model {
   beaches$: Observable<Array<Beach>>;
 
   constructor(protected _store: Store<any>,

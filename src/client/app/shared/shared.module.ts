@@ -18,9 +18,10 @@ import { AuthGuard } from './services/authguard/auth-guard.service';
 import { LoginOptionsComponent } from './components/login/login-options.component';
 import { LocationService } from './services/location/location.service';
 import { LocationLoadingComponent } from './services/location/components/location-loading.component';
-import { SpotSupplyModel } from './framework/models/beach.model';
+import { BeachModel } from './framework/models/beach.model';
 import { StoreModule } from '@ngrx/store';
 import { beachReducer } from './framework/reducers/beach.reducer';
+import { LoginModel } from './framework/models/login.model';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -63,7 +64,8 @@ export class SharedModule {
         UserService,
         AuthGuard,
         LocationService,
-        SpotSupplyModel,
+        BeachModel,
+        LoginModel,
         {provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>'}
       ]
     };
