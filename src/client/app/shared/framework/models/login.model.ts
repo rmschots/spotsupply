@@ -19,7 +19,7 @@ export class LoginModel extends Model {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Access-Control-Allow-Headers': 'Content-Type',
-    }
+    };
     let headers: Headers = new Headers(headerDict);
     let options: RequestOptionsArgs = {
       headers: headers
