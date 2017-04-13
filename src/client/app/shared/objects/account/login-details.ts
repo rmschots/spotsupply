@@ -1,5 +1,5 @@
 export class LoginDetails {
-  constructor(public email: string,
+  constructor(public phoneOrEmail: string,
               public password: string) {
   }
 }

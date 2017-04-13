@@ -7,19 +7,20 @@ import { Http } from '@angular/http';
 import { Config } from '../../config/env.config';
 import { Model } from './model';
 import { Beach } from '../../objects/beach/beach';
+import { RestGatewayService } from '../../services/gateway/rest-gateway.service';
 
 @Injectable()
 export class BeachModel extends Model {
   beaches$: Observable<Array<Beach>>;
 
   constructor(protected _store: Store<any>,
-              private http: Http) {
+              private _restGateway: RestGatewayService) {
     super();
     this.beaches$ = this._store.select('beaches');
   }
 
   loadBeaches() {
-    this.http.get(Config.REST_API + '/beach').subscribe(data => {
+    this._restGateway.get('/beach').subscribe(data => {
       this._store.dispatch(SpotSupplyActions.loadBeaches(this.convertRestResponse(data)));
     });
   }

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
-import { UserService } from '../../services/user/user.service';
 import { LoginDetails } from '../../objects/account/login-details';
 import { Router } from '@angular/router';
+import { LoginModel } from '../../framework/models/login.model';
 
 @Component({
   moduleId: module.id,
@@ -13,24 +13,20 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   loginDetails: LoginDetails = new LoginDetails('', '');
+  errorMessage: string = null;
 
-  constructor(
-    private dialogRef: MdDialogRef<LoginComponent>,
-    private loginService: UserService,
-    private router: Router) {
-    this.loginService.loginSubscription((loginDetails) => {
-      if (this.loginService.isLoggedIn()) {
-        // Get the redirect URL from our auth service
-        // If no redirect has been set, use the default
-        let redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/crisis-center/admin';
-        // Redirect the user
-        this.router.navigate([redirect]);
-      }
-      this.dialogRef.close('SUCCESS');
-    });
+  constructor(private dialogRef: MdDialogRef<LoginComponent>,
+              private _loginModel: LoginModel,
+              private router: Router) {
   }
 
   login() {
-    this.loginService.logIn(this.loginDetails);
+    this._loginModel.login(this.loginDetails).subscribe((success: boolean) => {
+      let redirect = this._loginModel.redirectUrl ? this._loginModel.redirectUrl : '/';
+      this.router.navigate([redirect]);
+      this.dialogRef.close('SUCCESS');
+    }, (error: any) => {
+      this.errorMessage = error.message;
+    });
   }
 }

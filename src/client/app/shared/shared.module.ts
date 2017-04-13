@@ -22,6 +22,8 @@ import { BeachModel } from './framework/models/beach.model';
 import { StoreModule } from '@ngrx/store';
 import { beachReducer } from './framework/reducers/beach.reducer';
 import { LoginModel } from './framework/models/login.model';
+import { RestGatewayService } from './services/gateway/rest-gateway.service';
+import { loginReducer } from './framework/reducers/login.reducer';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -44,7 +46,8 @@ export function createTranslateLoader(http: Http) {
       deps: [Http]
     }),
     StoreModule.provideStore({
-      beaches: beachReducer
+      beaches: beachReducer,
+      login: loginReducer
     }),
   ],
   declarations: [ToolbarComponent, NavbarComponent, ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent,
@@ -66,6 +69,7 @@ export class SharedModule {
         LocationService,
         BeachModel,
         LoginModel,
+        RestGatewayService,
         {provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>'}
       ]
     };

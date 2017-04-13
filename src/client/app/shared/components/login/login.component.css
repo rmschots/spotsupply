@@ -4,3 +4,7 @@
 .login-parent {
   text-align: center;
 }
+
+.login-error-message {
+  margin-bottom: 8px;
+}
