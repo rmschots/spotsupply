@@ -2,7 +2,6 @@ import { Action } from '@ngrx/store';
 
 import { BEACHES_LOAD, USER_LOGIN, USER_LOGOUT } from '../spotsupply.actions';
 import { Beach } from '../../../objects/beach/beach';
-import { CreateUser } from '../../../objects/account/create-user';
 import { LoginUser } from '../../../objects/account/login-user';
 
 export const SpotSupplyActions = {

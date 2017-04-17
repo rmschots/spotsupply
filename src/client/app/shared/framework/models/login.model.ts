@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Model } from './model';
@@ -10,7 +10,7 @@ import { LoginUser } from '../../objects/account/login-user';
 import { URLSearchParams } from '@angular/http';
 
 @Injectable()
-export class LoginModel extends Model {
+export class LoginModel extends Model implements OnInit {
 
   redirectUrl: string;
   loginUser$: Observable<LoginUser>;
@@ -19,6 +19,10 @@ export class LoginModel extends Model {
               private _restGateway: RestGatewayService) {
     super();
     this.loginUser$ = this._store.select('login');
+  }
+
+  ngOnInit(): void {
+    this.checkLoggedIn();
   }
 
   createUser(createUser: CreateUser): Observable<boolean> {
@@ -55,6 +59,12 @@ export class LoginModel extends Model {
 
   loadAccount() {
     this._restGateway.get('/account').subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  checkLoggedIn() {
+    this._restGateway.get('/isAuthenticated').subscribe(data => {
       console.log(data);
     });
   }

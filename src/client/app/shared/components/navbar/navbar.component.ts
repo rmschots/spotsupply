@@ -35,7 +35,6 @@ export class NavbarComponent {
   }
 
   logOut() {
-    console.log('logging out');
     this._loginModel.logout();
     this.navigated();
   }

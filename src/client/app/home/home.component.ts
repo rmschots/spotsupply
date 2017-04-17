@@ -70,7 +70,6 @@ export class HomeComponent implements OnInit {
       this.overlayError = null;
       this.selectedSpot = spot.id;
       setTimeout(() => {
-        console.log(this.elRef.nativeElement.parentElement);
         let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineInstance(
           this.document,
           '#' + spot.name,

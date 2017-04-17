@@ -28,16 +28,13 @@ export class LocationService {
     if (this.permissionStatus !== LocationPermissionStatus.GRANTED) {
       let dialogRef = this.dialog.open(LocationLoadingComponent, LocationService.dialogOptions);
       navigator.geolocation.watchPosition((location) => {
-          console.log(location);
           this.permissionStatus = LocationPermissionStatus.GRANTED;
           this.lastKnownPosition = location;
           this.isInBounds = true;
           dialogRef.close('SUCCESS');
         },
         (error: PositionError) => {
-          console.log(error);
           this.permissionStatus = LocationPermissionStatus.DENIED;
-          console.error(error);
           this.positionError = error;
           this.isInBounds = false;
           dialogRef.close('FAILURE');
