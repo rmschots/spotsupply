@@ -49,7 +49,13 @@ export class LoginModel extends Model {
         return true;
       }
     ).subscribe(() => {
-      console.log('test');
+      console.log('logged out');
+    });
+  }
+
+  loadAccount() {
+    this._restGateway.get('/account').subscribe(data => {
+      console.log(data);
     });
   }
 }
