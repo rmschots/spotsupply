@@ -1,10 +1,11 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Language } from './language';
 import { NavigationService } from '../../services/navigation/navigation.service';
 import { LanguageService } from '../../services/language/language.service';
 import { Router } from '@angular/router';
 import { ShoppingCartService } from '../../services/shopping-cart/shopping-cart.service';
-import { LocationService } from '../../services/location/location.service';
+import { LocationModel } from '../../framework/models/location.model';
+import { LocationPermissionStatus } from '../../objects/position/location-permission-status';
 
 @Component({
   moduleId: module.id,
@@ -32,12 +33,15 @@ export class ToolbarComponent {
               private languageService: LanguageService,
               private router: Router,
               private shoppingCartService: ShoppingCartService,
-              private locationService: LocationService) {
+              private _locationModel: LocationModel) {
     this.title = this.navigationService.getTitle();
     this.languages = languageService.getLanguages();
     this.selectedLanguage = languageService.getActiveLanguage();
     this.productsAmount = shoppingCartService.getProductsAmount();
-    this.showCart = locationService.isInBounds && !shoppingCartService.isOrdered();
+    _locationModel.atBeach$.subscribe(beach => {
+      this.isInBounds = !!beach;
+      this.updateShowCart();
+    });
 
     navigationService.titleSubscription((title: string) => {
       this.title = title;
@@ -52,12 +56,12 @@ export class ToolbarComponent {
       this.isOrdered = isOrdered;
       this.updateShowCart();
     });
-    locationService.inBoundsSubscription(isInBounds => {
-      this.isInBounds = isInBounds;
-      this.updateShowCart();
-    });
-    locationService.positionErrorSubscription(positionError => {
-      this.error = 'map.errorCode.' + positionError.code;
+    _locationModel.locationPermissionStatus$.subscribe(permissionStatus => {
+      if (permissionStatus === LocationPermissionStatus.DENIED) {
+        this.error = 'map.errorCode.' + LocationPermissionStatus.DENIED;
+      } else {
+        this.error = null;
+      }
     });
   }
 
@@ -77,7 +81,7 @@ export class ToolbarComponent {
   }
 
   private updateShowCart() {
-    this.showCart = this.isOrdered && this.isInBounds;
+    this.showCart = !this.isOrdered && this.isInBounds;
   }
 }
 

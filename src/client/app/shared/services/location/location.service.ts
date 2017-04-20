@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { MdDialogConfig, MdDialog } from '@angular/material';
 import { LocationLoadingComponent } from './components/location-loading.component';
-import { LocationPermissionStatus } from './objects/location-permission-status';
+import { LocationPermissionStatus } from '../../objects/position/location-permission-status';
 
 @Injectable()
 export class LocationService {

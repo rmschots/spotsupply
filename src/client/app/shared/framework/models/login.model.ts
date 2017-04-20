@@ -22,7 +22,7 @@ export class LoginModel extends Model implements OnInit {
   }
 
   ngOnInit(): void {
-    this.checkLoggedIn();
+    this.loadAccount();
   }
 
   createUser(createUser: CreateUser): Observable<boolean> {
@@ -59,12 +59,6 @@ export class LoginModel extends Model implements OnInit {
 
   loadAccount() {
     this._restGateway.get('/account').subscribe(data => {
-      console.log(data);
-    });
-  }
-
-  checkLoggedIn() {
-    this._restGateway.get('/isAuthenticated').subscribe(data => {
       console.log(data);
     });
   }

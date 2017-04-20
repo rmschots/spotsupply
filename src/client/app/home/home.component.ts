@@ -2,9 +2,11 @@ import { ChangeDetectorRef, Component, ElementRef, Inject, OnInit } from '@angul
 import { PageScrollConfig, PageScrollInstance, PageScrollService } from 'ng2-page-scroll/ng2-page-scroll';
 import { DOCUMENT } from '@angular/platform-browser';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
-import { LocationService } from '../shared/services/location/location.service';
 import { BeachModel } from '../shared/framework/models/beach.model';
 import { Beach } from '../shared/objects/beach/beach';
+import { LocationModel } from '../shared/framework/models/location.model';
+import { LocationPermissionStatus } from '../shared/objects/position/location-permission-status';
+import { combineLatest } from 'rxjs/operator/combineLatest';
 
 @Component({
   moduleId: module.id,
@@ -19,7 +21,7 @@ export class HomeComponent implements OnInit {
   map: google.maps.Map;
   spots: Array<Beach> = [];
   selectedSpot: number;
-  overlayError: PositionError = null;
+  overlayError: string = null;
 
   private _lastKnownPosition: Position;
 
@@ -28,22 +30,40 @@ export class HomeComponent implements OnInit {
               private elRef: ElementRef,
               private changeDetector: ChangeDetectorRef,
               private navigationService: NavigationService,
-              private locationService: LocationService,
+              private _locationModel: LocationModel,
               private _beachModel: BeachModel) {
     navigationService.setTitle('home');
     PageScrollConfig.defaultDuration = 0;
-    this.locationService.positionSubscription(position => {
-      this._lastKnownPosition = position;
-      this.selectSpot(this.spots[0]);
-      this.displayUserLocation();
+    _locationModel.locationPermissionStatus$.subscribe(locationPermissionStatus => {
+      if (locationPermissionStatus === LocationPermissionStatus.DENIED) {
+        this.overlayError = 'Could not determine location';
+      } else {
+        this.overlayError = null;
+      }
     });
-    this.locationService.positionErrorSubscription(positionError => {
-      this.overlayError = positionError;
-      this.changeDetector.detectChanges();
+    _locationModel.lastKnownLocation$.subscribe(lastKnownLocation => {
+      this._lastKnownPosition = lastKnownLocation;
+      if (lastKnownLocation) {
+        this.displayUserLocation();
+      }
+    });
+    _locationModel.atBeach$.subscribe(atBeach => {
+      if (atBeach) {
+        this.selectedSpot = atBeach.id;
+      } else {
+        this.selectedSpot = null;
+      }
+      this.displayUserLocation();
     });
     _beachModel.beaches$.subscribe(beaches => {
       this.spots = beaches;
     });
+    combineLatest.call(_locationModel.lastKnownLocation$, _beachModel.beaches$).subscribe(
+      (latestValues: any) => {
+        if (latestValues[0] && latestValues[1]) {
+          _locationModel.setUserAtBeach(latestValues[1][0]);
+        }
+      });
   }
 
   ngOnInit(): void {
@@ -51,7 +71,7 @@ export class HomeComponent implements OnInit {
   }
 
   checkIt() {
-    this.locationService.startFetchingLocation();
+    this._locationModel.startFetchingLocation();
   }
 
   onMapReady(map: google.maps.Map) {
