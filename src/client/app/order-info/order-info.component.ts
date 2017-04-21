@@ -16,7 +16,7 @@ import { ConfirmationInfoComponent } from './confirmation-info/confirmation-info
 })
 export class OrderInfoComponent {
 
-  cart: Collections.Dictionary<Product, number>;
+  cart: Map<Product, number>;
   orderInfo = new OrderInfo('Ostend', '0123 45 67 89', 'Bring now', 'Cash');
   times = ['Bring now', '10:30', '10:45', '11:00'];
   paymentMethods = ['Cash'];

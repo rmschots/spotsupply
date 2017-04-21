@@ -1,7 +1,5 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
-import { MdTabNavBar } from '@angular/material';
-import { UserService } from '../shared/services/user/user.service';
 
 @Component({
   moduleId: module.id,
@@ -9,18 +7,10 @@ import { UserService } from '../shared/services/user/user.service';
   templateUrl: 'settings.component.html',
   styleUrls: ['settings.component.css']
 })
-export class SettingsComponent implements AfterViewInit {
+export class SettingsComponent {
   isLoggedIn = false;
-  @ViewChild(MdTabNavBar) private tabs: MdTabNavBar;
 
   constructor(private navigationService: NavigationService) {
     navigationService.setTitle('settings');
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.tabs._activeLinkChanged = true;
-      this.tabs.ngAfterContentChecked();
-    }, 1);
   }
 }

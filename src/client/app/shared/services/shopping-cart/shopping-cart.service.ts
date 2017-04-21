@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Product } from '../../objects/product/product';
-import * as Collections from 'typescript-collections';
+import { ProductsModel } from '../../framework/models/products.model';
+import { ProductCategory } from '../../objects/product/product-category';
 
 /**
  * This class provides the NameList service with methods to read names and add names.
@@ -9,7 +10,7 @@ import * as Collections from 'typescript-collections';
 @Injectable()
 export class ShoppingCartService {
 
-  private cart = new Collections.Dictionary<Product, number>();
+  private cart = new Map<number, number>();
 
   private productTotal: number = 0;
   private productTotalSubject = new Subject<number>();
@@ -20,6 +21,16 @@ export class ShoppingCartService {
   private productsAmount: number = 0;
   private productsAmountSubject = new Subject<number>();
 
+  private _categories: ProductCategory[] = [];
+  private _productMap: Map<number, Product> = new Map();
+
+  constructor(private _productsModel: ProductsModel) {
+    _productsModel.productHierarchy$.subscribe(categories => {
+      this._categories = categories;
+      this._productMap = this._generateProductMap(this._categories);
+    });
+  }
+
   getProductTotal(): number {
     return this.productTotal;
   }
@@ -28,12 +39,16 @@ export class ShoppingCartService {
     return this.productsAmount;
   }
 
-  getCart(): Collections.Dictionary<Product, number> {
-    return this.cart;
+  getCart(): Map<Product, number> {
+    let productCart = new Map<Product, number>();
+    this.cart.forEach((amount, productId) => {
+      productCart.set(this._productMap.get(productId), amount);
+    });
+    return productCart;
   }
 
   getProductAmount(product: Product): number {
-    return this.cart.containsKey(product) ? this.cart.getValue(product) : 0;
+    return this.cart.has(product.id) ? this.cart.get(product.id) : 0;
   }
 
   isOrdered(): boolean {
@@ -58,42 +73,56 @@ export class ShoppingCartService {
   }
 
   addProduct(product: Product) {
-    if (this.cart.containsKey(product)) {
-      this.cart.setValue(product, this.cart.getValue(product) + 1);
+    if (this.cart.has(product.id)) {
+      this.cart.set(product.id, this.cart.get(product.id) + 1);
     } else {
-      this.cart.setValue(product, 1);
+      this.cart.set(product.id, 1);
     }
-    this.calculateNewTotal();
+    this._calculateNewTotal();
   }
 
   removeProduct(product: Product) {
-    if (this.cart.containsKey(product)) {
-      let currentAmount = this.cart.getValue(product);
+    if (this.cart.has(product.id)) {
+      let currentAmount = this.cart.get(product.id);
       if (currentAmount <= 1) {
-        this.cart.remove(product);
+        this.cart.delete(product.id);
       } else {
-        this.cart.setValue(product, currentAmount - 1);
+        this.cart.set(product.id, currentAmount - 1);
       }
-      this.calculateNewTotal();
+      this._calculateNewTotal();
     }
   }
 
   removeAllProducts() {
     this.cart.clear();
-    this.calculateNewTotal();
+    this._calculateNewTotal();
   }
 
-  private calculateNewTotal() {
+  private _calculateNewTotal() {
     let totalTmp = 0;
     let prodAmt = 0;
-    this.cart.forEach((product, amount) => {
-      totalTmp += product.price * amount;
+    this.cart.forEach((amount, productId) => {
+      totalTmp += this._productMap.get(productId).price * amount;
       prodAmt += amount;
     });
     this.productTotal = totalTmp;
     this.productTotalSubject.next(totalTmp);
     this.productsAmount = prodAmt;
     this.productsAmountSubject.next(prodAmt);
+  }
+
+  private _generateProductMap(categories: ProductCategory[]): Map<number, Product> {
+    let tmp: [number, Product][] = categories
+      .map((category) => {
+        return category.types;
+      })
+      .reduce(((types1, types2) => types1.concat(types2)), [])
+      .map((type) => {
+        return type.products;
+      })
+      .reduce(((product1, product2) => product1.concat(product2)), [])
+      .map((i) => <[number, Product]>[i.id, i]);
+    return new Map<number, Product>(tmp);
   }
 }
 

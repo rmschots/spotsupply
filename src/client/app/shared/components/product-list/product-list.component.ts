@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ProductCategory } from '../../objects/product/product-category';
-import { ProductType } from '../../objects/product/product-type';
 import { Product } from '../../objects/product/product';
 import { ShoppingCartService } from '../../services/shopping-cart/shopping-cart.service';
+import { ProductsModel } from '../../framework/models/products.model';
 
 @Component({
   moduleId: module.id,
@@ -15,10 +15,14 @@ export class ProductListComponent {
   @Input() shop: boolean;
 
   selectedTabIndex: number = 0;
-  categories: ProductCategory[] = this.getCategories();
+  categories: ProductCategory[] = [];
 
-  constructor(private shoppingCartService: ShoppingCartService) {
-
+  constructor(private shoppingCartService: ShoppingCartService,
+              private _productsModel: ProductsModel) {
+    _productsModel.loadProductHierarchy();
+    _productsModel.productHierarchy$.subscribe(productHierarchy => {
+      this.categories = productHierarchy;
+    });
   }
 
   tabSelected(tabIndex: any) {
@@ -48,55 +52,4 @@ export class ProductListComponent {
   getProductAmount(product: Product): number {
     return this.shoppingCartService.getProductAmount(product);
   }
-
-  private getCategories(): ProductCategory[] {
-    return [
-      new ProductCategory('Top sellers', [
-        new ProductType(1, 'Top sellers', false, [
-          new Product(1, 'Coca Cola', '33cl', 2.5),
-          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
-          new Product(6, 'Smos cheese', 'cheese, vegetables', 3.5),
-          new Product(8, 'Calippo Orange', '', 1)
-        ])
-      ]),
-      new ProductCategory('Drinks', [
-        new ProductType(2, 'Soft drinks', true, [
-          new Product(1, 'Coca Cola', '33cl', 2.5),
-          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
-          new Product(1, 'Coca Cola', '33cl', 2.5),
-          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
-          new Product(1, 'Coca Cola', '33cl', 2.5),
-          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
-          new Product(1, 'Coca Cola', '33cl', 2.5),
-          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
-          new Product(1, 'Coca Cola', '33cl', 2.5),
-          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
-          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
-          new Product(1, 'Coca Cola', '33cl', 2.5),
-          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
-          new Product(1, 'Coca Cola', '33cl', 2.5),
-          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
-          new Product(1, 'Coca Cola', '33cl', 2.5),
-          new Product(2, 'Coca Cola Zero', '33cl', 2.5),
-          new Product(1, 'Coca Cola', '33cl', 2.5),
-          new Product(2, 'Coca Cola Zero', '33cl', 2.5)
-        ]),
-        new ProductType(3, 'Beers', true, [
-          new Product(3, 'Jupiler', '25cl', 2),
-          new Product(4, 'Jupiler', '33cl', 2.5)
-        ])
-      ]),
-      new ProductCategory('Snacks', [
-        new ProductType(4, 'Sandwiches', true, [
-          new Product(5, 'Smos', 'cheese, ham, vegetables', 3.5),
-          new Product(6, 'Smos cheese', 'cheese, vegetables', 3.5)
-        ]),
-        new ProductType(5, 'Ice cream', true, [
-          new Product(7, 'Calippo Cola', '', 1),
-          new Product(8, 'Calippo Orange', '', 1)
-        ])
-      ])
-    ];
-  }
-
 }

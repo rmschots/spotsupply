@@ -28,6 +28,8 @@ import {
   userPositionReducer
 } from './framework/reducers/user-location.reducer';
 import { LocationModel } from './framework/models/location.model';
+import { productReducer } from './framework/reducers/product.reducer';
+import { ProductsModel } from './framework/models/products.model';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -54,7 +56,8 @@ export function createTranslateLoader(http: Http) {
       login: loginReducer,
       locationPermissionStatus: locationPermissionReducer,
       lastKnownLocation: userPositionReducer,
-      atBeach: userAtBeachReducer
+      atBeach: userAtBeachReducer,
+      productHierarchy: productReducer
     }),
   ],
   declarations: [ToolbarComponent, NavbarComponent, ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent,
@@ -76,6 +79,7 @@ export class SharedModule {
         BeachModel,
         LoginModel,
         LocationModel,
+        ProductsModel,
         RestGatewayService,
         {provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>'}
       ]

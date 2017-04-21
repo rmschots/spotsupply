@@ -8,6 +8,7 @@ import { SpotSupplyActions } from '../actions/action-creators/spotsupply.action-
 import { LoginDetails } from '../../objects/account/login-details';
 import { LoginUser } from '../../objects/account/login-user';
 import { URLSearchParams } from '@angular/http';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class LoginModel extends Model implements OnInit {
@@ -16,7 +17,8 @@ export class LoginModel extends Model implements OnInit {
   loginUser$: Observable<LoginUser>;
 
   constructor(protected _store: Store<any>,
-              private _restGateway: RestGatewayService) {
+              private _restGateway: RestGatewayService,
+              private _router: Router) {
     super();
     this.loginUser$ = this._store.select('login');
   }
@@ -53,7 +55,9 @@ export class LoginModel extends Model implements OnInit {
         return true;
       }
     ).subscribe(() => {
-      console.log('logged out');
+      console.log('logged out, redirecting to home...');
+      this._router.navigate(['']);
+      window.location.reload();
     });
   }
 

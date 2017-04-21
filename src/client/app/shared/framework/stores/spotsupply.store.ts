@@ -8,5 +8,6 @@ export const initialState: Map<string, Object> = fromJS({
   loggedIn: false,
   locationPermissionStatus: LocationPermissionStatus.UNKNOWN,
   atBeach: null,
-  lastKnownLocation: null
+  lastKnownLocation: null,
+  productHierarchy: []
 });

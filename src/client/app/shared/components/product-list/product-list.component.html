@@ -1,5 +1,5 @@
 <md-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="tabSelected($event)"
-              [ngStyle]="{height: '100%'}">
+              [ngStyle]="{height: '100%'}" md-stretch-tabs [dynamicHeight]="true">
   <md-tab *ngFor="let category of categories" [label]="category.name">
     <div class="tab-content">
       <div *ngFor="let type of category.types" class="md-elevation-z6">

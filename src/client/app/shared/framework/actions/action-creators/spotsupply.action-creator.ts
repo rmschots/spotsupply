@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 import {
   BEACHES_LOAD,
-  LOCATION_PERMISSION_UPDATED,
+  LOCATION_PERMISSION_UPDATED, PRODUCT_HIERARCHY,
   USER_AT_BEACH,
   USER_LOGIN,
   USER_LOGOUT,
@@ -11,6 +11,7 @@ import {
 import { Beach } from '../../../objects/beach/beach';
 import { LoginUser } from '../../../objects/account/login-user';
 import { LocationPermissionStatus } from '../../../objects/position/location-permission-status';
+import { ProductCategory } from '../../../objects/product/product-category';
 
 export const SpotSupplyActions = {
   loadBeaches(payload: Array<Beach>): Action {
@@ -46,6 +47,12 @@ export const SpotSupplyActions = {
   userAtBeach(payload: Beach): Action {
     return {
       type: USER_AT_BEACH,
+      payload: payload
+    };
+  },
+  productHierarchy(payload: ProductCategory[]): Action {
+    return {
+      type: PRODUCT_HIERARCHY,
       payload: payload
     };
   }
