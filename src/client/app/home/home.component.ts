@@ -19,14 +19,12 @@ import { combineLatest } from 'rxjs/operator/combineLatest';
 export class HomeComponent implements OnInit {
 
   map: google.maps.Map;
-  spots: Array<Beach> = [];
   selectedSpot: number;
   overlayError: string = null;
 
   private _lastKnownPosition: Position;
 
   constructor(private pageScrollService: PageScrollService,
-              @Inject(DOCUMENT) private document: Document,
               private elRef: ElementRef,
               private changeDetector: ChangeDetectorRef,
               private navigationService: NavigationService,
@@ -55,15 +53,16 @@ export class HomeComponent implements OnInit {
       }
       this.displayUserLocation();
     });
-    _beachModel.beaches$.subscribe(beaches => {
-      this.spots = beaches;
-    });
     combineLatest.call(_locationModel.lastKnownLocation$, _beachModel.beaches$).subscribe(
       (latestValues: any) => {
         if (latestValues[0] && latestValues[1]) {
           _locationModel.setUserAtBeach(latestValues[1][0]);
         }
       });
+  }
+
+  get beaches(){
+    return this._beachModel.beaches$;
   }
 
   ngOnInit(): void {
@@ -91,7 +90,7 @@ export class HomeComponent implements OnInit {
       this.selectedSpot = spot.id;
       setTimeout(() => {
         let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineInstance(
-          this.document,
+          document,
           '#' + spot.name,
           this.elRef.nativeElement.parentElement);
         this.pageScrollService.start(pageScrollInstance);

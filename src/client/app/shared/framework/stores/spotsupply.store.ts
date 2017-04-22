@@ -1,8 +1,7 @@
-import { fromJS, Map } from 'immutable';
+import * as immutable from 'immutable';
 import { LocationPermissionStatus } from '../../objects/position/location-permission-status';
-import { Beach } from '../../objects/beach/beach';
 
-export const initialState: Map<string, Object> = fromJS({
+export const initialState: immutable.Map<string, Object> = immutable.fromJS({
   beaches: [],
   login: null,
   loggedIn: false,
