@@ -24,6 +24,7 @@ export class ProjectConfig extends SeedConfig {
     this.SYSTEM_BUILDER_CONFIG.packageConfigPaths = [
       ...this.SYSTEM_BUILDER_CONFIG.packageConfigPaths,
       join('node_modules', '@ngrx', '*', 'package.json'),
+      join('node_modules', '@ngx-translate', '*', 'package.json'),
       join('node_modules', '@ngui', '*', 'package.json')
     ];
 
