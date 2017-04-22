@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { NavigationService } from './services/navigation/index';
-import { TranslateLoader, TranslateModule, TranslateStaticLoader } from 'ng2-translate';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { Http } from '@angular/http';
@@ -24,19 +25,22 @@ import { LoginModel } from './framework/models/login.model';
 import { RestGatewayService } from './services/gateway/rest-gateway.service';
 import { loginReducer } from './framework/reducers/login.reducer';
 import {
-  locationPermissionReducer, userAtBeachReducer,
+  locationPermissionReducer,
+  userAtBeachReducer,
   userPositionReducer
 } from './framework/reducers/user-location.reducer';
 import { LocationModel } from './framework/models/location.model';
 import { productReducer } from './framework/reducers/product.reducer';
 import { ProductsModel } from './framework/models/products.model';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
-export function createTranslateLoader(http: Http) {
-  return new TranslateStaticLoader(http, '/assets/i18n', '.json');
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: Http) {
+  return new TranslateHttpLoader(http);
 }
 
 @NgModule({
@@ -47,10 +51,13 @@ export function createTranslateLoader(http: Http) {
     ReactiveFormsModule,
     MaterialModule,
     TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: (createTranslateLoader),
-      deps: [Http]
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [Http]
+      }
     }),
+    BrowserAnimationsModule,
     StoreModule.provideStore({
       beaches: beachReducer,
       login: loginReducer,

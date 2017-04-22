@@ -28,13 +28,9 @@
       "@ngui/map",
       "ng2-page-scroll",
       "hammerjs",
-      "ng2-translate"
+      "@ngx-translate/core",
+      "@ngx-translate/http-loader"
     ]
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src"
-  ],
   "compileOnSave": false
 }

@@ -52,10 +52,10 @@
 }
 
 .price-total {
-  width: 100%;
   text-align: center;
 }
 
 .total-text {
+  display: inline-flex !important;
   font-size: 12pt !important;
 }
