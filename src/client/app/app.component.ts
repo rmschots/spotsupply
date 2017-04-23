@@ -1,7 +1,8 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Config } from './shared/config/env.config';
 import './operators';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { LoginModel } from './shared/framework/models/login.model';
 
 @Component({
   moduleId: module.id,
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
 
   @ViewChild(NavbarComponent) navbar: NavbarComponent;
 
-  constructor() {
+  constructor(private _loginModel: LoginModel) {
     console.log('Environment config', Config);
     (<any>window).loading_screen.finish();
   }
@@ -42,6 +43,12 @@ export class AppComponent implements OnInit {
       console.log('desktop');
       this.isDesktop = true;
     }
+    this._loginModel.loadAccount().subscribe(loggedIn => {
+      console.log('logged in: ' + loggedIn);
+    },
+    error => {
+      console.log(error);
+    });
   }
 
 }

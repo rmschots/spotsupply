@@ -61,9 +61,12 @@ export class LoginModel extends Model implements OnInit {
     });
   }
 
-  loadAccount() {
-    this._restGateway.get('/account').subscribe(data => {
-      console.log(data);
-    });
+  loadAccount() : Observable<boolean> {
+    return this._restGateway.get('/account').map(
+      (payload: any) => {
+        this._store.dispatch(SpotSupplyActions.loginUser(this.convertRestResponse(payload)));
+        return true;
+      }
+    );
   }
 }

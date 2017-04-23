@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
-import { LoginModel } from '../shared/framework/models/login.model';
 
 @Component({
   moduleId: module.id,
@@ -9,8 +8,7 @@ import { LoginModel } from '../shared/framework/models/login.model';
   styleUrls: ['products.component.css']
 })
 export class ProductsComponent {
-  constructor(private navigationService: NavigationService, _loginModel: LoginModel) {
+  constructor(private navigationService: NavigationService) {
     navigationService.setTitle('products');
-    _loginModel.loadAccount();
   }
 }
