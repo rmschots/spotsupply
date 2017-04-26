@@ -6,15 +6,24 @@ import { SpotSupplyActions } from '../actions/action-creators/spotsupply.action-
 import { Model } from './model';
 import { RestGatewayService } from '../../services/gateway/rest-gateway.service';
 import { ProductCategory } from '../../objects/product/product-category';
+import { Product } from '../../objects/product/product';
+import 'rxjs/add/operator/scan';
 
 @Injectable()
 export class ProductsModel extends Model {
   productHierarchy$: Observable<Array<ProductCategory>>;
+  productMap$: Observable<Map<number, Product>>;
 
   constructor(protected _store: Store<any>,
               private _restGateway: RestGatewayService) {
     super();
-    this.productHierarchy$ = this._store.select('productHierarchy');
+    let product$ = this._store.select('product');
+    this.productHierarchy$ = product$.scan((accum: boolean, current: any) => {
+      return (current && current.get('hierarchy')) || accum;
+    }, false);
+    this.productMap$ = product$.scan((accum: boolean, current: any) => {
+      return (current && current.get('productMap')) || accum;
+    }, false);
   }
 
   loadProductHierarchy() {

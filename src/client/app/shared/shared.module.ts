@@ -24,15 +24,13 @@ import { beachReducer } from './framework/reducers/beach.reducer';
 import { LoginModel } from './framework/models/login.model';
 import { RestGatewayService } from './services/gateway/rest-gateway.service';
 import { loginReducer } from './framework/reducers/login.reducer';
-import {
-  locationPermissionReducer,
-  userAtBeachReducer,
-  userPositionReducer
-} from './framework/reducers/user-location.reducer';
 import { LocationModel } from './framework/models/location.model';
 import { productReducer } from './framework/reducers/product.reducer';
 import { ProductsModel } from './framework/models/products.model';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ShoppingCartModel } from './framework/models/shopping-cart.model';
+import { locationReducer } from './framework/reducers/location.reducer';
+import { cartReducer } from './framework/reducers/cart.reducer';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -61,10 +59,9 @@ export function HttpLoaderFactory(http: Http) {
     StoreModule.provideStore({
       beaches: beachReducer,
       login: loginReducer,
-      locationPermissionStatus: locationPermissionReducer,
-      lastKnownLocation: userPositionReducer,
-      atBeach: userAtBeachReducer,
-      productHierarchy: productReducer
+      location: locationReducer,
+      product: productReducer,
+      cart: cartReducer
     }),
   ],
   declarations: [ToolbarComponent, NavbarComponent, ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent,
@@ -87,6 +84,7 @@ export class SharedModule {
         LoginModel,
         LocationModel,
         ProductsModel,
+        ShoppingCartModel,
         RestGatewayService,
         {provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>'}
       ]

@@ -3,6 +3,9 @@ import { Config } from './shared/config/env.config';
 import './operators';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { LoginModel } from './shared/framework/models/login.model';
+import { ShoppingCartModel } from './shared/framework/models/shopping-cart.model';
+import { BeachModel } from './shared/framework/models/beach.model';
+import { ProductsModel } from './shared/framework/models/products.model';
 
 @Component({
   moduleId: module.id,
@@ -19,7 +22,10 @@ export class AppComponent implements OnInit {
 
   @ViewChild(NavbarComponent) navbar: NavbarComponent;
 
-  constructor(private _loginModel: LoginModel) {
+  constructor(private _loginModel: LoginModel,
+              private _shoppingCartModel: ShoppingCartModel,
+              private _beachModel: BeachModel,
+              private _productsModel: ProductsModel) {
     console.log('Environment config', Config);
     (<any>window).loading_screen.finish();
   }
@@ -44,11 +50,14 @@ export class AppComponent implements OnInit {
       this.isDesktop = true;
     }
     this._loginModel.loadAccount().subscribe(loggedIn => {
-      console.log('logged in: ' + loggedIn);
-    },
-    error => {
-      console.log(error);
-    });
+        console.log('logged in: ' + loggedIn);
+      },
+      error => {
+        console.log(error);
+      });
+    this._beachModel.loadBeaches();
+    this._productsModel.loadProductHierarchy();
+    this._shoppingCartModel.loadShoppingCart();
   }
 
 }

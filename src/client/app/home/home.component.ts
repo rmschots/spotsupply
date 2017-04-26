@@ -1,12 +1,12 @@
-import { ChangeDetectorRef, Component, ElementRef, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 import { PageScrollConfig, PageScrollInstance, PageScrollService } from 'ng2-page-scroll/ng2-page-scroll';
-import { DOCUMENT } from '@angular/platform-browser';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
 import { BeachModel } from '../shared/framework/models/beach.model';
 import { Beach } from '../shared/objects/beach/beach';
 import { LocationModel } from '../shared/framework/models/location.model';
 import { LocationPermissionStatus } from '../shared/objects/position/location-permission-status';
 import { combineLatest } from 'rxjs/operator/combineLatest';
+import { ShoppingCartModel } from '../shared/framework/models/shopping-cart.model';
 
 @Component({
   moduleId: module.id,
@@ -16,7 +16,7 @@ import { combineLatest } from 'rxjs/operator/combineLatest';
   providers: [BeachModel]
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
   map: google.maps.Map;
   selectedSpot: number;
@@ -29,10 +29,11 @@ export class HomeComponent implements OnInit {
               private changeDetector: ChangeDetectorRef,
               private navigationService: NavigationService,
               private _locationModel: LocationModel,
-              private _beachModel: BeachModel) {
+              private _beachModel: BeachModel,
+              private _shoppingCartModel: ShoppingCartModel) {
     navigationService.setTitle('home');
     PageScrollConfig.defaultDuration = 0;
-    _locationModel.locationPermissionStatus$.subscribe(locationPermissionStatus => {
+    _locationModel.permission$.subscribe(locationPermissionStatus => {
       if (locationPermissionStatus === LocationPermissionStatus.DENIED) {
         this.overlayError = 'Could not determine location';
       } else {
@@ -56,17 +57,13 @@ export class HomeComponent implements OnInit {
     combineLatest.call(_locationModel.lastKnownLocation$, _beachModel.beaches$).subscribe(
       (latestValues: any) => {
         if (latestValues[0] && latestValues[1]) {
-          _locationModel.setUserAtBeach(latestValues[1][0]);
+          _locationModel.setUserAtBeach(latestValues[1].get(0));
         }
       });
   }
 
-  get beaches(){
+  get beaches() {
     return this._beachModel.beaches$;
-  }
-
-  ngOnInit(): void {
-    this._beachModel.loadBeaches();
   }
 
   checkIt() {
@@ -115,5 +112,9 @@ export class HomeComponent implements OnInit {
         map: this.map
       });
     }
+  }
+
+  goToStore() {
+    this._shoppingCartModel.createShoppingCart(this.selectedSpot);
   }
 }

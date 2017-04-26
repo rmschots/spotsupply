@@ -31,7 +31,9 @@
     </md-card>
   </div>
   <a md-fab
+     *ngIf="selectedSpot"
      class="hover-button"
+     (click)="goToStore()"
      [routerLink]="['/store']">
     <md-icon>shopping_cart</md-icon>
   </a>

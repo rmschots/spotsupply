@@ -56,7 +56,7 @@ export class ToolbarComponent {
       this.isOrdered = isOrdered;
       this.updateShowCart();
     });
-    _locationModel.locationPermissionStatus$.subscribe(permissionStatus => {
+    _locationModel.permission$.subscribe(permissionStatus => {
       if (permissionStatus === LocationPermissionStatus.DENIED) {
         this.error = 'map.errorCode.' + LocationPermissionStatus.DENIED;
       } else {

@@ -9,6 +9,7 @@ import { LoginDetails } from '../../objects/account/login-details';
 import { LoginUser } from '../../objects/account/login-user';
 import { URLSearchParams } from '@angular/http';
 import { Router } from '@angular/router';
+import 'rxjs/add/operator/scan';
 
 @Injectable()
 export class LoginModel extends Model implements OnInit {
@@ -20,7 +21,10 @@ export class LoginModel extends Model implements OnInit {
               private _restGateway: RestGatewayService,
               private _router: Router) {
     super();
-    this.loginUser$ = this._store.select('login');
+    let user$ = this._store.select('login');
+    this.loginUser$ = user$.scan((accum: boolean, current: any) => {
+      return (current && current.get('details')) || accum;
+    }, false);
   }
 
   ngOnInit(): void {
@@ -61,7 +65,7 @@ export class LoginModel extends Model implements OnInit {
     });
   }
 
-  loadAccount() : Observable<boolean> {
+  loadAccount(): Observable<boolean> {
     return this._restGateway.get('/account').map(
       (payload: any) => {
         this._store.dispatch(SpotSupplyActions.loginUser(this.convertRestResponse(payload)));

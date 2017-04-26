@@ -3,10 +3,10 @@ import { NavigationService } from '../shared/services/navigation/navigation.serv
 import { ShoppingCartService } from '../shared/services/shopping-cart/shopping-cart.service';
 import { OrderInfo } from './order-info';
 import { Product } from '../shared/objects/product/product';
-import * as Collections from 'typescript-collections';
 import { Router } from '@angular/router';
 import { MdDialog } from '@angular/material';
 import { ConfirmationInfoComponent } from './confirmation-info/confirmation-info.component';
+import { ShoppingCartModel } from '../shared/framework/models/shopping-cart.model';
 
 @Component({
   moduleId: module.id,
@@ -23,6 +23,7 @@ export class OrderInfoComponent {
 
   constructor(private navigationService: NavigationService,
               private shoppingCartService: ShoppingCartService,
+              private _shoppingCartModel: ShoppingCartModel,
               private router: Router,
               private dialog: MdDialog) {
     navigationService.setTitle('order-info');

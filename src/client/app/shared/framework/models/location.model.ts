@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/scan';
 import { Model } from './model';
 import { LocationPermissionStatus } from '../../objects/position/location-permission-status';
 import { LocationLoadingComponent } from '../../services/location/components/location-loading.component';
@@ -15,7 +16,7 @@ export class LocationModel extends Model {
     disableClose: true
   };
 
-  locationPermissionStatus$: Observable<LocationPermissionStatus>;
+  permission$: Observable<LocationPermissionStatus>;
   lastKnownLocation$: Observable<Position>;
   atBeach$: Observable<Beach>;
 
@@ -23,10 +24,17 @@ export class LocationModel extends Model {
 
   constructor(protected _store: Store<any>, private dialog: MdDialog) {
     super();
-    this.locationPermissionStatus$ = this._store.select('locationPermissionStatus');
-    this.lastKnownLocation$ = this._store.select('lastKnownLocation');
-    this.atBeach$ = this._store.select('atBeach');
-    this.locationPermissionStatus$.subscribe(permissionStatus => {
+    let location$: Observable<any> = this._store.select('location');
+    this.permission$ = location$.scan((accum: boolean, current: any) => {
+      return (current && current.get('permission')) || accum;
+    }, false);
+    this.lastKnownLocation$ = location$.scan((accum: boolean, current: any) => {
+      return (current && current.get('position')) || accum;
+    }, false);
+    this.atBeach$ = location$.scan((accum: boolean, current: any) => {
+      return (current && current.get('atBeach')) || accum;
+    }, false);
+    this.permission$.subscribe(permissionStatus => {
       this._permissionStatus = permissionStatus;
     });
   }

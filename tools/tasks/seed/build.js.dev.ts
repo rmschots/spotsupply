@@ -2,7 +2,7 @@ import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
 import * as util from 'gulp-util';
-import { join/*, sep, relative*/ } from 'path';
+import { join, sep, relative } from 'path';
 
 import Config from '../../config';
 import { makeTsProject, TemplateLocalsBuilder } from '../../utils';
@@ -63,11 +63,11 @@ export =
         .pipe(plugins.sourcemaps.write())
         // Use for debugging with Webstorm/IntelliJ
         // https://github.com/mgechev/angular-seed/issues/1220
-        //    .pipe(plugins.sourcemaps.write('.', {
-        //      includeContent: false,
-        //      sourceRoot: (file: any) =>
-        //        relative(file.path, Config.PROJECT_ROOT + '/' + Config.APP_SRC).replace(sep, '/') + '/' + Config.APP_SRC
-        //    }))
+           .pipe(plugins.sourcemaps.write('.', {
+             includeContent: false,
+             sourceRoot: (file: any) =>
+               relative(file.path, Config.PROJECT_ROOT + '/' + Config.APP_SRC).replace(sep, '/') + '/' + Config.APP_SRC
+           }))
         .pipe(plugins.template(new TemplateLocalsBuilder().withStringifiedSystemConfigDev().build()))
         .pipe(gulp.dest(Config.APP_DEST));
       }

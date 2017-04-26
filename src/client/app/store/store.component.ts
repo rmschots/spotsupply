@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
-import { ProductCategory } from '../shared/objects/product/product-category';
-import { ShoppingCartService } from '../shared/services/shopping-cart/shopping-cart.service';
 import { Router } from '@angular/router';
-import { MdDialog } from '@angular/material';
-import { LoginOptionsComponent } from '../shared/components/login/login-options.component';
 import { UserService } from '../shared/services/user/user.service';
+import { ShoppingCartModel } from '../shared/framework/models/shopping-cart.model';
 
 @Component({
   moduleId: module.id,
@@ -15,21 +12,21 @@ import { UserService } from '../shared/services/user/user.service';
 })
 export class StoreComponent {
 
-  categories: ProductCategory[] = [];
   productTotal: number;
 
-  constructor(private navigationService: NavigationService, private shoppingCartService: ShoppingCartService,
-              private router: Router, public dialog: MdDialog, private userService: UserService) {
+  constructor(private navigationService: NavigationService,
+              private router: Router,
+              private userService: UserService,
+              private _shoppingCartModel: ShoppingCartModel) {
     navigationService.setTitle('store');
-    this.productTotal = shoppingCartService.getProductTotal();
-    shoppingCartService.productTotalSubscription(total => {
+    _shoppingCartModel.productTotal$.subscribe(total => {
       this.productTotal = total;
     });
   }
 
   onClearCartClicked() {
     if (this.productTotal > 0) {
-      this.shoppingCartService.removeAllProducts();
+      this._shoppingCartModel.removeAllProducts();
     }
   }
 
