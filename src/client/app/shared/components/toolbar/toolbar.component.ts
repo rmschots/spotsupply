@@ -16,7 +16,7 @@ import { Unsubscribable } from '../unsubscribable';
   styleUrls: ['toolbar.component.css']
 })
 
-export class ToolbarComponent extends Unsubscribable{
+export class ToolbarComponent extends Unsubscribable {
 
   @Output() openMenu = new EventEmitter<boolean>();
   @Input() menuOpen: boolean = false;
@@ -44,9 +44,9 @@ export class ToolbarComponent extends Unsubscribable{
     this.productsAmount = shoppingCartService.getProductsAmount();
     _locationModel.atBeach$.takeUntil(this._ngUnsubscribe$)
       .subscribe(beach => {
-      this.isInBounds = !!beach;
-      this.updateShowCart();
-    });
+        this.isInBounds = !!beach;
+        this.updateShowCart();
+      });
 
     navigationService.titleSubscription((title: string) => {
       this.title = title;
@@ -56,21 +56,21 @@ export class ToolbarComponent extends Unsubscribable{
     });
     _shoppingCartModel.productAmount$.takeUntil(this._ngUnsubscribe$)
       .subscribe(amt => {
-      this.productsAmount = amt;
-    });
+        this.productsAmount = amt;
+      });
     _shoppingCartModel.ordered$.takeUntil(this._ngUnsubscribe$)
       .subscribe(isOrdered => {
-      this.isOrdered = isOrdered;
-      this.updateShowCart();
-    });
+        this.isOrdered = isOrdered;
+        this.updateShowCart();
+      });
     _locationModel.permission$.takeUntil(this._ngUnsubscribe$)
       .subscribe(permissionStatus => {
-      if (permissionStatus === LocationPermissionStatus.DENIED) {
-        this.error = 'map.errorCode.' + LocationPermissionStatus.DENIED;
-      } else {
-        this.error = null;
-      }
-    });
+        if (permissionStatus === LocationPermissionStatus.DENIED) {
+          this.error = 'map.errorCode.' + LocationPermissionStatus.DENIED;
+        } else {
+          this.error = null;
+        }
+      });
   }
 
   menuOpened() {
