@@ -16,7 +16,7 @@ export class LoginOptionsComponent {
 
   openLoginDialog() {
     let dialogRef = this.dialog.open(LoginComponent);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().take(1).subscribe(result => {
       if (result === 'SUCCESS') {
         this.dialogRef.close('SUCCESS');
       }

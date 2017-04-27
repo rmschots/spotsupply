@@ -5,7 +5,7 @@ import {
   PERSISTED_CART_ADD_ITEM,
   PERSISTED_CART_LOAD,
   PERSISTED_CART_REMOVE_ALL_ITEMS,
-  PERSISTED_CART_REMOVE_ITEM,
+  PERSISTED_CART_REMOVE_ITEM, PLACE_ORDER,
   SHOPPING_CART_ADD_ITEM,
   SHOPPING_CART_LOAD,
   SHOPPING_CART_REMOVE_ALL_ITEMS,
@@ -38,6 +38,10 @@ export function cartReducer(state: any = initialState.get('cart'), action: Actio
       break;
     case PERSISTED_CART_REMOVE_ALL_ITEMS:
       state = state.set('persisted', action.payload);
+      break;
+    case PLACE_ORDER:
+      state = state.set('persisted', action.payload);
+      state = state.set('live', action.payload);
       break;
   }
   return state;

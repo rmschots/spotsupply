@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
-import { ShoppingCartService } from '../shared/services/shopping-cart/shopping-cart.service';
 import { OrderInfo } from './order-info';
-import { Product } from '../shared/objects/product/product';
 import { Router } from '@angular/router';
 import { MdDialog } from '@angular/material';
 import { ConfirmationInfoComponent } from './confirmation-info/confirmation-info.component';
 import { ShoppingCartModel } from '../shared/framework/models/shopping-cart.model';
+import { ShoppingCart } from '../shared/objects/cart/shopping-cart';
+import { Unsubscribable } from '../shared/components/unsubscribable';
 
 @Component({
   moduleId: module.id,
@@ -14,27 +14,38 @@ import { ShoppingCartModel } from '../shared/framework/models/shopping-cart.mode
   templateUrl: 'order-info.component.html',
   styleUrls: ['order-info.component.css']
 })
-export class OrderInfoComponent {
+export class OrderInfoComponent extends Unsubscribable {
 
-  cart: Map<Product, number>;
+  cart: ShoppingCart;
+
   orderInfo = new OrderInfo('Ostend', '0123 45 67 89', 'Bring now', 'Cash');
   times = ['Bring now', '10:30', '10:45', '11:00'];
   paymentMethods = ['Cash'];
 
   constructor(private navigationService: NavigationService,
-              private shoppingCartService: ShoppingCartService,
               private _shoppingCartModel: ShoppingCartModel,
               private router: Router,
               private dialog: MdDialog) {
+    super();
     navigationService.setTitle('order-info');
-    this.cart = shoppingCartService.getCart();
+    _shoppingCartModel.persistedCart$.takeUntil(this._ngUnsubscribe$)
+      .subscribe(cart => {
+        this.cart = cart;
+      });
   }
 
   placeOrder() {
-    this.shoppingCartService.placeOrder();
-    let dialogRef = this.dialog.open(ConfirmationInfoComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      this.router.navigate(['/settings/current-order']);
-    });
+    this._shoppingCartModel.placeOrder().take(1)
+      .subscribe(complete => {
+        if (complete) {
+          let dialogRef = this.dialog.open(ConfirmationInfoComponent);
+          dialogRef.afterClosed().take(1)
+            .subscribe(() => {
+              this.router.navigate(['/settings/current-order']);
+            });
+        }
+      }, (error: any) => {
+        console.log('test');
+      });
   }
 }

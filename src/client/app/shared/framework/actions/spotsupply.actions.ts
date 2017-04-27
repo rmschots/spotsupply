@@ -13,3 +13,4 @@ export const PERSISTED_CART_LOAD = 'spotsupply:persistedCartLoad';
 export const PERSISTED_CART_ADD_ITEM = 'spotsupply:persistedCartAddItem';
 export const PERSISTED_CART_REMOVE_ITEM = 'spotsupply:persistedCartRemoveItem';
 export const PERSISTED_CART_REMOVE_ALL_ITEMS = 'spotsupply:persistedCartRemoveAllItems';
+export const PLACE_ORDER = 'spotsupply:placeOrder';

@@ -15,9 +15,13 @@ import 'rxjs/add/operator/combineLatest';
 @Injectable()
 export class ShoppingCartModel extends Model {
   shoppingCart$: Observable<ShoppingCart>;
+  persistedCart$: Observable<ShoppingCart>;
   productTotal$: Observable<number>;
+  ordered$: Observable<boolean>;
+  productAmount$: Observable<number>;
 
   private _shoppingCart: ShoppingCart = null;
+  private _persistedCart: ShoppingCart = null;
 
   constructor(protected _store: Store<any>,
               private _restGateway: RestGatewayService,
@@ -27,10 +31,17 @@ export class ShoppingCartModel extends Model {
     this.shoppingCart$ = cart$.scan((accum: boolean, current: any) => {
       return (current && current.get('live')) || accum;
     }, false);
+    this.persistedCart$ = cart$.scan((accum: boolean, current: any) => {
+      return (current && current.get('persisted')) || accum;
+    }, false);
 
     this.shoppingCart$.subscribe(cart => {
       this._shoppingCart = cart;
     });
+    this.persistedCart$.subscribe(cart => {
+      this._persistedCart = cart;
+    });
+
     this.productTotal$ = this.shoppingCart$.combineLatest(
       _productModel.productMap$,
       (cart: ShoppingCart, productMap: Map<number, Product>) => {
@@ -40,6 +51,19 @@ export class ShoppingCartModel extends Model {
         return cart.items.map(item => {
           return productMap.get(item.productId).price;
         }).reduce((itemPrice1, itemPrice2) => itemPrice1 + itemPrice2);
+      });
+
+    this.ordered$ = this.persistedCart$.map(
+      (cart: ShoppingCart) => {
+        return cart.status === 'ORDERED';
+      });
+
+    this.productAmount$ = this.shoppingCart$.map(
+      (cart: ShoppingCart) => {
+        if (!cart) {
+          return 0;
+        }
+        return cart.items.length;
       });
   }
 
@@ -79,6 +103,14 @@ export class ShoppingCartModel extends Model {
     this._store.dispatch(SpotSupplyActions.removeAllItemsFromShoppingCart(this._shoppingCart));
     this._restGateway.post('/shoppingCart/removeAllProducts').subscribe(data => {
       this._store.dispatch(SpotSupplyActions.removeAllItemsFromPersistedCart(this.convertRestResponse(data)));
+    });
+  }
+
+  placeOrder(): Observable<boolean> {
+    return this._restGateway.post('/shoppingCart/placeOrder', this._persistedCart).map(data => {
+      const cart: ShoppingCart = this.convertRestResponse(data);
+      this._store.dispatch(SpotSupplyActions.placeOrder(cart));
+      return cart.status === 'ORDERED';
     });
   }
 

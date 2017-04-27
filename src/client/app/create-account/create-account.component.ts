@@ -20,6 +20,7 @@ export class CreateAccountComponent {
 
   createAccount() {
     this.loginModel.createUser(new CreateUser('email', 'phoneNumber', 'password'))
+      .take(1)
       .subscribe(() => {
         this.created = true;
       });

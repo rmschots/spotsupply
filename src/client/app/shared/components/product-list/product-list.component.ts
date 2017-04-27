@@ -3,6 +3,7 @@ import { ProductCategory } from '../../objects/product/product-category';
 import { Product } from '../../objects/product/product';
 import { ProductsModel } from '../../framework/models/products.model';
 import { ShoppingCartModel } from '../../framework/models/shopping-cart.model';
+import { Unsubscribable } from '../unsubscribable';
 
 @Component({
   moduleId: module.id,
@@ -10,7 +11,7 @@ import { ShoppingCartModel } from '../../framework/models/shopping-cart.model';
   templateUrl: 'product-list.component.html',
   styleUrls: ['product-list.component.css']
 })
-export class ProductListComponent {
+export class ProductListComponent extends Unsubscribable {
 
   @Input() shop: boolean;
 
@@ -19,7 +20,9 @@ export class ProductListComponent {
 
   constructor(private _productsModel: ProductsModel,
               private _shoppingCartModel: ShoppingCartModel) {
-    _productsModel.productHierarchy$.subscribe(productHierarchy => {
+    super();
+    _productsModel.productHierarchy$.takeUntil(this._ngUnsubscribe$)
+      .subscribe(productHierarchy => {
       this.categories = productHierarchy;
     });
   }

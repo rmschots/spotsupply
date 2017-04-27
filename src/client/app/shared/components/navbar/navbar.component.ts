@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import { LoginComponent } from '../login/login.component';
 import { MdDialog } from '@angular/material';
 import { LoginModel } from '../../framework/models/login.model';
+import { Unsubscribable } from '../unsubscribable';
 
 @Component({
   moduleId: module.id,
@@ -10,7 +11,7 @@ import { LoginModel } from '../../framework/models/login.model';
   styleUrls: ['navbar.component.css']
 })
 
-export class NavbarComponent {
+export class NavbarComponent extends Unsubscribable {
 
   @Output() menuClose = new EventEmitter<boolean>();
   @Output() margin = new EventEmitter<number>();
@@ -20,14 +21,16 @@ export class NavbarComponent {
   isLoggedIn: boolean = false;
 
   constructor(private _loginModel: LoginModel, public dialog: MdDialog) {
-    _loginModel.loginUser$.subscribe((userDetails) => {
-      this.isLoggedIn = !!userDetails;
-    });
+    super();
+    _loginModel.loginUser$.takeUntil(this._ngUnsubscribe$)
+      .subscribe((userDetails) => {
+        this.isLoggedIn = !!userDetails;
+      });
   }
 
   logIn() {
     let dialogRef = this.dialog.open(LoginComponent);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().take(1).subscribe(result => {
       if (result === 'SUCCESS') {
         this.navigated();
       }

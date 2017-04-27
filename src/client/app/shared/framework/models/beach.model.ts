@@ -3,8 +3,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { SpotSupplyActions } from '../actions/action-creators/spotsupply.action-creator';
-import { Http } from '@angular/http';
-import { Config } from '../../config/env.config';
 import { Model } from './model';
 import { Beach } from '../../objects/beach/beach';
 import { RestGatewayService } from '../../services/gateway/rest-gateway.service';

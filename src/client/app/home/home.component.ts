@@ -7,6 +7,7 @@ import { LocationModel } from '../shared/framework/models/location.model';
 import { LocationPermissionStatus } from '../shared/objects/position/location-permission-status';
 import { combineLatest } from 'rxjs/operator/combineLatest';
 import { ShoppingCartModel } from '../shared/framework/models/shopping-cart.model';
+import { Unsubscribable } from '../shared/components/unsubscribable';
 
 @Component({
   moduleId: module.id,
@@ -16,7 +17,7 @@ import { ShoppingCartModel } from '../shared/framework/models/shopping-cart.mode
   providers: [BeachModel]
 })
 
-export class HomeComponent {
+export class HomeComponent extends Unsubscribable {
 
   map: google.maps.Map;
   selectedSpot: number;
@@ -31,35 +32,41 @@ export class HomeComponent {
               private _locationModel: LocationModel,
               private _beachModel: BeachModel,
               private _shoppingCartModel: ShoppingCartModel) {
+    super();
     navigationService.setTitle('home');
     PageScrollConfig.defaultDuration = 0;
-    _locationModel.permission$.subscribe(locationPermissionStatus => {
-      if (locationPermissionStatus === LocationPermissionStatus.DENIED) {
-        this.overlayError = 'Could not determine location';
-      } else {
-        this.overlayError = null;
-      }
-    });
-    _locationModel.lastKnownLocation$.subscribe(lastKnownLocation => {
-      this._lastKnownPosition = lastKnownLocation;
-      if (lastKnownLocation) {
-        this.displayUserLocation();
-      }
-    });
-    _locationModel.atBeach$.subscribe(atBeach => {
-      if (atBeach) {
-        this.selectedSpot = atBeach.id;
-      } else {
-        this.selectedSpot = null;
-      }
-      this.displayUserLocation();
-    });
-    combineLatest.call(_locationModel.lastKnownLocation$, _beachModel.beaches$).subscribe(
-      (latestValues: any) => {
-        if (latestValues[0] && latestValues[1]) {
-          _locationModel.setUserAtBeach(latestValues[1].get(0));
+    _locationModel.permission$.takeUntil(this._ngUnsubscribe$)
+      .subscribe(locationPermissionStatus => {
+        if (locationPermissionStatus === LocationPermissionStatus.DENIED) {
+          this.overlayError = 'Could not determine location';
+        } else {
+          this.overlayError = null;
         }
       });
+    _locationModel.lastKnownLocation$.takeUntil(this._ngUnsubscribe$)
+      .subscribe(lastKnownLocation => {
+        this._lastKnownPosition = lastKnownLocation;
+        if (lastKnownLocation) {
+          this.displayUserLocation();
+        }
+      });
+    _locationModel.atBeach$.takeUntil(this._ngUnsubscribe$)
+      .subscribe(atBeach => {
+        if (atBeach) {
+          this.selectedSpot = atBeach.id;
+        } else {
+          this.selectedSpot = null;
+        }
+        this.displayUserLocation();
+      });
+    combineLatest.call(_locationModel.lastKnownLocation$, _beachModel.beaches$)
+      .takeUntil(this._ngUnsubscribe$)
+      .subscribe(
+        (latestValues: any) => {
+          if (latestValues[0] && latestValues[1]) {
+            _locationModel.setUserAtBeach(latestValues[1].get(0));
+          }
+        });
   }
 
   get beaches() {

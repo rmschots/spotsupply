@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { ShoppingCartService } from '../../services/shopping-cart/shopping-cart.service';
 import { LocationModel } from '../../framework/models/location.model';
 import { LocationPermissionStatus } from '../../objects/position/location-permission-status';
+import { ShoppingCartModel } from '../../framework/models/shopping-cart.model';
+import { Unsubscribable } from '../unsubscribable';
 
 @Component({
   moduleId: module.id,
@@ -14,7 +16,7 @@ import { LocationPermissionStatus } from '../../objects/position/location-permis
   styleUrls: ['toolbar.component.css']
 })
 
-export class ToolbarComponent {
+export class ToolbarComponent extends Unsubscribable{
 
   @Output() openMenu = new EventEmitter<boolean>();
   @Input() menuOpen: boolean = false;
@@ -33,12 +35,15 @@ export class ToolbarComponent {
               private languageService: LanguageService,
               private router: Router,
               private shoppingCartService: ShoppingCartService,
-              private _locationModel: LocationModel) {
+              private _locationModel: LocationModel,
+              private _shoppingCartModel: ShoppingCartModel) {
+    super();
     this.title = this.navigationService.getTitle();
     this.languages = languageService.getLanguages();
     this.selectedLanguage = languageService.getActiveLanguage();
     this.productsAmount = shoppingCartService.getProductsAmount();
-    _locationModel.atBeach$.subscribe(beach => {
+    _locationModel.atBeach$.takeUntil(this._ngUnsubscribe$)
+      .subscribe(beach => {
       this.isInBounds = !!beach;
       this.updateShowCart();
     });
@@ -49,14 +54,17 @@ export class ToolbarComponent {
     languageService.languageSubscription(language => {
       this.selectedLanguage = language;
     });
-    shoppingCartService.productsAmountSubscription(amt => {
+    _shoppingCartModel.productAmount$.takeUntil(this._ngUnsubscribe$)
+      .subscribe(amt => {
       this.productsAmount = amt;
     });
-    shoppingCartService.orderedSubscription(isOrdered => {
+    _shoppingCartModel.ordered$.takeUntil(this._ngUnsubscribe$)
+      .subscribe(isOrdered => {
       this.isOrdered = isOrdered;
       this.updateShowCart();
     });
-    _locationModel.permission$.subscribe(permissionStatus => {
+    _locationModel.permission$.takeUntil(this._ngUnsubscribe$)
+      .subscribe(permissionStatus => {
       if (permissionStatus === LocationPermissionStatus.DENIED) {
         this.error = 'map.errorCode.' + LocationPermissionStatus.DENIED;
       } else {

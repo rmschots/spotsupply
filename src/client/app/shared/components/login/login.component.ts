@@ -21,7 +21,7 @@ export class LoginComponent {
   }
 
   login() {
-    this._loginModel.login(this.loginDetails).subscribe((success: boolean) => {
+    this._loginModel.login(this.loginDetails).take(1).subscribe((success: boolean) => {
       let redirect = this._loginModel.redirectUrl ? this._loginModel.redirectUrl : '/';
       this.router.navigate([redirect]);
       this.dialogRef.close('SUCCESS');

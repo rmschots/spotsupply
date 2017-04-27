@@ -6,7 +6,7 @@ import {
   PERSISTED_CART_ADD_ITEM,
   PERSISTED_CART_LOAD,
   PERSISTED_CART_REMOVE_ALL_ITEMS,
-  PERSISTED_CART_REMOVE_ITEM,
+  PERSISTED_CART_REMOVE_ITEM, PLACE_ORDER,
   PRODUCT_HIERARCHY,
   SHOPPING_CART_ADD_ITEM,
   SHOPPING_CART_LOAD,
@@ -111,6 +111,12 @@ export const SpotSupplyActions = {
   removeAllItemsFromPersistedCart(payload: ShoppingCart): Action {
     return {
       type: PERSISTED_CART_REMOVE_ALL_ITEMS,
+      payload: payload
+    };
+  },
+  placeOrder(payload: ShoppingCart): Action {
+    return {
+      type: PLACE_ORDER,
       payload: payload
     };
   },
