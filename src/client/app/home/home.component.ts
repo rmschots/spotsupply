@@ -1,5 +1,10 @@
 import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
-import { PageScrollConfig, PageScrollInstance, PageScrollService } from 'ng2-page-scroll/ng2-page-scroll';
+import {
+  PageScrollConfig,
+  PageScrollInstance,
+  PageScrollOptions,
+  PageScrollService
+} from 'ng2-page-scroll/ng2-page-scroll';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
 import { BeachModel } from '../shared/framework/models/beach.model';
 import { Beach } from '../shared/objects/beach/beach';
@@ -23,6 +28,7 @@ export class HomeComponent extends Unsubscribable {
   selectedSpot: number;
   overlayError: string = null;
 
+  atBeach: Beach;
   private _lastKnownPosition: Position;
 
   constructor(private pageScrollService: PageScrollService,
@@ -53,9 +59,9 @@ export class HomeComponent extends Unsubscribable {
     _locationModel.atBeach$.takeUntil(this._ngUnsubscribe$)
       .subscribe(atBeach => {
         if (atBeach) {
-          this.selectedSpot = atBeach.id;
+          this.atBeach = atBeach;
         } else {
-          this.selectedSpot = null;
+          this.atBeach = null;
         }
         this.displayUserLocation();
       });
@@ -71,6 +77,14 @@ export class HomeComponent extends Unsubscribable {
 
   get beaches() {
     return this._beachModel.beaches$;
+  }
+
+  isChecking(): boolean {
+    return this._locationModel.isWatchingPosition();
+  }
+
+  get ordered() {
+    return this._shoppingCartModel.ordered$;
   }
 
   checkIt() {
@@ -93,10 +107,14 @@ export class HomeComponent extends Unsubscribable {
       this.overlayError = null;
       this.selectedSpot = spot.id;
       setTimeout(() => {
-        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineInstance(
-          document,
-          '#' + spot.name,
-          this.elRef.nativeElement.parentElement);
+        let pageScrollOptions: PageScrollOptions = {
+          document: document,
+          scrollTarget: '#' + spot.name,
+          scrollingViews: [this.elRef.nativeElement.parentElement],
+          pageScrollOffset: 15,
+          pageScrollDuration: 0
+        };
+        let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance(pageScrollOptions);
         this.pageScrollService.start(pageScrollInstance);
       }, 1);
     }
@@ -122,6 +140,6 @@ export class HomeComponent extends Unsubscribable {
   }
 
   goToStore() {
-    this._shoppingCartModel.createShoppingCart(this.selectedSpot);
+    this._shoppingCartModel.createShoppingCart(this.atBeach.id);
   }
 }

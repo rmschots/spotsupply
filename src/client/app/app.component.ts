@@ -8,6 +8,7 @@ import { ProductsModel } from './shared/framework/models/products.model';
 import { Unsubscribable } from './shared/components/unsubscribable';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   moduleId: module.id,
@@ -58,7 +59,7 @@ export class AppComponent extends Unsubscribable implements OnInit {
           console.log('logged in: ' + loggedIn);
         },
         error => {
-          console.log(error);
+          console.log('not logged in');
         });
     this._beachModel.loadBeaches();
     this._productsModel.loadProductHierarchy();

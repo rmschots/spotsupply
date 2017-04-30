@@ -9,10 +9,10 @@
     <a class="menu-item" md-list-item [routerLink]="['/faq']" [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}"
        (click)="navigated()">{{'NAVBAR.items.faq' | translate}}</a>
-    <a *ngIf="isLoggedIn" class="menu-item" md-list-item [routerLink]="['/settings']"
+    <a *ngIf="isLoggedIn | async" class="menu-item" md-list-item [routerLink]="['/settings']"
        [routerLinkActive]="['router-link-active']" (click)="navigated()">{{'NAVBAR.items.settings' | translate}}</a>
-    <md-list-item *ngIf="isLoggedIn" (click)="logOut()">{{'NAVBAR.items.logOut' | translate}}</md-list-item>
-    <md-list-item *ngIf="!isLoggedIn" (click)="logIn()">{{'NAVBAR.items.logIn' | translate}}</md-list-item>
+    <md-list-item *ngIf="isLoggedIn | async" (click)="logOut()">{{'NAVBAR.items.logOut' | translate}}</md-list-item>
+    <md-list-item *ngIf="!(isLoggedIn | async)" (click)="logIn()">{{'NAVBAR.items.logIn' | translate}}</md-list-item>
   </md-nav-list>
 
   <div class="navbar-footer">

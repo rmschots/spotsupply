@@ -2,7 +2,6 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import { LoginComponent } from '../login/login.component';
 import { MdDialog } from '@angular/material';
 import { LoginModel } from '../../framework/models/login.model';
-import { Unsubscribable } from '../unsubscribable';
 
 @Component({
   moduleId: module.id,
@@ -11,21 +10,15 @@ import { Unsubscribable } from '../unsubscribable';
   styleUrls: ['navbar.component.css']
 })
 
-export class NavbarComponent extends Unsubscribable {
+export class NavbarComponent {
 
   @Output() menuClose = new EventEmitter<boolean>();
   @Output() margin = new EventEmitter<number>();
   @Input() menuOpen: boolean;
   marginLeft: number;
   @ViewChild('navRoot') navParentElement: ElementRef;
-  isLoggedIn: boolean = false;
 
   constructor(private _loginModel: LoginModel, public dialog: MdDialog) {
-    super();
-    _loginModel.loginUser$.takeUntil(this._ngUnsubscribe$)
-      .subscribe((userDetails) => {
-        this.isLoggedIn = !!userDetails;
-      });
   }
 
   logIn() {
@@ -40,6 +33,10 @@ export class NavbarComponent extends Unsubscribable {
   logOut() {
     this._loginModel.logout();
     this.navigated();
+  }
+
+  get isLoggedIn() {
+    return this._loginModel.loggedIn$;
   }
 
   menuSwiped(event: any) {
@@ -72,10 +69,6 @@ export class NavbarComponent extends Unsubscribable {
         event.preventDefault();
       }
     }
-  }
-
-  notifyMenuClosed() {
-    this.menuClose.next();
   }
 
   setMenuClosed() {

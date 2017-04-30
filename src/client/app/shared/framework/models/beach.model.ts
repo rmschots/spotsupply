@@ -17,6 +17,10 @@ export class BeachModel extends Model {
     this.beaches$ = this._store.select('beaches');
   }
 
+  getBeach(id: number) {
+    return this.beaches$.map(( beaches: Array<Beach>) => beaches.find(beach => beach.id === id));
+  }
+
   loadBeaches() {
     this._restGateway.get('/beach').subscribe(data => {
       this._store.dispatch(SpotSupplyActions.loadBeaches(this.convertRestResponse(data)));

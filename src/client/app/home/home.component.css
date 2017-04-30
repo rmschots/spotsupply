@@ -108,12 +108,17 @@ md-chip {
   margin-bottom: 40px;
 }
 
+.at-beach-card {
+  border: solid #0074D9;
+}
+
 .unpadded-card {
    padding-bottom: 0;
 }
 
 .spot-title {
   font-size: 20px;
+  margin-top: 8px;
 }
 
 .no-margin-bottom {
@@ -138,5 +143,37 @@ md-card-header {
 .collapse-icon {
   position: absolute;
   right: 0;
-  font-size: 35px;
+  font-weight: bold;
+}
+
+.arrow-right-bottom {
+  position: fixed;
+  bottom: 6px;
+  right: 80px;
+  margin: 10px;
+}
+
+.arrow-right {
+  position:relative;
+  display: block;
+  padding-left: 10px;
+  height:40px;
+  background-color: #FF851B;
+  color: white;
+  line-height:40px;
+  white-space: nowrap;
+  text-align:center;
+  vertical-align: middle;
+}
+.arrow-right:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:-20px;
+  display: block;
+  width: 0;
+  height:0;
+  border-left: 20px solid #FF851B;
+  border-bottom: 20px solid transparent;
+  border-top: 20px solid transparent;
 }

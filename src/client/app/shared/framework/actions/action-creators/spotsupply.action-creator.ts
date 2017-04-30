@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import {
-  BEACHES_LOAD,
+  BEACHES_LOAD, CART_COMPLETE, CART_REFRESH,
   LOCATION_PERMISSION_UPDATED,
   PERSISTED_CART_ADD_ITEM,
   PERSISTED_CART_LOAD,
@@ -118,6 +118,17 @@ export const SpotSupplyActions = {
     return {
       type: PLACE_ORDER,
       payload: payload
+    };
+  },
+  cartRefresh(payload: ShoppingCart): Action {
+    return {
+      type: CART_REFRESH,
+      payload: payload
+    };
+  },
+  completeOrder(): Action {
+    return {
+      type: CART_COMPLETE
     };
   },
 };

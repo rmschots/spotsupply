@@ -3,4 +3,5 @@
 </div>
 <div *ngIf="ordered">
   <ss-cart [cart]="cart"></ss-cart>
+  <button md-raised-button (click)="completeOrder()" class="text-center">Complete order</button>
 </div>

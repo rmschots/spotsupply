@@ -13,6 +13,11 @@
     </md-icon>
     <div *ngIf="productsAmount > 0" class="cart-size">{{productsAmount}}</div>
   </div>
+  <div *ngIf="showOrder" class="action-parent">
+    <md-icon class="btn-action" (click)="goToOrder()">
+      local_shipping
+    </md-icon>
+  </div>
   <button md-button [mdMenuTriggerFor]="menu" class="btn-language">
     <img src="/assets/img/{{selectedLanguage.code}}.jpg"/>
   </button>

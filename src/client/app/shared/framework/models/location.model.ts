@@ -5,7 +5,7 @@ import 'rxjs/add/operator/scan';
 import { Model } from './model';
 import { LocationPermissionStatus } from '../../objects/position/location-permission-status';
 import { LocationLoadingComponent } from '../../services/location/components/location-loading.component';
-import { MdDialog, MdDialogConfig } from '@angular/material';
+import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 import { Beach } from '../../objects/beach/beach';
 import { SpotSupplyActions } from '../actions/action-creators/spotsupply.action-creator';
 
@@ -21,6 +21,8 @@ export class LocationModel extends Model {
   atBeach$: Observable<Beach>;
 
   private _permissionStatus: LocationPermissionStatus = null;
+  private _dialogRef: MdDialogRef<LocationLoadingComponent>;
+  private _watchId: number;
 
   constructor(protected _store: Store<any>, private dialog: MdDialog) {
     super();
@@ -40,24 +42,46 @@ export class LocationModel extends Model {
   }
 
   startFetchingLocation() {
-    if (this._permissionStatus !== LocationPermissionStatus.GRANTED) {
-      let dialogRef = this.dialog.open(LocationLoadingComponent, LocationModel.dialogOptions);
-      navigator.geolocation.watchPosition((location) => {
-          this._store.dispatch(SpotSupplyActions.locationPermissionUpdated(LocationPermissionStatus.GRANTED));
-          this._store.dispatch(SpotSupplyActions.userPositionUpdated(location));
-          dialogRef.close('SUCCESS');
-        },
-        (error: PositionError) => {
-          this._store.dispatch(SpotSupplyActions.locationPermissionUpdated(LocationPermissionStatus.DENIED));
-          dialogRef.close('FAILURE');
-        }, {
-          timeout: 20000,
-          enableHighAccuracy: true
-        });
+    if (!this._watchId) {
+      this._watchPosition(true);
+    } else {
+      console.error('already watching location');
     }
+  }
+
+  isWatchingPosition(): boolean {
+    return !!this._watchId;
   }
 
   setUserAtBeach(atBeach: Beach) {
     this._store.dispatch(SpotSupplyActions.userAtBeach(atBeach));
+  }
+
+  private _watchPosition(useDialog: boolean) {
+    if (useDialog) {
+      this._dialogRef = this.dialog.open(LocationLoadingComponent, LocationModel.dialogOptions);
+    }
+    this._watchId = navigator.geolocation.watchPosition((location) => {
+        console.error('success location');
+        this._store.dispatch(SpotSupplyActions.locationPermissionUpdated(LocationPermissionStatus.GRANTED));
+        this._store.dispatch(SpotSupplyActions.userPositionUpdated(location));
+        if (useDialog) {
+          this._dialogRef.close('SUCCESS');
+        }
+      },
+      (error: PositionError) => {
+        console.error('error location');
+        if (this._watchId) {
+          navigator.geolocation.clearWatch(this._watchId);
+          this._watchId = null;
+        }
+        if (useDialog) {
+          this._dialogRef.close('FAILURE');
+        }
+        this._store.dispatch(SpotSupplyActions.locationPermissionUpdated(LocationPermissionStatus.DENIED));
+      }, {
+        timeout: 20000,
+        enableHighAccuracy: true
+      });
   }
 }

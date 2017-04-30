@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
 import { Router } from '@angular/router';
-import { UserService } from '../shared/services/user/user.service';
 import { ShoppingCartModel } from '../shared/framework/models/shopping-cart.model';
 import { Unsubscribable } from '../shared/components/unsubscribable';
+import { LoginModel } from '../shared/framework/models/login.model';
 
 @Component({
   moduleId: module.id,
@@ -15,15 +15,21 @@ export class StoreComponent extends Unsubscribable {
 
   productTotal: number;
 
+  private _loggedIn: boolean = false;
+
   constructor(private navigationService: NavigationService,
               private router: Router,
-              private userService: UserService,
+              private _loginModel: LoginModel,
               private _shoppingCartModel: ShoppingCartModel) {
     super();
     navigationService.setTitle('store');
     _shoppingCartModel.productTotal$.takeUntil(this._ngUnsubscribe$)
       .subscribe(total => {
         this.productTotal = total;
+      });
+    _loginModel.loggedIn$.takeUntil(this._ngUnsubscribe$)
+      .subscribe(loggedIn => {
+        this._loggedIn = loggedIn;
       });
   }
 
@@ -35,7 +41,7 @@ export class StoreComponent extends Unsubscribable {
 
   onNextClicked() {
     if (this.productTotal > 0) {
-      if (this.userService.isLoggedIn()) {
+      if (this._loggedIn) {
         this.router.navigate(['/order-info']);
       } else {
         this.openCheckoutAsDialog();

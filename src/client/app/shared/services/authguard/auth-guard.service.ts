@@ -10,8 +10,8 @@ export class AuthGuard implements CanActivate {
   private _loggedIn = false;
 
   constructor(private _loginModel: LoginModel, private dialog: MdDialog) {
-    this._loginModel.loginUser$.subscribe(() => {
-      this._loggedIn = true;
+    this._loginModel.loggedIn$.subscribe(loggedIn => {
+      this._loggedIn = loggedIn;
     });
   }
 

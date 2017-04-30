@@ -4,14 +4,12 @@ import { SettingsComponent } from './settings.component';
 import { CurrentOrderComponent } from './current-order/current-order.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { PreferencesComponent } from './preferences/preferences.component';
-import { AuthGuard } from '../shared/services/authguard/auth-guard.service';
 @NgModule({
   imports: [
     RouterModule.forChild([
       {
         path: 'settings',
         component: SettingsComponent,
-        canActivate: [AuthGuard],
         children: [
           {
             path: '',

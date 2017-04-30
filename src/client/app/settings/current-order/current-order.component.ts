@@ -25,4 +25,8 @@ export class CurrentOrderComponent extends Unsubscribable {
         this.ordered = ordered;
       });
   }
+
+  completeOrder() {
+    this._shoppingCartModel.completeOrder();
+  }
 }

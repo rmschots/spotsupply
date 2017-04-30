@@ -1,12 +1,12 @@
 <div id="home">
-  <div class="flex-container padded-row-xl text-center">
+  <div *ngIf="!isChecking()" class="flex-container padded-row-xl text-center">
     <h3 class="centered-title">{{'HOME.lookForSupplyAtSpot'|translate}}</h3>
     <button md-raised-button color="primary" (click)="checkIt()">{{'HOME.checkIt'|translate}}</button>
   </div>
 
   <div class="flex-container padded-row-xl text-center">
     <md-card *ngFor="let spot of (beaches|async)" [id]="spot.name" class="spot-card"
-             [ngClass]="{'unpadded-card': selectedSpot !== spot.id}">
+             [ngClass]="{'unpadded-card': selectedSpot !== spot.id, 'at-beach-card': atBeach && atBeach.id === spot.id}">
       <div md-card-image class="image-banner clickable"
            [ngStyle]="{'background-image': 'url(/assets/img/oostende.jpg)'}"
            (click)="selectSpot(spot)">
@@ -16,7 +16,8 @@
           <b>{{spot.name | translate}}</b>
           <small>(25 km)</small>
         </md-card-title>
-        <md-icon class="collapse-icon">{{selectedSpot == spot.id? 'keyboard_arrow_up':'keyboard_arrow_down'}}</md-icon>
+        <button md-button class="collapse-icon" [color]="'primary'">{{selectedSpot == spot.id? 'Hide map':'Show on map'}}</button>
+        <!--<md-icon class="collapse-icon">{{selectedSpot == spot.id? 'keyboard_arrow_up':'keyboard_arrow_down'}}</md-icon>-->
       </md-card-header>
 
       <md-card-content class="no-margin-bottom" *ngIf="selectedSpot == spot.id">
@@ -30,8 +31,13 @@
       </md-card-content>
     </md-card>
   </div>
+  <div *ngIf="atBeach && !(ordered | async)" class="arrow-right-bottom">
+    <div class="arrow-right mat-elevation-z6">
+      Shop @ {{atBeach.name}}
+    </div>
+  </div>
   <a md-fab
-     *ngIf="selectedSpot"
+     *ngIf="atBeach && !(ordered | async)"
      class="hover-button"
      (click)="goToStore()"
      [routerLink]="['/store']">

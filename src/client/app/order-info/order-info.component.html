@@ -1,7 +1,7 @@
 <h4 class="header-small-margin order-info-title">Delivery information</h4>
-<form>
+<form *ngIf="cart">
   <md-input-container class="full-width" floatPlaceholder="always">
-    <input mdInput [(ngModel)]="orderInfo.spot" placeholder="Your spot" name="spot" disabled/>
+    <input mdInput [value]="beachName | async | translate" placeholder="Your spot" name="spot" disabled/>
   </md-input-container>
   <md-input-container class="full-width" floatPlaceholder="always">
     <input mdInput [(ngModel)]="orderInfo.phoneNumber" placeholder="Your phone number" name="phoneNumber" disabled/>

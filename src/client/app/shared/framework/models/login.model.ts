@@ -16,6 +16,7 @@ export class LoginModel extends Model implements OnInit {
 
   redirectUrl: string;
   loginUser$: Observable<LoginUser>;
+  loggedIn$: Observable<boolean>;
 
   constructor(protected _store: Store<any>,
               private _restGateway: RestGatewayService,
@@ -25,6 +26,9 @@ export class LoginModel extends Model implements OnInit {
     this.loginUser$ = user$.scan((accum: boolean, current: any) => {
       return (current && current.get('details')) || accum;
     }, false);
+    this.loggedIn$ = this.loginUser$.map(details => {
+      return !!details;
+    });
   }
 
   ngOnInit(): void {
@@ -46,7 +50,9 @@ export class LoginModel extends Model implements OnInit {
     params.set('password', loginUser.password);
     return this._restGateway.post('/account/login', loginUser, params).map(
       (payload: any) => {
-        this._store.dispatch(SpotSupplyActions.loginUser(this.convertRestResponse(payload)));
+        const payloadJS = this.convertRestResponse(payload);
+        this._store.dispatch(SpotSupplyActions.cartRefresh(payloadJS.cart));
+        this._store.dispatch(SpotSupplyActions.loginUser(payloadJS.user));
         return true;
       }
     );

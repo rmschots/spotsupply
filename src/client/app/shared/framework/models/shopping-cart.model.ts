@@ -28,12 +28,15 @@ export class ShoppingCartModel extends Model {
               private _productModel: ProductsModel) {
     super();
     let cart$ = this._store.select('cart');
-    this.shoppingCart$ = cart$.scan((accum: boolean, current: any) => {
-      return (current && current.get('live')) || accum;
-    }, false);
-    this.persistedCart$ = cart$.scan((accum: boolean, current: any) => {
-      return (current && current.get('persisted')) || accum;
-    }, false);
+    this.shoppingCart$ = cart$.map((current: any) => {
+      return current.get('live');
+    });
+    this.persistedCart$ = cart$.map((current: any) => {
+      return current.get('persisted');
+    });
+    this.ordered$ = cart$.map((current: any) => {
+      return current.get('ordered');
+    });
 
     this.shoppingCart$.subscribe(cart => {
       this._shoppingCart = cart;
@@ -53,10 +56,10 @@ export class ShoppingCartModel extends Model {
         }).reduce((itemPrice1, itemPrice2) => itemPrice1 + itemPrice2);
       });
 
-    this.ordered$ = this.persistedCart$.map(
-      (cart: ShoppingCart) => {
-        return cart.status === 'ORDERED';
-      });
+    // this.ordered$ = this.persistedCart$.map(
+    //   (cart: ShoppingCart) => {
+    //     return cart && cart.status === 'ORDERED';
+    //   });
 
     this.productAmount$ = this.shoppingCart$.map(
       (cart: ShoppingCart) => {
@@ -111,6 +114,12 @@ export class ShoppingCartModel extends Model {
       const cart: ShoppingCart = this.convertRestResponse(data);
       this._store.dispatch(SpotSupplyActions.placeOrder(cart));
       return cart.status === 'ORDERED';
+    });
+  }
+
+  completeOrder() {
+    return this._restGateway.post('/shoppingCart/completeOrder').subscribe(() => {
+      this._store.dispatch(SpotSupplyActions.completeOrder());
     });
   }
 

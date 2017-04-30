@@ -7,6 +7,8 @@ import { ConfirmationInfoComponent } from './confirmation-info/confirmation-info
 import { ShoppingCartModel } from '../shared/framework/models/shopping-cart.model';
 import { ShoppingCart } from '../shared/objects/cart/shopping-cart';
 import { Unsubscribable } from '../shared/components/unsubscribable';
+import { BeachModel } from '../shared/framework/models/beach.model';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   moduleId: module.id,
@@ -24,6 +26,7 @@ export class OrderInfoComponent extends Unsubscribable {
 
   constructor(private navigationService: NavigationService,
               private _shoppingCartModel: ShoppingCartModel,
+              private _beachModel: BeachModel,
               private router: Router,
               private dialog: MdDialog) {
     super();
@@ -32,6 +35,13 @@ export class OrderInfoComponent extends Unsubscribable {
       .subscribe(cart => {
         this.cart = cart;
       });
+  }
+
+  get beachName() {
+    return this._shoppingCartModel.persistedCart$
+      .switchMap(cart => cart ?
+        this._beachModel.getBeach(cart.beachId).map(beach => beach.name)
+        : Observable.of(''));
   }
 
   placeOrder() {

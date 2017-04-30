@@ -26,6 +26,7 @@ export class ToolbarComponent extends Unsubscribable {
   selectedLanguage: Language;
   productsAmount = 0;
   showCart = false;
+  showOrder = false;
   error: string;
 
   private isOrdered = false;
@@ -84,12 +85,17 @@ export class ToolbarComponent extends Unsubscribable {
     this.router.navigate(['/store']);
   }
 
+  goToOrder() {
+    this.router.navigate(['/settings/current-order']);
+  }
+
   languageSelected(language: Language) {
     this.languageService.setLanguage(language);
   }
 
   private updateShowCart() {
     this.showCart = !this.isOrdered && this.isInBounds;
+    this.showOrder = this.isOrdered;
   }
 }
 
