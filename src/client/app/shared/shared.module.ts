@@ -31,6 +31,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShoppingCartModel } from './framework/models/shopping-cart.model';
 import { locationReducer } from './framework/reducers/location.reducer';
 import { cartReducer } from './framework/reducers/cart.reducer';
+import { PasswordValidatorDirective } from './directives/password-validator.directive';
+import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
+import { PhoneNumberValidatorDirective } from './directives/phone-number-validator.directive';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -63,11 +66,13 @@ export function HttpLoaderFactory(http: Http) {
       product: productReducer,
       cart: cartReducer
     }),
+    PasswordStrengthBarModule
   ],
   declarations: [ToolbarComponent, NavbarComponent, ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent,
-    LocationLoadingComponent],
+    LocationLoadingComponent, PasswordValidatorDirective, PhoneNumberValidatorDirective],
   exports: [ToolbarComponent, NavbarComponent, TranslateModule, CommonModule, FormsModule, RouterModule, MaterialModule,
-    ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent, LocationLoadingComponent],
+    ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent, LocationLoadingComponent,
+    PasswordValidatorDirective, PasswordStrengthBarModule, PhoneNumberValidatorDirective],
   entryComponents: [LocationLoadingComponent]
 })
 export class SharedModule {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavigationService } from '../shared/services/navigation/navigation.service';
 import { LoginModel } from '../shared/framework/models/login.model';
 import { CreateUser } from '../shared/objects/account/create-user';
+import { MdSnackBar } from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -12,17 +13,25 @@ import { CreateUser } from '../shared/objects/account/create-user';
 export class CreateAccountComponent {
 
   created: boolean = false;
+  createUser: CreateUser = new CreateUser('', '', '');
+  passwordConfirmation: string = '';
 
   constructor(private navigationService: NavigationService,
-              private loginModel: LoginModel) {
+              private loginModel: LoginModel,
+              private _snackBar: MdSnackBar) {
     navigationService.setTitle('createAccount');
   }
 
-  createAccount() {
-    this.loginModel.createUser(new CreateUser('email', 'phoneNumber', 'password'))
+  onSubmit() {
+    this.loginModel.createUser(this.createUser)
       .take(1)
       .subscribe(() => {
-        this.created = true;
-      });
+          this.created = true;
+        },
+        (error) => {
+          this._snackBar.open(error.message, null, {
+            duration: 2000,
+          });
+        });
   }
 }

@@ -163,6 +163,7 @@
     "@ngrx/store": "^2.2.2",
     "immutable": "^3.8.1",
     "reflect-metadata": "^0.1.8",
-    "simple-peer": "^6.0.7"
+    "simple-peer": "^6.0.7",
+    "ng2-password-strength-bar": "1.1.2"
   }
 }

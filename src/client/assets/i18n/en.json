@@ -9,6 +9,7 @@
   "NAVBAR": {
     "items": {
       "contact": "Contact us",
+      "createAccount": "Create Account",
       "faq": "FAQ",
       "home": "Home",
       "logIn": "Log In",
