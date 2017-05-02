@@ -29,8 +29,14 @@ export class CreateAccountComponent {
           this.created = true;
         },
         (error) => {
-          this._snackBar.open(error.message, null, {
-            duration: 2000,
+          let errorMessage: string;
+          if (error.errors && error.errors.length > 0) {
+            errorMessage = error.errors[0].defaultMessage;
+          } else {
+            errorMessage = error.message;
+          }
+          this._snackBar.open(errorMessage, null, {
+            duration: 2000
           });
         });
   }

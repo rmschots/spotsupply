@@ -49,12 +49,10 @@ export class RestGatewayService {
 
   private _handleError(e: any) {
     if (e.status === 412) {
-      this._snackBar.open(JSON.parse(e._body).message, null, {
+      this._snackBar.open(e.json().message, null, {
         duration: 2000,
       });
     }
-    return Observable.throw(
-      new Error(JSON.parse(e._body).message)
-    );
+    return Observable.throw(e.json());
   }
 }
