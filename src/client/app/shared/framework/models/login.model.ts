@@ -9,7 +9,6 @@ import { LoginDetails } from '../../objects/account/login-details';
 import { LoginUser } from '../../objects/account/login-user';
 import { URLSearchParams } from '@angular/http';
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/scan';
 
 @Injectable()
 export class LoginModel extends Model implements OnInit {

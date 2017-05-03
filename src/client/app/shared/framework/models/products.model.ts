@@ -7,7 +7,6 @@ import { Model } from './model';
 import { RestGatewayService } from '../../services/gateway/rest-gateway.service';
 import { ProductCategory } from '../../objects/product/product-category';
 import { Product } from '../../objects/product/product';
-import 'rxjs/add/operator/scan';
 
 @Injectable()
 export class ProductsModel extends Model {

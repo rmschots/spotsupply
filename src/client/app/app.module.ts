@@ -17,6 +17,13 @@ import { StoreModule } from './store/store.module';
 import { OrderInfoModule } from './order-info/order-info.module';
 import { CreateAccountModule } from './create-account/create-account.module';
 import { NguiMapModule } from '@ngui/map';
+import { VerifyEmailModule } from './verify-email/verify-email.module';
+
+import 'rxjs/add/operator/scan';
+import 'rxjs/add/operator/takeUntil';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/combineLatest';
 
 @NgModule({
   imports: [
@@ -33,6 +40,7 @@ import { NguiMapModule } from '@ngui/map';
     StoreModule,
     OrderInfoModule,
     CreateAccountModule,
+    VerifyEmailModule,
     SharedModule.forRoot(),
     MaterialModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBtYO0eJfiqw2AqMRu-0_X8gBVSUWiIymg'}),

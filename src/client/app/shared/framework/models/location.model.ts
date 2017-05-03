@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/scan';
 import { Model } from './model';
 import { LocationPermissionStatus } from '../../objects/position/location-permission-status';
 import { LocationLoadingComponent } from '../../services/location/components/location-loading.component';

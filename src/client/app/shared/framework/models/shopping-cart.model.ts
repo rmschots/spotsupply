@@ -10,7 +10,6 @@ import { Product } from '../../objects/product/product';
 import { CartItem } from '../../objects/cart/cart-item';
 import { URLSearchParams } from '@angular/http';
 import { ProductsModel } from './products.model';
-import 'rxjs/add/operator/combineLatest';
 
 @Injectable()
 export class ShoppingCartModel extends Model {

@@ -1,0 +1,14 @@
+<div *ngIf="verified">
+  <p><b>Account verified!</b></p>
+  <p>You can now log in.</p>
+  <p>Redirecting to homepage in {{timerCount}}</p>
+</div>
+<div *ngIf="!verified">
+  <div *ngIf="errorMessage" class="warn-text">
+    {{errorMessage}}
+  </div>
+  <div *ngIf="!errorMessage">
+    <md-spinner></md-spinner>
+    Checking verification code...
+  </div>
+</div>

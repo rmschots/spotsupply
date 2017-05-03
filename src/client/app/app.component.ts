@@ -6,9 +6,6 @@ import { ShoppingCartModel } from './shared/framework/models/shopping-cart.model
 import { BeachModel } from './shared/framework/models/beach.model';
 import { ProductsModel } from './shared/framework/models/products.model';
 import { Unsubscribable } from './shared/components/unsubscribable';
-import 'rxjs/add/operator/takeUntil';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/switchMap';
 
 @Component({
   moduleId: module.id,
