@@ -9,3 +9,7 @@
 .tab-link {
   flex-grow: 1;
 }
+
+.content-overflow-auto {
+  overflow: auto;
+}

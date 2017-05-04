@@ -8,6 +8,7 @@ import { LocationModel } from '../../framework/models/location.model';
 import { LocationPermissionStatus } from '../../objects/position/location-permission-status';
 import { ShoppingCartModel } from '../../framework/models/shopping-cart.model';
 import { Unsubscribable } from '../unsubscribable';
+import { combineLatest } from 'rxjs/observable/combineLatest';
 
 @Component({
   moduleId: module.id,
@@ -29,9 +30,6 @@ export class ToolbarComponent extends Unsubscribable {
   showOrder = false;
   error: string;
 
-  private isOrdered = false;
-  private isInBounds = false;
-
   constructor(private navigationService: NavigationService,
               private languageService: LanguageService,
               private router: Router,
@@ -43,11 +41,6 @@ export class ToolbarComponent extends Unsubscribable {
     this.languages = languageService.getLanguages();
     this.selectedLanguage = languageService.getActiveLanguage();
     this.productsAmount = shoppingCartService.getProductsAmount();
-    _locationModel.atBeach$.takeUntil(this._ngUnsubscribe$)
-      .subscribe(beach => {
-        this.isInBounds = !!beach;
-        this.updateShowCart();
-      });
 
     navigationService.titleSubscription((title: string) => {
       this.title = title;
@@ -59,11 +52,6 @@ export class ToolbarComponent extends Unsubscribable {
       .subscribe(amt => {
         this.productsAmount = amt;
       });
-    _shoppingCartModel.ordered$.takeUntil(this._ngUnsubscribe$)
-      .subscribe(isOrdered => {
-        this.isOrdered = isOrdered;
-        this.updateShowCart();
-      });
     _locationModel.permission$.takeUntil(this._ngUnsubscribe$)
       .subscribe(permissionStatus => {
         if (permissionStatus === LocationPermissionStatus.DENIED) {
@@ -71,6 +59,13 @@ export class ToolbarComponent extends Unsubscribable {
         } else {
           this.error = null;
         }
+      });
+    combineLatest(_shoppingCartModel.hasCart$, _shoppingCartModel.ordered$, _locationModel.atBeach$)
+      .takeUntil(this._ngUnsubscribe$)
+      .subscribe(latestValues => {
+        const [hasCart, ordered, atBeach] = latestValues;
+        this.showCart = hasCart && !ordered && !!atBeach;
+        this.showOrder = hasCart && ordered;
       });
   }
 
@@ -91,11 +86,6 @@ export class ToolbarComponent extends Unsubscribable {
 
   languageSelected(language: Language) {
     this.languageService.setLanguage(language);
-  }
-
-  private updateShowCart() {
-    this.showCart = !this.isOrdered && this.isInBounds;
-    this.showOrder = this.isOrdered;
   }
 }
 

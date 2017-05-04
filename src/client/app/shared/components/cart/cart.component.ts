@@ -13,6 +13,7 @@ import { Unsubscribable } from '../unsubscribable';
 export class CartComponent extends Unsubscribable {
 
   @Input() cart: ShoppingCart;
+  @Input() showTotal: boolean = true;
 
   private _productsMap: Map<number, Product>;
 

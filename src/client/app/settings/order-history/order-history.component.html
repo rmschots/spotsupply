@@ -1,1 +1,23 @@
-<p>Order History</p>
+<div *ngFor="let cart of (history|async)">
+  <md-card class="cart-entry">
+    <md-card-header (click)="toggleCart(cart.id)">
+      <div class="text-grow">
+        <md-card-title>
+          <div>
+            DATE HERE
+          </div>
+          <div class="text-center">
+            {{getBeachName(cart.beachId)}}
+          </div>
+          <div class="last-item">
+            &euro;{{cart.price}}
+          </div>
+        </md-card-title>
+      </div>
+      <md-icon class="collapse-icon">{{selectedOrderId === cart.id ? 'keyboard_arrow_up': 'keyboard_arrow_down'}}</md-icon>
+    </md-card-header>
+    <md-card-content *ngIf="selectedOrderId === cart.id">
+      <ss-cart [cart]="cart" [showTotal]="false"></ss-cart>
+    </md-card-content>
+  </md-card>
+</div>

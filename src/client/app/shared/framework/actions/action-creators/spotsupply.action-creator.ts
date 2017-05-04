@@ -1,12 +1,16 @@
 import { Action } from '@ngrx/store';
 
 import {
-  BEACHES_LOAD, CART_COMPLETE, CART_REFRESH,
+  BEACHES_LOAD,
+  CART_COMPLETE,
+  CART_HISTORY_LOAD,
+  CART_REFRESH,
   LOCATION_PERMISSION_UPDATED,
   PERSISTED_CART_ADD_ITEM,
   PERSISTED_CART_LOAD,
   PERSISTED_CART_REMOVE_ALL_ITEMS,
-  PERSISTED_CART_REMOVE_ITEM, PLACE_ORDER,
+  PERSISTED_CART_REMOVE_ITEM,
+  PLACE_ORDER,
   PRODUCT_HIERARCHY,
   SHOPPING_CART_ADD_ITEM,
   SHOPPING_CART_LOAD,
@@ -129,6 +133,12 @@ export const SpotSupplyActions = {
   completeOrder(): Action {
     return {
       type: CART_COMPLETE
+    };
+  },
+  loadCartHistory(payload: Array<ShoppingCart>): Action {
+    return {
+      type: CART_HISTORY_LOAD,
+      payload: payload
     };
   },
 };

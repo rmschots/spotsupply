@@ -1,7 +1,7 @@
-<div *ngIf="!ordered">
+<div *ngIf="!(ordered | async)">
   <p>No current order</p>
 </div>
-<div *ngIf="ordered">
-  <ss-cart [cart]="cart"></ss-cart>
+<div *ngIf="ordered | async">
+  <ss-cart [cart]="cart | async"></ss-cart>
   <button md-raised-button (click)="completeOrder()" class="text-center">Complete order</button>
 </div>

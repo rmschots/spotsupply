@@ -15,6 +15,8 @@ import { ProductsModel } from './products.model';
 export class ShoppingCartModel extends Model {
   shoppingCart$: Observable<ShoppingCart>;
   persistedCart$: Observable<ShoppingCart>;
+  hasCart$: Observable<boolean>;
+  history$: Observable<Array<ShoppingCart>>;
   productTotal$: Observable<number>;
   ordered$: Observable<boolean>;
   productAmount$: Observable<number>;
@@ -33,8 +35,14 @@ export class ShoppingCartModel extends Model {
     this.persistedCart$ = cart$.map((current: any) => {
       return current.get('persisted');
     });
+    this.hasCart$ = this.persistedCart$.map((cart) => {
+      return cart !== null;
+    });
     this.ordered$ = cart$.map((current: any) => {
       return current.get('ordered');
+    });
+    this.history$ = cart$.map((current: any) => {
+      return current.get('history');
     });
 
     this.shoppingCart$.subscribe(cart => {
@@ -54,11 +62,6 @@ export class ShoppingCartModel extends Model {
           return productMap.get(item.productId).price;
         }).reduce((itemPrice1, itemPrice2) => itemPrice1 + itemPrice2);
       });
-
-    // this.ordered$ = this.persistedCart$.map(
-    //   (cart: ShoppingCart) => {
-    //     return cart && cart.status === 'ORDERED';
-    //   });
 
     this.productAmount$ = this.shoppingCart$.map(
       (cart: ShoppingCart) => {
@@ -126,6 +129,12 @@ export class ShoppingCartModel extends Model {
     this._restGateway.get('/shoppingCart').subscribe(data => {
       this._store.dispatch(SpotSupplyActions.loadPersistedCart(this.convertRestResponse(data)));
       this._store.dispatch(SpotSupplyActions.loadShoppingCart(this.convertRestResponse(data)));
+    });
+  }
+
+  loadCartHistory() {
+    this._restGateway.get('/shoppingCart/history').subscribe(data => {
+      this._store.dispatch(SpotSupplyActions.loadCartHistory(this.convertRestResponse(data)));
     });
   }
 

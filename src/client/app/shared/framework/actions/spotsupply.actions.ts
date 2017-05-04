@@ -16,3 +16,4 @@ export const PERSISTED_CART_REMOVE_ALL_ITEMS = 'spotsupply:persistedCartRemoveAl
 export const PLACE_ORDER = 'spotsupply:placeOrder';
 export const CART_REFRESH = 'spotsupply:cartRefresh';
 export const CART_COMPLETE = 'spotsupply:cartComplete';
+export const CART_HISTORY_LOAD = 'spotsupply:loadCartHistory';
