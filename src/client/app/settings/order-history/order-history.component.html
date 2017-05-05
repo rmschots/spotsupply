@@ -1,3 +1,6 @@
+<div *ngIf="!(history|async) || (history|async).length === 0" class="empty-history-text">
+  Your order history is empty
+</div>
 <div *ngFor="let cart of (history|async)">
   <md-card class="cart-entry">
     <md-card-header (click)="toggleCart(cart.id)">

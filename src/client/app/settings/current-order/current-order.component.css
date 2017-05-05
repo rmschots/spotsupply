@@ -1,2 +1,7 @@
 :host {
 }
+
+.no-order-text {
+  text-align: center;
+  margin-top: 16px;
+}

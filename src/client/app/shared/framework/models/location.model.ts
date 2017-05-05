@@ -69,7 +69,13 @@ export class LocationModel extends Model {
         }
       },
       (error: PositionError) => {
-        console.error('error location');
+        if(error.code === 3){
+          // timeout
+        }
+        if(error.code === 2) {
+          // googleapis no response
+        }
+        console.error('error location: ', error);
         if (this._watchId) {
           navigator.geolocation.clearWatch(this._watchId);
           this._watchId = null;

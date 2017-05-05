@@ -1,4 +1,4 @@
-<div *ngIf="!(ordered | async)">
+<div *ngIf="!(ordered | async)" class="no-order-text">
   <p>No current order</p>
 </div>
 <div *ngIf="ordered | async">
