@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartModel } from '../../shared/framework/models/shopping-cart.model';
 import { BeachModel } from '../../shared/framework/models/beach.model';
+import { Observable } from 'rxjs/Observable';
+import { ShoppingCart } from '../../shared/objects/cart/shopping-cart';
 
 @Component({
   moduleId: module.id,
@@ -32,7 +34,13 @@ export class OrderHistoryComponent implements OnInit {
     return this._beachModel.getBeachName(id);
   }
 
-  get history() {
+  get history(): Observable<Array<ShoppingCart>> {
     return this._shoppingCartModel.history$;
+  }
+
+  get historyEmpty() {
+    return this._shoppingCartModel.history$.map(history => {
+      return !history || history.length === 0;
+    });
   }
 }

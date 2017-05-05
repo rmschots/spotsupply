@@ -1,4 +1,4 @@
-<div *ngIf="!(history|async) || (history|async).length === 0" class="empty-history-text">
+<div *ngIf="historyEmpty | async" class="empty-history-text">
   Your order history is empty
 </div>
 <div *ngFor="let cart of (history|async)">
@@ -17,7 +17,8 @@
           </div>
         </md-card-title>
       </div>
-      <md-icon class="collapse-icon">{{selectedOrderId === cart.id ? 'keyboard_arrow_up': 'keyboard_arrow_down'}}</md-icon>
+      <md-icon class="collapse-icon">{{selectedOrderId === cart.id ? 'keyboard_arrow_up': 'keyboard_arrow_down'}}
+      </md-icon>
     </md-card-header>
     <md-card-content *ngIf="selectedOrderId === cart.id">
       <ss-cart [cart]="cart" [showTotal]="false"></ss-cart>

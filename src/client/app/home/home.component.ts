@@ -25,11 +25,13 @@ import { Unsubscribable } from '../shared/components/unsubscribable';
 export class HomeComponent extends Unsubscribable {
 
   map: google.maps.Map;
+
   selectedSpot: number;
   overlayError: string = null;
 
   atBeach: Beach;
   private _lastKnownPosition: Position;
+  private _marker: google.maps.Marker;
 
   constructor(private pageScrollService: PageScrollService,
               private elRef: ElementRef,
@@ -123,8 +125,10 @@ export class HomeComponent extends Unsubscribable {
   displayUserLocation() {
     if (this.map && this._lastKnownPosition) {
       let gPos = new google.maps.LatLng(this._lastKnownPosition.coords.latitude, this._lastKnownPosition.coords.longitude);
-      // this.map.setCenter(gPos);
-      new google.maps.Marker({
+      if (this._marker) {
+        this._marker.setMap(null);
+      }
+      this._marker = new google.maps.Marker({
         position: gPos,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,

@@ -69,10 +69,10 @@ export class LocationModel extends Model {
         }
       },
       (error: PositionError) => {
-        if(error.code === 3){
+        if (error.code === 3) {
           // timeout
         }
-        if(error.code === 2) {
+        if (error.code === 2) {
           // googleapis no response
         }
         console.error('error location: ', error);
