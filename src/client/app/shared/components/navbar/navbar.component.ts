@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import { LoginComponent } from '../login/login.component';
 import { MdDialog } from '@angular/material';
 import { LoginModel } from '../../framework/models/login.model';
+import { DataStatus } from '../../services/gateway/data-status';
 
 @Component({
   moduleId: module.id,
@@ -36,7 +37,9 @@ export class NavbarComponent {
   }
 
   get isLoggedIn() {
-    return this._loginModel.loggedIn$;
+    return this._loginModel.loginAvailable$.map(dataStatus => {
+      return dataStatus === DataStatus.AVAILABLE;
+    });
   }
 
   menuSwiped(event: any) {

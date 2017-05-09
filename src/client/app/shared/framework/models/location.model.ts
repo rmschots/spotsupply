@@ -7,6 +7,7 @@ import { LocationLoadingComponent } from '../../services/location/components/loc
 import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 import { Beach } from '../../objects/beach/beach';
 import { SpotSupplyActions } from '../actions/action-creators/spotsupply.action-creator';
+import { BeachModel } from './beach.model';
 
 @Injectable()
 export class LocationModel extends Model {
@@ -23,7 +24,7 @@ export class LocationModel extends Model {
   private _dialogRef: MdDialogRef<LocationLoadingComponent>;
   private _watchId: number;
 
-  constructor(protected _store: Store<any>, private dialog: MdDialog) {
+  constructor(protected _store: Store<any>, private dialog: MdDialog, private _beachModel: BeachModel) {
     super();
     let location$: Observable<any> = this._store.select('location');
     this.permission$ = location$.scan((accum: boolean, current: any) => {
@@ -38,6 +39,15 @@ export class LocationModel extends Model {
     this.permission$.subscribe(permissionStatus => {
       this._permissionStatus = permissionStatus;
     });
+    this.lastKnownLocation$.combineLatest(_beachModel.beaches$)
+      .subscribe(
+        (latestValues: any) => {
+          if (latestValues[0] && latestValues[1]) {
+            this._setUserAtBeach(latestValues[1].get(0));
+          }
+        });
+
+    _beachModel.loadBeaches();
   }
 
   startFetchingLocation() {
@@ -52,7 +62,7 @@ export class LocationModel extends Model {
     return !!this._watchId;
   }
 
-  setUserAtBeach(atBeach: Beach) {
+  _setUserAtBeach(atBeach: Beach) {
     this._store.dispatch(SpotSupplyActions.userAtBeach(atBeach));
   }
 
@@ -85,8 +95,9 @@ export class LocationModel extends Model {
         }
         this._store.dispatch(SpotSupplyActions.locationPermissionUpdated(LocationPermissionStatus.DENIED));
       }, {
-        timeout: 20000,
-        enableHighAccuracy: true
+        timeout: 5000,
+        enableHighAccuracy: true,
+        maximumAge: 5000
       });
   }
 }

@@ -26,7 +26,7 @@ export class ProductsModel extends Model {
   }
 
   loadProductHierarchy() {
-    this._restGateway.get('/product/productHierarchy').subscribe(data => {
+    this._restGateway.get('/product/productHierarchy').take(1).subscribe(data => {
       this._store.dispatch(SpotSupplyActions.productHierarchy(this.convertRestResponse(data)));
     });
   }

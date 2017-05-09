@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ShoppingCartModel } from '../shared/framework/models/shopping-cart.model';
 import { Unsubscribable } from '../shared/components/unsubscribable';
 import { LoginModel } from '../shared/framework/models/login.model';
+import { DataStatus } from '../shared/services/gateway/data-status';
 
 @Component({
   moduleId: module.id,
@@ -27,9 +28,9 @@ export class StoreComponent extends Unsubscribable {
       .subscribe(total => {
         this.productTotal = total;
       });
-    _loginModel.loggedIn$.takeUntil(this._ngUnsubscribe$)
-      .subscribe(loggedIn => {
-        this._loggedIn = loggedIn;
+    _loginModel.loginAvailable$.takeUntil(this._ngUnsubscribe$)
+      .subscribe(loginAvailable => {
+        this._loggedIn = loginAvailable === DataStatus.AVAILABLE;
       });
   }
 

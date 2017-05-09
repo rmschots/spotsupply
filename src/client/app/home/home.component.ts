@@ -10,9 +10,9 @@ import { BeachModel } from '../shared/framework/models/beach.model';
 import { Beach } from '../shared/objects/beach/beach';
 import { LocationModel } from '../shared/framework/models/location.model';
 import { LocationPermissionStatus } from '../shared/objects/position/location-permission-status';
-import { combineLatest } from 'rxjs/operator/combineLatest';
 import { ShoppingCartModel } from '../shared/framework/models/shopping-cart.model';
 import { Unsubscribable } from '../shared/components/unsubscribable';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -35,11 +35,11 @@ export class HomeComponent extends Unsubscribable {
 
   constructor(private pageScrollService: PageScrollService,
               private elRef: ElementRef,
-              private changeDetector: ChangeDetectorRef,
               private navigationService: NavigationService,
               private _locationModel: LocationModel,
               private _beachModel: BeachModel,
-              private _shoppingCartModel: ShoppingCartModel) {
+              private _shoppingCartModel: ShoppingCartModel,
+              private _router: Router) {
     super();
     navigationService.setTitle('home');
     PageScrollConfig.defaultDuration = 0;
@@ -67,14 +67,6 @@ export class HomeComponent extends Unsubscribable {
         }
         this.displayUserLocation();
       });
-    combineLatest.call(_locationModel.lastKnownLocation$, _beachModel.beaches$)
-      .takeUntil(this._ngUnsubscribe$)
-      .subscribe(
-        (latestValues: any) => {
-          if (latestValues[0] && latestValues[1]) {
-            _locationModel.setUserAtBeach(latestValues[1].get(0));
-          }
-        });
   }
 
   get beaches() {
@@ -87,6 +79,10 @@ export class HomeComponent extends Unsubscribable {
 
   get ordered() {
     return this._shoppingCartModel.ordered$;
+  }
+
+  get hasCart() {
+    return this._shoppingCartModel.hasCart$;
   }
 
   checkIt() {
@@ -144,6 +140,11 @@ export class HomeComponent extends Unsubscribable {
   }
 
   goToStore() {
-    this._shoppingCartModel.createShoppingCart(this.atBeach.id);
+    this._shoppingCartModel.createShoppingCart(this.atBeach.id)
+      .subscribe(success => {
+        if (success) {
+          this._router.navigate(['/store']);
+        }
+      });
   }
 }

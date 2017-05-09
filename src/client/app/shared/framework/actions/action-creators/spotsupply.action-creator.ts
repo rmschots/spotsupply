@@ -4,7 +4,7 @@ import {
   BEACHES_LOAD,
   CART_COMPLETE,
   CART_HISTORY_LOAD,
-  CART_REFRESH,
+  CART_REFRESH, HAS_CART,
   LOCATION_PERMISSION_UPDATED,
   PERSISTED_CART_ADD_ITEM,
   PERSISTED_CART_LOAD,
@@ -141,4 +141,10 @@ export const SpotSupplyActions = {
       payload: payload
     };
   },
+  hasCart(payload: boolean): Action {
+    return {
+      type: HAS_CART,
+      payload: payload
+    };
+  }
 };

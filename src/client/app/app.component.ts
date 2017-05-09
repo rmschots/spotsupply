@@ -6,6 +6,7 @@ import { ShoppingCartModel } from './shared/framework/models/shopping-cart.model
 import { BeachModel } from './shared/framework/models/beach.model';
 import { ProductsModel } from './shared/framework/models/products.model';
 import { Unsubscribable } from './shared/components/unsubscribable';
+import { StartupService } from './shared/services/startup/startup.service';
 
 @Component({
   moduleId: module.id,
@@ -25,7 +26,8 @@ export class AppComponent extends Unsubscribable implements OnInit {
   constructor(private _loginModel: LoginModel,
               private _shoppingCartModel: ShoppingCartModel,
               private _beachModel: BeachModel,
-              private _productsModel: ProductsModel) {
+              private _productsModel: ProductsModel,
+              private _startupService: StartupService) {
     super();
     console.log('Environment config', Config);
     (<any>window).loading_screen.finish();
@@ -50,16 +52,6 @@ export class AppComponent extends Unsubscribable implements OnInit {
       console.log('desktop');
       this.isDesktop = true;
     }
-    this._loginModel.loadAccount()
-      .takeUntil(this._ngUnsubscribe$)
-      .subscribe(loggedIn => {
-          console.log('logged in: ' + loggedIn);
-        },
-        error => {
-          console.log('not logged in');
-        });
-    this._beachModel.loadBeaches();
-    this._productsModel.loadProductHierarchy();
-    this._shoppingCartModel.loadShoppingCart();
+    this._startupService.load();
   }
 }

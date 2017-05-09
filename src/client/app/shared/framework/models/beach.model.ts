@@ -34,7 +34,7 @@ export class BeachModel extends Model {
   }
 
   loadBeaches() {
-    this._restGateway.get('/beach').subscribe(data => {
+    this._restGateway.get('/beach').take(1).subscribe(data => {
       this._store.dispatch(SpotSupplyActions.loadBeaches(this.convertRestResponse(data)));
     });
   }

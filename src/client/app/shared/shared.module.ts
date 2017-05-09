@@ -10,12 +10,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { Http } from '@angular/http';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { ShoppingCartService } from './services/shopping-cart/shopping-cart.service';
 import { CartComponent } from './components/cart/cart.component';
 import { LanguageService } from './services/language/language.service';
 import { LoginComponent } from './components/login/login.component';
-import { UserService } from './services/user/user.service';
-import { AuthGuard } from './services/authguard/auth-guard.service';
+import { AuthGuard } from './services/guards/auth-guard.service';
 import { LoginOptionsComponent } from './components/login/login-options.component';
 import { LocationLoadingComponent } from './services/location/components/location-loading.component';
 import { BeachModel } from './framework/models/beach.model';
@@ -34,6 +32,7 @@ import { cartReducer } from './framework/reducers/cart.reducer';
 import { PasswordValidatorDirective } from './directives/password-validator.directive';
 import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
 import { PhoneNumberValidatorDirective } from './directives/phone-number-validator.directive';
+import { StartupService } from './services/startup/startup.service';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -81,9 +80,7 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         NavigationService,
-        ShoppingCartService,
         LanguageService,
-        UserService,
         AuthGuard,
         BeachModel,
         LoginModel,
@@ -91,6 +88,7 @@ export class SharedModule {
         ProductsModel,
         ShoppingCartModel,
         RestGatewayService,
+        StartupService,
         {provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>'}
       ]
     };

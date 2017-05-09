@@ -9,13 +9,17 @@ import { LoginDetails } from '../../objects/account/login-details';
 import { LoginUser } from '../../objects/account/login-user';
 import { URLSearchParams } from '@angular/http';
 import { Router } from '@angular/router';
+import { DataStatus } from '../../services/gateway/data-status';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class LoginModel extends Model implements OnInit {
 
   redirectUrl: string;
   loginUser$: Observable<LoginUser>;
-  loggedIn$: Observable<boolean>;
+  loginAvailable$: BehaviorSubject<DataStatus> = new BehaviorSubject(DataStatus.UNKNOWN);
+
+  private _loginAvailable: DataStatus = DataStatus.UNKNOWN;
 
   constructor(protected _store: Store<any>,
               private _restGateway: RestGatewayService,
@@ -25,8 +29,10 @@ export class LoginModel extends Model implements OnInit {
     this.loginUser$ = user$.scan((accum: boolean, current: any) => {
       return (current && current.get('details')) || accum;
     }, false);
-    this.loggedIn$ = this.loginUser$.map(details => {
-      return !!details;
+    this.loginUser$.subscribe((loginUser) => {
+      if (!!loginUser) {
+        this._setLoginAvailable(DataStatus.AVAILABLE);
+      }
     });
   }
 
@@ -40,7 +46,7 @@ export class LoginModel extends Model implements OnInit {
         () => {
           return true;
         }
-      );
+      ).take(1);
   }
 
   login(loginUser: LoginDetails): Observable<boolean> {
@@ -54,7 +60,7 @@ export class LoginModel extends Model implements OnInit {
         this._store.dispatch(SpotSupplyActions.loginUser(payloadJS.user));
         return true;
       }
-    );
+    ).take(1);
   }
 
   logout() {
@@ -63,19 +69,31 @@ export class LoginModel extends Model implements OnInit {
         this._store.dispatch(SpotSupplyActions.logoutUser());
         return true;
       }
-    ).subscribe(() => {
+    ).take(1).subscribe(() => {
       console.log('logged out, redirecting to home...');
       this._router.navigate(['']);
       window.location.reload();
     });
   }
 
-  loadAccount(): Observable<boolean> {
-    return this._restGateway.get('/account').map(
-      (payload: any) => {
-        this._store.dispatch(SpotSupplyActions.loginUser(this.convertRestResponse(payload)));
-        return true;
-      }
-    );
+  loadAccount() {
+    if (this._loginAvailable === DataStatus.UNKNOWN) {
+      this._setLoginAvailable(DataStatus.LOADING);
+      this._restGateway.get('/account').subscribe(
+        (payload: any) => {
+          this._store.dispatch(SpotSupplyActions.loginUser(this.convertRestResponse(payload)));
+        },
+        () => {
+          this._setLoginAvailable(DataStatus.UNAVAILABLE);
+        }
+      );
+    }
+  }
+
+  private _setLoginAvailable(dataStatus: DataStatus) {
+    this._loginAvailable = dataStatus;
+    if (dataStatus !== DataStatus.LOADING) {
+      this.loginAvailable$.next(this._loginAvailable);
+    }
   }
 }

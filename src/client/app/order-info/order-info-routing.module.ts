@@ -1,7 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { OrderInfoComponent } from './order-info.component';
-import { AuthGuard } from '../shared/services/authguard/auth-guard.service';
+import { AuthGuard } from '../shared/services/guards/auth-guard.service';
+import { AtBeachGuard } from '../shared/services/guards/at-beach-guard.service';
 
 @NgModule({
   imports: [
@@ -9,7 +10,7 @@ import { AuthGuard } from '../shared/services/authguard/auth-guard.service';
       {
         path: 'order-info',
         component: OrderInfoComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, AtBeachGuard]
       }
     ])
   ],

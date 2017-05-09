@@ -33,7 +33,7 @@ export class VerifyEmailComponent implements AfterViewInit {
         let sParams: URLSearchParams = new URLSearchParams();
         sParams.set('verificationCode', params['verificationCode']);
         return this._restGateway.post('/account/verify', {}, sParams);
-      })
+      }).take(1)
       .subscribe(
         () => {
           this.verified = true;

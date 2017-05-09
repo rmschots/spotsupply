@@ -10,6 +10,7 @@ import { Product } from '../../objects/product/product';
 import { CartItem } from '../../objects/cart/cart-item';
 import { URLSearchParams } from '@angular/http';
 import { ProductsModel } from './products.model';
+import { LocationModel } from './location.model';
 
 @Injectable()
 export class ShoppingCartModel extends Model {
@@ -26,7 +27,8 @@ export class ShoppingCartModel extends Model {
 
   constructor(protected _store: Store<any>,
               private _restGateway: RestGatewayService,
-              private _productModel: ProductsModel) {
+              private _productModel: ProductsModel,
+              private _locationModel: LocationModel) {
     super();
     let cart$ = this._store.select('cart');
     this.shoppingCart$ = cart$.map((current: any) => {
@@ -35,8 +37,8 @@ export class ShoppingCartModel extends Model {
     this.persistedCart$ = cart$.map((current: any) => {
       return current.get('persisted');
     });
-    this.hasCart$ = this.persistedCart$.map((cart) => {
-      return cart !== null;
+    this.hasCart$ = cart$.map((current: any) => {
+      return current.get('hasCart');
     });
     this.ordered$ = cart$.map((current: any) => {
       return current.get('ordered');
@@ -72,14 +74,16 @@ export class ShoppingCartModel extends Model {
       });
   }
 
-  createShoppingCart(beachId: number) {
-    if (!this._shoppingCart) {
-      let shoppingCart: ShoppingCart = new ShoppingCart(undefined, beachId);
-      this._store.dispatch(SpotSupplyActions.loadShoppingCart(shoppingCart));
-      this._restGateway.post('/shoppingCart', {beachId: beachId}).subscribe(data => {
+  createShoppingCart(beachId: number): Observable<boolean> {
+    this._store.dispatch(SpotSupplyActions.hasCart(undefined));
+    let shoppingCart: ShoppingCart = new ShoppingCart(undefined, beachId);
+    this._store.dispatch(SpotSupplyActions.loadShoppingCart(shoppingCart));
+    return this._restGateway.post('/shoppingCart', {beachId: beachId}).take(1)
+      .map(data => {
         this._store.dispatch(SpotSupplyActions.loadPersistedCart(this.convertRestResponse(data)));
+        this._store.dispatch(SpotSupplyActions.hasCart(true));
+        return true;
       });
-    }
   }
 
   addProduct(product: Product) {
@@ -88,7 +92,7 @@ export class ShoppingCartModel extends Model {
     this._store.dispatch(SpotSupplyActions.addItemToShoppingCart(this._shoppingCart));
     let params: URLSearchParams = new URLSearchParams();
     params.set('productId', '' + product.id);
-    this._restGateway.post('/shoppingCart/addProduct', null, params).subscribe(data => {
+    this._restGateway.post('/shoppingCart/addProduct', null, params).take(1).subscribe(data => {
       this._store.dispatch(SpotSupplyActions.addItemToPersistedCart(this.convertRestResponse(data)));
     });
   }
@@ -98,7 +102,7 @@ export class ShoppingCartModel extends Model {
     this._store.dispatch(SpotSupplyActions.removeItemFromShoppingCart(this._shoppingCart));
     let params: URLSearchParams = new URLSearchParams();
     params.set('productId', '' + product.id);
-    this._restGateway.post('/shoppingCart/removeProduct', null, params).subscribe(data => {
+    this._restGateway.post('/shoppingCart/removeProduct', null, params).take(1).subscribe(data => {
       this._store.dispatch(SpotSupplyActions.removeItemFromPersistedCart(this.convertRestResponse(data)));
     });
   }
@@ -106,7 +110,7 @@ export class ShoppingCartModel extends Model {
   removeAllProducts() {
     this._shoppingCart.items.length = 0;
     this._store.dispatch(SpotSupplyActions.removeAllItemsFromShoppingCart(this._shoppingCart));
-    this._restGateway.post('/shoppingCart/removeAllProducts').subscribe(data => {
+    this._restGateway.post('/shoppingCart/removeAllProducts').take(1).subscribe(data => {
       this._store.dispatch(SpotSupplyActions.removeAllItemsFromPersistedCart(this.convertRestResponse(data)));
     });
   }
@@ -116,24 +120,32 @@ export class ShoppingCartModel extends Model {
       const cart: ShoppingCart = this.convertRestResponse(data);
       this._store.dispatch(SpotSupplyActions.placeOrder(cart));
       return cart.status === 'ORDERED';
-    });
+    }).take(1);
   }
 
   completeOrder() {
-    return this._restGateway.post('/shoppingCart/completeOrder').subscribe(() => {
+    return this._restGateway.post('/shoppingCart/completeOrder').take(1).subscribe(() => {
       this._store.dispatch(SpotSupplyActions.completeOrder());
+      this._store.dispatch(SpotSupplyActions.hasCart(false));
     });
   }
 
   loadShoppingCart() {
-    this._restGateway.get('/shoppingCart').subscribe(data => {
-      this._store.dispatch(SpotSupplyActions.loadPersistedCart(this.convertRestResponse(data)));
-      this._store.dispatch(SpotSupplyActions.loadShoppingCart(this.convertRestResponse(data)));
-    });
+    this._store.dispatch(SpotSupplyActions.hasCart(undefined));
+    this._restGateway.get('/shoppingCart').take(1).subscribe(
+      data => {
+        this._store.dispatch(SpotSupplyActions.loadPersistedCart(this.convertRestResponse(data)));
+        this._store.dispatch(SpotSupplyActions.loadShoppingCart(this.convertRestResponse(data)));
+        this._store.dispatch(SpotSupplyActions.hasCart(true));
+        this._locationModel.startFetchingLocation();
+      },
+      () => {
+        this._store.dispatch(SpotSupplyActions.hasCart(false));
+      });
   }
 
   loadCartHistory() {
-    this._restGateway.get('/shoppingCart/history').subscribe(data => {
+    this._restGateway.get('/shoppingCart/history').take(1).subscribe(data => {
       this._store.dispatch(SpotSupplyActions.loadCartHistory(this.convertRestResponse(data)));
     });
   }

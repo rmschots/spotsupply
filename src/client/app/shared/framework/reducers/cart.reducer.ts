@@ -2,8 +2,9 @@ import { Action } from '@ngrx/store';
 
 import { initialState } from '../stores/spotsupply.store';
 import {
-  CART_COMPLETE, CART_HISTORY_LOAD,
-  CART_REFRESH,
+  CART_COMPLETE,
+  CART_HISTORY_LOAD,
+  CART_REFRESH, HAS_CART,
   PERSISTED_CART_ADD_ITEM,
   PERSISTED_CART_LOAD,
   PERSISTED_CART_REMOVE_ALL_ITEMS,
@@ -63,6 +64,8 @@ export function cartReducer(state: any = initialState.get('cart'), action: Actio
     case CART_HISTORY_LOAD:
       state = state.set('history', action.payload);
       break;
+    case HAS_CART:
+      state = state.set('hasCart', action.payload);
   }
   return state;
 }

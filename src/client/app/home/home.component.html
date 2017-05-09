@@ -16,7 +16,9 @@
           <b>{{spot.name | translate}}</b>
           <small>(25 km)</small>
         </md-card-title>
-        <button md-button class="collapse-icon" [color]="'primary'">{{selectedSpot == spot.id? 'Hide map':'Show on map'}}</button>
+        <button md-button class="collapse-icon" [color]="'primary'">{{selectedSpot == spot.id? 'Hide map':'Show on
+          map'}}
+        </button>
         <!--<md-icon class="collapse-icon">{{selectedSpot == spot.id? 'keyboard_arrow_up':'keyboard_arrow_down'}}</md-icon>-->
       </md-card-header>
 
@@ -31,16 +33,15 @@
       </md-card-content>
     </md-card>
   </div>
-  <div *ngIf="atBeach && !(ordered | async)" class="arrow-right-bottom">
+  <div *ngIf="!(hasCart | async) && atBeach && !(ordered | async)" class="arrow-right-bottom">
     <div class="arrow-right mat-elevation-z6">
       Shop @ {{atBeach.name}}
     </div>
   </div>
-  <a md-fab
-     *ngIf="atBeach && !(ordered | async)"
-     class="hover-button"
-     (click)="goToStore()"
-     [routerLink]="['/store']">
+  <button md-fab
+          *ngIf="!(hasCart | async) && atBeach && !(ordered | async)"
+          class="hover-button"
+          (click)="goToStore()">
     <md-icon>shopping_cart</md-icon>
-  </a>
+  </button>
 </div>
