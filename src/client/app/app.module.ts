@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
@@ -44,10 +44,6 @@ import 'rxjs/add/operator/combineLatest';
     SharedModule.forRoot(),
     MaterialModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBtYO0eJfiqw2AqMRu-0_X8gBVSUWiIymg'}),
-    // Ng2MapModule.forRoot({
-    //   apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBtYO0eJfiqw2AqMRu-0_X8gBVSUWiIymg' +
-    //   '&libraries=visualization,places,drawing',
-    // }),
     Ng2PageScrollModule.forRoot()
   ],
   declarations: [AppComponent],

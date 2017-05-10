@@ -1,10 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Config } from './shared/config/env.config';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
-import { LoginModel } from './shared/framework/models/login.model';
-import { ShoppingCartModel } from './shared/framework/models/shopping-cart.model';
-import { BeachModel } from './shared/framework/models/beach.model';
-import { ProductsModel } from './shared/framework/models/products.model';
 import { Unsubscribable } from './shared/components/unsubscribable';
 import { StartupService } from './shared/services/startup/startup.service';
 
@@ -23,11 +19,7 @@ export class AppComponent extends Unsubscribable implements OnInit {
 
   @ViewChild(NavbarComponent) navbar: NavbarComponent;
 
-  constructor(private _loginModel: LoginModel,
-              private _shoppingCartModel: ShoppingCartModel,
-              private _beachModel: BeachModel,
-              private _productsModel: ProductsModel,
-              private _startupService: StartupService) {
+  constructor(private _startupService: StartupService) {
     super();
     console.log('Environment config', Config);
     (<any>window).loading_screen.finish();

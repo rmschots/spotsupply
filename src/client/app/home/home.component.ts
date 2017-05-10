@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import {
   PageScrollConfig,
   PageScrollInstance,
@@ -13,6 +13,7 @@ import { LocationPermissionStatus } from '../shared/objects/position/location-pe
 import { ShoppingCartModel } from '../shared/framework/models/shopping-cart.model';
 import { Unsubscribable } from '../shared/components/unsubscribable';
 import { Router } from '@angular/router';
+import { DataStatus } from '../shared/services/gateway/data-status';
 
 @Component({
   moduleId: module.id,
@@ -82,7 +83,7 @@ export class HomeComponent extends Unsubscribable {
   }
 
   get hasCart() {
-    return this._shoppingCartModel.hasCart$;
+    return this._shoppingCartModel.cartAvailable$.map(status => status === DataStatus.AVAILABLE);
   }
 
   checkIt() {
@@ -140,9 +141,12 @@ export class HomeComponent extends Unsubscribable {
   }
 
   goToStore() {
-    this._shoppingCartModel.createShoppingCart(this.atBeach.id)
-      .subscribe(success => {
-        if (success) {
+    this._shoppingCartModel.createShoppingCart(this.atBeach.id);
+    this._shoppingCartModel.cartAvailable$
+      .filter(status => [DataStatus.AVAILABLE, DataStatus.UNAVAILABLE].includes(status))
+      .take(1)
+      .subscribe(status => {
+        if(status === DataStatus.AVAILABLE) {
           this._router.navigate(['/store']);
         }
       });

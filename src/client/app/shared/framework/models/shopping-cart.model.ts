@@ -11,21 +11,24 @@ import { CartItem } from '../../objects/cart/cart-item';
 import { URLSearchParams } from '@angular/http';
 import { ProductsModel } from './products.model';
 import { LocationModel } from './location.model';
+import { DataStatus } from '../../services/gateway/data-status';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class ShoppingCartModel extends Model {
   shoppingCart$: Observable<ShoppingCart>;
   persistedCart$: Observable<ShoppingCart>;
-  hasCart$: Observable<boolean>;
   history$: Observable<Array<ShoppingCart>>;
   productTotal$: Observable<number>;
   ordered$: Observable<boolean>;
   productAmount$: Observable<number>;
+  cartAvailable$: BehaviorSubject<DataStatus> = new BehaviorSubject(DataStatus.UNKNOWN);
 
   private _shoppingCart: ShoppingCart = null;
   private _persistedCart: ShoppingCart = null;
+  private _cartAvailable: DataStatus = DataStatus.UNKNOWN;
 
-  constructor(protected _store: Store<any>,
+  constructor(private _store: Store<any>,
               private _restGateway: RestGatewayService,
               private _productModel: ProductsModel,
               private _locationModel: LocationModel) {
@@ -36,9 +39,6 @@ export class ShoppingCartModel extends Model {
     });
     this.persistedCart$ = cart$.map((current: any) => {
       return current.get('persisted');
-    });
-    this.hasCart$ = cart$.map((current: any) => {
-      return current.get('hasCart');
     });
     this.ordered$ = cart$.map((current: any) => {
       return current.get('ordered');
@@ -52,7 +52,11 @@ export class ShoppingCartModel extends Model {
     });
     this.persistedCart$.subscribe(cart => {
       this._persistedCart = cart;
+      if (!!cart) {
+        this._setCartAvailable(DataStatus.AVAILABLE);
+      }
     });
+
 
     this.productTotal$ = this.shoppingCart$.combineLatest(
       _productModel.productMap$,
@@ -74,16 +78,24 @@ export class ShoppingCartModel extends Model {
       });
   }
 
-  createShoppingCart(beachId: number): Observable<boolean> {
-    this._store.dispatch(SpotSupplyActions.hasCart(undefined));
-    let shoppingCart: ShoppingCart = new ShoppingCart(undefined, beachId);
-    this._store.dispatch(SpotSupplyActions.loadShoppingCart(shoppingCart));
-    return this._restGateway.post('/shoppingCart', {beachId: beachId}).take(1)
-      .map(data => {
-        this._store.dispatch(SpotSupplyActions.loadPersistedCart(this.convertRestResponse(data)));
-        this._store.dispatch(SpotSupplyActions.hasCart(true));
-        return true;
-      });
+  createShoppingCart(beachId: number) {
+    if ([DataStatus.UNAVAILABLE, DataStatus.UNKNOWN].includes(this._cartAvailable)) {
+      this._setCartAvailable(DataStatus.LOADING);
+      let shoppingCart: ShoppingCart = new ShoppingCart(undefined, beachId);
+      this._store.dispatch(SpotSupplyActions.loadShoppingCart(shoppingCart));
+      this._restGateway.post('/shoppingCart', {beachId: beachId}).take(1)
+        .subscribe(
+          data => {
+            this._store.dispatch(SpotSupplyActions.loadPersistedCart(this.convertRestResponse(data)));
+            return true;
+          },
+          error => {
+            this._setCartAvailable(DataStatus.UNAVAILABLE);
+            return error;
+          });
+    } else {
+      console.error('trying to create a shopping cart while status is: '+ this._cartAvailable);
+    }
   }
 
   addProduct(product: Product) {
@@ -126,22 +138,25 @@ export class ShoppingCartModel extends Model {
   completeOrder() {
     return this._restGateway.post('/shoppingCart/completeOrder').take(1).subscribe(() => {
       this._store.dispatch(SpotSupplyActions.completeOrder());
-      this._store.dispatch(SpotSupplyActions.hasCart(false));
+      this._setCartAvailable(DataStatus.UNAVAILABLE);
     });
   }
 
   loadShoppingCart() {
-    this._store.dispatch(SpotSupplyActions.hasCart(undefined));
-    this._restGateway.get('/shoppingCart').take(1).subscribe(
-      data => {
-        this._store.dispatch(SpotSupplyActions.loadPersistedCart(this.convertRestResponse(data)));
-        this._store.dispatch(SpotSupplyActions.loadShoppingCart(this.convertRestResponse(data)));
-        this._store.dispatch(SpotSupplyActions.hasCart(true));
-        this._locationModel.startFetchingLocation();
-      },
-      () => {
-        this._store.dispatch(SpotSupplyActions.hasCart(false));
-      });
+    if ([DataStatus.UNAVAILABLE, DataStatus.UNKNOWN].includes(this._cartAvailable)) {
+      this._setCartAvailable(DataStatus.LOADING);
+      this._restGateway.get('/shoppingCart').take(1).subscribe(
+        data => {
+          this._store.dispatch(SpotSupplyActions.loadPersistedCart(this.convertRestResponse(data)));
+          this._store.dispatch(SpotSupplyActions.loadShoppingCart(this.convertRestResponse(data)));
+          this._locationModel.startFetchingLocation();
+        },
+        () => {
+          this._setCartAvailable(DataStatus.UNAVAILABLE);
+        });
+    } else {
+      console.error('Tried loading cart while one while status is: '+ this._cartAvailable);
+    }
   }
 
   loadCartHistory() {
@@ -156,5 +171,10 @@ export class ShoppingCartModel extends Model {
         .filter(value => value.productId === product.id)
         .length
       : 0;
+  }
+
+  private _setCartAvailable(dataStatus: DataStatus) {
+    this._cartAvailable = dataStatus;
+    this.cartAvailable$.next(this._cartAvailable);
   }
 }

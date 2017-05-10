@@ -15,7 +15,7 @@ import { LanguageService } from './services/language/language.service';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './services/guards/auth-guard.service';
 import { LoginOptionsComponent } from './components/login/login-options.component';
-import { LocationLoadingComponent } from './services/location/components/location-loading.component';
+import { LocationLoadingComponent } from './components/location-loading/location-loading.component';
 import { BeachModel } from './framework/models/beach.model';
 import { StoreModule } from '@ngrx/store';
 import { beachReducer } from './framework/reducers/beach.reducer';

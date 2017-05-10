@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { ShoppingCartModel } from '../../framework/models/shopping-cart.model';
+import { DataStatus } from '../gateway/data-status';
 
 @Injectable()
 export class HasCartGuard implements CanActivate {
@@ -10,14 +11,14 @@ export class HasCartGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    this._shoppingCartModel.loadShoppingCart();
-    return this._shoppingCartModel.hasCart$.filter((hasCart: boolean) => {
-      return hasCart !== undefined;
-    }).map((success: boolean) => {
-      if (!success) {
+    return this._shoppingCartModel.cartAvailable$.filter(status => {
+      return [DataStatus.AVAILABLE, DataStatus.UNAVAILABLE].includes(status);
+    }).map(status => {
+      const canActivate = status === DataStatus.AVAILABLE;
+      if (!canActivate) {
         this._router.navigate(['']);
       }
-      return success;
+      return canActivate;
     });
   }
 }

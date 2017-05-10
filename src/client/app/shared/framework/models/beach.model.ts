@@ -6,27 +6,35 @@ import { SpotSupplyActions } from '../actions/action-creators/spotsupply.action-
 import { Model } from './model';
 import { Beach } from '../../objects/beach/beach';
 import { RestGatewayService } from '../../services/gateway/rest-gateway.service';
+import { DataStatus } from '../../services/gateway/data-status';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { List } from 'immutable';
 
 @Injectable()
 export class BeachModel extends Model {
-  beaches$: Observable<Array<Beach>>;
+  beaches$: Observable<List<Beach>>;
+  beachesAvailable$: BehaviorSubject<DataStatus> = new BehaviorSubject(DataStatus.UNKNOWN);
 
   private _beachMap: Map<number, string> = new Map();
+  private _beachesAvailable = DataStatus.UNKNOWN;
 
   constructor(protected _store: Store<any>,
               private _restGateway: RestGatewayService) {
     super();
     this.beaches$ = this._store.select('beaches');
-    this.beaches$.subscribe(beaches => {
-      this._beachMap.clear();
-      beaches.forEach(beach => {
-        this._beachMap.set(beach.id, beach.name);
-      });
+    this.beaches$.subscribe((beaches: List<Beach>) => {
+      if (!!beaches && beaches.size > 0) {
+        this._beachMap.clear();
+        beaches.forEach(beach => {
+          this._beachMap.set(beach.id, beach.name);
+        });
+        this._setBeachesAvailable(DataStatus.AVAILABLE);
+      }
     });
   }
 
   getBeach(id: number): Observable<Beach> {
-    return this.beaches$.map((beaches: Array<Beach>) => beaches.find(beach => beach.id === id));
+    return this.beaches$.map((beaches: List<Beach>) => beaches.find(beach => beach.id === id));
   }
 
   getBeachName(beachId: number): string {
@@ -34,8 +42,21 @@ export class BeachModel extends Model {
   }
 
   loadBeaches() {
-    this._restGateway.get('/beach').take(1).subscribe(data => {
-      this._store.dispatch(SpotSupplyActions.loadBeaches(this.convertRestResponse(data)));
-    });
+    if ([DataStatus.UNAVAILABLE, DataStatus.UNKNOWN].includes(this._beachesAvailable)) {
+      this._setBeachesAvailable(DataStatus.LOADING);
+      this._restGateway.get('/beach').take(1).subscribe(data => {
+          this._store.dispatch(SpotSupplyActions.loadBeaches(this.convertRestResponse(data)));
+        },
+        () => {
+          this._setBeachesAvailable(DataStatus.UNAVAILABLE);
+        });
+    } else {
+      console.error('trying to load beaches while status is: ' + this._beachesAvailable);
+    }
+  }
+
+  private _setBeachesAvailable(dataStatus: DataStatus) {
+    this._beachesAvailable = dataStatus;
+    this.beachesAvailable$.next(this._beachesAvailable);
   }
 }

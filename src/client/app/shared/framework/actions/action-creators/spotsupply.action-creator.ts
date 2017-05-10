@@ -4,7 +4,7 @@ import {
   BEACHES_LOAD,
   CART_COMPLETE,
   CART_HISTORY_LOAD,
-  CART_REFRESH, HAS_CART,
+  CART_REFRESH,
   LOCATION_PERMISSION_UPDATED,
   PERSISTED_CART_ADD_ITEM,
   PERSISTED_CART_LOAD,
@@ -138,12 +138,6 @@ export const SpotSupplyActions = {
   loadCartHistory(payload: Array<ShoppingCart>): Action {
     return {
       type: CART_HISTORY_LOAD,
-      payload: payload
-    };
-  },
-  hasCart(payload: boolean): Action {
-    return {
-      type: HAS_CART,
       payload: payload
     };
   }

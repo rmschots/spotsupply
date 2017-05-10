@@ -8,6 +8,7 @@ import { LocationPermissionStatus } from '../../objects/position/location-permis
 import { ShoppingCartModel } from '../../framework/models/shopping-cart.model';
 import { Unsubscribable } from '../unsubscribable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
+import { DataStatus } from '../../services/gateway/data-status';
 
 @Component({
   moduleId: module.id,
@@ -57,12 +58,12 @@ export class ToolbarComponent extends Unsubscribable {
           this.error = null;
         }
       });
-    combineLatest(_shoppingCartModel.hasCart$, _shoppingCartModel.ordered$, _locationModel.atBeach$)
+    combineLatest(_shoppingCartModel.cartAvailable$, _shoppingCartModel.ordered$, _locationModel.atBeach$)
       .takeUntil(this._ngUnsubscribe$)
       .subscribe(latestValues => {
         const [hasCart, ordered, atBeach] = latestValues;
-        this.showCart = hasCart && !ordered && !!atBeach;
-        this.showOrder = hasCart && ordered;
+        this.showCart = hasCart === DataStatus.AVAILABLE && !ordered && !!atBeach;
+        this.showOrder = hasCart === DataStatus.AVAILABLE && ordered;
       });
   }
 

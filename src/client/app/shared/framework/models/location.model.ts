@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Model } from './model';
 import { LocationPermissionStatus } from '../../objects/position/location-permission-status';
-import { LocationLoadingComponent } from '../../services/location/components/location-loading.component';
+import { LocationLoadingComponent } from '../../components/location-loading/location-loading.component';
 import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 import { Beach } from '../../objects/beach/beach';
 import { SpotSupplyActions } from '../actions/action-creators/spotsupply.action-creator';
@@ -46,8 +46,6 @@ export class LocationModel extends Model {
             this._setUserAtBeach(latestValues[1].get(0));
           }
         });
-
-    _beachModel.loadBeaches();
   }
 
   startFetchingLocation() {

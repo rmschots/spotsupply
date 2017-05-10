@@ -92,8 +92,6 @@ export class LoginModel extends Model implements OnInit {
 
   private _setLoginAvailable(dataStatus: DataStatus) {
     this._loginAvailable = dataStatus;
-    if (dataStatus !== DataStatus.LOADING) {
-      this.loginAvailable$.next(this._loginAvailable);
-    }
+    this.loginAvailable$.next(this._loginAvailable);
   }
 }
