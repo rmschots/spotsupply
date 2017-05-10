@@ -1,40 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Language } from '../../components/toolbar/language';
 import { TranslateService } from '@ngx-translate/core';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { List } from 'immutable';
 
 @Injectable()
 export class LanguageService {
 
-  private languages: Language[] = [
+  static languages: List<Language> = List.of(
     new Language('en', 'English'),
     new Language('be-nl', 'Nederlands'),
     new Language('be-fr', 'Français')
-  ];
-  private activeLanguage: Language = this.languages[0];
-  private languageSubject: Subject<Language> = new Subject<Language>();
+  );
+
+  language$: BehaviorSubject<Language> = new BehaviorSubject<Language>(LanguageService.languages.get(0));
+  private activeLanguage: Language = LanguageService.languages.get(0);
 
   constructor(private translate: TranslateService) {
     translate.setDefaultLang(this.activeLanguage.code);
     translate.use(this.activeLanguage.code);
   }
 
-  languageSubscription(obs: ((value: Language) => void)) {
-    this.languageSubject.subscribe(obs);
-  }
-
-  getLanguages(): Language[] {
-    return this.languages;
-  }
-
-  getActiveLanguage() {
-    return this.activeLanguage;
-  }
-
   setLanguage(language: Language) {
     this.activeLanguage = language;
     this.translate.use(this.activeLanguage.code);
-    this.languageSubject.next(this.activeLanguage);
+    this.language$.next(this.activeLanguage);
   }
 }
 

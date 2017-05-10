@@ -16,10 +16,9 @@
           <b>{{spot.name | translate}}</b>
           <small>(25 km)</small>
         </md-card-title>
-        <button md-button class="collapse-icon" [color]="'primary'">{{selectedSpot == spot.id? 'Hide map':'Show on
-          map'}}
+        <button md-button class="collapse-icon" [color]="'primary'">
+          {{selectedSpot == spot.id? 'Hide map':'Show on map'}}
         </button>
-        <!--<md-icon class="collapse-icon">{{selectedSpot == spot.id? 'keyboard_arrow_up':'keyboard_arrow_down'}}</md-icon>-->
       </md-card-header>
 
       <md-card-content class="no-margin-bottom" *ngIf="selectedSpot == spot.id">

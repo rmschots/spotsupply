@@ -3,7 +3,7 @@
     <div class="full-width field-container">
       <md-icon class="input-icon">email</md-icon>
       <md-input-container class="complete-form-width" floatPlaceholder="always">
-        <input mdInput [type]="'email'" placeholder="E-mail address" name="email" #email="ngModel"
+        <input mdInput type="email" placeholder="E-mail address" name="email" #email="ngModel"
                [(ngModel)]="createUser.email" required
                pattern="^[a-zA-Z0-9.!#$%&’*+=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"/>
         <md-error>Format: xxx@xxx.xxx</md-error>
@@ -12,7 +12,7 @@
     <div class="full-width field-container">
       <md-icon class="input-icon">phone_iphone</md-icon>
       <md-input-container class="complete-form-width" floatPlaceholder="always">
-        <input mdInput placeholder="Phone number" name="number" [(ngModel)]="createUser.phoneNumber"
+        <input mdInput type="tel" placeholder="Phone number" name="number" [(ngModel)]="createUser.phoneNumber"
                required validatePhoneNumber/>
         <md-error>Format example: 0496 123456</md-error>
       </md-input-container>
@@ -20,7 +20,7 @@
     <div class="full-width field-container">
       <md-icon class="input-icon">security</md-icon>
       <md-input-container class="complete-form-width" floatPlaceholder="always">
-        <input mdInput [type]="'password'" placeholder="Password" name="password" [(ngModel)]="createUser.password"
+        <input mdInput type="password" placeholder="Password" name="password" [(ngModel)]="createUser.password"
                required minlength="6" validatePassword/>
         <md-error>more than 6, at most 32 characters, contains numbers, uppercase and lowercase letters</md-error>
       </md-input-container>
@@ -31,7 +31,7 @@
     <div class="full-width field-container">
       <md-icon class="input-icon">security</md-icon>
       <md-input-container class="complete-form-width" floatPlaceholder="always">
-        <input mdInput [type]="'password'" placeholder="Repeat password" name="password2"
+        <input mdInput type="password" placeholder="Repeat password" name="password2"
                [(ngModel)]="passwordConfirmation"
                required minlength="6" pattern="{{createUser.password}}"/>
         <md-error>Your password doesn't match</md-error>

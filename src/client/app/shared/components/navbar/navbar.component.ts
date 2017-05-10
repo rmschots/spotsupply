@@ -3,6 +3,10 @@ import { LoginComponent } from '../login/login.component';
 import { MdDialog } from '@angular/material';
 import { LoginModel } from '../../framework/models/login.model';
 import { DataStatus } from '../../services/gateway/data-status';
+import { Language } from '../toolbar/language';
+import { LanguageService } from '../../services/language/language.service';
+import { Unsubscribable } from '../unsubscribable';
+import { List } from 'immutable';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +15,7 @@ import { DataStatus } from '../../services/gateway/data-status';
   styleUrls: ['navbar.component.css']
 })
 
-export class NavbarComponent {
+export class NavbarComponent extends Unsubscribable {
 
   @Output() menuClose = new EventEmitter<boolean>();
   @Output() margin = new EventEmitter<number>();
@@ -19,7 +23,22 @@ export class NavbarComponent {
   marginLeft: number;
   @ViewChild('navRoot') navParentElement: ElementRef;
 
-  constructor(private _loginModel: LoginModel, public dialog: MdDialog) {
+  languages: List<Language>;
+  selectedLanguage: Language;
+
+  constructor(private _loginModel: LoginModel,
+              public dialog: MdDialog,
+              private languageService: LanguageService) {
+    super();
+    this.languages = LanguageService.languages;
+    languageService.language$.takeUntil(this._ngUnsubscribe$)
+      .subscribe(language => {
+        this.selectedLanguage = language;
+      });
+  }
+
+  languageSelected(language: Language) {
+    this.languageService.setLanguage(language);
   }
 
   logIn() {

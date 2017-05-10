@@ -20,3 +20,16 @@
   position: absolute;
   width: 100%;
 }
+
+.header-parent {
+  display: flex;
+}
+
+.header-parent > h3 {
+  flex-grow: 1;
+}
+
+.header-parent > button {
+  min-width: 17px;
+  margin-top: -8px;
+}

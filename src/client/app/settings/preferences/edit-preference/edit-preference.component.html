@@ -1,0 +1,43 @@
+<div>
+
+  <ng-template [ngIf]="type === 'password'">
+    <md-input-container class="full-width field-container" floatPlaceholder="always">
+      <input mdInput type="password" placeholder="Current password" name="password"
+             [(ngModel)]="currentPassword" required/>
+    </md-input-container>
+    <md-input-container #largeContainer class="full-width field-container"
+                        floatPlaceholder="always" [ngClass]="{'large-container': largeContainer._isErrorState()}">
+      <input #input mdInput type="password" placeholder="New password" name="password"
+             [(ngModel)]="value" validatePassword required/>
+      <md-error>
+        <div style="padding-bottom: 50px">more than 6, at most 32 characters, contains numbers, uppercase and lowercase
+          letters
+        </div>
+      </md-error>
+    </md-input-container>
+    <md-input-container class="full-width field-container" floatPlaceholder="always">
+      <input mdInput type="password" placeholder="Repeat password" name="password2" [(ngModel)]="passwordRepeat"
+             required minlength="6" pattern="{{value}}"/>
+      <md-error>Your password doesn't match</md-error>
+    </md-input-container>
+  </ng-template>
+
+  <ng-template [ngIf]="type === 'tel'">
+    <md-input-container class="full-width field-container" floatPlaceholder="always">
+      <input mdInput type="tel" placeholder="Phone number" name="phoneNumber"
+             [(ngModel)]="value" validatePhoneNumber required/>
+      <md-error>Format example: 0496 123456</md-error>
+    </md-input-container>
+  </ng-template>
+
+  <ng-template [ngIf]="type === 'email'">
+    <md-input-container class="full-width field-container" floatPlaceholder="always">
+      <input mdInput type="email" placeholder="Email address" name="email" [(ngModel)]="value"
+             pattern="^[a-zA-Z0-9.!#$%&’*+=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required/>
+      <md-error>Format: xxx@xxx.xxx</md-error>
+    </md-input-container>
+  </ng-template>
+  <button md-raised-button class="collapse-icon" [color]="'accent'" (click)="submit()">
+    Submit
+  </button>
+</div>

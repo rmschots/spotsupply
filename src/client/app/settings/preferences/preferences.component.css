@@ -9,3 +9,19 @@
 .preferences-form {
   margin: 10px;
 }
+
+.preferences-input-parent {
+  display: flex;
+}
+
+.preferences-input-parent {
+  display: flex;
+}
+
+.preferences-input-parent > md-input-container{
+  flex-grow: 1;
+}
+.preferences-input-parent > md-icon{
+  margin: auto auto auto 16px;
+  align-self: center;
+}

@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Language } from './language';
 import { NavigationService } from '../../services/navigation/navigation.service';
-import { LanguageService } from '../../services/language/language.service';
 import { Router } from '@angular/router';
 import { LocationModel } from '../../framework/models/location.model';
 import { LocationPermissionStatus } from '../../objects/position/location-permission-status';
@@ -23,28 +21,20 @@ export class ToolbarComponent extends Unsubscribable {
   @Input() menuOpen: boolean = false;
 
   title: string;
-  languages: Language[];
-  selectedLanguage: Language;
   productsAmount = 0;
   showCart = false;
   showOrder = false;
   error: string;
 
   constructor(private navigationService: NavigationService,
-              private languageService: LanguageService,
               private router: Router,
               private _locationModel: LocationModel,
               private _shoppingCartModel: ShoppingCartModel) {
     super();
     this.title = this.navigationService.getTitle();
-    this.languages = languageService.getLanguages();
-    this.selectedLanguage = languageService.getActiveLanguage();
 
     navigationService.titleSubscription((title: string) => {
       this.title = title;
-    });
-    languageService.languageSubscription(language => {
-      this.selectedLanguage = language;
     });
     _shoppingCartModel.productAmount$.takeUntil(this._ngUnsubscribe$)
       .subscribe(amt => {
@@ -80,10 +70,6 @@ export class ToolbarComponent extends Unsubscribable {
 
   goToOrder() {
     this.router.navigate(['/settings/current-order']);
-  }
-
-  languageSelected(language: Language) {
-    this.languageService.setLanguage(language);
   }
 }
 

@@ -1,6 +1,17 @@
 <div #navRoot id="sidenav" (swipe)="menuSwiped($event)" (slide)="menuSlide($event)">
   <md-nav-list>
-    <h3 md-subheader>SpotSupply</h3>
+    <div class="header-parent">
+      <h3 md-subheader>SpotSupply</h3>
+      <button md-button [mdMenuTriggerFor]="menu">
+        <img src="/assets/img/{{selectedLanguage.code}}.jpg"/>
+      </button>
+      <md-menu #menu="mdMenu">
+        <button md-menu-item *ngFor="let language of languages" (click)="languageSelected(language)">
+          <md-icon><img src="/assets/img/{{language.code}}.jpg"/></md-icon>
+          <span>{{language.name}}</span>
+        </button>
+      </md-menu>
+    </div>
     <a class="menu-item" md-list-item [routerLink]="['/']" [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}" (click)="navigated()">{{'NAVBAR.items.home' | translate}}</a>
     <a class="menu-item" md-list-item [routerLink]="['/products']" [routerLinkActive]="['router-link-active']"
