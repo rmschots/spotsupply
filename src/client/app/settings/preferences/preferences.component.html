@@ -1,13 +1,13 @@
 <form class="preferences-form">
   <div class="preferences-input-parent">
     <md-input-container class="full-width" floatPlaceholder="always">
-      <input mdInput placeholder="Email address" name="email" value="{{email}}" disabled />
+      <input mdInput placeholder="Email address" name="email" [value]="email" disabled />
     </md-input-container>
     <md-icon (click)="openEditEmailDialog()">edit</md-icon>
   </div>
   <div class="preferences-input-parent">
     <md-input-container class="full-width" floatPlaceholder="always">
-      <input mdInput type="tel" placeholder="Phone number" name="phoneNumber" value="{{phoneNumber}}" disabled />
+      <input mdInput type="tel" placeholder="Phone number" name="phoneNumber" [value]="phoneNumber" disabled />
     </md-input-container>
     <md-icon (click)="openEditPhoneNumberDialog()">edit</md-icon>
   </div>

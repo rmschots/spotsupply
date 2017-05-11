@@ -6,8 +6,8 @@
     <md-input-container class="full-width" floatPlaceholder="always">
       <input mdInput placeholder="Password" name="password" [(ngModel)]="loginDetails.password"/>
     </md-input-container>
-    <div *ngIf="errorMessage" class="login-error-message">{{errorMessage}}</div>
-    <button md-raised-button color="accent" (click)="login()" (blur)="errorMessage = null">
+    <div *ngIf="errorMessage" class="login-error-message warn-text">{{errorMessage}}</div>
+    <button md-raised-button color="accent" (click)="login()" (blur)="errorMessage = undefined">
       Log in
     </button>
   </form>

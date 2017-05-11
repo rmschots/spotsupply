@@ -76,6 +76,48 @@ export class LoginModel extends Model implements OnInit {
     });
   }
 
+  updateEmail(email: string, currentPassword: string): Observable<boolean> {
+    return this._restGateway.post('/account/updateEmail', {
+      email: email,
+      currentPassword: currentPassword
+    })
+      .map(
+        (payload: any) => {
+          const payloadJS = this.convertRestResponse(payload);
+          this._store.dispatch(SpotSupplyActions.loginUser(payloadJS));
+          return true;
+        }
+      ).take(1);
+  }
+
+  updatePhoneNumber(phoneNumber: string, currentPassword: string): Observable<boolean> {
+    return this._restGateway.post('/account/updatePhoneNumber', {
+      phoneNumber: phoneNumber,
+      currentPassword: currentPassword
+    })
+      .map(
+        (payload: any) => {
+          const payloadJS = this.convertRestResponse(payload);
+          this._store.dispatch(SpotSupplyActions.loginUser(payloadJS));
+          return true;
+        }
+      ).take(1);
+  }
+
+  updatePassword(newPassword: string, currentPassword: string): Observable<boolean> {
+    return this._restGateway.post('/account/updatePassword', {
+      newPassword: newPassword,
+      currentPassword: currentPassword
+    })
+      .map(
+        (payload: any) => {
+          const payloadJS = this.convertRestResponse(payload);
+          this._store.dispatch(SpotSupplyActions.loginUser(payloadJS));
+          return true;
+        }
+      ).take(1);
+  }
+
   loadAccount() {
     if (this._loginAvailable === DataStatus.UNKNOWN) {
       this._setLoginAvailable(DataStatus.LOADING);

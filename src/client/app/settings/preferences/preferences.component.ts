@@ -28,23 +28,26 @@ export class PreferencesComponent extends Unsubscribable {
   }
 
   openEditEmailDialog() {
-    let dialogRef = this._dialog.open(EditPreferenceComponent);
-    let component = dialogRef.componentInstance;
+    const dialogRef = this._dialog.open(EditPreferenceComponent);
+    const component = dialogRef.componentInstance;
     component.value = this.email;
     component.type = 'email';
+    component.submitCallback = (newPass, currPass) => this._loginModel.updateEmail(newPass, currPass);
   }
 
   openEditPhoneNumberDialog() {
-    let dialogRef = this._dialog.open(EditPreferenceComponent);
-    let component = dialogRef.componentInstance;
+    const dialogRef = this._dialog.open(EditPreferenceComponent);
+    const component = dialogRef.componentInstance;
     component.value = this.phoneNumber;
     component.type = 'tel';
+    component.submitCallback = (newPass, currPass) => this._loginModel.updatePhoneNumber(newPass, currPass);
   }
 
   openEditPasswordDialog() {
-    let dialogRef = this._dialog.open(EditPreferenceComponent);
-    let component = dialogRef.componentInstance;
+    const dialogRef = this._dialog.open(EditPreferenceComponent);
+    const component = dialogRef.componentInstance;
     component.value = '';
     component.type = 'password';
+    component.submitCallback = (newPass, currPass) => this._loginModel.updatePassword(newPass, currPass);
   }
 }
