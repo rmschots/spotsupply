@@ -45,7 +45,7 @@ export class StartupService {
       obs1$.filter(cartAvailable => [DataStatus.AVAILABLE, DataStatus.UNAVAILABLE].includes(cartAvailable))
         .take(1)
         .subscribe(cartAvailable => {
-          if (cartAvailable) {
+          if (cartAvailable === DataStatus.AVAILABLE) {
             this._locationModel.startFetchingLocation();
           }
         });
