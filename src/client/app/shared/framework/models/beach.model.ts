@@ -9,13 +9,14 @@ import { RestGatewayService } from '../../services/gateway/rest-gateway.service'
 import { DataStatus } from '../../services/gateway/data-status';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { List } from 'immutable';
+import { Coordinate } from '../../objects/position/position';
 
 @Injectable()
 export class BeachModel extends Model {
   beaches$: Observable<List<Beach>>;
   beachesAvailable$: BehaviorSubject<DataStatus> = new BehaviorSubject(DataStatus.UNKNOWN);
 
-  private _beachMap: Map<number, string> = new Map();
+  private _beachMap: Map<number, Beach> = new Map();
   private _beachesAvailable = DataStatus.UNKNOWN;
 
   constructor(protected _store: Store<any>,
@@ -26,7 +27,7 @@ export class BeachModel extends Model {
       if (!!beaches && beaches.size > 0) {
         this._beachMap.clear();
         beaches.forEach(beach => {
-          this._beachMap.set(beach.id, beach.name);
+          this._beachMap.set(beach.id, beach);
         });
         this._setBeachesAvailable(DataStatus.AVAILABLE);
       }
@@ -38,7 +39,11 @@ export class BeachModel extends Model {
   }
 
   getBeachName(beachId: number): string {
-    return this._beachMap.get(beachId);
+    return this._beachMap.get(beachId).name;
+  }
+
+  getBeachCoordinates(beachId: number): Coordinate[] {
+    return this._beachMap.get(beachId).coordinates;
   }
 
   loadBeaches() {

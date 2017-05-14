@@ -92,6 +92,16 @@ export class HomeComponent extends Unsubscribable {
 
   onMapReady(map: google.maps.Map) {
     this.map = map;
+    const bermudaTriangle = new google.maps.Polygon({
+      paths: this._beachModel.getBeachCoordinates(this.selectedSpot),
+      strokeColor: '#673ab7',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#673ab7',
+      fillOpacity: 0.35
+    });
+    map.fitBounds(this.getAreaBounds(bermudaTriangle.getPaths()));
+    bermudaTriangle.setMap(map);
     setTimeout(() => {
       this.displayUserLocation();
     }, 1);
@@ -146,9 +156,21 @@ export class HomeComponent extends Unsubscribable {
       .filter(status => [DataStatus.AVAILABLE, DataStatus.UNAVAILABLE].includes(status))
       .take(1)
       .subscribe(status => {
-        if(status === DataStatus.AVAILABLE) {
+        if (status === DataStatus.AVAILABLE) {
           this._router.navigate(['/store']);
         }
       });
+  }
+
+  private getAreaBounds(paths: google.maps.MVCArray): google.maps.LatLngBounds {
+    let bounds = new google.maps.LatLngBounds();
+    let path;
+    for (var i = 0; i < paths.getLength(); i++) {
+      path = paths.getAt(i);
+      for (var ii = 0; ii < path.getLength(); ii++) {
+        bounds.extend(path.getAt(ii));
+      }
+    }
+    return bounds;
   }
 }

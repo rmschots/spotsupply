@@ -24,7 +24,6 @@
       <md-card-content class="no-margin-bottom" *ngIf="selectedSpot == spot.id">
         <div class="map-parent">
           <ngui-map
-            center="{{spot.position.latitude}}, {{spot.position.longitude}}"
             disableDefaultUI="true"
             (mapReady$)="onMapReady($event)">
           </ngui-map>

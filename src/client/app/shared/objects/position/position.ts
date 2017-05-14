@@ -1,4 +1,4 @@
-export class Position {
-  latitude: number;
-  longitude: number;
+export class Coordinate {
+  lng: number;
+  lat: number;
 }
