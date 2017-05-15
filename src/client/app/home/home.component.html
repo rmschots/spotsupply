@@ -4,6 +4,10 @@
     <button md-raised-button color="primary" (click)="checkIt()">{{'HOME.checkIt'|translate}}</button>
   </div>
 
+  <div *ngIf="isNotAtBeach | async" class="flex-container padded-row-xl text-center">
+    We cannot deliver to where you are right now. Go to one of our beaches to create an order.
+  </div>
+
   <div class="flex-container padded-row-xl text-center">
     <md-card *ngFor="let spot of (beaches|async)" [id]="spot.name" class="spot-card"
              [ngClass]="{'unpadded-card': selectedSpot !== spot.id, 'at-beach-card': atBeach && atBeach.id === spot.id}">
@@ -14,7 +18,7 @@
       <md-card-header class="clickable spot-header" (click)="selectSpot(spot)">
         <md-card-title class="spot-title">
           <b>{{spot.name | translate}}</b>
-          <small>(25 km)</small>
+          <small *ngIf="distanceToBeachAvailable | async">{{getBeachDistance(spot.id)}}</small>
         </md-card-title>
         <button md-button class="collapse-icon" [color]="'primary'">
           {{selectedSpot == spot.id? 'Hide map':'Show on map'}}
@@ -24,6 +28,7 @@
       <md-card-content class="no-margin-bottom" *ngIf="selectedSpot == spot.id">
         <div class="map-parent">
           <ngui-map
+            center="51.23135408102922, 2.9106473500000902"
             disableDefaultUI="true"
             (mapReady$)="onMapReady($event)">
           </ngui-map>

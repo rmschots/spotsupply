@@ -5,6 +5,7 @@ import { ShoppingCartModel } from '../shared/framework/models/shopping-cart.mode
 import { Unsubscribable } from '../shared/components/unsubscribable';
 import { LoginModel } from '../shared/framework/models/login.model';
 import { DataStatus } from '../shared/services/gateway/data-status';
+import { LocationModel } from '../shared/framework/models/location.model';
 
 @Component({
   moduleId: module.id,
@@ -21,7 +22,8 @@ export class StoreComponent extends Unsubscribable {
   constructor(private navigationService: NavigationService,
               private router: Router,
               private _loginModel: LoginModel,
-              private _shoppingCartModel: ShoppingCartModel) {
+              private _shoppingCartModel: ShoppingCartModel,
+              private _locationModel: LocationModel) {
     super();
     navigationService.setTitle('store');
     _shoppingCartModel.productTotal$.takeUntil(this._ngUnsubscribe$)
@@ -34,6 +36,12 @@ export class StoreComponent extends Unsubscribable {
       });
   }
 
+  get isNotAtBeach() {
+    return this._locationModel.atBeachAvailable$.map(status => {
+      return status !== DataStatus.AVAILABLE;
+    });
+  }
+
   onClearCartClicked() {
     if (this.productTotal > 0) {
       this._shoppingCartModel.removeAllProducts();
@@ -41,7 +49,7 @@ export class StoreComponent extends Unsubscribable {
   }
 
   onNextClicked() {
-    if (this.productTotal > 0) {
+    if (this.productTotal > 0 && !!this._locationModel.getAtBeach()) {
       if (this._loggedIn) {
         this.router.navigate(['/order-info']);
       } else {

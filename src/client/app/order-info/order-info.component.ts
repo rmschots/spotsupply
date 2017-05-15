@@ -9,6 +9,8 @@ import { ShoppingCart } from '../shared/objects/cart/shopping-cart';
 import { Unsubscribable } from '../shared/components/unsubscribable';
 import { BeachModel } from '../shared/framework/models/beach.model';
 import { Observable } from 'rxjs/Observable';
+import { LocationModel } from '../shared/framework/models/location.model';
+import { DataStatus } from '../shared/services/gateway/data-status';
 
 @Component({
   moduleId: module.id,
@@ -27,6 +29,7 @@ export class OrderInfoComponent extends Unsubscribable {
   constructor(private navigationService: NavigationService,
               private _shoppingCartModel: ShoppingCartModel,
               private _beachModel: BeachModel,
+              private _locationModel: LocationModel,
               private router: Router,
               private dialog: MdDialog) {
     super();
@@ -40,8 +43,14 @@ export class OrderInfoComponent extends Unsubscribable {
   get beachName() {
     return this._shoppingCartModel.persistedCart$
       .switchMap(cart => cart ?
-        this._beachModel.getBeach(cart.beachId).map(beach => beach.name)
+        this._beachModel.getBeachObs(cart.beachId).map(beach => beach.name)
         : Observable.of(''));
+  }
+
+  get isNotAtBeach() {
+    return this._locationModel.atBeachAvailable$.map(status => {
+      return status !== DataStatus.AVAILABLE;
+    });
   }
 
   placeOrder() {

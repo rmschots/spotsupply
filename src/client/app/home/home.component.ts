@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import {
   PageScrollConfig,
   PageScrollInstance,
@@ -31,6 +31,10 @@ export class HomeComponent extends Unsubscribable {
   overlayError: string = null;
 
   atBeach: Beach;
+
+  mapCenter: google.maps.LatLng;
+  mapZoom: number = 13;
+
   private _lastKnownPosition: Position;
   private _marker: google.maps.Marker;
 
@@ -74,6 +78,19 @@ export class HomeComponent extends Unsubscribable {
     return this._beachModel.beaches$;
   }
 
+  get distanceToBeachAvailable() {
+    return this._locationModel.distanceToBeachAvailable$
+      .map(status => {
+        return status === DataStatus.AVAILABLE;
+      });
+  }
+
+  get isNotAtBeach() {
+    return this._locationModel.atBeachAvailable$.map(status => {
+      return status !== DataStatus.AVAILABLE;
+    });
+  }
+
   isChecking(): boolean {
     return this._locationModel.isWatchingPosition();
   }
@@ -91,8 +108,12 @@ export class HomeComponent extends Unsubscribable {
   }
 
   onMapReady(map: google.maps.Map) {
+    if(!this.mapCenter && !this.mapZoom) {
+      this.mapCenter = new google.maps.LatLng(10,10);
+      this.mapZoom = 10;
+    }
     this.map = map;
-    const bermudaTriangle = new google.maps.Polygon({
+    const beachPolygon = new google.maps.Polygon({
       paths: this._beachModel.getBeachCoordinates(this.selectedSpot),
       strokeColor: '#673ab7',
       strokeOpacity: 0.8,
@@ -100,8 +121,10 @@ export class HomeComponent extends Unsubscribable {
       fillColor: '#673ab7',
       fillOpacity: 0.35
     });
-    map.fitBounds(this.getAreaBounds(bermudaTriangle.getPaths()));
-    bermudaTriangle.setMap(map);
+    map.fitBounds(this.getAreaBounds(beachPolygon.getPaths()));
+    this.mapCenter = map.getCenter();
+    this.mapZoom = map.getZoom();
+    beachPolygon.setMap(map);
     setTimeout(() => {
       this.displayUserLocation();
     }, 1);
@@ -160,6 +183,19 @@ export class HomeComponent extends Unsubscribable {
           this._router.navigate(['/store']);
         }
       });
+  }
+
+  getBeachDistance(beachId: number): string {
+    let distanceMeter = this._locationModel.getBeachDistance(beachId);
+    if (distanceMeter === 0) {
+      return '';
+    }
+    if (distanceMeter < 1000) {
+      return Math.round(distanceMeter) + ' m';
+    } else if (distanceMeter < 10000) {
+      return Math.round(distanceMeter / 100) / 10 + ' km';
+    }
+    return Math.round(distanceMeter / 1000) + ' km';
   }
 
   private getAreaBounds(paths: google.maps.MVCArray): google.maps.LatLngBounds {

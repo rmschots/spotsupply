@@ -7,6 +7,7 @@ import { ShoppingCartModel } from '../../framework/models/shopping-cart.model';
 import { Unsubscribable } from '../unsubscribable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { DataStatus } from '../../services/gateway/data-status';
+import { MdSnackBar, MdSnackBarRef, SimpleSnackBar } from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -26,10 +27,13 @@ export class ToolbarComponent extends Unsubscribable {
   showOrder = false;
   error: string;
 
+  private _snackbarRef: MdSnackBarRef<SimpleSnackBar>;
+
   constructor(private navigationService: NavigationService,
               private router: Router,
               private _locationModel: LocationModel,
-              private _shoppingCartModel: ShoppingCartModel) {
+              private _shoppingCartModel: ShoppingCartModel,
+              private _snackBar: MdSnackBar) {
     super();
     this.title = this.navigationService.getTitle();
 
@@ -48,13 +52,26 @@ export class ToolbarComponent extends Unsubscribable {
           this.error = null;
         }
       });
-    combineLatest(_shoppingCartModel.cartAvailable$, _shoppingCartModel.ordered$, _locationModel.atBeach$)
+    combineLatest(_shoppingCartModel.cartAvailable$, _shoppingCartModel.ordered$, _locationModel.atBeachAvailable$)
       .takeUntil(this._ngUnsubscribe$)
       .subscribe(latestValues => {
         const [hasCart, ordered, atBeach] = latestValues;
-        this.showCart = hasCart === DataStatus.AVAILABLE && !ordered && !!atBeach;
+        this.showCart = hasCart === DataStatus.AVAILABLE && !ordered && atBeach === DataStatus.AVAILABLE;
         this.showOrder = hasCart === DataStatus.AVAILABLE && ordered;
       });
+    this.isNotAtBeach
+      .takeUntil(this._ngUnsubscribe$)
+      .subscribe(notAvailable => {
+        if (this._snackbarRef && !notAvailable) {
+          this._snackbarRef.dismiss();
+        }
+      });
+  }
+
+  get isNotAtBeach() {
+    return this._locationModel.atBeachAvailable$.map(status => {
+      return status !== DataStatus.AVAILABLE;
+    });
   }
 
   menuOpened() {
@@ -70,6 +87,17 @@ export class ToolbarComponent extends Unsubscribable {
 
   goToOrder() {
     this.router.navigate(['/settings/current-order']);
+  }
+
+  clickNotAtBeach() {
+    this._snackbarRef = this._snackBar.open('Not at beach!', 'Home');
+    this._snackbarRef.onAction().take(1).subscribe(() => {
+      this.router.navigate(['/']);
+    });
+    this._snackbarRef.afterDismissed().take(1)
+      .subscribe(() => {
+        this._snackbarRef = null;
+      });
   }
 }
 

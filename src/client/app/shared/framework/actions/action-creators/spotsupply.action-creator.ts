@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import {
+  BEACH_DISTANCES,
   BEACHES_LOAD,
   CART_COMPLETE,
   CART_HISTORY_LOAD,
@@ -58,9 +59,9 @@ export const SpotSupplyActions = {
       payload: payload
     };
   },
-  userAtBeach(payload: Beach): Action {
+  updateBeachDistances(payload: Beach): Action {
     return {
-      type: USER_AT_BEACH,
+      type: BEACH_DISTANCES,
       payload: payload
     };
   },

@@ -34,8 +34,12 @@ export class BeachModel extends Model {
     });
   }
 
-  getBeach(id: number): Observable<Beach> {
+  getBeachObs(id: number): Observable<Beach> {
     return this.beaches$.map((beaches: List<Beach>) => beaches.find(beach => beach.id === id));
+  }
+
+  getBeach(id: number): Beach {
+    return this._beachMap.get(id);
   }
 
   getBeachName(beachId: number): string {
