@@ -7,7 +7,7 @@
   <!-- This fills the remaining space of the current row -->
   <span class="toolbar-title-fill-remaining-space"></span>
 
-  <div *ngIf="isNotAtBeach | async" class="action-parent">
+  <div *ngIf="isChecking() && (isNotAtBeach | async)" class="action-parent">
     <md-icon class="btn-action" (click)="clickNotAtBeach()">
       warning
     </md-icon>

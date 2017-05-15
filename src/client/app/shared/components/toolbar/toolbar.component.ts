@@ -74,6 +74,10 @@ export class ToolbarComponent extends Unsubscribable {
     });
   }
 
+  isChecking(): boolean {
+    return this._locationModel.isWatchingPosition();
+  }
+
   menuOpened() {
     if (!this.menuOpen) {
       this.menuOpen = true;
