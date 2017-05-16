@@ -47,7 +47,7 @@ export class OrderInfoComponent extends Unsubscribable {
         : Observable.of(''));
   }
 
-  get isNotAtBeach() {
+  get isNotAtBeachYet() {
     return this._locationModel.atBeachAvailable$.map(status => {
       return status !== DataStatus.AVAILABLE;
     });

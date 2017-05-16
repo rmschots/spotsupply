@@ -70,7 +70,7 @@ export class ToolbarComponent extends Unsubscribable {
 
   get isNotAtBeach() {
     return this._locationModel.atBeachAvailable$.map(status => {
-      return status !== DataStatus.AVAILABLE;
+      return status === DataStatus.UNAVAILABLE;
     });
   }
 
