@@ -17,7 +17,21 @@ export class LanguageService {
   private activeLanguage: Language = LanguageService.languages.get(0);
 
   constructor(private translate: TranslateService) {
-    translate.setDefaultLang(this.activeLanguage.code);
+    translate.setDefaultLang(LanguageService.languages.get(0).code);
+    switch (navigator.language) {
+      case 'nl':
+        this.activeLanguage = LanguageService.languages.get(1);
+        break;
+      case 'en':
+        this.activeLanguage = LanguageService.languages.get(0);
+        break;
+      case 'fr':
+        this.activeLanguage = LanguageService.languages.get(2);
+        break;
+      default:
+        this.activeLanguage = LanguageService.languages.get(0);
+        break;
+    }
     translate.use(this.activeLanguage.code);
   }
 
