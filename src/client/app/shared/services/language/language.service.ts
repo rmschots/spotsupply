@@ -20,19 +20,18 @@ export class LanguageService {
     translate.setDefaultLang(LanguageService.languages.get(0).code);
     switch (navigator.language) {
       case 'nl':
-        this.activeLanguage = LanguageService.languages.get(1);
+        this.setLanguage(LanguageService.languages.get(1));
         break;
       case 'en':
-        this.activeLanguage = LanguageService.languages.get(0);
+        this.setLanguage(LanguageService.languages.get(0));
         break;
       case 'fr':
-        this.activeLanguage = LanguageService.languages.get(2);
+        this.setLanguage(LanguageService.languages.get(2));
         break;
       default:
-        this.activeLanguage = LanguageService.languages.get(0);
+        this.setLanguage(LanguageService.languages.get(0));
         break;
     }
-    translate.use(this.activeLanguage.code);
   }
 
   setLanguage(language: Language) {
