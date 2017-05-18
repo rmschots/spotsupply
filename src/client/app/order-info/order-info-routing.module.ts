@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { OrderInfoComponent } from './order-info.component';
 import { AuthGuard } from '../shared/services/guards/auth-guard.service';
 import { AtBeachGuard } from '../shared/services/guards/at-beach-guard.service';
+import { HasCartGuard } from '../shared/services/guards/has-cart-guard.service';
 
 @NgModule({
   imports: [
@@ -10,7 +11,7 @@ import { AtBeachGuard } from '../shared/services/guards/at-beach-guard.service';
       {
         path: 'order-info',
         component: OrderInfoComponent,
-        canActivate: [AuthGuard, AtBeachGuard]
+        canActivate: [AuthGuard, HasCartGuard, AtBeachGuard]
       }
     ])
   ],

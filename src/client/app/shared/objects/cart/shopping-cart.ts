@@ -7,7 +7,7 @@ export class ShoppingCart {
               public status: string = null,
               public price: number = 0,
               public orderDateTime: DateTime = null,
-              public requestedDateTime: DateTime = null,
+              public requestedTime: string = null,
               public deliveredDateTime: DateTime = null) {
   }
 }

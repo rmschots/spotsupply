@@ -33,6 +33,8 @@ import { PasswordValidatorDirective } from './directives/password-validator.dire
 import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
 import { PhoneNumberValidatorDirective } from './directives/phone-number-validator.directive';
 import { StartupService } from './services/startup/startup.service';
+import { deliveryReducer } from './framework/reducers/delivery.reducer';
+import { DeliveryModel } from './framework/models/delivery.model';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -63,7 +65,8 @@ export function HttpLoaderFactory(http: Http) {
       login: loginReducer,
       location: locationReducer,
       product: productReducer,
-      cart: cartReducer
+      cart: cartReducer,
+      delivery: deliveryReducer
     }),
     PasswordStrengthBarModule
   ],
@@ -87,6 +90,7 @@ export class SharedModule {
         LocationModel,
         ProductsModel,
         ShoppingCartModel,
+        DeliveryModel,
         RestGatewayService,
         StartupService,
         {provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>'}

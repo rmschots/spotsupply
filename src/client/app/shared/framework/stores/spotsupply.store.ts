@@ -5,5 +5,6 @@ export const initialState: immutable.Map<string, Object> = immutable.fromJS({
   login: {},
   location: {},
   product: {},
-  cart: {}
+  cart: {},
+  delivery: {}
 });

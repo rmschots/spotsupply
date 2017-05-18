@@ -8,7 +8,6 @@ import { NavigationService } from '../shared/services/navigation/navigation.serv
   styleUrls: ['settings.component.css']
 })
 export class SettingsComponent {
-  isLoggedIn = false;
 
   constructor(private navigationService: NavigationService) {
     navigationService.setTitle('settings');

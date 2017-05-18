@@ -1,28 +1,29 @@
 <h4 class="header-small-margin order-info-title">Delivery information</h4>
-<form *ngIf="cart">
+<form *ngIf="cart" #orderInfoForm="ngForm">
   <md-input-container class="full-width" floatPlaceholder="always">
     <input mdInput [value]="beachName | async | translate" placeholder="Your spot" name="spot" disabled/>
   </md-input-container>
   <md-input-container class="full-width" floatPlaceholder="always">
-    <input mdInput [(ngModel)]="orderInfo.phoneNumber" placeholder="Your phone number" name="phoneNumber" disabled/>
+    <input mdInput placeholder="Your phone number" name="phoneNumber" [value]="phoneNumber | async" disabled/>
   </md-input-container>
-  <md-select placeholder="Delivery time" class="full-width mat-input-wrapper" [(ngModel)]="orderInfo.deliveryTime"
-             name="deliveryTime">
-    <md-option *ngFor="let time of times" [value]="time">
+  <md-select placeholder="Delivery time" class="full-width mat-input-wrapper" [(ngModel)]="cart.requestedTime"
+             name="deliveryTime" floatPlaceholder="always" required>
+    <md-option *ngFor="let time of (possibleTimes | async)" [value]="time">
       {{ time }}
     </md-option>
   </md-select>
-  <md-select placeholder="Payment method" class="full-width mat-input-wrapper" [(ngModel)]="orderInfo.paymentMethod"
-             name="paymentMethod" disabled>
-    <md-option *ngFor="let method of paymentMethods" [value]="method">
-      {{ method }}
-    </md-option>
+  <md-select placeholder="Payment method" class="full-width mat-input-wrapper"
+             name="paymentMethod" [(ngModel)]="paymentMethod" disabled>
+    <md-option [value]="'Cash'">Cash</md-option>
   </md-select>
+  <h5 class="header-small-margin order-info-title text-center">Order information</h5>
+  <ss-cart [cart]="cart"></ss-cart>
+  <div *ngIf="errorMessage" class="warn-text">{{errorMessage}}</div>
+  <div class="bring-it-button-parent">
+    <button md-raised-button color="primary" class="bring-it-button" (click)="placeOrder()"
+            [disabled]="(isNotAtBeachYet | async) || !orderInfoForm.form.valid">
+      Bring it to my spot!
+    </button>
+  </div>
 </form>
-<h4 class="header-small-margin order-info-title">Order information</h4>
-<ss-cart [cart]="cart"></ss-cart>
-<div class="bring-it-button-parent">
-  <button md-raised-button color="primary" class="bring-it-button" (click)="placeOrder()" [disabled]="isNotAtBeachYet | async">
-    Bring it to my spot!
-  </button>
-</div>
+

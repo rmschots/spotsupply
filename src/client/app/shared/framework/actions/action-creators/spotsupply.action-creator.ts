@@ -12,12 +12,12 @@ import {
   PERSISTED_CART_REMOVE_ALL_ITEMS,
   PERSISTED_CART_REMOVE_ITEM,
   PLACE_ORDER,
+  POSSIBLE_TIMES_LOAD,
   PRODUCT_HIERARCHY,
   SHOPPING_CART_ADD_ITEM,
   SHOPPING_CART_LOAD,
   SHOPPING_CART_REMOVE_ALL_ITEMS,
   SHOPPING_CART_REMOVE_ITEM,
-  USER_AT_BEACH,
   USER_LOGIN,
   USER_LOGOUT,
   USER_POSITION_UPDATED
@@ -139,6 +139,12 @@ export const SpotSupplyActions = {
   loadCartHistory(payload: Array<ShoppingCart>): Action {
     return {
       type: CART_HISTORY_LOAD,
+      payload: payload
+    };
+  },
+  loadPossibleTimes(payload: Array<string>): Action {
+    return {
+      type: POSSIBLE_TIMES_LOAD,
       payload: payload
     };
   }
