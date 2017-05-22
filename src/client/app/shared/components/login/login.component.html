@@ -1,14 +1,17 @@
-<div class="login-parent">
+<div class="text-center">
   <form>
     <md-input-container class="full-width" floatPlaceholder="always">
-      <input mdInput placeholder="Phone or email" name="email" [(ngModel)]="loginDetails.phoneOrEmail"/>
+      <input mdInput placeholder="Phone or email" name="email" [(ngModel)]="loginDetails.phoneOrEmail" required/>
     </md-input-container>
     <md-input-container class="full-width" floatPlaceholder="always">
-      <input mdInput placeholder="Password" name="password" [(ngModel)]="loginDetails.password"/>
+      <input mdInput placeholder="Password" name="password" [(ngModel)]="loginDetails.password" required/>
     </md-input-container>
-    <div *ngIf="errorMessage" class="login-error-message warn-text">{{errorMessage}}</div>
-    <button md-raised-button color="accent" (click)="login()" (blur)="errorMessage = undefined">
+    <div *ngIf="errorMessage" class="warn-text">{{errorMessage}}</div>
+    <button md-raised-button color="primary" class="top-bot-margin-default" (click)="login()" (blur)="errorMessage = undefined">
       Log in
+    </button>
+    <button md-button color="primary" class="top-bot-margin-default" (click)="forgotPassword()">
+      Forgot password
     </button>
   </form>
 </div>

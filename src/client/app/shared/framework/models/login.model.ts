@@ -118,6 +118,21 @@ export class LoginModel extends Model implements OnInit {
       ).take(1);
   }
 
+  forgotPassword(email: string): Observable<boolean> {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('email', email);
+    return this._restGateway.post('/account/forgotPassword', null, params)
+      .map(() => true).take(1);
+  }
+
+  resetPassword(verificationCode: string, newPassword: string): Observable<boolean> {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('verificationCode', verificationCode);
+    params.set('newPassword', newPassword);
+    return this._restGateway.post('/account/resetPassword', null, params)
+      .map(() => true).take(1);
+  }
+
   loadAccount() {
     if (this._loginAvailable === DataStatus.UNKNOWN) {
       this._setLoginAvailable(DataStatus.LOADING);

@@ -72,3 +72,16 @@ body {
 .mat-tab-links {
   display: flex;
 }
+
+.top-bot-margin-default {
+  margin-top: 8px !important;
+  margin-bottom: 8px!important;
+}
+
+.bot-margin-default {
+  margin-bottom: 8px !important;
+}
+
+.top-margin-default {
+  margin-top: 8px !important;
+}
