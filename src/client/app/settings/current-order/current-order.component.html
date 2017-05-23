@@ -1,7 +1,19 @@
-<div *ngIf="!(ordered | async)" class="no-order-text">
+<div *ngIf="!(ordered | async)" class="flex-stretch no-order-text">
   <p>No current order</p>
 </div>
-<div *ngIf="ordered | async">
-  <ss-cart [cart]="cart | async"></ss-cart>
-  <button md-raised-button (click)="completeOrder()" class="text-center">Complete order</button>
+<div *ngIf="ordered | async" class="flex-stretch">
+  <ngui-map
+    class="flex-stretch2"
+    center="51.23135408102922, 2.9106473500000902"
+    disableDefaultUI="true"
+    (mapReady$)="onMapReady($event)">
+  </ngui-map>
+  <md-icon [mdMenuTriggerFor]="menu" class="input-icon overlay-info-button">shopping_cart</md-icon>
+  <md-menu #menu="mdMenu">
+    <ss-cart [cart]="cart | async"></ss-cart>
+  </md-menu>
+
+  <button class="text-center overlay-confirm-button" md-raised-button (click)="completeOrder()">
+    Complete order
+  </button>
 </div>

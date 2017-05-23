@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import {
   PageScrollConfig,
   PageScrollInstance,
@@ -108,8 +108,8 @@ export class HomeComponent extends Unsubscribable {
   }
 
   onMapReady(map: google.maps.Map) {
-    if(!this.mapCenter && !this.mapZoom) {
-      this.mapCenter = new google.maps.LatLng(10,10);
+    if (!this.mapCenter && !this.mapZoom) {
+      this.mapCenter = new google.maps.LatLng(10, 10);
       this.mapZoom = 10;
     }
     this.map = map;
@@ -121,7 +121,7 @@ export class HomeComponent extends Unsubscribable {
       fillColor: '#673ab7',
       fillOpacity: 0.35
     });
-    map.fitBounds(this.getAreaBounds(beachPolygon.getPaths()));
+    map.fitBounds(BeachModel.getAreaBounds(beachPolygon.getPaths()));
     this.mapCenter = map.getCenter();
     this.mapZoom = map.getZoom();
     beachPolygon.setMap(map);
@@ -161,11 +161,7 @@ export class HomeComponent extends Unsubscribable {
       this._marker = new google.maps.Marker({
         position: gPos,
         icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 10,
-          strokeColor: '#106cc8',
-          strokeOpacity: 0.5,
-          strokeWeight: 10
+          url: '/assets/img/ic_person_pin_circle_black_48px.svg'
         },
         draggable: false,
         map: this.map
@@ -196,17 +192,5 @@ export class HomeComponent extends Unsubscribable {
       return Math.round(distanceMeter / 100) / 10 + ' km';
     }
     return Math.round(distanceMeter / 1000) + ' km';
-  }
-
-  private getAreaBounds(paths: google.maps.MVCArray): google.maps.LatLngBounds {
-    let bounds = new google.maps.LatLngBounds();
-    let path;
-    for (var i = 0; i < paths.getLength(); i++) {
-      path = paths.getAt(i);
-      for (var ii = 0; ii < path.getLength(); ii++) {
-        bounds.extend(path.getAt(ii));
-      }
-    }
-    return bounds;
   }
 }

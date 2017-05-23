@@ -19,6 +19,18 @@ export class BeachModel extends Model {
   private _beachMap: Map<number, Beach> = new Map();
   private _beachesAvailable = DataStatus.UNKNOWN;
 
+  static getAreaBounds(paths: google.maps.MVCArray): google.maps.LatLngBounds {
+    let bounds = new google.maps.LatLngBounds();
+    let path;
+    for (var i = 0; i < paths.getLength(); i++) {
+      path = paths.getAt(i);
+      for (var ii = 0; ii < path.getLength(); ii++) {
+        bounds.extend(path.getAt(ii));
+      }
+    }
+    return bounds;
+  }
+
   constructor(protected _store: Store<any>,
               private _restGateway: RestGatewayService) {
     super();

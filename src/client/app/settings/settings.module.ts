@@ -6,9 +6,10 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { SharedModule } from '../shared/shared.module';
 import { EditPreferenceComponent } from './preferences/edit-preference/edit-preference.component';
+import { NguiMapModule } from '@ngui/map';
 
 @NgModule({
-  imports: [SharedModule, SettingsRoutingModule],
+  imports: [SharedModule, SettingsRoutingModule, NguiMapModule],
   declarations: [
     SettingsComponent,
     CurrentOrderComponent,

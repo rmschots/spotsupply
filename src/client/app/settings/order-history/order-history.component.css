@@ -1,6 +1,7 @@
 :host {
   padding: 0 16px;
   display: block;
+  width: 100%;
 }
 
 .collapse-icon {
