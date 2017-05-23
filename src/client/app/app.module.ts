@@ -24,6 +24,7 @@ import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/combineLatest';
+import { ResetPasswordModule } from './reset-password/reset-password.module';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import 'rxjs/add/operator/combineLatest';
     OrderInfoModule,
     CreateAccountModule,
     VerifyEmailModule,
+    ResetPasswordModule,
     SharedModule.forRoot(),
     MaterialModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBtYO0eJfiqw2AqMRu-0_X8gBVSUWiIymg'}),
