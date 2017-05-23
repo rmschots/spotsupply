@@ -52,3 +52,8 @@
   flex-basis: auto;
   padding: 5px;
 }
+
+.title-bar-logo {
+  margin-left: -8px;
+  margin-right: 4px;
+}
