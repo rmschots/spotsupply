@@ -3,13 +3,13 @@
   <div class="store-bar-left">
     <div [ngClass]="{'actions-opaque': productTotal < 1}" (click)="onClearCartClicked()">
       <md-icon class="delete-icon">delete</md-icon>
-      <div>Clear cart</div>
+      <div>{{'STORE.clearCart' | translate}}</div>
     </div>
   </div>
-  <div class="store-bar-middle">Total &#8364; {{productTotal}}</div>
+  <div class="store-bar-middle">{{'STORE.total' | translate}} &#8364; {{productTotal}}</div>
   <div class="store-bar-right">
     <div [ngClass]="{'actions-opaque': productTotal < 1 || (isNotAtBeach | async)}" (click)="onNextClicked()">
-      <div>Next</div>
+      <div>{{'STORE.next' | translate}}</div>
       <md-icon class="next-icon">keyboard_arrow_right</md-icon>
     </div>
   </div>

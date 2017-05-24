@@ -5,7 +5,7 @@
   </div>
 
   <div *ngIf="isNotAtBeach | async" class="flex-container padded-row-xl text-center">
-    We cannot deliver to where you are right now. Go to one of our beaches to create an order.
+    {{'HOME.cannotOrderNow' | translate}}
   </div>
 
   <div class="flex-container padded-row-xl text-center">
@@ -21,7 +21,7 @@
           <small *ngIf="distanceToBeachAvailable | async">{{getBeachDistance(spot.id)}}</small>
         </md-card-title>
         <button md-button class="collapse-icon" [color]="'primary'">
-          {{selectedSpot == spot.id? 'Hide map':'Show on map'}}
+          {{selectedSpot == spot.id? ('HOME.hideMap' | translate) : ('HOME.showMap' | translate) }}
         </button>
       </md-card-header>
 
@@ -38,7 +38,7 @@
   </div>
   <div *ngIf="!(hasCart | async) && atBeach && !(ordered | async)" class="arrow-right-bottom">
     <div class="arrow-right mat-elevation-z6">
-      Shop @ {{atBeach.name}}
+      {{'HOME.shopAt' | translate}} {{atBeach.name}} {{atBeach.name | translate}}
     </div>
   </div>
   <button md-fab

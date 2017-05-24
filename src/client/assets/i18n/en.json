@@ -4,7 +4,11 @@
     "checkIt": "Check it!",
     "lookForSupplyAtSpot": "Look if we're Supplying at your Spot!",
     "orders": "Orders",
-    "takeMyOrder": "Take my order"
+    "takeMyOrder": "Take my order",
+    "cannotOrderNow": "We cannot deliver to where you are right now. Go to one of our beaches to create an order.",
+    "showMap": "Show map",
+    "hideMap": "Hide map",
+    "shopAt": "Shop @"
   },
   "NAVBAR": {
     "items": {
@@ -32,6 +36,11 @@
       "title": "Preferences"
     }
   },
+  "STORE": {
+    "clearCart": "Clear cart",
+    "total": "Total",
+    "next": "Next"
+  },
   "TOOLBAR": {
     "title": {
       "contact": "Contact",
@@ -52,5 +61,12 @@
       "2": "Position unavailable",
       "3": "Position detection timed out"
     }
+  },
+  "CONFIRMATION-INFO": {
+    "orderProcessed": "Your order has been processed",
+    "instructions": "To ensure smooth delivery",
+    "instruction1": "Stay within the delivery area",
+    "instruction2": "Don't move too far away",
+    "instruction3": "If you move, make sure your location shows correctly on our map"
   }
 }
