@@ -8,7 +8,8 @@
     disableDefaultUI="true"
     (mapReady$)="onMapReady($event)">
   </ngui-map>
-  <md-icon [mdMenuTriggerFor]="menu" class="input-icon overlay-info-button">shopping_cart</md-icon>
+  <div class="overlay-time-text">estimated: {{cartRequestedTime | async}}</div>
+  <md-icon [mdMenuTriggerFor]="menu" class="overlay-info-button">shopping_cart</md-icon>
   <md-menu #menu="mdMenu">
     <ss-cart [cart]="cart | async"></ss-cart>
   </md-menu>

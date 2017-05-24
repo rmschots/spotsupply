@@ -48,3 +48,13 @@
   font-size: 48px;
   color: #FF7D00;
 }
+
+.overlay-time-text {
+  position: absolute;
+  margin-left: 8px;
+  margin-top: 8px;
+  top: 0;
+  left: 0;
+  font-size: 1em;
+  color: #FF7D00;
+}

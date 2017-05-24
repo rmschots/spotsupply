@@ -70,6 +70,10 @@ export class CurrentOrderComponent extends Unsubscribable {
     this._shoppingCartModel.completeOrder();
   }
 
+  get cartRequestedTime() {
+    return this._shoppingCartModel.shoppingCart$.map(cart => cart.requestedTime);
+  }
+
   get cart() {
     return this._shoppingCartModel.shoppingCart$;
   }
