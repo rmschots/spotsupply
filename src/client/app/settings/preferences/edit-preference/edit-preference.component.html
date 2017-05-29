@@ -1,43 +1,47 @@
 <div>
   <md-input-container class="full-width field-container" floatPlaceholder="always">
-    <input mdInput type="password" placeholder="Current password" name="currentPassword"
+    <input mdInput type="password" placeholder="{{'form.passwordCurrent.placeholder' | translate}}"
+           name="currentPassword"
            [(ngModel)]="currentPassword" required/>
   </md-input-container>
   <ng-template [ngIf]="type === 'password'">
     <md-input-container #largeContainer class="full-width field-container"
                         floatPlaceholder="always" [ngClass]="{'large-container': largeContainer._isErrorState()}">
-      <input #input mdInput type="password" placeholder="New password" name="password"
+      <input #input mdInput type="password" placeholder="{{'form.passwordNew.placeholder' | translate}}" name="password"
              [(ngModel)]="value" validatePassword required/>
       <md-error>
-        <div style="padding-bottom: 50px">more than 6, at most 32 characters, contains numbers, uppercase and lowercase
-          letters
+        <div style="padding-bottom: 50px">
+          {{'form.passwordNew.error' | translate}}
         </div>
       </md-error>
     </md-input-container>
     <md-input-container class="full-width field-container" floatPlaceholder="always">
-      <input mdInput type="password" placeholder="Repeat password" name="password2" [(ngModel)]="passwordRepeat"
+      <input mdInput type="password" placeholder="{{'form.passwordRepeat.placeholder' | translate}}" name="password2"
+             [(ngModel)]="passwordRepeat"
              required minlength="6" pattern="{{value}}"/>
-      <md-error>Your password doesn't match</md-error>
+      <md-error>{{'form.passwordRepeat.error' | translate}}</md-error>
     </md-input-container>
   </ng-template>
 
   <ng-template [ngIf]="type === 'tel'">
     <md-input-container class="full-width field-container" floatPlaceholder="always">
-      <input mdInput type="tel" placeholder="Phone number" name="phoneNumber"
+      <input mdInput type="tel" placeholder="{{'form.phone.placeholder' | translate}}" name="phoneNumber"
              [(ngModel)]="value" validatePhoneNumber required/>
-      <md-error>Format example: 0496 123456</md-error>
+      <md-error>{{'form.phone.error' | translate}}</md-error>
     </md-input-container>
   </ng-template>
 
   <ng-template [ngIf]="type === 'email'">
     <md-input-container class="full-width field-container" floatPlaceholder="always">
-      <input mdInput type="email" placeholder="Email address" name="email" [(ngModel)]="value"
+      <input mdInput type="email" placeholder="{{'form.email.placeholder' | translate}}" name="email"
+             [(ngModel)]="value"
              pattern="^[a-zA-Z0-9.!#$%&’*+=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required/>
-      <md-error>Format: xxx@xxx.xxx</md-error>
+      <md-error>{{'form.email.error' | translate}}</md-error>
     </md-input-container>
   </ng-template>
   <div *ngIf="errorMessage" class="preferences-error-message warn-text">{{errorMessage}}</div>
-  <button md-raised-button class="collapse-icon" [color]="'accent'" (click)="submit()" (blur)="errorMessage = undefined">
-    Submit
+  <button md-raised-button class="collapse-icon" [color]="'accent'" (click)="submit()"
+          (blur)="errorMessage = undefined">
+    {{'form.actions.submit' | translate}}
   </button>
 </div>

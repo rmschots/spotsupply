@@ -1,28 +1,31 @@
-<h4 class="header-small-margin order-info-title">Delivery information</h4>
+<h4 class="header-small-margin order-info-title">{{'ORDER-INFO.deliveryInformation' | translate}}</h4>
 <form *ngIf="cart" #orderInfoForm="ngForm">
   <md-input-container class="full-width" floatPlaceholder="always">
-    <input mdInput [value]="beachName | async | translate" placeholder="Your spot" name="spot" disabled/>
+    <input mdInput [value]="beachName | async | translate" placeholder="{{'ORDER-INFO.yourSpot' | translate}}"
+           name="spot" disabled/>
   </md-input-container>
   <md-input-container class="full-width" floatPlaceholder="always">
-    <input mdInput placeholder="Your phone number" name="phoneNumber" [value]="phoneNumber | async" disabled/>
+    <input mdInput placeholder="{{'form.phone.placeholder' | translate}}" name="phoneNumber"
+           [value]="phoneNumber | async" disabled/>
   </md-input-container>
-  <md-select placeholder="Delivery time" class="full-width mat-input-wrapper" [(ngModel)]="cart.requestedTime"
+  <md-select placeholder="{{'ORDER-INFO.deliveryTime' | translate}}" class="full-width mat-input-wrapper"
+             [(ngModel)]="cart.requestedTime"
              name="deliveryTime" floatPlaceholder="always" required>
     <md-option *ngFor="let time of (possibleTimes | async)" [value]="time">
       {{ time }}
     </md-option>
   </md-select>
-  <md-select placeholder="Payment method" class="full-width mat-input-wrapper"
+  <md-select placeholder="{{'ORDER-INFO.paymentMethod' | translate}}" class="full-width mat-input-wrapper"
              name="paymentMethod" [(ngModel)]="paymentMethod" disabled>
     <md-option [value]="'Cash'">Cash</md-option>
   </md-select>
-  <h5 class="header-small-margin order-info-title text-center">Order information</h5>
+  <h5 class="header-small-margin order-info-title text-center">{{'ORDER-INFO.orderInformation' | translate}}</h5>
   <ss-cart [cart]="cart"></ss-cart>
   <div *ngIf="errorMessage" class="warn-text">{{errorMessage}}</div>
   <div class="bring-it-button-parent">
     <button md-raised-button color="primary" class="bring-it-button" (click)="placeOrder()"
             [disabled]="(isNotAtBeachYet | async) || !orderInfoForm.form.valid">
-      Bring it to my spot!
+      {{'ORDER-INFO.bringIt' | translate}}
     </button>
   </div>
 </form>

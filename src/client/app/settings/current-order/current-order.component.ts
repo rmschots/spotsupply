@@ -71,7 +71,7 @@ export class CurrentOrderComponent extends Unsubscribable {
   }
 
   get cartRequestedTime() {
-    return this._shoppingCartModel.shoppingCart$.map(cart => cart.requestedTime);
+    return this._shoppingCartModel.shoppingCart$.map(cart => cart?cart.requestedTime:null);
   }
 
   get cart() {

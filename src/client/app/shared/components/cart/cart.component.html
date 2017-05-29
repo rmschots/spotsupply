@@ -14,6 +14,6 @@
     <div class="product-total-price">&#8364; {{getProductAmount(product)*product.price}}</div>
   </div>
   <md-chip-list *ngIf="showTotal" class="mat-chip-list-stacked price-total">
-    <md-chip class="total-text">Total: &#8364; {{getTotalAmount()}}</md-chip>
+    <md-chip class="total-text">{{'CART.total' | translate}}: &#8364; {{getTotalAmount()}}</md-chip>
   </md-chip-list>
 </div>

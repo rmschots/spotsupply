@@ -1,14 +1,29 @@
 {
+  "CONFIRMATION-INFO": {
+    "instruction1": "Stay within the delivery area",
+    "instruction2": "Don't move too far away",
+    "instruction3": "If you move, make sure your location shows correctly on our map",
+    "instructions": "To ensure smooth delivery",
+    "orderProcessed": "Your order has been processed"
+  },
+  "CREATE-ACCOUNT": {
+    "accountCreatedText1": "Verification mail will be sent.",
+    "accountCreatedText2": "Please check your inbox and verify your account to log in."
+  },
+  "CURRENT-ORDER": {
+    "estimated": "Estimated",
+    "noCurrentOrder": "No current order"
+  },
   "HOME": {
     "account": "Settings",
+    "cannotOrderNow": "We cannot deliver to where you are right now. Go to one of our beaches to create an order.",
     "checkIt": "Check it!",
+    "hideMap": "Hide map",
     "lookForSupplyAtSpot": "Look if we're Supplying at your Spot!",
     "orders": "Orders",
-    "takeMyOrder": "Take my order",
-    "cannotOrderNow": "We cannot deliver to where you are right now. Go to one of our beaches to create an order.",
+    "shopAt": "Shop @",
     "showMap": "Show map",
-    "hideMap": "Hide map",
-    "shopAt": "Shop @"
+    "takeMyOrder": "Take my order"
   },
   "NAVBAR": {
     "items": {
@@ -23,8 +38,24 @@
       "settings": "Settings"
     }
   },
+  "ORDER-HISTORY": {
+    "empty": "Your order history is empty"
+  },
+  "ORDER-INFO": {
+    "bringIt": "Bring it to my spot!",
+    "deliveryInformation": "Delivery information",
+    "deliveryTime": "Delivery time",
+    "orderInformation": "Order information",
+    "paymentMethod": "Payment method",
+    "yourSpot": "Your spot"
+  },
   "OSTEND": "OSTEND",
   "OTHER_BEACH": "OTHER BEACH",
+  "RESET-PASSWORD": {
+    "passwordChangedText1": "Password successfully changed!",
+    "passwordChangedText2": "You can now log in using your new password.",
+    "passwordChangedText3": "Redirecting to homepage in"
+  },
   "SETTINGS": {
     "CURRENT_ORDER": {
       "title": "Current order"
@@ -38,8 +69,8 @@
   },
   "STORE": {
     "clearCart": "Clear cart",
-    "total": "Total",
-    "next": "Next"
+    "next": "Next",
+    "total": "Total"
   },
   "TOOLBAR": {
     "title": {
@@ -55,6 +86,50 @@
       "verifyEmail": "Email Verification"
     }
   },
+  "VERIFY-EMAIL": {
+    "checkingVerificationCode": "Checking verification code...",
+    "verifiedText1": "Account verified!",
+    "verifiedText2": "You can now log in.",
+    "verifiedText3": "Redirecting to homepage in "
+  },
+  "form": {
+    "actions": {
+      "createAccount": "Create account",
+      "resetPassword": "Reset password",
+      "submit": "Submit",
+      "logIn": "Log in",
+      "ok": "OK"
+    },
+    "email": {
+      "error": "Format: xxx@xxx.xxx",
+      "placeholder": "Email address"
+    },
+    "password": {
+      "placeholder": "Password"
+    },
+    "passwordCreate": {
+      "error": "more than 6, at most 32 characters, contains numbers, uppercase and lowercase letters",
+      "placeholder": "Password"
+    },
+    "passwordCurrent": {
+      "placeholder": "Current password"
+    },
+    "passwordNew": {
+      "error": "more than 6, at most 32 characters, contains numbers, uppercase and lowercase letters",
+      "placeholder": "New password"
+    },
+    "passwordRepeat": {
+      "error": "Your password doesn't match",
+      "placeholder": "Repeat password"
+    },
+    "phone": {
+      "error": "Format example: 0496 123456",
+      "placeholder": "Phone number"
+    },
+    "phoneOrEmail": {
+      "placeholder": "Phone or email"
+    }
+  },
   "map": {
     "errorCode": {
       "1": "You need to enable location detection for detecting distance to our delivery area",
@@ -62,11 +137,17 @@
       "3": "Position detection timed out"
     }
   },
-  "CONFIRMATION-INFO": {
-    "orderProcessed": "Your order has been processed",
-    "instructions": "To ensure smooth delivery",
-    "instruction1": "Stay within the delivery area",
-    "instruction2": "Don't move too far away",
-    "instruction3": "If you move, make sure your location shows correctly on our map"
+  "CART": {
+    "total": "Total"
+  },
+  "LOCATION-LOADING": {
+    "loadingLocation": "Loading your location..."
+  },
+  "LOGIN": {
+    "forgotPassword": "Forgot password",
+    "createAnAccount": "Create an account",
+    "noAccountYet": "Don't have an account yet?",
+    "logIn": "Log in",
+    "resetPasswordMailSent": "We have sent a mail to reset your password if the given email address is linked to an account."
   }
 }

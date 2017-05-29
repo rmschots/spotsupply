@@ -1,5 +1,5 @@
 <div *ngIf="historyEmpty | async" class="empty-history-text">
-  Your order history is empty
+  {{'ORDER-HISTORY.empty' | translate}}
 </div>
 <div *ngFor="let cart of (history|async)">
   <md-card class="cart-entry">

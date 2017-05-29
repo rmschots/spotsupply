@@ -1,5 +1,5 @@
 <div *ngIf="!(ordered | async)" class="flex-stretch no-order-text">
-  <p>No current order</p>
+  <p>{{'CURRENT-ORDER.noCurrentOrder' | translate}}</p>
 </div>
 <div *ngIf="ordered | async" class="flex-stretch">
   <ngui-map
@@ -8,7 +8,7 @@
     disableDefaultUI="true"
     (mapReady$)="onMapReady($event)">
   </ngui-map>
-  <div class="overlay-time-text">estimated: {{cartRequestedTime | async}}</div>
+  <div class="overlay-time-text">{{'CURRENT-ORDER.estimated' | translate}}: {{cartRequestedTime | async}}</div>
   <md-icon [mdMenuTriggerFor]="menu" class="overlay-info-button">shopping_cart</md-icon>
   <md-menu #menu="mdMenu">
     <ss-cart [cart]="cart | async"></ss-cart>

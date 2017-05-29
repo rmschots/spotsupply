@@ -1,10 +1,10 @@
 <div class="buttons-parent">
   <button md-raised-button color="accent" class="checkout-as-button" (click)="openLoginDialog()">
-    Log in
+    {{'LOGIN.logIn' | translate}}
   </button>
   <hr>
-  <p>Don't have an account yet?</p>
+  <p>{{'LOGIN.noAccountYet' | translate}}</p>
   <button md-raised-button color="primary" class="checkout-as-button" (click)="goToCreateAccount()">
-    Create an account
+    {{'LOGIN.createAnAccount' | translate}}
   </button>
 </div>
