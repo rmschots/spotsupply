@@ -1,4 +1,7 @@
 {
+  "CART": {
+    "total": "Total"
+  },
   "CONFIRMATION-INFO": {
     "instruction1": "Stay within the delivery area",
     "instruction2": "Don't move too far away",
@@ -24,6 +27,16 @@
     "shopAt": "Shop @",
     "showMap": "Show map",
     "takeMyOrder": "Take my order"
+  },
+  "LOCATION-LOADING": {
+    "loadingLocation": "Loading your location..."
+  },
+  "LOGIN": {
+    "createAnAccount": "Create an account",
+    "forgotPassword": "Forgot password",
+    "logIn": "Log in",
+    "noAccountYet": "Don't have an account yet?",
+    "resetPasswordMailSent": "We have sent a mail to reset your password if the given email address is linked to an account."
   },
   "NAVBAR": {
     "items": {
@@ -95,10 +108,10 @@
   "form": {
     "actions": {
       "createAccount": "Create account",
-      "resetPassword": "Reset password",
-      "submit": "Submit",
       "logIn": "Log in",
-      "ok": "OK"
+      "ok": "OK",
+      "resetPassword": "Reset password",
+      "submit": "Submit"
     },
     "email": {
       "error": "Format: xxx@xxx.xxx",
@@ -136,18 +149,5 @@
       "2": "Position unavailable",
       "3": "Position detection timed out"
     }
-  },
-  "CART": {
-    "total": "Total"
-  },
-  "LOCATION-LOADING": {
-    "loadingLocation": "Loading your location..."
-  },
-  "LOGIN": {
-    "forgotPassword": "Forgot password",
-    "createAnAccount": "Create an account",
-    "noAccountYet": "Don't have an account yet?",
-    "logIn": "Log in",
-    "resetPasswordMailSent": "We have sent a mail to reset your password if the given email address is linked to an account."
   }
 }
