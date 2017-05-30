@@ -9,8 +9,8 @@
            [value]="phoneNumber | async" disabled/>
   </md-input-container>
   <md-select placeholder="{{'ORDER-INFO.deliveryTime' | translate}}" class="full-width mat-input-wrapper"
-             [(ngModel)]="cart.requestedTime"
-             name="deliveryTime" floatPlaceholder="always" required>
+             [(ngModel)]="cart.requestedTime" [ngClass]="{'warn-color': hasNoPossibleTimes}"
+             name="deliveryTime" floatPlaceholder="always" required [disabled]="hasNoPossibleTimes">
     <md-option *ngFor="let time of (possibleTimes | async)" [value]="time">
       {{ time }}
     </md-option>

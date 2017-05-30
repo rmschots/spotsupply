@@ -26,6 +26,8 @@ export class OrderInfoComponent extends Unsubscribable implements OnDestroy {
   paymentMethod: string = 'Cash';
   errorMessage: string;
 
+  hasNoPossibleTimes = false;
+
   private _snackbarRef: MdSnackBarRef<SimpleSnackBar>;
 
   constructor(private navigationService: NavigationService,
@@ -107,6 +109,7 @@ export class OrderInfoComponent extends Unsubscribable implements OnDestroy {
     this._deliveryModel.refreshPossibleTimes().take(1)
       .subscribe(null,
         error => {
+          this.hasNoPossibleTimes = true;
           this._snackbarRef = this._snackBar.open(error.message, 'Home');
           this._snackbarRef.onAction().take(1).subscribe(() => {
             this.router.navigate(['/']);

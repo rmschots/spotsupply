@@ -147,7 +147,7 @@ md-card-header {
 
 .arrow-right-bottom {
   position: fixed;
-  bottom: 6px;
+  bottom: 14px;
   right: 80px;
   margin: 10px;
 }
@@ -155,11 +155,11 @@ md-card-header {
 .arrow-right {
   position:relative;
   display: block;
-  padding-left: 10px;
-  height:40px;
-  background-color: #FF851B;
+  padding-left: 5px;
+  height:26px;
+  background-color: rgba(184, 184, 184, 0.75);
   color: white;
-  line-height:40px;
+  line-height:26px;
   white-space: nowrap;
   text-align:center;
   vertical-align: middle;
@@ -172,7 +172,7 @@ md-card-header {
   display: block;
   width: 0;
   height:0;
-  border-left: 20px solid #FF851B;
-  border-bottom: 20px solid transparent;
-  border-top: 20px solid transparent;
+  border-left: 20px solid rgba(184, 184, 184, 0.75);
+  border-bottom: 13px solid transparent;
+  border-top: 13px solid transparent;
 }

@@ -37,8 +37,8 @@
     </md-card>
   </div>
   <div *ngIf="!(hasCart | async) && atBeach && !(ordered | async)" class="arrow-right-bottom">
-    <div class="arrow-right mat-elevation-z6">
-      {{'HOME.shopAt' | translate}} {{atBeach.name}} {{atBeach.name | translate}}
+    <div class="arrow-right">
+      {{'HOME.shopAt' | translate}} {{atBeach.name | translate}}
     </div>
   </div>
   <button md-fab
