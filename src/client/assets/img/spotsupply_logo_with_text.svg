@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1417" height="354" viewBox="0 0 1417 354">
+  <defs>
+    <style>
+      .cls-1 {
+      fill: #ff7800;
+      fill-rule: evenodd;
+      }
+
+      .cls-2 {
+      fill: #00fffb;
+      }
+
+      .cls-3 {
+      fill: #ba00ff;
+      }
+
+      .cls-4 {
+      fill: #c9ff00;
+      }
+
+      .cls-5 {
+      font-size: 312.499px;
+      fill: #f1e903;
+      font-family: "Roboto Condensed";
+      }
+    </style>
+  </defs>
+  <path class="cls-1"
+        d="M407.5,93A91.473,91.473,0,0,1,499,184.446c0,50.505-91.392,152.531-91.5,152.554S316,234.951,316,184.446A91.473,91.473,0,0,1,407.5,93Z"/>
+  <circle class="cls-2" cx="407.5" cy="184.454" r="68.688"/>
+  <circle class="cls-3" cx="407.5" cy="184.453" r="45.656"/>
+  <circle class="cls-4" cx="407.5" cy="184.453" r="23.031"/>
+  <text id="tSupply" class="cls-5" x="500" y="268">tSupply</text>
+  <text id="Sp" class="cls-5" y="268">Sp</text>
+</svg>
