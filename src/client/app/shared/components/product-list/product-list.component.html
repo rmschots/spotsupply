@@ -7,9 +7,9 @@
         <div>
           <div *ngFor="let product of type.products" class="product-parent">
             <div class="product-name">
-              <span>{{product.name}}</span>
-              <div *ngIf="product.extraInfo" class="product-extra-info">
-                {{product.extraInfo}}
+              <span>{{'products.'+product.key+'.name' | translate}}</span>
+              <div *ngIf="'products.'+product.key+'.extraInfo' | translate" class="product-extra-info">
+                {{'products.'+product.key+'.extraInfo' | translate}}
               </div>
             </div>
             <div class="product-price">&#8364; {{product.price}}</div>

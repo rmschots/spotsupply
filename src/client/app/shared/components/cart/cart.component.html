@@ -2,9 +2,10 @@
   <div *ngFor="let product of getProducts()" class="product-parent">
     <div class="product-name">
       <div class="truncate">
-        {{product.name}}
-        <div *ngIf="product.extraInfo" class="product-name-part truncate product-extra-info">
-          ({{product.extraInfo}})
+        {{'products.'+product.key+'.name' | translate}}
+        <div *ngIf="'products.'+product.key+'.extraInfo' | translate"
+             class="product-name-part truncate product-extra-info">
+          ({{'products.'+product.key+'.extraInfo' | translate}})
         </div>
       </div>
       <div class="product-price">
