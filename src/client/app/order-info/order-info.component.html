@@ -12,7 +12,7 @@
              [(ngModel)]="cart.requestedTime" [ngClass]="{'warn-color': hasNoPossibleTimes}"
              name="deliveryTime" floatPlaceholder="always" required [disabled]="hasNoPossibleTimes">
     <md-option *ngFor="let time of (possibleTimes | async)" [value]="time">
-      {{ time }}
+      {{time | translate}}
     </md-option>
   </md-select>
   <md-select placeholder="{{'ORDER-INFO.paymentMethod' | translate}}" class="full-width mat-input-wrapper"

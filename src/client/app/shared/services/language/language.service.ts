@@ -18,7 +18,7 @@ export class LanguageService {
 
   constructor(private translate: TranslateService) {
     translate.setDefaultLang(LanguageService.languages.get(0).code);
-    switch (navigator.language) {
+    switch (translate.getBrowserLang()) {
       case 'nl':
         this.setLanguage(LanguageService.languages.get(1));
         break;
