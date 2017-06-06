@@ -1,9 +1,9 @@
 <md-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="tabSelected($event)"
               [ngStyle]="{height: '100%'}" md-stretch-tabs [dynamicHeight]="true">
-  <md-tab *ngFor="let category of categories" [label]="category.name">
+  <md-tab *ngFor="let category of categories" [label]="'productCategories.' + category.key | translate">
     <div class="tab-content">
       <div *ngFor="let type of category.types" class="md-elevation-z6">
-        <h4 *ngIf="type.hasTitle" class="header-small-margin product-list-title primary-text">{{type.name}}</h4>
+        <h4 *ngIf="type.hasTitle" class="header-small-margin product-list-title primary-text">{{'productTypes.' + type.key | translate}}</h4>
         <div>
           <div *ngFor="let product of type.products" class="product-parent">
             <div class="product-name">

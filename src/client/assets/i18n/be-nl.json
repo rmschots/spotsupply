@@ -22,7 +22,7 @@
     "account": "Instellingen",
     "cannotOrderNow": "We kunnen niet leveren waar je nu bent. Ga naar 1 van onze stranden om te bestellen.",
     "checkIt": "Check it!",
-    "hideMap": "Map verbergen",
+    "hideMap": "Verberg map",
     "lookForSupplyAtSpot": "Kijk of we ook Supply-en op jouw Spot!",
     "orders": "Bestellingen",
     "shopAt": "Bestel @",
@@ -150,6 +150,18 @@
       "2": "Locatie onbeschikbaar",
       "3": "Locatie detectie timed out"
     }
+  },
+  "productCategories": {
+    "DRINKS": "Dranken",
+    "SNACKS": "Snacks",
+    "TOP_SELLERS": "Toppers"
+  },
+  "productTypes": {
+    "BEER": "Bier",
+    "ICE_CREAM": "Ijs",
+    "SANDWICHES": "Sandwiches",
+    "SOFT_DRINKS": "Frisdranken",
+    "TOP_SELLERS": "Toppers"
   },
   "products": {
     "CALIPPO_COLA": {
