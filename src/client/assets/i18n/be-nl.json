@@ -1,10 +1,186 @@
 {
+  "ASAP": "Zo snel mogelijk",
+  "CART": {
+    "total": "Totaal"
+  },
+  "CONFIRMATION-INFO": {
+    "instruction1": "Blijf in de leveringszone",
+    "instruction2": "Verplaats je niet ver",
+    "instruction3": "Als je jewelf verplaatst, controleer of de map je correcte locatie toont.",
+    "instructions": "Om vlotte levering te garanderen",
+    "orderProcessed": "Uw order is verwerkt"
+  },
+  "CREATE-ACCOUNT": {
+    "accountCreatedText1": "Bevestigingsmail wordt verzonden.",
+    "accountCreatedText2": "Kijk in de inbox van je mail en bevestig je account om in te loggen."
+  },
+  "CURRENT-ORDER": {
+    "estimated": "Geschat",
+    "noCurrentOrder": "Geen huidige bestelling"
+  },
   "HOME": {
     "account": "Instellingen",
+    "cannotOrderNow": "We kunnen niet leveren waar je nu bent. Ga naar 1 van onze stranden om te bestellen.",
+    "checkIt": "Check it!",
+    "hideMap": "Map verbergen",
     "lookForSupplyAtSpot": "Kijk of we ook Supply-en op jouw Spot!",
     "orders": "Bestellingen",
+    "shopAt": "Bestel @",
+    "showMap": "Toon map",
     "takeMyOrder": "Neem mijn bestelling"
   },
+  "LOCATION-LOADING": {
+    "loadingLocation": "Locatie laden..."
+  },
+  "LOGIN": {
+    "createAnAccount": "Maak een account",
+    "forgotPassword": "Wachtwoord vergeten",
+    "logIn": "Inloggen",
+    "noAccountYet": "Nog geen account?",
+    "resetPasswordMailSent": "We hebben een mail gestuurd om je wachtwoord te wijzigen indien je emailadres aan een account is gelinkt."
+  },
+  "NAVBAR": {
+    "items": {
+      "contact": "Contacteer ons",
+      "createAccount": "Maak account",
+      "faq": "FAQ",
+      "home": "Home",
+      "logIn": "Inloggen",
+      "logOut": "Afmelden",
+      "paymentMethods": "Betaalmethodes",
+      "products": "Wat bieden we aan?",
+      "settings": "Instellingen"
+    }
+  },
+  "ORDER-HISTORY": {
+    "empty": "Uw bestelgeschiedenis is leeg"
+  },
+  "ORDER-INFO": {
+    "bringIt": "Breng het naar mijn Spot!",
+    "deliveryInformation": "Leveringsinformatie",
+    "deliveryTime": "Levertijd",
+    "orderInformation": "Leveringsinformatie",
+    "paymentMethod": "Betaalmethode",
+    "yourSpot": "Jou Spot"
+  },
   "OSTEND": "OOSTENDE",
-  "OTHER_BEACH": "ANDERE BADPLAATS"
+  "OTHER_BEACH": "ANDERE BADPLAATS",
+  "RESET-PASSWORD": {
+    "passwordChangedText1": "Je wachtwoord is gewijzigd!",
+    "passwordChangedText2": "Je kan nu inloggen met je nieuwe wachtwoord",
+    "passwordChangedText3": "Je word doorverwezen naar de homepage in"
+  },
+  "SETTINGS": {
+    "CURRENT_ORDER": {
+      "title": "Huidige bestelling"
+    },
+    "ORDER_HISTORY": {
+      "title": "bestelgeschiedenis"
+    },
+    "PREFERENCES": {
+      "title": "Voorkeuren"
+    }
+  },
+  "STORE": {
+    "clearCart": "Legen",
+    "next": "Volgende",
+    "total": "Totaal"
+  },
+  "TOOLBAR": {
+    "title": {
+      "contact": "Contact",
+      "createAccount": "Account maken",
+      "faq": "FAQ",
+      "home": "SpotSupply",
+      "order-info": "Mijn bestelling",
+      "products": "Productlijst",
+      "resetPassword": "Wachtwoord resetten",
+      "settings": "Instellingen",
+      "store": "Winkel",
+      "verifyEmail": "Email bevestigen"
+    }
+  },
+  "VERIFY-EMAIL": {
+    "checkingVerificationCode": "Bevestigingscode controleren...",
+    "verifiedText1": "Account geverifieerd!",
+    "verifiedText2": "Je kan nu inloggen.",
+    "verifiedText3": "Je word doorverwezen naar de homepage in"
+  },
+  "form": {
+    "actions": {
+      "createAccount": "Account maken",
+      "logIn": "Inloggen",
+      "ok": "OK",
+      "resetPassword": "Wachtwoord resetten",
+      "submit": "Bevestigen"
+    },
+    "email": {
+      "error": "Formaat: xxx@xxx.xxx",
+      "placeholder": "Emailadres"
+    },
+    "password": {
+      "placeholder": "Wachtwoord"
+    },
+    "passwordCreate": {
+      "error": "meer dan 6, maximum 32 tekens, bevat getallen, klein- en hoofdletters",
+      "placeholder": "Wachtwoord"
+    },
+    "passwordCurrent": {
+      "placeholder": "Huidig wachtwoord"
+    },
+    "passwordNew": {
+      "error": "meer dan 6, maximum 32 tekens, bevat getallen, klein- en hoofdletters",
+      "placeholder": "Nieuw wachtwoord"
+    },
+    "passwordRepeat": {
+      "error": "Je wachtwoord komt niet overeen",
+      "placeholder": "Herhaal wachtwoord"
+    },
+    "phone": {
+      "error": "Voorbeeld formaat: 0496 123456",
+      "placeholder": "Telefoonnummer"
+    },
+    "phoneOrEmail": {
+      "placeholder": "Telefoonnummer of email"
+    }
+  },
+  "map": {
+    "errorCode": {
+      "1": "Je moet detectie van locatie aanzetten om ons te te laten leveren waar jij bent",
+      "2": "Locatie onbeschikbaar",
+      "3": "Locatie detectie timed out"
+    }
+  },
+  "products": {
+    "CALIPPO_COLA": {
+      "name": "Calippo Cola"
+    },
+    "CALIPPO_ORANGE": {
+      "name": "Calippo Orange"
+    },
+    "COCA-COLA_25CL": {
+      "extraInfo": "25cl",
+      "name": "Coca Cola"
+    },
+    "COCA-COLA_33CL": {
+      "extraInfo": "33cl",
+      "name": "Coca Cola"
+    },
+    "JUPILER_25CL": {
+      "extraInfo": "25cl",
+      "name": "Jupiler"
+    },
+    "JUPILER_33CL": {
+      "extraInfo": "33cl",
+      "name": "Jupiler"
+    },
+    "SMOS_CHEESE": {
+      "extraInfo": "kaas, groenten",
+      "name": "Smos kaas"
+    },
+    "SMOS_NORMAL": {
+      "extraInfo": "kaas, hesp, groenten",
+      "name": "Smos"
+    }
+  }
 }
