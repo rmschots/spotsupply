@@ -9,7 +9,6 @@ import { NavigationService } from '../shared/services/navigation/navigation.serv
 import { BeachModel } from '../shared/framework/models/beach.model';
 import { Beach } from '../shared/objects/beach/beach';
 import { LocationModel } from '../shared/framework/models/location.model';
-import { LocationPermissionStatus } from '../shared/objects/position/location-permission-status';
 import { ShoppingCartModel } from '../shared/framework/models/shopping-cart.model';
 import { Unsubscribable } from '../shared/components/unsubscribable';
 import { Router } from '@angular/router';
@@ -28,7 +27,6 @@ export class HomeComponent extends Unsubscribable {
   map: google.maps.Map;
 
   selectedSpot: number;
-  overlayError: string = null;
 
   atBeach: Beach;
 
@@ -48,14 +46,6 @@ export class HomeComponent extends Unsubscribable {
     super();
     navigationService.setTitle('home');
     PageScrollConfig.defaultDuration = 0;
-    _locationModel.permission$.takeUntil(this._ngUnsubscribe$)
-      .subscribe(locationPermissionStatus => {
-        if (locationPermissionStatus === LocationPermissionStatus.DENIED) {
-          this.overlayError = 'Could not determine location';
-        } else {
-          this.overlayError = null;
-        }
-      });
     _locationModel.lastKnownLocation$.takeUntil(this._ngUnsubscribe$)
       .subscribe(lastKnownLocation => {
         this._lastKnownPosition = lastKnownLocation;
@@ -136,7 +126,6 @@ export class HomeComponent extends Unsubscribable {
       this.map = null;
     } else {
       this.map = null;
-      this.overlayError = null;
       this.selectedSpot = spot.id;
       setTimeout(() => {
         let pageScrollOptions: PageScrollOptions = {
