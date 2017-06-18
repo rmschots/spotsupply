@@ -4,14 +4,14 @@
   flex-flow: column;
 }
 
-/*.mobile-view {*/
-  /*height: 600px !important;*/
-  /*width: 350px !important;*/
-  /*left: 50% !important;*/
-  /*margin-left: -175px !important;*/
-/*}*/
+.mobile-view {
+  height: 568px !important;
+  width: 320px !important;
+  left: calc(50% - 160px) !important;
+  top: calc(50% - 284px) !important;
+}
 
-#main-parent {
+.main-parent {
   height: 100%;
   position: fixed;
   width: 100%;
@@ -24,7 +24,7 @@
   width: 100%;
 }
 
-#main-content {
+.main-content {
   width: 100%;
   overflow: auto;
   flex: 1 1 auto;
@@ -33,4 +33,11 @@
 
 .header {
   flex: 0 0 auto;
+}
+
+.phone-background {
+  left: calc(50% - 182px) !important;
+  top: calc(50% - 389px) !important;
+  position: absolute !important;
+  z-index: 0 !important;
 }

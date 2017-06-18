@@ -1,13 +1,29 @@
-<md-sidenav-container id="main-parent" [ngClass]="{'mobile-view': isDesktop}" (backdropClick)="menuOpen = false">
+<h1 *ngIf="isDesktop" style="color: white;text-align: center;">This site is made for mobile. Please use your mobile
+  device.</h1>
+<div class="marvel-device iphone5c white phone-background" *ngIf="isDesktop">
+  <div class="top-bar"></div>
+  <div class="sleep"></div>
+  <div class="volume"></div>
+  <div class="camera"></div>
+  <div class="sensor"></div>
+  <div class="speaker"></div>
+  <div class="screen">
+  </div>
+  <div class="home"></div>
+  <div class="bottom-bar"></div>
+</div>
+
+<md-sidenav-container class="main-parent" [ngClass]="{'mobile-view': isDesktop}" (backdropClick)="menuOpen = false">
   <md-sidenav mode="over" [opened]="menuOpen" (close)="sideNavClosed(true)"
               [ngStyle]="{'margin-left': marginLeft+'px'}">
     <ss-navbar [menuOpen]="menuOpen" (menuClose)="sideNavClosed(false)" (margin)="marginLeft=$event"></ss-navbar>
   </md-sidenav>
   <div class="sidenav-content">
     <ss-toolbar class="header" (openMenu)="menuOpened()" [menuOpen]="menuOpen"></ss-toolbar>
-    <div id="main-content">
+    <div class="main-content">
       <router-outlet></router-outlet>
     </div>
   </div>
 </md-sidenav-container>
+
 
