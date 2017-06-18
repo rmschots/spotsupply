@@ -125,7 +125,7 @@ export class LocationModel extends Model {
     if (!this._watchId) {
       this._watchPosition(true);
     } else {
-      console.error('already watching location');
+      console.warn('already watching location');
     }
   }
 
@@ -146,7 +146,7 @@ export class LocationModel extends Model {
       this._dialogRef = this.dialog.open(LocationLoadingComponent, LocationModel.dialogOptions);
     }
     this._watchId = navigator.geolocation.watchPosition((location) => {
-        console.error('success location');
+        console.log('success location');
         this._store.dispatch(SpotSupplyActions.locationPermissionUpdated(LocationPermissionStatus.GRANTED));
         this._store.dispatch(SpotSupplyActions.userPositionUpdated(location));
         if (useDialog) {
