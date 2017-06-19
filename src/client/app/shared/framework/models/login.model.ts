@@ -40,6 +40,15 @@ export class LoginModel extends Model implements OnInit {
     this.loadAccount();
   }
 
+  get isAdmin(): Observable<boolean> {
+    return this.loginAvailable$.combineLatest(this.loginUser$, (dataStatus: DataStatus, loginUser: LoginUser) => {
+      if (!loginUser || ![DataStatus.AVAILABLE, DataStatus.AVAILABLE].includes(dataStatus)) {
+        return undefined;
+      }
+      return dataStatus === DataStatus.AVAILABLE && loginUser.roles.includes('ROLE_ADMIN');
+    }).filter((val: boolean) => val !== undefined);
+  }
+
   createUser(createUser: CreateUser): Observable<boolean> {
     return this._restGateway.post('/account/create', createUser)
       .map(

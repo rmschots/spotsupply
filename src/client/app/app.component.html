@@ -1,6 +1,6 @@
-<h1 *ngIf="isDesktop" style="color: white;text-align: center;">This site is made for mobile. Please use your mobile
+<h1 *ngIf="isDesktop && !isAdmin" style="color: white;text-align: center;">This site is made for mobile. Please use your mobile
   device.</h1>
-<div class="marvel-device iphone5c white phone-background" *ngIf="isDesktop">
+<div class="marvel-device iphone5c white phone-background" *ngIf="isDesktop && !isAdmin">
   <div class="top-bar"></div>
   <div class="sleep"></div>
   <div class="volume"></div>
@@ -13,7 +13,7 @@
   <div class="bottom-bar"></div>
 </div>
 
-<md-sidenav-container class="main-parent" [ngClass]="{'mobile-view': isDesktop}" (backdropClick)="menuOpen = false">
+<md-sidenav-container class="main-parent" [ngClass]="{'mobile-view': isDesktop && !isAdmin}" (backdropClick)="menuOpen = false">
   <md-sidenav mode="over" [opened]="menuOpen" (close)="sideNavClosed(true)"
               [ngStyle]="{'margin-left': marginLeft+'px'}">
     <ss-navbar [menuOpen]="menuOpen" (menuClose)="sideNavClosed(false)" (margin)="marginLeft=$event"></ss-navbar>

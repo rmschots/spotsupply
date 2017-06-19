@@ -3,6 +3,7 @@ import { Config } from './shared/config/env.config';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { Unsubscribable } from './shared/components/unsubscribable';
 import { StartupService } from './shared/services/startup/startup.service';
+import { LoginModel } from './shared/framework/models/login.model';
 
 @Component({
   moduleId: module.id,
@@ -16,13 +17,17 @@ export class AppComponent extends Unsubscribable implements OnInit {
   isDesktop: boolean = false;
   menuOpen: boolean = false;
   marginLeft: number = 0;
+  isAdmin: boolean = false;
 
   @ViewChild(NavbarComponent) navbar: NavbarComponent;
 
-  constructor(private _startupService: StartupService) {
+  constructor(private _startupService: StartupService, private _loginModel: LoginModel) {
     super();
     console.log('Environment config', Config);
     (<any>window).loading_screen.finish();
+    this._loginModel.isAdmin
+      .takeUntil(this._ngUnsubscribe$)
+      .subscribe(isAdmin => this.isAdmin = isAdmin);
   }
 
   menuOpened() {
