@@ -1,4 +1,9 @@
 {
+  "ADMIN": {
+    "ADMIN_HOME": {
+      "title": "Admin home"
+    }
+  },
   "ASAP": "As soon as possible",
   "CART": {
     "total": "Total"
@@ -41,6 +46,7 @@
   },
   "NAVBAR": {
     "items": {
+      "admin": "Admin",
       "contact": "Contact us",
       "createAccount": "Create Account",
       "faq": "FAQ",
@@ -88,6 +94,7 @@
   },
   "TOOLBAR": {
     "title": {
+      "admin": "Admin",
       "contact": "Contact",
       "createAccount": "Create Account",
       "faq": "FAQ",

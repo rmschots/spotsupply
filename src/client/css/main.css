@@ -85,3 +85,14 @@ body {
 .top-margin-default {
   margin-top: 8px !important;
 }
+
+.tab-link {
+  flex-grow: 1;
+}
+
+.content-overflow-auto {
+  overflow: auto;
+  position: relative;
+  display: flex;
+  height: 100%;
+}

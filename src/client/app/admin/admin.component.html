@@ -1,0 +1,13 @@
+<nav md-tab-nav-bar>
+  <a md-tab-link
+     [routerLink]="'./admin-home'"
+     [routerLinkActive] #rla="routerLinkActive"
+     [routerLinkActiveOptions]="{exact:true}"
+     [active]="rla.isActive"
+     class="tab-link">
+    {{'ADMIN.ADMIN_HOME.title'|translate}}
+  </a>
+</nav>
+<div class="full-width content-overflow-auto">
+  <router-outlet></router-outlet>
+</div>

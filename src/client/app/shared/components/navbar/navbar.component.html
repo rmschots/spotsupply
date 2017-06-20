@@ -22,9 +22,12 @@
        (click)="navigated()">{{'NAVBAR.items.faq' | translate}}</a>
     <a *ngIf="isLoggedIn | async" class="menu-item" md-list-item [routerLink]="['/settings']"
        [routerLinkActive]="['router-link-active']" (click)="navigated()">{{'NAVBAR.items.settings' | translate}}</a>
+    <a *ngIf="isAdmin | async" class="menu-item" md-list-item [routerLink]="['/admin']"
+       [routerLinkActive]="['router-link-active']" (click)="navigated()">{{'NAVBAR.items.admin' | translate}}</a>
     <md-list-item *ngIf="isLoggedIn | async" (click)="logOut()">{{'NAVBAR.items.logOut' | translate}}</md-list-item>
     <md-list-item *ngIf="!(isLoggedIn | async)" (click)="logIn()">{{'NAVBAR.items.logIn' | translate}}</md-list-item>
-    <a *ngIf="!(isLoggedIn | async)" class="menu-item" md-list-item [routerLink]="['/create-account']" [routerLinkActive]="['router-link-active']"
+    <a *ngIf="!(isLoggedIn | async)" class="menu-item" md-list-item [routerLink]="['/create-account']"
+       [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}"
        (click)="navigated()">{{'NAVBAR.items.createAccount' | translate}}</a>
   </md-nav-list>

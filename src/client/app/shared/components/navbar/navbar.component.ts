@@ -61,6 +61,10 @@ export class NavbarComponent extends Unsubscribable {
     });
   }
 
+  get isAdmin() {
+    return this._loginModel.isAdmin;
+  }
+
   menuSwiped(event: any) {
     if (event.direction === 2) {
       this.closeMenu();
