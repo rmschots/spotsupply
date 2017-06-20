@@ -1,7 +1,16 @@
 {
   "ADMIN": {
-    "ADMIN_HOME": {
-      "title": "Admin home"
+    "ADMIN_DASHBOARD": {
+      "title": "Dashboard"
+    },
+    "PRODUCT_MANAGER": {
+      "title": "Product Manager"
+    },
+    "USER_MANAGER": {
+      "title": "User Manager"
+    },
+    "ORDER_MANAGER": {
+      "title": "Order Manager"
     }
   },
   "ASAP": "As soon as possible",

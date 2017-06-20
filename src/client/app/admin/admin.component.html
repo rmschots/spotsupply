@@ -1,11 +1,35 @@
 <nav md-tab-nav-bar>
   <a md-tab-link
-     [routerLink]="'./admin-home'"
+     [routerLink]="'./dashboard'"
      [routerLinkActive] #rla="routerLinkActive"
      [routerLinkActiveOptions]="{exact:true}"
      [active]="rla.isActive"
      class="tab-link">
-    {{'ADMIN.ADMIN_HOME.title'|translate}}
+    {{'ADMIN.ADMIN_DASHBOARD.title'|translate}}
+  </a>
+  <a md-tab-link
+     [routerLink]="'./product-manager'"
+     [routerLinkActive] #rla2="routerLinkActive"
+     [routerLinkActiveOptions]="{exact:true}"
+     [active]="rla2.isActive"
+     class="tab-link">
+    {{'ADMIN.PRODUCT_MANAGER.title'|translate}}
+  </a>
+  <a md-tab-link
+     [routerLink]="'./user-manager'"
+     [routerLinkActive] #rla3="routerLinkActive"
+     [routerLinkActiveOptions]="{exact:true}"
+     [active]="rla3.isActive"
+     class="tab-link">
+    {{'ADMIN.USER_MANAGER.title'|translate}}
+  </a>
+  <a md-tab-link
+     [routerLink]="'./order-manager'"
+     [routerLinkActive] #rla4="routerLinkActive"
+     [routerLinkActiveOptions]="{exact:true}"
+     [active]="rla4.isActive"
+     class="tab-link">
+    {{'ADMIN.ORDER_MANAGER.title'|translate}}
   </a>
 </nav>
 <div class="full-width content-overflow-auto">
