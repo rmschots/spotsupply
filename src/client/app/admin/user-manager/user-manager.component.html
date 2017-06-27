@@ -1,3 +1,37 @@
 <div>
-  user manager
+  <h1>user manager</h1>
+  <md-input-container class="complete-form-width">
+    <input mdInput type="text" placeholder="filter" name="filterText" #email="ngModel"
+           [(ngModel)]="filterText" (change)="filterChanged()"/>
+  </md-input-container>
+  <button md-mini-fab (click)="filterChanged()">
+    <md-icon>search</md-icon>
+  </button>
+  <div *ngIf="isLoaded">
+    <div *ngIf="currentFilter">
+      Current filter: {{currentFilter}}
+    </div>
+    <table *ngIf="(usersSubject | async).length > 0; else usersEmpty">
+      <thead>
+      <tr>
+        <th>id</th>
+        <th>email</th>
+        <th>phone</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of (usersSubject | async)">
+        <td>{{user.id}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.phoneNumber}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <ng-template #usersEmpty>No users found</ng-template>
+    <div *ngIf="pagesArray.length > 1">
+      <button *ngFor="let number of pagesArray" (click)="changePage(number)">
+        {{number+1}}
+      </button>
+    </div>
+  </div>
 </div>
