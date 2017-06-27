@@ -55,4 +55,9 @@ export class UserManagerComponent extends Unsubscribable {
       });
   }
 
+  hasUsers() {
+    return this.usersSubject.map(users => {
+      return !!users && users.length > 0;
+    });
+  }
 }
