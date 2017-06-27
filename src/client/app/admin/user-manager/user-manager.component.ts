@@ -5,6 +5,7 @@ import { Unsubscribable } from '../../shared/components/unsubscribable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LoginUser } from '../../shared/objects/account/login-user';
 import { UsersSearchResult } from '../../shared/objects/search/users-search-result';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   moduleId: module.id,
@@ -55,7 +56,7 @@ export class UserManagerComponent extends Unsubscribable {
       });
   }
 
-  hasUsers() {
+  get hasUsers() {
     return this.usersSubject.map(users => {
       return !!users && users.length > 0;
     });

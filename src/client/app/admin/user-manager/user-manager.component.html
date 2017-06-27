@@ -11,7 +11,7 @@
     <div *ngIf="currentFilter">
       Current filter: {{currentFilter}}
     </div>
-    <table *ngIf="hasUsers | async; else usersEmpty">
+    <table *ngIf="(hasUsers | async); else usersEmpty">
       <thead>
       <tr>
         <th>id</th>
