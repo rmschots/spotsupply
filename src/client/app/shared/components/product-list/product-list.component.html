@@ -1,15 +1,16 @@
 <md-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="tabSelected($event)"
               [ngStyle]="{height: '100%'}" md-stretch-tabs [dynamicHeight]="true">
-  <md-tab *ngFor="let category of categories" [label]="'productCategories.' + category.key | translate">
+  <md-tab *ngFor="let category of categories" [label]="category.name | ssTranslate | async">
     <div class="tab-content">
       <div *ngFor="let type of category.types" class="md-elevation-z6">
-        <h4 *ngIf="type.hasTitle" class="header-small-margin product-list-title primary-text">{{'productTypes.' + type.key | translate}}</h4>
+        <h4 *ngIf="type.hasTitle" class="header-small-margin product-list-title primary-text">{{ type.name |
+          ssTranslate | async}}</h4>
         <div>
           <div *ngFor="let product of type.products" class="product-parent">
             <div class="product-name">
-              <span>{{'products.'+product.key+'.name' | translate}}</span>
-              <div *ngIf="'products.'+product.key+'.extraInfo' | translate" class="product-extra-info">
-                {{'products.'+product.key+'.extraInfo' | translate}}
+              <span>{{product.name| ssTranslate | async}}</span>
+              <div *ngIf="product.extraInfo" class="product-extra-info">
+                {{product.extraInfo | ssTranslate | async}}
               </div>
             </div>
             <div class="product-price">&#8364; {{product.price}}</div>
@@ -18,7 +19,8 @@
                        [ngClass]="{'action-disabled': getProductAmount(product) < 1}"
                        (click)="removeProduct(product)"></md-icon>
               <div class="amount-text">{{getProductAmount(product)}}</div>
-              <md-icon fontSet="fa" fontIcon="fa-plus" class="text-center primary-text" (click)="addProduct(product)"></md-icon>
+              <md-icon fontSet="fa" fontIcon="fa-plus" class="text-center primary-text"
+                       (click)="addProduct(product)"></md-icon>
             </div>
           </div>
         </div>

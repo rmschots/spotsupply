@@ -1,7 +1,8 @@
 import { Product } from './product';
+import { Translations } from '../common/translations';
 export class ProductType {
   constructor(public id: number,
-              public key: string,
+              public name: Translations,
               public hasTitle: boolean,
               public products: Product[]) {
   }

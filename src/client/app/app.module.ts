@@ -14,6 +14,7 @@ import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/combineLatest';
+import 'rxjs/add/operator/withLatestFrom';
 import { AdminModule } from './admin/admin.module';
 
 @NgModule({

@@ -150,49 +150,5 @@
       "2": "Locatie onbeschikbaar",
       "3": "Locatie detectie timed out"
     }
-  },
-  "productCategories": {
-    "DRINKS": "Dranken",
-    "SNACKS": "Snacks",
-    "TOP_SELLERS": "Toppers"
-  },
-  "productTypes": {
-    "BEER": "Bier",
-    "ICE_CREAM": "Ijs",
-    "SANDWICHES": "Sandwiches",
-    "SOFT_DRINKS": "Frisdranken",
-    "TOP_SELLERS": "Toppers"
-  },
-  "products": {
-    "CALIPPO_COLA": {
-      "name": "Calippo Cola"
-    },
-    "CALIPPO_ORANGE": {
-      "name": "Calippo Orange"
-    },
-    "COCA-COLA_25CL": {
-      "extraInfo": "25cl",
-      "name": "Coca Cola"
-    },
-    "COCA-COLA_33CL": {
-      "extraInfo": "33cl",
-      "name": "Coca Cola"
-    },
-    "JUPILER_25CL": {
-      "extraInfo": "25cl",
-      "name": "Jupiler"
-    },
-    "JUPILER_33CL": {
-      "extraInfo": "33cl",
-      "name": "Jupiler"
-    },
-    "SMOS_CHEESE": {
-      "extraInfo": "kaas, groenten",
-      "name": "Smos kaas"
-    },
-    "SMOS_NORMAL": {
-      "extraInfo": "kaas, hesp, groenten",
-      "name": "Smos"
-    }
   }
 }

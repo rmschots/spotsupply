@@ -36,6 +36,7 @@ import { StartupService } from './services/startup/startup.service';
 import { deliveryReducer } from './framework/reducers/delivery.reducer';
 import { DeliveryModel } from './framework/models/delivery.model';
 import { ResetPasswordComponent } from './components/login/reset-password.component';
+import { SSTranslatePipe } from './pipes/ss-translation.pipe';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -72,10 +73,10 @@ export function HttpLoaderFactory(http: Http) {
     PasswordStrengthBarModule
   ],
   declarations: [ToolbarComponent, NavbarComponent, ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent,
-    LocationLoadingComponent, PasswordValidatorDirective, PhoneNumberValidatorDirective, ResetPasswordComponent],
+    LocationLoadingComponent, PasswordValidatorDirective, PhoneNumberValidatorDirective, ResetPasswordComponent, SSTranslatePipe],
   exports: [ToolbarComponent, NavbarComponent, TranslateModule, CommonModule, FormsModule, RouterModule, MaterialModule,
     ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent, LocationLoadingComponent, ResetPasswordComponent,
-    PasswordValidatorDirective, PasswordStrengthBarModule, PhoneNumberValidatorDirective],
+    PasswordValidatorDirective, PasswordStrengthBarModule, PhoneNumberValidatorDirective, SSTranslatePipe],
   entryComponents: [LocationLoadingComponent]
 })
 export class SharedModule {

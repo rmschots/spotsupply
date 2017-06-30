@@ -166,51 +166,5 @@
       "2": "Position unavailable",
       "3": "Position detection timed out"
     }
-  },
-  "productCategories": {
-    "DRINKS": "Drinks",
-    "SNACKS": "Snacks",
-    "TOP_SELLERS": "Top sellers"
-  },
-  "productTypes": {
-    "BEER": "Beer",
-    "ICE_CREAM": "Ice cream",
-    "SANDWICHES": "Sandwiches",
-    "SOFT_DRINKS": "Soft drinks",
-    "TOP_SELLERS": "Top sellers"
-  },
-  "products": {
-    "CALIPPO_COLA": {
-      "extraInfo": "",
-      "name": "Calippo Cola"
-    },
-    "CALIPPO_ORANGE": {
-      "extraInfo": "",
-      "name": "Calippo Orange"
-    },
-    "COCA-COLA_25CL": {
-      "extraInfo": "25cl",
-      "name": "Coca Cola"
-    },
-    "COCA-COLA_33CL": {
-      "extraInfo": "33cl",
-      "name": "Coca Cola"
-    },
-    "JUPILER_25CL": {
-      "extraInfo": "25cl",
-      "name": "Jupiler"
-    },
-    "JUPILER_33CL": {
-      "extraInfo": "33cl",
-      "name": "Jupiler"
-    },
-    "SMOS_CHEESE": {
-      "extraInfo": "cheese, vegetables",
-      "name": "Smos cheese"
-    },
-    "SMOS_NORMAL": {
-      "extraInfo": "cheese, ham, vegetables",
-      "name": "Smos"
-    }
   }
 }
