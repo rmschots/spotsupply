@@ -8,12 +8,12 @@ import { Beach } from '../../objects/beach/beach';
 import { RestGatewayService } from '../../services/gateway/rest-gateway.service';
 import { DataStatus } from '../../services/gateway/data-status';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { List } from 'immutable';
+import * as immutable from 'immutable';
 import { Coordinate } from '../../objects/position/position';
 
 @Injectable()
 export class BeachModel extends Model {
-  beaches$: Observable<List<Beach>>;
+  beaches$: Observable<immutable.List<Beach>>;
   beachesAvailable$: BehaviorSubject<DataStatus> = new BehaviorSubject(DataStatus.UNKNOWN);
 
   private _beachMap: Map<number, Beach> = new Map();
@@ -35,7 +35,7 @@ export class BeachModel extends Model {
               private _restGateway: RestGatewayService) {
     super();
     this.beaches$ = this._store.select('beaches');
-    this.beaches$.subscribe((beaches: List<Beach>) => {
+    this.beaches$.subscribe((beaches: immutable.List<Beach>) => {
       if (!!beaches && beaches.size > 0) {
         this._beachMap.clear();
         beaches.forEach(beach => {
@@ -47,7 +47,7 @@ export class BeachModel extends Model {
   }
 
   getBeachObs(id: number): Observable<Beach> {
-    return this.beaches$.map((beaches: List<Beach>) => beaches.find(beach => beach.id === id));
+    return this.beaches$.map((beaches: immutable.List<Beach>) => beaches.find(beach => beach.id === id));
   }
 
   getBeach(id: number): Beach {

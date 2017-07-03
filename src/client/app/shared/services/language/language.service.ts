@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Language } from '../../components/toolbar/language';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { List } from 'immutable';
+import * as immutable from 'immutable';
 
 @Injectable()
 export class LanguageService {
 
-  static languages: List<Language> = List.of(
+  static languages: immutable.List<Language> = immutable.List.of(
     new Language('en', 'English'),
     new Language('nl', 'Nederlands'),
     new Language('fr', 'Français')

@@ -6,7 +6,7 @@ import { DataStatus } from '../../services/gateway/data-status';
 import { Language } from '../toolbar/language';
 import { LanguageService } from '../../services/language/language.service';
 import { Unsubscribable } from '../unsubscribable';
-import { List } from 'immutable';
+import * as immutable from 'immutable';
 
 @Component({
   moduleId: module.id,
@@ -23,7 +23,7 @@ export class NavbarComponent extends Unsubscribable {
   marginLeft: number;
   @ViewChild('navRoot') navParentElement: ElementRef;
 
-  languages: List<Language>;
+  languages: immutable.List<Language>;
   selectedLanguage: Language;
 
   constructor(private _loginModel: LoginModel,
