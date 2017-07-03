@@ -56,60 +56,28 @@ export class ProjectConfig extends SeedConfig {
 
     this.addPackagesBundles([{
       name: '@angular/material',
-      path: 'node_modules/@angular/material/bundles/material.umd.js',
-      packageMeta: {
-        main: 'index.js',
-        defaultExtension: 'js'
-      }
+      path: 'node_modules/@angular/material/bundles/material.umd.js'
     }, {
       name: '@ngui/map',
-      path: 'node_modules/@ngui/map/dist/map.umd.js',
-      packageMeta: {
-        main: 'index.js',
-        defaultExtension: 'js'
-      }
+      path: 'node_modules/@ngui/map/dist/map.umd.js'
     }, {
       name: 'ng2-page-scroll/ng2-page-scroll',
-      path: 'node_modules/ng2-page-scroll/bundles/ng2-page-scroll.umd.js',
-      packageMeta: {
-        main: 'ng2-page-scroll.js',
-        defaultExtension: 'js'
-      }
+      path: 'node_modules/ng2-page-scroll/bundles/ng2-page-scroll.umd.js'
     }, {
       name: '@ngx-translate/core',
-      path: 'node_modules/@ngx-translate/core/bundles/core.umd.js',
-      packageMeta: {
-        main: 'core.umd.js',
-        defaultExtension: 'js'
-      }
+      path: 'node_modules/@ngx-translate/core/bundles/core.umd.js'
     }, {
       name: '@ngx-translate/http-loader',
-      path: 'node_modules/@ngx-translate/http-loader/bundles/http-loader.umd.js',
-      packageMeta: {
-        main: 'http-loader.umd.js',
-        defaultExtension: 'js'
-      }
+      path: 'node_modules/@ngx-translate/http-loader/bundles/http-loader.umd.js'
     }, {
       name: 'typescript-collections',
-      path: 'node_modules/typescript-collections/dist/lib/index.js',
-      packageMeta: {
-        main: 'index.js',
-        defaultExtension: 'js'
-      }
+      path: 'node_modules/typescript-collections/dist/lib/index.js'
     }, {
       name: '@ngrx/store',
-      path: 'node_modules/@ngrx/store/bundles/store.umd.js',
-      packageMeta: {
-        main: 'index.js',
-        defaultExtension: 'js'
-      }
+      path: 'node_modules/@ngrx/store/bundles/store.umd.js'
     }, {
       name: '@ngrx/core',
-      path: 'node_modules/@ngrx/core/bundles/core.umd.js',
-      packageMeta: {
-        main: 'index.js',
-        defaultExtension: 'js'
-      }
+      path: 'node_modules/@ngrx/core/bundles/core.umd.js'
     }, {
       name: 'immutable',
       path: 'node_modules/immutable/dist/immutable.js'
@@ -118,7 +86,10 @@ export class ProjectConfig extends SeedConfig {
       path: 'node_modules/simple-peer/simplepeer.min.js'
     }, {
       name: 'ng2-password-strength-bar',
-      path: 'node_modules/ng2-password-strength-bar/index.js'
+      path: 'node_modules/ng2-password-strength-bar/index.js',
+      packageMeta: {
+        defaultExtension: 'js'
+      }
     }]);
 
     // Add packages (e.g. ng2-translate)

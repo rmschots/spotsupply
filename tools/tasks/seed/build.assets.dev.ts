@@ -23,4 +23,3 @@ export =
         .pipe(gulp.dest(Config.APP_DEST));
     }
   };
-
