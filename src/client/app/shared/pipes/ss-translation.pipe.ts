@@ -10,6 +10,9 @@ import { Observable } from 'rxjs/Observable';
 export class SSTranslatePipe implements PipeTransform {
 
   private static translate(translatable: Translations, language: string): string {
+    if(!translatable) {
+      return '';
+    }
     switch (language) {
       case 'en':
       case 'nl':
