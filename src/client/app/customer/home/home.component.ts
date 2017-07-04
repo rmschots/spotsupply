@@ -120,25 +120,27 @@ export class HomeComponent extends Unsubscribable {
     }, 1);
   }
 
-  selectSpot(spot: Beach) {
+  deselectSpot(spot: Beach) {
     if (this.selectedSpot === spot.id) {
       this.selectedSpot = null;
       this.map = null;
-    } else {
-      this.map = null;
-      this.selectedSpot = spot.id;
-      setTimeout(() => {
-        let pageScrollOptions: PageScrollOptions = {
-          document: document,
-          scrollTarget: '#' + spot.name,
-          scrollingViews: [this.elRef.nativeElement.parentElement],
-          pageScrollOffset: 15,
-          pageScrollDuration: 0
-        };
-        let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance(pageScrollOptions);
-        this.pageScrollService.start(pageScrollInstance);
-      }, 1);
     }
+  }
+
+  selectSpot(spot: Beach) {
+    this.map = null;
+    this.selectedSpot = spot.id;
+    setTimeout(() => {
+      let pageScrollOptions: PageScrollOptions = {
+        document: document,
+        scrollTarget: '#' + spot.name,
+        scrollingViews: [this.elRef.nativeElement.parentElement],
+        pageScrollOffset: 15,
+        pageScrollDuration: 0
+      };
+      let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance(pageScrollOptions);
+      this.pageScrollService.start(pageScrollInstance);
+    }, 500);
   }
 
   displayUserLocation() {

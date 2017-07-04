@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FAQComponent } from './faq.component';
 import { FAQRoutingModule } from './faq-routing.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
-  imports: [CommonModule, FAQRoutingModule],
+  imports: [SharedModule, FAQRoutingModule],
   declarations: [FAQComponent],
   exports: [FAQComponent]
 })

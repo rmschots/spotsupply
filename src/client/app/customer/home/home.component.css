@@ -96,7 +96,6 @@ md-chip {
   opacity: 0.75;
 }
 
-
 .image-banner {
   height: 80px;
   overflow: hidden;
@@ -113,11 +112,7 @@ md-chip {
 }
 
 .unpadded-card {
-   padding-bottom: 0;
-}
-
-.spot-title {
-  margin-top: 8px;
+  padding-bottom: 0;
 }
 
 .no-margin-bottom {
@@ -153,26 +148,53 @@ md-card-header {
 }
 
 .arrow-right {
-  position:relative;
+  position: relative;
   display: block;
   padding-left: 5px;
-  height:26px;
+  height: 26px;
   background-color: rgba(184, 184, 184, 0.75);
   color: white;
-  line-height:26px;
+  line-height: 26px;
   white-space: nowrap;
-  text-align:center;
+  text-align: center;
   vertical-align: middle;
 }
-.arrow-right:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:-20px;
+
+.arrow-right:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -20px;
   display: block;
   width: 0;
-  height:0;
+  height: 0;
   border-left: 20px solid rgba(184, 184, 184, 0.75);
   border-bottom: 13px solid transparent;
   border-top: 13px solid transparent;
+}
+
+md-panel-title {
+  color: white;
+  text-shadow: 0 0 30px rgba(68, 68, 68, 1);
+  font-size: 14pt;
+  width: 100%;
+}
+
+.spot-title > * {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.spot-title > b {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spot-title > small {
+  white-space: nowrap;
+}
+
+md-expansion-panel {
+  margin-bottom: 16px !important;
 }

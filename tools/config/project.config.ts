@@ -33,13 +33,14 @@ export class ProjectConfig extends SeedConfig {
       ...this.NPM_DEPENDENCIES,
       // {src: 'bootstrap/dist/js/bootstrap.js', inject: 'libs'},
       // {src: 'bootstrap/dist/css/bootstrap.css', inject: true},
-      {src: '@angular/material/prebuilt-themes/deeppurple-amber.css', inject: true},
+      // {src: '@angular/material/prebuilt-themes/deeppurple-amber.css', inject: true},
       {src: 'font-awesome/css/font-awesome.css', inject: true},
       {src: 'hammerjs/hammer.js', inject: 'libs'},
     ];
 
     // Add `local` third-party libraries to be injected/bundled.
     this.APP_ASSETS = [
+      {src: `${this.CSS_SRC}/deeppurple-amber.css`, inject: true, vendor: false},
       // {src: `${this.APP_SRC}/your-path-to-lib/libs/jquery-ui.js`, inject: true, vendor: false}
       // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
     ];
