@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ProductsModel } from '../../shared/framework/models/products.model';
+import { MdButtonToggleGroup } from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -8,7 +10,15 @@ import { Component } from '@angular/core';
 })
 export class ProductManagerComponent {
 
-  constructor() {
+  @ViewChild('selectedCategory') selectedCategory: MdButtonToggleGroup;
+  @ViewChild('selectedType') selectedType: MdButtonToggleGroup;
+  @ViewChild('selectedProduct') selectedProduct: MdButtonToggleGroup;
+
+  constructor(private _productsModel: ProductsModel) {
     console.log('product manager');
+  }
+
+  get productCategories() {
+    return this._productsModel.productHierarchy$;
   }
 }

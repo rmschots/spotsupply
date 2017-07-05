@@ -1,5 +1,35 @@
 :host {
-  display: flex;
-  align-content: stretch;
+  display: block;
   width: 100%;
+}
+
+.product-hierarchy {
+  display: flex;
+  width: 100%;
+}
+
+.product-group {
+  flex-grow: 1;
+}
+
+md-button-toggle-group {
+  height: 300px;
+  display: flex;
+  overflow: auto;
+}
+
+.action-button-group {
+  display: flex;
+}
+
+.add-button {
+  width: 50%;
+}
+
+.edit-button {
+  width: 50%;
+}
+
+h4 {
+  text-align: center;
 }

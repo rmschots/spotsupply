@@ -1,3 +1,56 @@
-<div>
-  product manager
+<div class="product-hierarchy">
+  <div>
+    <h4>Category</h4>
+    <md-button-toggle-group [vertical]=true #selectedCategory="mdButtonToggleGroup"
+                            (change)="selectedProduct.value = null; selectedType.value = null">
+      <md-button-toggle *ngFor="let category of productCategories | async" [value]="category">
+        {{category.name | ssTranslate | async}}
+      </md-button-toggle>
+    </md-button-toggle-group>
+    <div class="action-button-group">
+      <button md-raised-button class="add-button">
+        <md-icon>add</md-icon>
+      </button>
+      <button md-raised-button class="edit-button" [disabled]="!selectedCategory.value">
+        <md-icon>edit</md-icon>
+      </button>
+    </div>
+  </div>
+  <div>
+    <h4>Type</h4>
+    <md-button-toggle-group [vertical]=true #selectedType="mdButtonToggleGroup" (change)="selectedProduct.value = null">
+      <md-button-toggle *ngFor="let type of selectedCategory.value?selectedCategory.value.types:[]" [value]="type">
+        {{type.name | ssTranslate | async}}
+      </md-button-toggle>
+    </md-button-toggle-group>
+    <div class="action-button-group">
+      <button md-raised-button class="add-button" [disabled]="!selectedCategory.value">
+        <md-icon>add</md-icon>
+      </button>
+      <button md-raised-button class="edit-button" [disabled]="!selectedType.value">
+        <md-icon>edit</md-icon>
+      </button>
+    </div>
+  </div>
+  <div class="product-group">
+    <h4>Product</h4>
+    <md-button-toggle-group [vertical]=true #selectedProduct="mdButtonToggleGroup">
+      <md-button-toggle *ngFor="let product of selectedType.value?selectedType.value.products:[]" [value]="product">
+        {{product.name | ssTranslate | async}}
+        <small *ngIf="product.extraInfo">({{product.extraInfo | ssTranslate | async}})</small>
+      </md-button-toggle>
+    </md-button-toggle-group>
+    <div class="action-button-group">
+      <button md-raised-button class="add-button" [disabled]="!selectedType.value">
+        <md-icon>add</md-icon>
+      </button>
+      <button md-raised-button class="edit-button" [disabled]="!selectedProduct.value">
+        <md-icon>edit</md-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="selectedProduct.value">
+  {{ selectedProduct.value.name | ssTranslate | async}}
+  <small *ngIf="selectedProduct.value.extraInfo">({{selectedProduct.value.extraInfo | ssTranslate | async}})</small>
 </div>
