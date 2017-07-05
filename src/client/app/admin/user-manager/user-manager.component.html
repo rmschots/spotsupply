@@ -7,11 +7,11 @@
   <button md-mini-fab (click)="filterChanged()">
     <md-icon>search</md-icon>
   </button>
-  <div *ngIf="isLoaded">
+  <div *ngIf="isLoaded" class="table-parent">
     <div *ngIf="currentFilter">
       Current filter: {{currentFilter}}
     </div>
-    <table *ngIf="(hasUsers | async); else usersEmpty">
+    <table *ngIf="(hasUsers | async); else usersEmpty" id="table" class="table table-hover table-mc-light-blue">
       <thead>
       <tr>
         <th>id</th>

@@ -5,7 +5,6 @@ import { Unsubscribable } from '../../shared/components/unsubscribable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LoginUser } from '../../shared/objects/account/login-user';
 import { UsersSearchResult } from '../../shared/objects/search/users-search-result';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   moduleId: module.id,
