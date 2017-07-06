@@ -1,5 +1,6 @@
-export interface Translations {
-  en: string;
-  nl: string;
-  fr: string;
+export class Translations {
+  constructor(public en: string = '',
+              public nl: string = '',
+              public fr: string = '') {
+  }
 }

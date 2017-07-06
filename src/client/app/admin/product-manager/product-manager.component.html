@@ -8,7 +8,7 @@
       </md-button-toggle>
     </md-button-toggle-group>
     <div class="action-button-group">
-      <button md-raised-button class="add-button">
+      <button md-raised-button class="add-button" (click)="addCategory()">
         <md-icon>add</md-icon>
       </button>
       <button md-raised-button class="edit-button" [disabled]="!selectedCategory.value">
@@ -24,7 +24,7 @@
       </md-button-toggle>
     </md-button-toggle-group>
     <div class="action-button-group">
-      <button md-raised-button class="add-button" [disabled]="!selectedCategory.value">
+      <button md-raised-button class="add-button" [disabled]="!selectedCategory.value" (click)="addType(selectedCategory.value)">
         <md-icon>add</md-icon>
       </button>
       <button md-raised-button class="edit-button" [disabled]="!selectedType.value">
@@ -41,10 +41,10 @@
       </md-button-toggle>
     </md-button-toggle-group>
     <div class="action-button-group">
-      <button md-raised-button class="add-button" [disabled]="!selectedType.value">
+      <button md-raised-button class="add-button" [disabled]="!selectedType.value" (click)="addProduct(selectedType.value)">
         <md-icon>add</md-icon>
       </button>
-      <button md-raised-button class="edit-button" [disabled]="!selectedProduct.value">
+      <button md-raised-button class="edit-button" [disabled]="!selectedProduct.value" (click)="updateProduct(selectedProduct.value)">
         <md-icon>edit</md-icon>
       </button>
     </div>

@@ -9,11 +9,13 @@ import { ProductCategory } from '../../objects/product/product-category';
 import { Product } from '../../objects/product/product';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { DataStatus } from '../../services/gateway/data-status';
+import { ProductType } from '../../objects/product/product-type';
 
 @Injectable()
 export class ProductsModel extends Model {
   productHierarchy$: Observable<Array<ProductCategory>>;
   productMap$: Observable<Map<number, Product>>;
+  productTypeMap$: BehaviorSubject<Map<number, Array<ProductType>>> = new BehaviorSubject(new Map());
 
   productsAvailable$ = new BehaviorSubject<DataStatus>(DataStatus.UNKNOWN);
 
@@ -32,7 +34,20 @@ export class ProductsModel extends Model {
 
     this.productHierarchy$.subscribe(hierarchy => {
       if (!!hierarchy) {
+        const map = new Map<number, Array<ProductType>>();
+        hierarchy.map(cat => {
+          return cat.types;
+        }).forEach(types => types.forEach(type => type.products.forEach(product => {
+          if (map.has(product.id)) {
+            map.get(product.id).push(type);
+          } else {
+            map.set(product.id, [type]);
+          }
+        })));
+        this.productTypeMap$.next(map);
         this._setProductsAvailable(DataStatus.AVAILABLE);
+      } else {
+        this.productTypeMap$.next(new Map());
       }
     });
   }
@@ -50,6 +65,11 @@ export class ProductsModel extends Model {
     } else {
       console.error('Tried loading product hierarchy while one already exists');
     }
+  }
+
+  invalidate() {
+    this._setProductsAvailable(DataStatus.UNKNOWN);
+    this.loadProductHierarchy();
   }
 
   private _setProductsAvailable(dataStatus: DataStatus) {

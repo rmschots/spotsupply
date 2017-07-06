@@ -6,6 +6,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductManagerComponent } from './product-manager/product-manager.component';
 import { UserManagerComponent } from './user-manager/user-manager.component';
 import { OrderManagerComponent } from './order-manager/order-manager.component';
+import { CreateUpdateProductComponent } from './product-manager/create-product/create-update-product.component';
+import { CreateProductTypeComponent } from './product-manager/create-product-type/create-product-type.component';
+import { CreateProductCategoryComponent } from './product-manager/create-product-category/create-product-category.component';
 
 
 @NgModule({
@@ -15,9 +18,17 @@ import { OrderManagerComponent } from './order-manager/order-manager.component';
     DashboardComponent,
     ProductManagerComponent,
     UserManagerComponent,
-    OrderManagerComponent
+    OrderManagerComponent,
+    CreateUpdateProductComponent,
+    CreateProductTypeComponent,
+    CreateProductCategoryComponent
   ],
-  exports: [AdminComponent]
+  exports: [AdminComponent],
+  entryComponents: [
+    CreateUpdateProductComponent,
+    CreateProductTypeComponent,
+    CreateProductCategoryComponent
+  ]
 })
 
 export class AdminModule {

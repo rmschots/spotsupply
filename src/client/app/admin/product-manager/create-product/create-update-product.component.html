@@ -1,0 +1,64 @@
+<form>
+  <table class="full-width" cellspacing="8px">
+    <tr>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="{{'form.productNameEnglish.placeholder' | translate}}" name="productNameEnglish"
+                 [(ngModel)]="data.name.en" required/>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="{{'form.productNameDutch.placeholder' | translate}}" name="productNameDutch"
+                 [(ngModel)]="data.name.nl" required/>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="{{'form.productNameFrench.placeholder' | translate}}" name="productNameFrench"
+                 [(ngModel)]="data.name.fr" required/>
+        </md-input-container>
+      </td>
+    </tr>
+  </table>
+  <table class="full-width" cellspacing="8px">
+    <tr>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="{{'form.productExtraInfoEnglish.placeholder' | translate}}"
+                 name="productExtraInfoEnglish"
+                 [(ngModel)]="data.extraInfo.en" required/>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="{{'form.productExtraInfoDutch.placeholder' | translate}}"
+                 name="productExtraInfoDutch"
+                 [(ngModel)]="data.extraInfo.nl" required/>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="{{'form.productExtraInfoFrench.placeholder' | translate}}"
+                 name="productExtraInfoFrench"
+                 [(ngModel)]="data.extraInfo.fr" required/>
+        </md-input-container>
+      </td>
+    </tr>
+  </table>
+  <md-select placeholder="{{'form.productType.placeholder' | translate}}" [(ngModel)]="data.productTypes"
+             name="productType" [multiple]=true class="full-width input-padding">
+    <md-option *ngFor="let productType of (productTypes | async)" [value]="productType.id">
+      {{productType.name | ssTranslate | async}}
+    </md-option>
+  </md-select>
+  <md-input-container class="input-padding">
+    <input mdInput placeholder="{{'form.price.placeholder' | translate}}"
+           name="price"
+           type="number"
+           [(ngModel)]="data.price" required/>
+  </md-input-container>
+</form>
+<button md-raised-button (click)="submit()">
+  {{ isCreate? 'create' : 'update' }}
+</button>

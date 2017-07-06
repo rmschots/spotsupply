@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CustomerModule } from './customer/customer.module';
 import { MaterialModule } from '@angular/material';
 import { SharedModule } from './shared/shared.module';
+import { AdminModule } from './admin/admin.module';
 
 import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/takeUntil';
@@ -17,7 +18,8 @@ import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/startWith';
-import { AdminModule } from './admin/admin.module';
+import 'rxjs/add/operator/distinct';
+import 'rxjs/add/operator/concatMap';
 
 @NgModule({
   imports: [

@@ -158,6 +158,33 @@
     },
     "phoneOrEmail": {
       "placeholder": "Phone or email"
+    },
+    "productCategory": {
+      "placeholder": "Product category"
+    },
+    "productType": {
+      "placeholder": "Product type"
+    },
+    "productExtraInfoEnglish": {
+      "placeholder": "Extra info (EN)"
+    },
+    "productExtraInfoDutch": {
+      "placeholder": "Extra info (NL)"
+    },
+    "productExtraInfoFrench": {
+      "placeholder": "Extra info (FR)"
+    },
+    "productNameEnglish": {
+      "placeholder": "Name (EN)"
+    },
+    "productNameDutch": {
+      "placeholder": "Name (NL)"
+    },
+    "productNameFrench": {
+      "placeholder": "Name (FR)"
+    },
+    "price": {
+      "placeholder": "Price"
     }
   },
   "map": {
