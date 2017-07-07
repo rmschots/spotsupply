@@ -3,7 +3,8 @@ export class Product {
   constructor(public id: number,
               public name: Translations,
               public extraInfo: Translations,
-              public price: number) {
+              public price: number,
+              public active: boolean) {
   }
 
   toString() {

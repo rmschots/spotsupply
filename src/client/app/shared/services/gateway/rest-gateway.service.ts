@@ -20,26 +20,24 @@ export class RestGatewayService {
   }
 
   get(path: string, params: URLSearchParams = new URLSearchParams()): Observable<Response> {
-    return this._http.get(Config.REST_API + path, this.createGetOptions(params)).catch((e) => {
+    return this._http.get(Config.REST_API + path, this.createOptions(params)).catch((e) => {
       return this._handleError(e);
     });
   }
 
   post(path: string, payload?: any, params: URLSearchParams = new URLSearchParams()): Observable<Response> {
-    return this._http.post(Config.REST_API + path, payload, this.createPostOptions(params)).catch((e) => {
+    return this._http.post(Config.REST_API + path, payload, this.createOptions(params)).catch((e) => {
       return this._handleError(e);
     });
   }
 
-  private createPostOptions(params: any = new URLSearchParams()) {
-    return {
-      headers: this._headers,
-      withCredentials: true,
-      search: params
-    };
+  delete(path: string, params: URLSearchParams = new URLSearchParams()): Observable<Response> {
+    return this._http.delete(Config.REST_API + path, this.createOptions(params)).catch((e) => {
+      return this._handleError(e);
+    });
   }
 
-  private createGetOptions(params: URLSearchParams = new URLSearchParams()) {
+  private createOptions(params: URLSearchParams = new URLSearchParams()) {
     return {
       headers: this._headers,
       withCredentials: true,

@@ -33,3 +33,7 @@ md-button-toggle-group {
 h4 {
   text-align: center;
 }
+
+.inactive-entity {
+  text-decoration: line-through;
+}

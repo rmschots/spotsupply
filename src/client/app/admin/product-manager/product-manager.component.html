@@ -35,7 +35,7 @@
   <div class="product-group">
     <h4>Product</h4>
     <md-button-toggle-group [vertical]=true #selectedProduct="mdButtonToggleGroup">
-      <md-button-toggle *ngFor="let product of selectedType.value?selectedType.value.products:[]" [value]="product">
+      <md-button-toggle *ngFor="let product of selectedType.value?selectedType.value.products:[]" [value]="product" [ngClass]="{'inactive-entity': !product.active}">
         {{product.name | ssTranslate | async}}
         <small *ngIf="product.extraInfo">({{product.extraInfo | ssTranslate | async}})</small>
       </md-button-toggle>

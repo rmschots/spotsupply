@@ -58,6 +58,7 @@
            type="number"
            [(ngModel)]="data.price" required/>
   </md-input-container>
+  <md-checkbox name="active" [(ngModel)]="data.active">{{'form.active.placeholder' | translate}}</md-checkbox>
 </form>
 <button md-raised-button (click)="submit()">
   {{ isCreate? 'create' : 'update' }}

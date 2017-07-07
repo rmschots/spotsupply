@@ -5,6 +5,7 @@ export class CreateProduct {
   public name: Translations = new Translations();
   public extraInfo: Translations = new Translations();
   public price: number = 1.0;
+  public active: boolean = false;
 
   constructor(productType: ProductType) {
     this.productTypes = [productType.id];

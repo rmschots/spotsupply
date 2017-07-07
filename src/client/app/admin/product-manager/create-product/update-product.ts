@@ -7,6 +7,7 @@ export class UpdateProduct {
   extraInfo: Translations;
   price: number;
   productTypes: Array<number>;
+  active: boolean;
 
   constructor(product: Product, productType: Array<ProductType>) {
     this.id = product.id;
@@ -16,5 +17,6 @@ export class UpdateProduct {
       : new Translations();
     this.price = product.price;
     this.productTypes = productType.map(type => type.id);
+    this.active = product.active;
   }
 }

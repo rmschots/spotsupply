@@ -185,6 +185,9 @@
     },
     "price": {
       "placeholder": "Price"
+    },
+    "active": {
+      "placeholder": "Active"
     }
   },
   "map": {

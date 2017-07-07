@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { ProductCategory } from '../../objects/product/product-category';
 import { Product } from '../../objects/product/product';
 import { ProductsModel } from '../../framework/models/products.model';
 import { ShoppingCartModel } from '../../framework/models/shopping-cart.model';
-import { Unsubscribable } from '../unsubscribable';
 
 @Component({
   moduleId: module.id,
@@ -11,20 +9,18 @@ import { Unsubscribable } from '../unsubscribable';
   templateUrl: 'product-list.component.html',
   styleUrls: ['product-list.component.css']
 })
-export class ProductListComponent extends Unsubscribable {
+export class ProductListComponent {
 
   @Input() shop: boolean;
 
   selectedTabIndex: number = 0;
-  categories: ProductCategory[] = [];
 
   constructor(private _productsModel: ProductsModel,
               private _shoppingCartModel: ShoppingCartModel) {
-    super();
-    _productsModel.productHierarchy$.takeUntil(this._ngUnsubscribe$)
-      .subscribe(productHierarchy => {
-      this.categories = productHierarchy;
-    });
+  }
+
+  get categories() {
+    return this._productsModel.productHierarchy$;
   }
 
   tabSelected(tabIndex: any) {
