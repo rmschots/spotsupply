@@ -5,6 +5,7 @@ export const LOCATION_PERMISSION_UPDATED = 'spotsupply:locationPermissionUpdated
 export const USER_POSITION_UPDATED = 'spotsupply:userPositionUpdated';
 export const BEACH_DISTANCES = 'spotsupply:beachDistances';
 export const PRODUCT_HIERARCHY = 'spotsupply:productHierarchy';
+export const UNTYPED_PRODUCTS = 'spotsupply:untypedProducts';
 export const SHOPPING_CART_LOAD = 'spotsupply:shoppingCartLoad';
 export const SHOPPING_CART_ADD_ITEM = 'spotsupply:shoppingCartAddItem';
 export const SHOPPING_CART_REMOVE_ITEM = 'spotsupply:shoppingCartRemoveItem';

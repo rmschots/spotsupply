@@ -36,7 +36,7 @@ export class StartupService {
 
       this._loginModel.loadAccount();
       this._beachModel.loadBeaches();
-      this._productsModel.loadProductHierarchy();
+      this._productsModel.loadProducts();
 
       let obs1$ = this._shoppingCartModel.cartAvailable$;
       let obs2$ = this._beachModel.beachesAvailable$;

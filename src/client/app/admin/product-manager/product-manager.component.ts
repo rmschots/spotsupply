@@ -39,6 +39,10 @@ export class ProductManagerComponent extends Unsubscribable implements AfterView
     return this._productsModel.productHierarchy$;
   }
 
+  get untypedProducts() {
+    return this._productsModel.untypedProducts$;
+  }
+
   updateProduct(product: Product) {
     let dialogRef = this._dialog.open(CreateUpdateProductComponent,
       {

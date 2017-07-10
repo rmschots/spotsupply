@@ -22,12 +22,10 @@ md-button-toggle-group {
   display: flex;
 }
 
-.add-button {
-  width: 50%;
-}
-
-.edit-button {
-  width: 50%;
+.action-button-group > button {
+  padding: 0;
+  min-width: 36px;
+  flex-grow: 1;
 }
 
 h4 {
@@ -36,4 +34,9 @@ h4 {
 
 .inactive-entity {
   text-decoration: line-through;
+}
+
+.untypedProducts button {
+  min-width: 36px;
+  padding: 0;
 }

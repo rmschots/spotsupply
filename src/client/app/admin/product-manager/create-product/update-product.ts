@@ -16,7 +16,7 @@ export class UpdateProduct {
       ? new Translations(product.extraInfo.en, product.extraInfo.nl, product.extraInfo.fr)
       : new Translations();
     this.price = product.price;
-    this.productTypes = productType.map(type => type.id);
+    this.productTypes = productType?productType.map(type => type.id):null;
     this.active = product.active;
   }
 }

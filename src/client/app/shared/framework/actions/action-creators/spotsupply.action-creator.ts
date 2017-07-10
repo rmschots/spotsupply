@@ -17,7 +17,7 @@ import {
   SHOPPING_CART_ADD_ITEM,
   SHOPPING_CART_LOAD,
   SHOPPING_CART_REMOVE_ALL_ITEMS,
-  SHOPPING_CART_REMOVE_ITEM,
+  SHOPPING_CART_REMOVE_ITEM, UNTYPED_PRODUCTS,
   USER_LOGIN,
   USER_LOGOUT,
   USER_POSITION_UPDATED
@@ -27,6 +27,7 @@ import { LoginUser } from '../../../objects/account/login-user';
 import { LocationPermissionStatus } from '../../../objects/position/location-permission-status';
 import { ProductCategory } from '../../../objects/product/product-category';
 import { ShoppingCart } from '../../../objects/cart/shopping-cart';
+import { Product } from '../../../objects/product/product';
 
 export const SpotSupplyActions = {
   loadBeaches(payload: Array<Beach>): Action {
@@ -68,6 +69,12 @@ export const SpotSupplyActions = {
   productHierarchy(payload: ProductCategory[]): Action {
     return {
       type: PRODUCT_HIERARCHY,
+      payload: payload
+    };
+  },
+  untypedProducts(payload: Array<Product>): Action {
+    return {
+      type: UNTYPED_PRODUCTS,
       payload: payload
     };
   },

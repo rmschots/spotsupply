@@ -8,11 +8,14 @@
       </md-button-toggle>
     </md-button-toggle-group>
     <div class="action-button-group">
-      <button md-raised-button class="add-button" (click)="addCategory()">
+      <button md-raised-button (click)="addCategory()">
         <md-icon>add</md-icon>
       </button>
-      <button md-raised-button class="edit-button" [disabled]="!selectedCategory.value">
+      <button md-raised-button [disabled]="!selectedCategory.value">
         <md-icon>edit</md-icon>
+      </button>
+      <button md-raised-button [disabled]="!selectedCategory.value">
+        <md-icon>delete</md-icon>
       </button>
     </div>
   </div>
@@ -24,33 +27,43 @@
       </md-button-toggle>
     </md-button-toggle-group>
     <div class="action-button-group">
-      <button md-raised-button class="add-button" [disabled]="!selectedCategory.value" (click)="addType(selectedCategory.value)">
+      <button md-raised-button [disabled]="!selectedCategory.value" (click)="addType(selectedCategory.value)">
         <md-icon>add</md-icon>
       </button>
-      <button md-raised-button class="edit-button" [disabled]="!selectedType.value">
+      <button md-raised-button [disabled]="!selectedType.value">
         <md-icon>edit</md-icon>
+      </button>
+      <button md-raised-button [disabled]="!selectedType.value">
+        <md-icon>delete</md-icon>
       </button>
     </div>
   </div>
   <div class="product-group">
     <h4>Product</h4>
     <md-button-toggle-group [vertical]=true #selectedProduct="mdButtonToggleGroup">
-      <md-button-toggle *ngFor="let product of selectedType.value?selectedType.value.products:[]" [value]="product" [ngClass]="{'inactive-entity': !product.active}">
+      <md-button-toggle *ngFor="let product of selectedType.value?selectedType.value.products:[]" [value]="product"
+                        [ngClass]="{'inactive-entity': !product.active}">
         {{product.name | ssTranslate | async}}
         <small *ngIf="product.extraInfo">({{product.extraInfo | ssTranslate | async}})</small>
       </md-button-toggle>
     </md-button-toggle-group>
     <div class="action-button-group">
-      <button md-raised-button class="add-button" [disabled]="!selectedType.value" (click)="addProduct(selectedType.value)">
+      <button md-raised-button [disabled]="!selectedType.value" (click)="addProduct(selectedType.value)">
         <md-icon>add</md-icon>
       </button>
-      <button md-raised-button class="edit-button" [disabled]="!selectedProduct.value" (click)="updateProduct(selectedProduct.value)">
+      <button md-raised-button [disabled]="!selectedProduct.value" (click)="updateProduct(selectedProduct.value)">
         <md-icon>edit</md-icon>
       </button>
     </div>
   </div>
 </div>
-<div *ngIf="selectedProduct.value">
-  {{ selectedProduct.value.name | ssTranslate | async}}
-  <small *ngIf="selectedProduct.value.extraInfo">({{selectedProduct.value.extraInfo | ssTranslate | async}})</small>
+<h5>Untyped products</h5>
+<div class="untypedProducts">
+  <div *ngFor="let product of (untypedProducts | async)">
+    {{product.name | ssTranslate | async}}
+    <small *ngIf="product.extraInfo">({{product.extraInfo | ssTranslate | async}})</small>
+    <button md-button (click)="updateProduct(product)">
+      <md-icon>edit</md-icon>
+    </button>
+  </div>
 </div>
