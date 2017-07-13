@@ -5,11 +5,17 @@ import { CreateUpdateProductComponent } from './create-product/create-update-pro
 import { ProductCategory } from '../../shared/objects/product/product-category';
 import { ProductType } from '../../shared/objects/product/product-type';
 import { Unsubscribable } from '../../shared/components/unsubscribable';
-import { CreateProductTypeComponent } from './create-product-type/create-product-type.component';
-import { CreateProductCategoryComponent } from './create-product-category/create-product-category.component';
+import { CreateUpdateProductTypeComponent } from './create-product-type/create-update-product-type.component';
 import { CreateProduct } from './create-product/create-product';
 import { Product } from '../../shared/objects/product/product';
 import { UpdateProduct } from './create-product/update-product';
+import { CreateProductType } from './create-product-type/create-product-type';
+import { UpdateProductType } from './create-product-type/update-product-type';
+import { RestGatewayService } from '../../shared/services/gateway/rest-gateway.service';
+import { URLSearchParams } from '@angular/http';
+import { CreateProductCategory } from './create-product-category/create-product-category';
+import { UpdateProductCategory } from './create-product-category/update-product-category';
+import { CreateUpdateProductCategoryComponent } from './create-product-category/create-update-product-category.component';
 
 @Component({
   moduleId: module.id,
@@ -24,7 +30,8 @@ export class ProductManagerComponent extends Unsubscribable implements AfterView
   @ViewChild('selectedProduct') selectedProduct: MdButtonToggleGroup;
 
   constructor(private _productsModel: ProductsModel,
-              private _dialog: MdDialog) {
+              private _dialog: MdDialog,
+              private _restService: RestGatewayService) {
     super();
   }
 
@@ -43,6 +50,15 @@ export class ProductManagerComponent extends Unsubscribable implements AfterView
     return this._productsModel.untypedProducts$;
   }
 
+  addProduct(type: ProductType) {
+    let dialogRef = this._dialog.open(CreateUpdateProductComponent, { data: new CreateProduct(type) });
+    dialogRef.afterClosed().take(1).subscribe(result => {
+      if (result) {
+        this._productsModel.invalidate();
+      }
+    });
+  }
+
   updateProduct(product: Product) {
     let dialogRef = this._dialog.open(CreateUpdateProductComponent,
       {
@@ -56,8 +72,8 @@ export class ProductManagerComponent extends Unsubscribable implements AfterView
     });
   }
 
-  addProduct(type: ProductType) {
-    let dialogRef = this._dialog.open(CreateUpdateProductComponent, { data: new CreateProduct(type) });
+  addType(category: ProductCategory) {
+    let dialogRef = this._dialog.open(CreateUpdateProductTypeComponent, { data: new CreateProductType(category) });
     dialogRef.afterClosed().take(1).subscribe(result => {
       if (result) {
         this._productsModel.invalidate();
@@ -65,21 +81,48 @@ export class ProductManagerComponent extends Unsubscribable implements AfterView
     });
   }
 
-  addType(category: ProductCategory) {
-    let dialogRef = this._dialog.open(CreateProductTypeComponent, { data: category });
+  updateType(type: ProductType, category: ProductCategory) {
+    let dialogRef = this._dialog.open(CreateUpdateProductTypeComponent, { data: new UpdateProductType(type, category) });
     dialogRef.afterClosed().take(1).subscribe(result => {
       if (result) {
         this._productsModel.invalidate();
       }
     });
+  }
+
+  deleteType(type: ProductType) {
+    const params = new URLSearchParams();
+    params.set('productTypeId', '' + type.id);
+    this._restService
+      .doDelete('/product/deleteProductType', params)
+      .take(1)
+      .subscribe(() => this._productsModel.invalidate());
   }
 
   addCategory() {
-    let dialogRef = this._dialog.open(CreateProductCategoryComponent);
+    let dialogRef = this._dialog.open(CreateUpdateProductCategoryComponent, { data: new CreateProductCategory() });
     dialogRef.afterClosed().take(1).subscribe(result => {
       if (result) {
         this._productsModel.invalidate();
       }
     });
+  }
+
+  updateCategory(category: ProductCategory) {
+    let dialogRef = this._dialog.open(CreateUpdateProductCategoryComponent, { data: new UpdateProductCategory(category) });
+    dialogRef.afterClosed().take(1).subscribe(result => {
+      if (result) {
+        this._productsModel.invalidate();
+      }
+    });
+  }
+
+  deleteCategory(category: ProductCategory) {
+    const params = new URLSearchParams();
+    params.set('productCategoryId', '' + category.id);
+    this._restService
+      .doDelete('/product/deleteProductCategory', params)
+      .take(1)
+      .subscribe(() => this._productsModel.invalidate());
   }
 }

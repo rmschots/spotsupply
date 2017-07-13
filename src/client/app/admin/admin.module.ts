@@ -7,8 +7,8 @@ import { ProductManagerComponent } from './product-manager/product-manager.compo
 import { UserManagerComponent } from './user-manager/user-manager.component';
 import { OrderManagerComponent } from './order-manager/order-manager.component';
 import { CreateUpdateProductComponent } from './product-manager/create-product/create-update-product.component';
-import { CreateProductTypeComponent } from './product-manager/create-product-type/create-product-type.component';
-import { CreateProductCategoryComponent } from './product-manager/create-product-category/create-product-category.component';
+import { CreateUpdateProductTypeComponent } from './product-manager/create-product-type/create-update-product-type.component';
+import { CreateUpdateProductCategoryComponent } from './product-manager/create-product-category/create-update-product-category.component';
 
 
 @NgModule({
@@ -20,14 +20,14 @@ import { CreateProductCategoryComponent } from './product-manager/create-product
     UserManagerComponent,
     OrderManagerComponent,
     CreateUpdateProductComponent,
-    CreateProductTypeComponent,
-    CreateProductCategoryComponent
+    CreateUpdateProductTypeComponent,
+    CreateUpdateProductCategoryComponent
   ],
   exports: [AdminComponent],
   entryComponents: [
     CreateUpdateProductComponent,
-    CreateProductTypeComponent,
-    CreateProductCategoryComponent
+    CreateUpdateProductTypeComponent,
+    CreateUpdateProductCategoryComponent
   ]
 })
 

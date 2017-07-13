@@ -1,6 +1,6 @@
 <div class="product-hierarchy">
   <div>
-    <h4>Category</h4>
+    <h4>{{'PRODUCT-MANAGER.productCategory' | translate}}</h4>
     <md-button-toggle-group [vertical]=true #selectedCategory="mdButtonToggleGroup"
                             (change)="selectedProduct.value = null; selectedType.value = null">
       <md-button-toggle *ngFor="let category of productCategories | async" [value]="category">
@@ -11,16 +11,16 @@
       <button md-raised-button (click)="addCategory()">
         <md-icon>add</md-icon>
       </button>
-      <button md-raised-button [disabled]="!selectedCategory.value">
+      <button md-raised-button [disabled]="!selectedCategory.value" (click)="updateCategory(selectedCategory.value)">
         <md-icon>edit</md-icon>
       </button>
-      <button md-raised-button [disabled]="!selectedCategory.value">
+      <button md-raised-button [disabled]="!selectedCategory.value" (click)="deleteCategory(selectedCategory.value)">
         <md-icon>delete</md-icon>
       </button>
     </div>
   </div>
   <div>
-    <h4>Type</h4>
+    <h4>{{'PRODUCT-MANAGER.productType' | translate}}</h4>
     <md-button-toggle-group [vertical]=true #selectedType="mdButtonToggleGroup" (change)="selectedProduct.value = null">
       <md-button-toggle *ngFor="let type of selectedCategory.value?selectedCategory.value.types:[]" [value]="type">
         {{type.name | ssTranslate | async}}
@@ -30,16 +30,17 @@
       <button md-raised-button [disabled]="!selectedCategory.value" (click)="addType(selectedCategory.value)">
         <md-icon>add</md-icon>
       </button>
-      <button md-raised-button [disabled]="!selectedType.value">
+      <button md-raised-button [disabled]="!selectedType.value"
+              (click)="updateType(selectedType.value, selectedCategory.value)">
         <md-icon>edit</md-icon>
       </button>
-      <button md-raised-button [disabled]="!selectedType.value">
+      <button md-raised-button [disabled]="!selectedType.value" (click)="deleteType(selectedType.value)">
         <md-icon>delete</md-icon>
       </button>
     </div>
   </div>
   <div class="product-group">
-    <h4>Product</h4>
+    <h4>{{'PRODUCT-MANAGER.product' | translate}}</h4>
     <md-button-toggle-group [vertical]=true #selectedProduct="mdButtonToggleGroup">
       <md-button-toggle *ngFor="let product of selectedType.value?selectedType.value.products:[]" [value]="product"
                         [ngClass]="{'inactive-entity': !product.active}">
@@ -57,7 +58,7 @@
     </div>
   </div>
 </div>
-<h5>Untyped products</h5>
+<h5>{{'PRODUCT-MANAGER.untypedProducts' | translate}}</h5>
 <div class="untypedProducts">
   <div *ngFor="let product of (untypedProducts | async)">
     {{product.name | ssTranslate | async}}

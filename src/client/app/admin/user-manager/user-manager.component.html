@@ -1,7 +1,6 @@
 <div>
-  <h1>user manager</h1>
   <md-input-container class="complete-form-width">
-    <input mdInput type="text" placeholder="filter" name="filterText" #email="ngModel"
+    <input mdInput type="text" [placeholder]="'common.filter' | translate" name="filterText" #email="ngModel"
            [(ngModel)]="filterText" (change)="filterChanged()"/>
   </md-input-container>
   <button md-mini-fab (click)="filterChanged()">
@@ -14,9 +13,9 @@
     <table *ngIf="(hasUsers | async); else usersEmpty" id="table" class="table table-hover table-mc-light-blue">
       <thead>
       <tr>
-        <th>id</th>
-        <th>email</th>
-        <th>phone</th>
+        <th>{{'common.id' | translate}}</th>
+        <th>{{'common.email' | translate}}</th>
+        <th>{{'common.phone' | translate}}</th>
       </tr>
       </thead>
       <tbody>

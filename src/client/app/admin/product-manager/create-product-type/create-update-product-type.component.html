@@ -1,0 +1,40 @@
+<form #createUpdateProductTypeForm="ngForm" (ngSubmit)="submit()">
+  <table class="full-width" cellspacing="8px">
+    <tr>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput [placeholder]="'form.productTypeNameEnglish.placeholder' | translate" name="productTypeNameEnglish"
+                 [(ngModel)]="data.name.en" required/>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput [placeholder]="'form.productTypeNameDutch.placeholder' | translate" name="productTypeNameDutch"
+                 [(ngModel)]="data.name.nl" required/>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput [placeholder]="'form.productTypeNameFrench.placeholder' | translate" name="productTypeNameFrench"
+                 [(ngModel)]="data.name.fr" required/>
+        </md-input-container>
+      </td>
+    </tr>
+  </table>
+  <md-checkbox name="hasTitle" [(ngModel)]="data.hasTitle">{{'form.productTypeHasTitle.placeholder' | translate}}</md-checkbox>
+  <md-select [placeholder]="'form.productCategory.placeholder' | translate" [(ngModel)]="data.productCategoryId"
+             name="productCategory" class="full-width input-padding" required>
+    <md-option *ngFor="let productCategory of (productCategories | async)" [value]="productCategory.id">
+      {{productCategory.name | ssTranslate | async}}
+    </md-option>
+  </md-select>
+  <md-input-container class="input-padding">
+    <input mdInput [placeholder]="'form.sortingOrder.placeholder' | translate"
+           name="sortingOrder"
+           type="number"
+           [(ngModel)]="data.sortingOrder" required/>
+  </md-input-container>
+  <button md-raised-button type="submit" [disabled]="!createUpdateProductTypeForm.form.valid">
+    {{ isCreate? 'create' : 'update' }}
+  </button>
+</form>

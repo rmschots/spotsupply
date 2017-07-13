@@ -1,21 +1,21 @@
 <h4 class="header-small-margin order-info-title">{{'ORDER-INFO.deliveryInformation' | translate}}</h4>
 <form *ngIf="cart" #orderInfoForm="ngForm">
   <md-input-container class="full-width" floatPlaceholder="always">
-    <input mdInput [value]="beachName | async | translate" placeholder="{{'ORDER-INFO.yourSpot' | translate}}"
+    <input mdInput [value]="beachName | async | translate" [placeholder]="'ORDER-INFO.yourSpot' | translate"
            name="spot" disabled/>
   </md-input-container>
   <md-input-container class="full-width" floatPlaceholder="always">
-    <input mdInput placeholder="{{'form.phone.placeholder' | translate}}" name="phoneNumber"
+    <input mdInput [placeholder]="'form.phone.placeholder' | translate" name="phoneNumber"
            [value]="phoneNumber | async" disabled/>
   </md-input-container>
-  <md-select placeholder="{{'ORDER-INFO.deliveryTime' | translate}}" class="full-width mat-input-wrapper"
+  <md-select [placeholder]="'ORDER-INFO.deliveryTime' | translate" class="full-width mat-input-wrapper"
              [(ngModel)]="cart.requestedTime" [ngClass]="{'warn-color': hasNoPossibleTimes}"
              name="deliveryTime" floatPlaceholder="always" required [disabled]="hasNoPossibleTimes">
     <md-option *ngFor="let time of (possibleTimes | async)" [value]="time">
       {{time | translate}}
     </md-option>
   </md-select>
-  <md-select placeholder="{{'ORDER-INFO.paymentMethod' | translate}}" class="full-width mat-input-wrapper"
+  <md-select [placeholder]="'ORDER-INFO.paymentMethod' | translate" class="full-width mat-input-wrapper"
              name="paymentMethod" [(ngModel)]="paymentMethod" disabled>
     <md-option [value]="'Cash'">Cash</md-option>
   </md-select>

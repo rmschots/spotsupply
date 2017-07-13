@@ -1,18 +1,4 @@
 {
-  "ADMIN": {
-    "ADMIN_DASHBOARD": {
-      "title": "Dashboard"
-    },
-    "PRODUCT_MANAGER": {
-      "title": "Product Manager"
-    },
-    "USER_MANAGER": {
-      "title": "User Manager"
-    },
-    "ORDER_MANAGER": {
-      "title": "Order Manager"
-    }
-  },
   "ASAP": "As soon as possible",
   "CART": {
     "total": "Total"
@@ -122,6 +108,22 @@
     "verifiedText2": "You can now log in.",
     "verifiedText3": "Redirecting to homepage in "
   },
+  "PRODUCT-MANAGER": {
+    "title": "Product manager",
+    "productCategory": "Category",
+    "productType": "Type",
+    "product": "Product",
+    "untypedProducts": "Untyped products"
+  },
+  "USER-MANAGER": {
+    "title": "User manager"
+  },
+  "ORDER-MANAGER": {
+    "title": "Order manager"
+  },
+  "ADMIN-DASHBOARD": {
+    "title": "Dashboard"
+  },
   "form": {
     "actions": {
       "createAccount": "Create account",
@@ -188,6 +190,30 @@
     },
     "active": {
       "placeholder": "Active"
+    },
+    "productCategoryNameEnglish": {
+      "placeholder": "Category name (EN)"
+    },
+    "productTypeNameEnglish": {
+      "placeholder": "Type name (EN)"
+    },
+    "productCategoryNameDutch": {
+      "placeholder": "Category name (NL)"
+    },
+    "productTypeNameDutch": {
+      "placeholder": "Type name (NL)"
+    },
+    "productCategoryNameFrench": {
+      "placeholder": "Category name (FR)"
+    },
+    "productTypeNameFrench": {
+      "placeholder": "Type name (FR)"
+    },
+    "sortingOrder": {
+      "placeholder": "Sorting order"
+    },
+    "productTypeHasTitle": {
+      "placeholder": "Has title"
     }
   },
   "map": {
@@ -196,5 +222,11 @@
       "2": "Position unavailable",
       "3": "Position detection timed out"
     }
+  },
+  "common": {
+    "filter": "filter",
+    "id": "id",
+    "email": "email",
+    "phone": "phone"
   }
 }

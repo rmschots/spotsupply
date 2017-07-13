@@ -31,7 +31,7 @@ export class RestGatewayService {
     });
   }
 
-  delete(path: string, params: URLSearchParams = new URLSearchParams()): Observable<Response> {
+  doDelete(path: string, params: URLSearchParams = new URLSearchParams()): Observable<Response> {
     return this._http.delete(Config.REST_API + path, this.createOptions(params)).catch((e) => {
       return this._handleError(e);
     });
