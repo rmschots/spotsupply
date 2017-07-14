@@ -38,6 +38,7 @@ import { DeliveryModel } from './framework/models/delivery.model';
 import { ResetPasswordComponent } from './components/login/reset-password.component';
 import { SSTranslatePipe } from './pipes/ss-translation.pipe';
 import { SSActivePipe } from './pipes/ss-active.pipe';
+import { CdkTableModule } from '@angular/cdk';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -55,6 +56,7 @@ export function HttpLoaderFactory(http: Http) {
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    CdkTableModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -76,7 +78,7 @@ export function HttpLoaderFactory(http: Http) {
   declarations: [ToolbarComponent, NavbarComponent, ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent,
     LocationLoadingComponent, PasswordValidatorDirective, PhoneNumberValidatorDirective, ResetPasswordComponent, SSTranslatePipe,
     SSActivePipe],
-  exports: [ToolbarComponent, NavbarComponent, TranslateModule, CommonModule, FormsModule, RouterModule, MaterialModule,
+  exports: [ToolbarComponent, NavbarComponent, TranslateModule, CommonModule, FormsModule, RouterModule, MaterialModule, CdkTableModule,
     ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent, LocationLoadingComponent, ResetPasswordComponent,
     PasswordValidatorDirective, PasswordStrengthBarModule, PhoneNumberValidatorDirective, SSTranslatePipe, SSActivePipe],
   entryComponents: [LocationLoadingComponent]

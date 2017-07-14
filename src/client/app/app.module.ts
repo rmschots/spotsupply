@@ -20,6 +20,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/distinct';
 import 'rxjs/add/operator/concatMap';
+import 'rxjs/add/operator/catch';
 
 @NgModule({
   imports: [
