@@ -4,4 +4,6 @@ export class UsersSearchResult {
   pages: number;
   page: number;
   filter: string;
+  totalResults: number;
+  pageSize: number;
 }
