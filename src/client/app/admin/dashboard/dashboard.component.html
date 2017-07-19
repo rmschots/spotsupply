@@ -1,3 +1,12 @@
 <div>
-  to be implemented
+  <md-input-container>
+    <input mdInput type="number" placeholder="amount" name="amountOfUsers"
+           [(ngModel)]="amountOfUsers">
+  </md-input-container>
+  <button md-raised-button (click)="addDummyUsers()">Add users</button>
+  <md-input-container>
+    <input mdInput type="number" placeholder="amount" name="amountOfOrders"
+           [(ngModel)]="amountOfOrders">
+  </md-input-container>
+  <button md-raised-button (click)="addDummyOrders()">Add orders</button>
 </div>

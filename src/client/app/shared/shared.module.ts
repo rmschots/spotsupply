@@ -39,6 +39,7 @@ import { ResetPasswordComponent } from './components/login/reset-password.compon
 import { SSTranslatePipe } from './pipes/ss-translation.pipe';
 import { SSActivePipe } from './pipes/ss-active.pipe';
 import { CdkTableModule } from '@angular/cdk';
+import { LoadingDialogComponent } from './components/loading/loading-dialog.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -77,11 +78,12 @@ export function HttpLoaderFactory(http: Http) {
   ],
   declarations: [ToolbarComponent, NavbarComponent, ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent,
     LocationLoadingComponent, PasswordValidatorDirective, PhoneNumberValidatorDirective, ResetPasswordComponent, SSTranslatePipe,
-    SSActivePipe],
+    SSActivePipe, LoadingDialogComponent],
   exports: [ToolbarComponent, NavbarComponent, TranslateModule, CommonModule, FormsModule, RouterModule, MaterialModule, CdkTableModule,
     ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent, LocationLoadingComponent, ResetPasswordComponent,
-    PasswordValidatorDirective, PasswordStrengthBarModule, PhoneNumberValidatorDirective, SSTranslatePipe, SSActivePipe],
-  entryComponents: [LocationLoadingComponent]
+    PasswordValidatorDirective, PasswordStrengthBarModule, PhoneNumberValidatorDirective, SSTranslatePipe, SSActivePipe,
+    LoadingDialogComponent],
+  entryComponents: [LocationLoadingComponent, LoadingDialogComponent]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
@@ -99,7 +101,7 @@ export class SharedModule {
         DeliveryModel,
         RestGatewayService,
         StartupService,
-        { provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>' }
+        {provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>'}
       ]
     };
   }

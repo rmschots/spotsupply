@@ -1,0 +1,7 @@
+:host {
+}
+
+.loading-progress {
+  display: inline-block;
+  text-align: center;
+}

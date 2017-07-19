@@ -83,7 +83,7 @@ export class ExampleDatabase {
   }
 
   get pageSize$(): Observable<number> {
-    return this.searchResult$.map(data => data ? data.pageSize : 15);
+    return this.searchResult$.map(data => data ? data.pageSize : 10);
   }
 
   doSearch(filterText: string, pageNumber: number, pageSize: number, sortBy: string, sortOrder: string) {
@@ -94,7 +94,7 @@ export class ExampleDatabase {
     params.set('sortBy', sortBy);
     params.set('sortOrder', sortOrder);
     this.isLoading$.next(true);
-    return this._restGateway.get('/account/searchUsersByPage', params)
+    return this._restGateway.get('/account/searchUsers', params)
       .take(1)
       .subscribe(data => {
         let searchResult = new UsersSearchResult();
