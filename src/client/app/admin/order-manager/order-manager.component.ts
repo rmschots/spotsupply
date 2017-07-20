@@ -23,7 +23,7 @@ import { BeachModel } from '../../shared/framework/models/beach.model';
 })
 export class OrderManagerComponent implements OnInit {
 
-  displayedColumns = ['id', 'beachId', 'phoneNumber'];
+  displayedColumns = ['id', 'beachId', 'phoneNumber', 'status', 'price', 'orderDateTime', 'requestedTime', 'deliveredDateTime', 'items'];
 
   exampleDatabase = new ExampleDatabase(this._restGateway);
   dataSource: ExampleDataSource | null;
