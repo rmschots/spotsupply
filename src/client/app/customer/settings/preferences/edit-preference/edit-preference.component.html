@@ -3,13 +3,15 @@
     <input mdInput type="password" [placeholder]="'form.passwordCurrent.placeholder' | translate"
            name="currentPassword"
            [(ngModel)]="currentPassword" required/>
+    <md-icon mdSuffix>mode_edit</md-icon>
   </md-input-container>
   <ng-template [ngIf]="type === 'password'">
-    <md-input-container #largeContainer class="full-width field-container"
-                        floatPlaceholder="always" [ngClass]="{'large-container': largeContainer._isErrorState()}">
+    <md-input-container class="full-width field-container"
+                        floatPlaceholder="always">
       <input #input mdInput type="password" [placeholder]="'form.passwordNew.placeholder' | translate" name="password"
              [(ngModel)]="value" validatePassword required/>
-      <md-error>
+      <md-icon mdSuffix>mode_edit</md-icon>
+      <md-error #largeContainer>
         <div style="padding-bottom: 50px">
           {{'form.passwordNew.error' | translate}}
         </div>
@@ -19,6 +21,7 @@
       <input mdInput type="password" [placeholder]="'form.passwordRepeat.placeholder' | translate" name="password2"
              [(ngModel)]="passwordRepeat"
              required minlength="6" pattern="{{value}}"/>
+      <md-icon mdSuffix>mode_edit</md-icon>
       <md-error>{{'form.passwordRepeat.error' | translate}}</md-error>
     </md-input-container>
   </ng-template>
@@ -27,6 +30,7 @@
     <md-input-container class="full-width field-container" floatPlaceholder="always">
       <input mdInput type="tel" [placeholder]="'form.phone.placeholder' | translate" name="phoneNumber"
              [(ngModel)]="value" validatePhoneNumber required/>
+      <md-icon mdSuffix>mode_edit</md-icon>
       <md-error>{{'form.phone.error' | translate}}</md-error>
     </md-input-container>
   </ng-template>
@@ -36,6 +40,7 @@
       <input mdInput type="email" [placeholder]="'form.email.placeholder' | translate" name="email"
              [(ngModel)]="value"
              pattern="^[a-zA-Z0-9.!#$%&’*+=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required/>
+      <md-icon mdSuffix>mode_edit</md-icon>
       <md-error>{{'form.email.error' | translate}}</md-error>
     </md-input-container>
   </ng-template>

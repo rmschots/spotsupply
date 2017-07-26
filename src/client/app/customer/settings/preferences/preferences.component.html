@@ -1,20 +1,28 @@
 <form class="preferences-form">
   <div class="preferences-input-parent">
     <md-input-container class="full-width" floatPlaceholder="always">
-      <input mdInput [placeholder]="'form.email.placeholder' | translate" name="email" [value]="email" disabled />
+      <input mdInput [placeholder]="'form.email.placeholder' | translate" name="email" [value]="email" disabled/>
     </md-input-container>
-    <md-icon (click)="openEditEmailDialog()">edit</md-icon>
+    <button md-icon-button>
+      <md-icon (click)="openEditEmailDialog()">edit</md-icon>
+    </button>
   </div>
   <div class="preferences-input-parent">
     <md-input-container class="full-width" floatPlaceholder="always">
-      <input mdInput type="tel" [placeholder]="'form.phone.placeholder' | translate" name="phoneNumber" [value]="phoneNumber" disabled />
+      <input mdInput type="tel" [placeholder]="'form.phone.placeholder' | translate" name="phoneNumber"
+             [value]="phoneNumber" disabled/>
     </md-input-container>
-    <md-icon (click)="openEditPhoneNumberDialog()">edit</md-icon>
+    <button md-icon-button>
+      <md-icon (click)="openEditPhoneNumberDialog()">edit</md-icon>
+    </button>
   </div>
   <div class="preferences-input-parent">
     <md-input-container class="full-width" floatPlaceholder="always">
-      <input mdInput type="password" [placeholder]="'form.password.placeholder' | translate" name="password" value="looks like password" disabled />
+      <input mdInput type="password" [placeholder]="'form.password.placeholder' | translate" name="password"
+             value="looks like password" disabled/>
     </md-input-container>
-    <md-icon (click)="openEditPasswordDialog()">edit</md-icon>
+    <button md-icon-button>
+      <md-icon (click)="openEditPasswordDialog()">edit</md-icon>
+    </button>
   </div>
 </form>
