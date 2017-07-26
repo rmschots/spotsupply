@@ -1,12 +1,30 @@
-<div>
+<h4>
+  Add dummy data
+</h4>
+<div class="full-width">
   <md-input-container>
     <input mdInput type="number" placeholder="amount" name="amountOfUsers"
            [(ngModel)]="amountOfUsers">
   </md-input-container>
   <button md-raised-button (click)="addDummyUsers()">Add users</button>
+</div>
+<div class="full-width">
   <md-input-container>
     <input mdInput type="number" placeholder="amount" name="amountOfOrders"
            [(ngModel)]="amountOfOrders">
   </md-input-container>
   <button md-raised-button (click)="addDummyOrders()">Add orders</button>
+</div>
+<h4>Statistics
+  <button md-icon-button>
+    <md-icon (click)="refreshStatistics()">refresh</md-icon>
+  </button>
+</h4>
+<div class="full-width" *ngIf="latestStatistics$ | async as statistics">
+  <div>orders: {{statistics.amountOfOrders}}</div>
+  <div>ordered orders: {{statistics.amountOfOrderedOrders}}</div>
+  <div>users: {{statistics.amountOfUsers}}</div>
+  <div>products: {{statistics.amountOfProducts}}</div>
+  <div>avg. cart price: {{statistics.averageCartPrice}}</div>
+  <div>avg. products per cart: {{statistics.averageProductsPerCart}}</div>
 </div>
