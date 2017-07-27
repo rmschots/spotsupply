@@ -83,10 +83,10 @@ export class ShoppingCartModel extends Model {
       this._setCartAvailable(DataStatus.LOADING);
       let shoppingCart: ShoppingCart = new ShoppingCart(undefined, beachId);
       this._store.dispatch(SpotSupplyActions.loadShoppingCart(shoppingCart));
-      this._restGateway.post('/shoppingCart', {beachId: beachId}).take(1)
+      this._restGateway.post('/shoppingCart', { beachId: beachId }).take(1)
         .subscribe(
           data => {
-            this._store.dispatch(SpotSupplyActions.loadPersistedCart(this.convertRestResponse(data)));
+            this._store.dispatch(SpotSupplyActions.loadPersistedCart(this.initCartData(this.convertRestResponse(data))));
             return true;
           },
           error => {
@@ -94,7 +94,7 @@ export class ShoppingCartModel extends Model {
             return error;
           });
     } else {
-      console.error('trying to create a shopping cart while status is: '+ this._cartAvailable);
+      console.error('trying to create a shopping cart while status is: ' + this._cartAvailable);
     }
   }
 
@@ -105,7 +105,7 @@ export class ShoppingCartModel extends Model {
     let params: URLSearchParams = new URLSearchParams();
     params.set('productId', '' + product.id);
     this._restGateway.post('/shoppingCart/addProduct', null, params).take(1).subscribe(data => {
-      this._store.dispatch(SpotSupplyActions.addItemToPersistedCart(this.convertRestResponse(data)));
+      this._store.dispatch(SpotSupplyActions.addItemToPersistedCart(this.initCartData(this.convertRestResponse(data))));
     });
   }
 
@@ -115,7 +115,7 @@ export class ShoppingCartModel extends Model {
     let params: URLSearchParams = new URLSearchParams();
     params.set('productId', '' + product.id);
     this._restGateway.post('/shoppingCart/removeProduct', null, params).take(1).subscribe(data => {
-      this._store.dispatch(SpotSupplyActions.removeItemFromPersistedCart(this.convertRestResponse(data)));
+      this._store.dispatch(SpotSupplyActions.removeItemFromPersistedCart(this.initCartData(this.convertRestResponse(data))));
     });
   }
 
@@ -123,13 +123,13 @@ export class ShoppingCartModel extends Model {
     this._shoppingCart.items.length = 0;
     this._store.dispatch(SpotSupplyActions.removeAllItemsFromShoppingCart(this._shoppingCart));
     this._restGateway.post('/shoppingCart/removeAllProducts').take(1).subscribe(data => {
-      this._store.dispatch(SpotSupplyActions.removeAllItemsFromPersistedCart(this.convertRestResponse(data)));
+      this._store.dispatch(SpotSupplyActions.removeAllItemsFromPersistedCart(this.initCartData(this.convertRestResponse(data))));
     });
   }
 
   placeOrder(): Observable<boolean> {
     return this._restGateway.post('/shoppingCart/placeOrder', this._persistedCart).map(data => {
-      const cart: ShoppingCart = this.convertRestResponse(data);
+      const cart: ShoppingCart = this.initCartData(this.convertRestResponse(data));
       this._store.dispatch(SpotSupplyActions.placeOrder(cart));
       return cart.status === 'ORDERED';
     }).take(1);
@@ -147,21 +147,24 @@ export class ShoppingCartModel extends Model {
       this._setCartAvailable(DataStatus.LOADING);
       this._restGateway.get('/shoppingCart').take(1).subscribe(
         data => {
-          this._store.dispatch(SpotSupplyActions.loadPersistedCart(this.convertRestResponse(data)));
-          this._store.dispatch(SpotSupplyActions.loadShoppingCart(this.convertRestResponse(data)));
+          this._store.dispatch(SpotSupplyActions.loadPersistedCart(this.initCartData(this.convertRestResponse(data))));
+          this._store.dispatch(SpotSupplyActions.loadShoppingCart(this.initCartData(this.convertRestResponse(data))));
           this._locationModel.startFetchingLocation();
         },
         () => {
           this._setCartAvailable(DataStatus.UNAVAILABLE);
         });
     } else {
-      console.error('Tried loading cart while one while status is: '+ this._cartAvailable);
+      console.error('Tried loading cart while one while status is: ' + this._cartAvailable);
     }
   }
 
   loadCartHistory() {
     this._restGateway.get('/shoppingCart/history').take(1).subscribe(data => {
-      this._store.dispatch(SpotSupplyActions.loadCartHistory(this.convertRestResponse(data)));
+      this._store.dispatch(SpotSupplyActions.loadCartHistory(
+        this.convertRestResponse(data)
+          .map((cart: ShoppingCart) => this.initCartData(cart))
+      ));
     });
   }
 
@@ -171,6 +174,12 @@ export class ShoppingCartModel extends Model {
         .filter(value => value.productId === product.id)
         .length
       : 0;
+  }
+
+  initCartData(cart: ShoppingCart): ShoppingCart {
+    cart.deliveredDateTime = new Date(cart.deliveredDateTime);
+    cart.orderDateTime = new Date(cart.orderDateTime);
+    return cart;
   }
 
   private _setCartAvailable(dataStatus: DataStatus) {

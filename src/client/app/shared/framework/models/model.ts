@@ -1,5 +1,7 @@
+import { Response } from '@angular/http';
+
 export class Model {
-  protected convertRestResponse(response: any): any {
+  protected convertRestResponse(response: Response): any {
     if (!!response.text()) {
       return response.json();
     }

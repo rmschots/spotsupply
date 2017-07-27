@@ -9,11 +9,11 @@ export function productReducer(state: any = initialState.get('product'), action:
   switch (action.type) {
     case PRODUCT_HIERARCHY:
       state = state.set('hierarchy', action.payload);
-      state = state.set('productMap', updateProductMapWithHierarchy(state, action.payload));
+      state = state.set('productMap', updateProductMapWithHierarchy(state.get('productMap'), action.payload));
       break;
     case UNTYPED_PRODUCTS:
       state = state.set('untypedProducts', action.payload);
-      state = state.set('productMap', updateProductMapWithUntypedProducts(state, action.payload));
+      state = state.set('productMap', updateProductMapWithUntypedProducts(state.get('productMap'), action.payload));
   }
   return state;
 }

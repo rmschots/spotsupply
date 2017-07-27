@@ -3,6 +3,7 @@ import { Headers, Http, Response, URLSearchParams } from '@angular/http';
 import { Config } from '../../config/env.config';
 import { Observable } from 'rxjs/Observable';
 import { MdSnackBar } from '@angular/material';
+import { _throw } from 'rxjs/observable/throw';
 
 @Injectable()
 export class RestGatewayService {
@@ -51,6 +52,6 @@ export class RestGatewayService {
         duration: 2000,
       });
     }
-    return Observable.throw(e.json());
+    return _throw(e.json());
   }
 }

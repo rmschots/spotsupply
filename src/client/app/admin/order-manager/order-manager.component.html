@@ -34,7 +34,7 @@
 
     <ng-container cdkColumnDef="orderDateTime">
       <md-header-cell *cdkHeaderCellDef md-sort-header> Order time </md-header-cell>
-      <md-cell *cdkCellDef="let row"> {{row.orderDateTime}} </md-cell>
+      <md-cell *cdkCellDef="let row"> {{row.orderDateTime | date: 'dd/MM/yyyy'}} </md-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="requestedTime">
@@ -44,7 +44,7 @@
 
     <ng-container cdkColumnDef="deliveredDateTime">
       <md-header-cell *cdkHeaderCellDef md-sort-header> Delivery time </md-header-cell>
-      <md-cell *cdkCellDef="let row"> {{row.deliveredDateTime}} </md-cell>
+      <md-cell *cdkCellDef="let row"> {{row.deliveredDateTime | date: 'dd/MM/yyyy'}} </md-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="items">

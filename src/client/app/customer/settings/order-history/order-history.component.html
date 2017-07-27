@@ -7,7 +7,7 @@
       <div class="text-grow">
         <md-card-title>
           <div>
-            {{cart.orderDateTime.dayOfMonth}}/{{cart.orderDateTime.monthValue}}/{{cart.orderDateTime.year}}
+            {{cart.orderDateTime | date: 'dd/MM/yyyy'}}
           </div>
           <div class="text-center">
             {{getBeachName(cart.beachId)}}
