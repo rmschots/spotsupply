@@ -16,8 +16,8 @@ import { LoginModel } from '../../shared/framework/models/login.model';
 @Component({
   moduleId: module.id,
   selector: 'ss-order-info',
-  templateUrl: 'app/customer/order-info/order-info.component.html',
-  styleUrls: ['app/customer/order-info/order-info.component.css']
+  templateUrl: 'order-info.component.html',
+  styleUrls: ['order-info.component.css']
 })
 export class OrderInfoComponent extends Unsubscribable implements OnDestroy {
 

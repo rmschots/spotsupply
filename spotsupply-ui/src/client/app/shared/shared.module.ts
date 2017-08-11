@@ -30,7 +30,6 @@ import { ShoppingCartModel } from './framework/models/shopping-cart.model';
 import { locationReducer } from './framework/reducers/location.reducer';
 import { cartReducer } from './framework/reducers/cart.reducer';
 import { PasswordValidatorDirective } from './directives/password-validator.directive';
-import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
 import { PhoneNumberValidatorDirective } from './directives/phone-number-validator.directive';
 import { StartupService } from './services/startup/startup.service';
 import { deliveryReducer } from './framework/reducers/delivery.reducer';
@@ -39,14 +38,15 @@ import { ResetPasswordComponent } from './components/login/reset-password.compon
 import { SSTranslatePipe } from './pipes/ss-translation.pipe';
 import { SSActivePipe } from './pipes/ss-active.pipe';
 import { LoadingDialogComponent } from './components/loading/loading-dialog.component';
-import { CdkTableModule } from '@angular/cdk/table';
+import { CdkTableModule } from '@angular/cdk';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 // AoT requires an exported function for factories
-export function HttpLoaderFactory(http: Http) {
+export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
@@ -63,26 +63,25 @@ export function HttpLoaderFactory(http: Http) {
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [Http]
+        deps: [HttpClient]
       }
     }),
     BrowserAnimationsModule,
-    StoreModule.provideStore({
+    StoreModule.forRoot({
       beaches: beachReducer,
       login: loginReducer,
       location: locationReducer,
       product: productReducer,
       cart: cartReducer,
       delivery: deliveryReducer
-    }),
-    PasswordStrengthBarModule
+    })
   ],
   declarations: [ToolbarComponent, NavbarComponent, ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent,
     LocationLoadingComponent, PasswordValidatorDirective, PhoneNumberValidatorDirective, ResetPasswordComponent, SSTranslatePipe,
     SSActivePipe, LoadingDialogComponent],
   exports: [ToolbarComponent, NavbarComponent, TranslateModule, CommonModule, FormsModule, RouterModule, MaterialModule, CdkTableModule,
     MdTableModule, ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent, LocationLoadingComponent,
-    ResetPasswordComponent, PasswordValidatorDirective, PasswordStrengthBarModule, PhoneNumberValidatorDirective, SSTranslatePipe,
+    ResetPasswordComponent, PasswordValidatorDirective, PhoneNumberValidatorDirective, SSTranslatePipe,
     SSActivePipe, LoadingDialogComponent],
   entryComponents: [LocationLoadingComponent, LoadingDialogComponent]
 })

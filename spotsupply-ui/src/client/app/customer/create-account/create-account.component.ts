@@ -7,8 +7,8 @@ import { MdSnackBar } from '@angular/material';
 @Component({
   moduleId: module.id,
   selector: 'ss-create-account',
-  templateUrl: 'app/customer/create-account/create-account.component.html',
-  styleUrls: ['app/customer/create-account/create-account.component.css']
+  templateUrl: 'create-account.component.html',
+  styleUrls: ['create-account.component.css']
 })
 export class CreateAccountComponent {
 

@@ -9,8 +9,8 @@ import 'rxjs/add/observable/timer';
 @Component({
   moduleId: module.id,
   selector: 'ss-verify-email',
-  templateUrl: 'app/customer/verify-email/verify-email.component.html',
-  styleUrls: ['app/customer/verify-email/verify-email.component.css']
+  templateUrl: 'verify-email.component.html',
+  styleUrls: ['verify-email.component.css']
 })
 export class VerifyEmailComponent implements AfterViewInit {
 

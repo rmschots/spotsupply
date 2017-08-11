@@ -2,8 +2,9 @@ import { Action } from '@ngrx/store';
 
 import { initialState } from '../stores/spotsupply.store';
 import { BEACH_DISTANCES, LOCATION_PERMISSION_UPDATED, USER_POSITION_UPDATED } from '../actions/spotsupply.actions';
+import { ActionWithPayload } from '../actions/action-creators/spotsupply.action-creator';
 
-export function locationReducer(state: any = initialState.get('location'), action: Action) {
+export function locationReducer(state: any = initialState.get('location'), action: ActionWithPayload) {
   switch (action.type) {
     case LOCATION_PERMISSION_UPDATED:
       state = state.set('permission', action.payload);

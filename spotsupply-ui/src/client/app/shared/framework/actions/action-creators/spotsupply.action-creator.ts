@@ -29,127 +29,131 @@ import { ProductCategory } from '../../../objects/product/product-category';
 import { ShoppingCart } from '../../../objects/cart/shopping-cart';
 import { Product } from '../../../objects/product/product';
 
+export interface ActionWithPayload extends Action {
+  payload?: any;
+}
+
 export const SpotSupplyActions = {
-  loadBeaches(payload: Array<Beach>): Action {
+  loadBeaches(payload: Array<Beach>): ActionWithPayload {
     return {
       type: BEACHES_LOAD,
       payload: payload
     };
   },
-  loginUser(payload: LoginUser): Action {
+  loginUser(payload: LoginUser): ActionWithPayload {
     return {
       type: USER_LOGIN,
       payload: payload
     };
   },
-  logoutUser(): Action {
+  logoutUser(): ActionWithPayload {
     return {
       type: USER_LOGOUT,
       payload: null
     };
   },
-  locationPermissionUpdated(payload: LocationPermissionStatus): Action {
+  locationPermissionUpdated(payload: LocationPermissionStatus): ActionWithPayload {
     return {
       type: LOCATION_PERMISSION_UPDATED,
       payload: payload
     };
   },
-  userPositionUpdated(payload: Position): Action {
+  userPositionUpdated(payload: Position): ActionWithPayload {
     return {
       type: USER_POSITION_UPDATED,
       payload: payload
     };
   },
-  updateBeachDistances(payload: Beach): Action {
+  updateBeachDistances(payload: Beach): ActionWithPayload {
     return {
       type: BEACH_DISTANCES,
       payload: payload
     };
   },
-  productHierarchy(payload: ProductCategory[]): Action {
+  productHierarchy(payload: ProductCategory[]): ActionWithPayload {
     return {
       type: PRODUCT_HIERARCHY,
       payload: payload
     };
   },
-  untypedProducts(payload: Array<Product>): Action {
+  untypedProducts(payload: Array<Product>): ActionWithPayload {
     return {
       type: UNTYPED_PRODUCTS,
       payload: payload
     };
   },
-  loadShoppingCart(payload: ShoppingCart): Action {
+  loadShoppingCart(payload: ShoppingCart): ActionWithPayload {
     return {
       type: SHOPPING_CART_LOAD,
       payload: payload
     };
   },
-  loadPersistedCart(payload: ShoppingCart): Action {
+  loadPersistedCart(payload: ShoppingCart): ActionWithPayload {
     return {
       type: PERSISTED_CART_LOAD,
       payload: payload
     };
   },
-  addItemToShoppingCart(payload: ShoppingCart): Action {
+  addItemToShoppingCart(payload: ShoppingCart): ActionWithPayload {
     return {
       type: SHOPPING_CART_ADD_ITEM,
       payload: payload
     };
   },
-  addItemToPersistedCart(payload: ShoppingCart): Action {
+  addItemToPersistedCart(payload: ShoppingCart): ActionWithPayload {
     return {
       type: PERSISTED_CART_ADD_ITEM,
       payload: payload
     };
   },
-  removeItemFromShoppingCart(payload: ShoppingCart): Action {
+  removeItemFromShoppingCart(payload: ShoppingCart): ActionWithPayload {
     return {
       type: SHOPPING_CART_REMOVE_ITEM,
       payload: payload
     };
   },
-  removeItemFromPersistedCart(payload: ShoppingCart): Action {
+  removeItemFromPersistedCart(payload: ShoppingCart): ActionWithPayload {
     return {
       type: PERSISTED_CART_REMOVE_ITEM,
       payload: payload
     };
   },
-  removeAllItemsFromShoppingCart(payload: ShoppingCart): Action {
+  removeAllItemsFromShoppingCart(payload: ShoppingCart): ActionWithPayload {
     return {
       type: SHOPPING_CART_REMOVE_ALL_ITEMS,
       payload: payload
     };
   },
-  removeAllItemsFromPersistedCart(payload: ShoppingCart): Action {
+  removeAllItemsFromPersistedCart(payload: ShoppingCart): ActionWithPayload {
     return {
       type: PERSISTED_CART_REMOVE_ALL_ITEMS,
       payload: payload
     };
   },
-  placeOrder(payload: ShoppingCart): Action {
+  placeOrder(payload: ShoppingCart): ActionWithPayload {
     return {
       type: PLACE_ORDER,
       payload: payload
     };
   },
-  cartRefresh(payload: ShoppingCart): Action {
+  cartRefresh(payload: ShoppingCart): ActionWithPayload {
     return {
       type: CART_REFRESH,
       payload: payload
     };
   },
-  completeOrder(): Action {
+  completeOrder(): ActionWithPayload {
     return {
       type: CART_COMPLETE
     };
   },
-  loadCartHistory(payload: Array<ShoppingCart>): Action {
+  loadCartHistory(payload: Array<ShoppingCart>): ActionWithPayload {
     return {
       type: CART_HISTORY_LOAD,
       payload: payload
     };
   },
-  loadPossibleTimes(payload: Array<string>): Action {
+  loadPossibleTimes(payload: Array<string>): ActionWithPayload {
     return {
       type: POSSIBLE_TIMES_LOAD,
       payload: payload

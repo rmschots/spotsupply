@@ -4,8 +4,9 @@ import { initialState } from '../stores/spotsupply.store';
 import { PRODUCT_HIERARCHY, UNTYPED_PRODUCTS } from '../actions/spotsupply.actions';
 import { ProductCategory } from '../../objects/product/product-category';
 import { Product } from '../../objects/product/product';
+import { ActionWithPayload } from '../actions/action-creators/spotsupply.action-creator';
 
-export function productReducer(state: any = initialState.get('product'), action: Action) {
+export function productReducer(state: any = initialState.get('product'), action: ActionWithPayload) {
   switch (action.type) {
     case PRODUCT_HIERARCHY:
       state = state.set('hierarchy', action.payload);

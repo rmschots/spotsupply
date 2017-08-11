@@ -4,8 +4,8 @@ import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
 @Component({
   moduleId: module.id,
   selector: 'ss-loading-dialog',
-  templateUrl: 'app/shared/components/loading/loading-dialog.component.html',
-  styleUrls: ['app/shared/components/loading/loading-dialog.component.css']
+  templateUrl: 'loading-dialog.component.html',
+  styleUrls: ['loading-dialog.component.css']
 })
 export class LoadingDialogComponent {
 

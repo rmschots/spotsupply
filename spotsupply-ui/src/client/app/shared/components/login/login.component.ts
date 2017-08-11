@@ -8,8 +8,8 @@ import { ResetPasswordComponent } from './reset-password.component';
 @Component({
   moduleId: module.id,
   selector: 'ss-login',
-  templateUrl: 'app/shared/components/login/login.component.html',
-  styleUrls: ['app/shared/components/login/login.component.css']
+  templateUrl: 'login.component.html',
+  styleUrls: ['login.component.css']
 })
 export class LoginComponent {
 

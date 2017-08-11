@@ -12,13 +12,13 @@ import { LoginUser } from '../../shared/objects/account/login-user';
 import { RestGatewayService } from '../../shared/services/gateway/rest-gateway.service';
 import { UsersSearchResult } from '../../shared/objects/search/users-search-result';
 import { URLSearchParams } from '@angular/http';
-import { DataSource } from '@angular/cdk/table';
+import { DataSource } from '@angular/cdk';
 
 @Component({
   moduleId: module.id,
   selector: 'ss-user-manager',
-  templateUrl: 'app/admin/user-manager/user-manager.component.html',
-  styleUrls: ['app/admin/user-manager/user-manager.component.css']
+  templateUrl: 'user-manager.component.html',
+  styleUrls: ['user-manager.component.css']
 })
 export class UserManagerComponent implements OnInit {
 

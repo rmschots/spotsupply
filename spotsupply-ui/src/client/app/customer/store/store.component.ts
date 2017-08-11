@@ -10,8 +10,8 @@ import { LocationModel } from '../../shared/framework/models/location.model';
 @Component({
   moduleId: module.id,
   selector: 'ss-store',
-  templateUrl: 'app/customer/store/store.component.html',
-  styleUrls: ['app/customer/store/store.component.css']
+  templateUrl: 'store.component.html',
+  styleUrls: ['store.component.css']
 })
 export class StoreComponent extends Unsubscribable {
 

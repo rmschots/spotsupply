@@ -8,8 +8,8 @@ import { CreateProductType } from './create-product-type';
 @Component({
   moduleId: module.id,
   selector: 'ss-create-product-type',
-  templateUrl: 'app/admin/product-manager/create-product-type/create-update-product-type.component.html',
-  styleUrls: ['app/admin/product-manager/create-product-type/create-update-product-type.component.css']
+  templateUrl: 'create-update-product-type.component.html',
+  styleUrls: ['create-update-product-type.component.css']
 })
 export class CreateUpdateProductTypeComponent {
 

@@ -16,8 +16,9 @@ import {
   SHOPPING_CART_REMOVE_ITEM
 } from '../actions/spotsupply.actions';
 import { ShoppingCart } from '../../objects/cart/shopping-cart';
+import { ActionWithPayload } from '../actions/action-creators/spotsupply.action-creator';
 
-export function cartReducer(state: any = initialState.get('cart'), action: Action) {
+export function cartReducer(state: any = initialState.get('cart'), action: ActionWithPayload) {
   let cart;
   switch (action.type) {
     case SHOPPING_CART_LOAD:

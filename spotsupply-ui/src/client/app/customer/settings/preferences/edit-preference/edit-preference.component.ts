@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   moduleId: module.id,
   selector: 'ss-edit-preference',
-  templateUrl: 'app/customer/settings/preferences/edit-preference/edit-preference.component.html',
-  styleUrls: ['app/customer/settings/preferences/edit-preference/edit-preference.component.css']
+  templateUrl: 'edit-preference.component.html',
+  styleUrls: ['edit-preference.component.css']
 })
 export class EditPreferenceComponent {
 

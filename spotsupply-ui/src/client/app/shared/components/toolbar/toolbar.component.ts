@@ -12,8 +12,8 @@ import { MdSnackBar, MdSnackBarRef, SimpleSnackBar } from '@angular/material';
 @Component({
   moduleId: module.id,
   selector: 'ss-toolbar',
-  templateUrl: 'app/shared/components/toolbar/toolbar.component.html',
-  styleUrls: ['app/shared/components/toolbar/toolbar.component.css']
+  templateUrl: 'toolbar.component.html',
+  styleUrls: ['toolbar.component.css']
 })
 
 export class ToolbarComponent extends Unsubscribable {

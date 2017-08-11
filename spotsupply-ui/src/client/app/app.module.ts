@@ -21,6 +21,7 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/distinct';
 import 'rxjs/add/operator/concatMap';
 import 'rxjs/add/operator/catch';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import 'rxjs/add/operator/catch';
     CommonModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     CustomerModule,
     AdminModule,

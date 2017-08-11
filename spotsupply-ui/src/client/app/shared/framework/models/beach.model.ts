@@ -10,6 +10,7 @@ import { DataStatus } from '../../services/gateway/data-status';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import * as immutable from 'immutable';
 import { Coordinate } from '../../objects/position/position';
+import { Polygon } from '@ngui/map';
 
 @Injectable()
 export class BeachModel extends Model {
@@ -19,7 +20,7 @@ export class BeachModel extends Model {
   private _beachMap: Map<number, Beach> = new Map();
   private _beachesAvailable = DataStatus.UNKNOWN;
 
-  static getAreaBounds(paths: google.maps.MVCArray): google.maps.LatLngBounds {
+  static getAreaBounds(paths: google.maps.MVCArray<google.maps.MVCArray<google.maps.LatLng>>): google.maps.LatLngBounds {
     let bounds = new google.maps.LatLngBounds();
     let path;
     for (var i = 0; i < paths.getLength(); i++) {

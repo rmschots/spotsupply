@@ -5,8 +5,8 @@ import { LoginModel } from '../../framework/models/login.model';
 @Component({
   moduleId: module.id,
   selector: 'ss-reset-password',
-  templateUrl: 'app/shared/components/login/reset-password.component.html',
-  styleUrls: ['app/shared/components/login/reset-password.component.css']
+  templateUrl: 'reset-password.component.html',
+  styleUrls: ['reset-password.component.css']
 })
 export class ResetPasswordComponent {
 

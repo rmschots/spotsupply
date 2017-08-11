@@ -13,13 +13,13 @@ import { URLSearchParams } from '@angular/http';
 import { OrdersSearchResult } from '../../shared/objects/search/orders-search-result';
 import { Order } from '../../shared/objects/order/order';
 import { BeachModel } from '../../shared/framework/models/beach.model';
-import { DataSource } from '@angular/cdk/table';
+import { DataSource } from '@angular/cdk';
 
 @Component({
   moduleId: module.id,
   selector: 'ss-order-manager',
-  templateUrl: 'app/admin/order-manager/order-manager.component.html',
-  styleUrls: ['app/admin/order-manager/order-manager.component.css']
+  templateUrl: 'order-manager.component.html',
+  styleUrls: ['order-manager.component.css']
 })
 export class OrderManagerComponent implements OnInit {
 

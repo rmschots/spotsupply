@@ -6,8 +6,8 @@ import { ShoppingCartModel } from '../../framework/models/shopping-cart.model';
 @Component({
   moduleId: module.id,
   selector: 'ss-product-list',
-  templateUrl: 'app/shared/components/product-list/product-list.component.html',
-  styleUrls: ['app/shared/components/product-list/product-list.component.css']
+  templateUrl: 'product-list.component.html',
+  styleUrls: ['product-list.component.css']
 })
 export class ProductListComponent {
 

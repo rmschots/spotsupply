@@ -10,8 +10,8 @@ import { MdSnackBar } from '@angular/material';
 @Component({
   moduleId: module.id,
   selector: 'ss-reset-password',
-  templateUrl: 'app/customer/reset-password/reset-password.component.html',
-  styleUrls: ['app/customer/reset-password/reset-password.component.css']
+  templateUrl: 'reset-password.component.html',
+  styleUrls: ['reset-password.component.css']
 })
 export class ResetPasswordComponent implements AfterViewInit {
 

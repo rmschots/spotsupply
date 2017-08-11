@@ -8,8 +8,8 @@ import { LoginModel } from './shared/framework/models/login.model';
 @Component({
   moduleId: module.id,
   selector: 'ss-app',
-  templateUrl: 'app/app.component.html',
-  styleUrls: ['app/app.component.css'],
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.css'],
 })
 
 export class AppComponent extends Unsubscribable implements OnInit {

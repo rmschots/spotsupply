@@ -6,8 +6,8 @@ import { Router } from '@angular/router';
 @Component({
   moduleId: module.id,
   selector: 'ss-login-options',
-  templateUrl: 'app/shared/components/login/login-options.component.html',
-  styleUrls: ['app/shared/components/login/login-options.component.css']
+  templateUrl: 'login-options.component.html',
+  styleUrls: ['login-options.component.css']
 })
 export class LoginOptionsComponent {
 

@@ -20,8 +20,8 @@ import { CreateUpdateProductCategoryComponent } from './create-product-category/
 @Component({
   moduleId: module.id,
   selector: 'ss-product-manager',
-  templateUrl: 'app/admin/product-manager/product-manager.component.html',
-  styleUrls: ['app/admin/product-manager/product-manager.component.css']
+  templateUrl: 'product-manager.component.html',
+  styleUrls: ['product-manager.component.css']
 })
 export class ProductManagerComponent extends Unsubscribable implements AfterViewInit {
 

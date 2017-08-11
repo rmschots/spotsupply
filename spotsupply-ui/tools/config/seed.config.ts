@@ -2,7 +2,10 @@ import { join } from 'path';
 import * as slash from 'slash';
 import { argv } from 'yargs';
 
-import { BuildType, ExtendPackages, InjectableDependency } from './seed.config.interfaces';
+import {
+  BuildType, ExtendPackages, InjectableDependency,
+  SourceMapExplorerOutputFormat
+} from './seed.config.interfaces';
 
 /************************* DO NOT CHANGE ************************
  *
@@ -27,6 +30,16 @@ import { BuildType, ExtendPackages, InjectableDependency } from './seed.config.i
 export const BUILD_TYPES: BuildType = {
   DEVELOPMENT: 'dev',
   PRODUCTION: 'prod'
+};
+
+/**
+ * The enumeration of available source-map-explorer output formats.
+ * @type {SourceMapExplorerOutputFormats}
+ */
+export const SME_OUTPUT_FORMATS: SourceMapExplorerOutputFormat = {
+  HTML: 'html',
+  JSON: 'json',
+  TSV: 'tsv'
 };
 
 /**
@@ -62,6 +75,23 @@ export class SeedConfig {
   BUILD_TYPE = getBuildType();
 
   /**
+   * The flag to determine preserving source maps on build or not.
+   * The default value is `false`, which can be overriden by the `--preserve-source-maps` flag when running `npm start`.
+   */
+  PRESERVE_SOURCE_MAPS = argv['preserve-source-maps'] || false;
+
+  /**
+   * The current source-map-explorer output format.
+   * The default value is `html`, which can be overriden by the `--sme-out-format html|json|tsv` flag when running `npm run sme`.
+   */
+  SME_OUT_FORMAT = getSmeOutFormat();
+
+  /**
+   * The current source-map-explorer output folder.
+   */
+  SME_DIR = 'sme';
+
+  /**
    * The flag for the debug option of the application.
    * The default value is `false`, which can be overriden by the `--debug` flag when running `npm start`.
    * @type {boolean}
@@ -83,9 +113,9 @@ export class SeedConfig {
   COVERAGE_PORT = argv['coverage-port'] || 4004;
 
   /**
-   * The path to the coverage output
-   * NB: this must match what is configured in ./karma.conf.js
-   */
+  * The path to the coverage output
+  * NB: this must match what is configured in ./karma.conf.js
+  */
   COVERAGE_DIR = 'coverage_js';
   COVERAGE_TS_DIR = 'coverage';
 
@@ -359,11 +389,11 @@ export class SeedConfig {
    */
   ROLLUP_INCLUDE_DIR: string[] = ['node_modules/**'];
 
-  /**
-   * List of named export Object key value pairs
-   * key: dependencie file
-   * value: exported Objects
-   */
+ /**
+  * List of named export Object key value pairs
+  * key: dependencie file
+  * value: exported Objects
+  */
   ROLLUP_NAMED_EXPORTS: any[] = [];
 
   /**
@@ -380,12 +410,12 @@ export class SeedConfig {
    * @type {any}
    */
   SYSTEM_CONFIG_DEV: any = {
-    defaultJSExtensions: true,
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       '@angular/animations': 'node_modules/@angular/animations/bundles/animations.umd.js',
       '@angular/platform-browser/animations': 'node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js',
       '@angular/common': 'node_modules/@angular/common/bundles/common.umd.js',
+      '@angular/common/http': 'node_modules/@angular/common/bundles/common-http.umd.js',
       '@angular/compiler': 'node_modules/@angular/compiler/bundles/compiler.umd.js',
       '@angular/core': 'node_modules/@angular/core/bundles/core.umd.js',
       '@angular/forms': 'node_modules/@angular/forms/bundles/forms.umd.js',
@@ -406,10 +436,14 @@ export class SeedConfig {
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
       'app/': `${this.APP_BASE}app/`,
       // For test config
-      'dist/dev/*': '/base/dist/dev/*',
-      '*': 'node_modules/*'
+      'dist/dev/': '/base/dist/dev/',
+      '': 'node_modules/'
     },
-    packages: {}
+    packages: {
+      [this.BOOTSTRAP_DIR]: {
+        defaultExtension: 'js'
+      }
+    }
   };
 
   /**
@@ -424,7 +458,6 @@ export class SeedConfig {
    * @type {any}
    */
   SYSTEM_BUILDER_CONFIG: any = {
-    defaultJSExtensions: true,
     base: this.PROJECT_ROOT,
     packageConfigPaths: [
       join('node_modules', '*', 'package.json'),
@@ -520,9 +553,9 @@ export class SeedConfig {
   ];
 
   /**
-   * Browser-sync middleware configurations array.
-   * @type {Array}
-   */
+  * Browser-sync middleware configurations array.
+  * @type {Array}
+  */
   PROXY_MIDDLEWARE: any[] = [];
 
   /**
@@ -544,8 +577,8 @@ export class SeedConfig {
    */
   private get _APP_ASSETS(): InjectableDependency[] {
     return [
-      { src: `${this.CSS_SRC}/${this.CSS_BUNDLE_NAME}.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
       ...this.APP_ASSETS,
+      { src: `${this.CSS_SRC}/${this.CSS_BUNDLE_NAME}.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
     ];
   }
 
@@ -680,9 +713,9 @@ export class SeedConfig {
 
   }
 
-  /**
-   * Convert named rollup array to object
-   */
+/**
+ * Convert named rollup array to object
+ */
   getRollupNamedExports() {
     let namedExports = {};
     this.ROLLUP_NAMED_EXPORTS.map(namedExport => {
@@ -742,4 +775,9 @@ function getBuildType() {
   } else {
     return BUILD_TYPES.DEVELOPMENT;
   }
+}
+
+function getSmeOutFormat() {
+  let format = (argv['sme-out-format'] || '').toUpperCase();
+  return SME_OUTPUT_FORMATS[format] || SME_OUTPUT_FORMATS.HTML;
 }

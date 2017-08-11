@@ -89,11 +89,8 @@ export class ProjectConfig extends SeedConfig {
       name: 'simple-peer',
       path: 'node_modules/simple-peer/simplepeer.min.js'
     }, {
-      name: 'ng2-password-strength-bar',
-      path: 'node_modules/ng2-password-strength-bar/index.js',
-      packageMeta: {
-        defaultExtension: 'js'
-      }
+      name: 'tslib',
+      path: 'node_modules/tslib/tslib.js'
     }]);
 
     // Add packages (e.g. ng2-translate)

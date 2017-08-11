@@ -17,7 +17,6 @@
         <module>spotsupply-service</module>
         <module>spotsupply-e2e</module>
         <module>spotsupply-jar</module>
-        <module>spotsupply-common</module>
     </modules>
 
     <properties>

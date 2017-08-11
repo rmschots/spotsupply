@@ -9,8 +9,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Component({
   moduleId: module.id,
   selector: 'ss-dashboard',
-  templateUrl: 'app/admin/dashboard/dashboard.component.html',
-  styleUrls: ['app/admin/dashboard/dashboard.component.css']
+  templateUrl: 'dashboard.component.html',
+  styleUrls: ['dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 

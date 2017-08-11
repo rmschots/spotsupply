@@ -8,8 +8,8 @@ import { UpdateProduct } from './update-product';
 @Component({
   moduleId: module.id,
   selector: 'ss-create-update-product',
-  templateUrl: 'app/admin/product-manager/create-product/create-update-product.component.html',
-  styleUrls: ['app/admin/product-manager/create-product/create-update-product.component.css']
+  templateUrl: 'create-update-product.component.html',
+  styleUrls: ['create-update-product.component.css']
 })
 export class CreateUpdateProductComponent {
 

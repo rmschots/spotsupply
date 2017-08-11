@@ -4,8 +4,8 @@ import { NavigationService } from '../shared/services/navigation/navigation.serv
 @Component({
   moduleId: module.id,
   selector: 'ss-admin',
-  templateUrl: 'app/admin/admin.component.html',
-  styleUrls: ['app/admin/admin.component.css']
+  templateUrl: 'admin.component.html',
+  styleUrls: ['admin.component.css']
 })
 export class AdminComponent {
 
