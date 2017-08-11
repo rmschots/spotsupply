@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>be.spotsupply</groupId>
+    <artifactId>spotsupply</artifactId>
+    <packaging>pom</packaging>
+    <version>0.1.0</version>
+
+    <modules>
+        <module>spotsupply-ui</module>
+        <module>spotsupply-rest</module>
+        <module>spotsupply-domain</module>
+        <module>spotsupply-security</module>
+        <module>spotsupply-service</module>
+        <module>spotsupply-e2e</module>
+        <module>spotsupply-jar</module>
+        <module>spotsupply-common</module>
+    </modules>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <hibernate.version>5.0.12.Final</hibernate.version>
+        <springboot.version>1.5.3.RELEASE</springboot.version>
+        <lombok.version>1.16.16</lombok.version>
+        <geom.version>0.11.1</geom.version>
+        <proj4j.version>0.1.0</proj4j.version>
+        <jackson-datatype.version>2.9.0.pr4</jackson-datatype.version>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.3.RELEASE</version>
+    </parent>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>be.spotsupply</groupId>
+                <artifactId>spotsupply-service</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>be.spotsupply</groupId>
+                <artifactId>spotsupply-domain</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>be.spotsupply</groupId>
+                <artifactId>spotsupply-e2e</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>be.spotsupply</groupId>
+                <artifactId>spotsupply-rest</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>be.spotsupply</groupId>
+                <artifactId>spotsupply-security</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>be.spotsupply</groupId>
+                <artifactId>spotsupply-server</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>be.spotsupply</groupId>
+                <artifactId>spotsupply-ui</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-mail</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
+            <!-- DB dependencies -->
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-java8</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-dbcp</groupId>
+                <artifactId>commons-dbcp</artifactId>
+                <version>${commons-dbcp.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.jayway.jsonpath</groupId>
+                <artifactId>json-path</artifactId>
+                <version>${json-path.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- geo -->
+            <dependency>
+                <groupId>math.geom2d</groupId>
+                <artifactId>javaGeom</artifactId>
+                <version>${geom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.osgeo</groupId>
+                <artifactId>proj4j</artifactId>
+                <version>${proj4j.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson-datatype.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
