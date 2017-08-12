@@ -1,0 +1,65 @@
+<form #createUpdateProductForm="ngForm" (ngSubmit)="submit()">
+  <table class="full-width" cellspacing="8px">
+    <tr>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput [placeholder]="'form.productNameEnglish.placeholder' | translate" name="productNameEnglish"
+                 [(ngModel)]="data.name.en" required/>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput [placeholder]="'form.productNameDutch.placeholder' | translate" name="productNameDutch"
+                 [(ngModel)]="data.name.nl" required/>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput [placeholder]="'form.productNameFrench.placeholder' | translate" name="productNameFrench"
+                 [(ngModel)]="data.name.fr" required/>
+        </md-input-container>
+      </td>
+    </tr>
+  </table>
+  <table class="full-width" cellspacing="8px">
+    <tr>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput [placeholder]="'form.productExtraInfoEnglish.placeholder' | translate"
+                 name="productExtraInfoEnglish"
+                 [(ngModel)]="data.extraInfo.en"/>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput [placeholder]="'form.productExtraInfoDutch.placeholder' | translate"
+                 name="productExtraInfoDutch"
+                 [(ngModel)]="data.extraInfo.nl"/>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput [placeholder]="'form.productExtraInfoFrench.placeholder' | translate"
+                 name="productExtraInfoFrench"
+                 [(ngModel)]="data.extraInfo.fr"/>
+        </md-input-container>
+      </td>
+    </tr>
+  </table>
+  <md-select [placeholder]="'form.productType.placeholder' | translate" [(ngModel)]="data.productTypes"
+             name="productType" [multiple]=true class="full-width input-padding" required>
+    <md-option *ngFor="let productType of (productTypes | async)" [value]="productType.id">
+      {{productType.name | ssTranslate | async}}
+    </md-option>
+  </md-select>
+  <md-input-container class="input-padding">
+    <input mdInput [placeholder]="'form.price.placeholder' | translate"
+           name="price"
+           type="number"
+           [(ngModel)]="data.price" required/>
+  </md-input-container>
+  <md-checkbox name="active" [(ngModel)]="data.active">{{'form.active.placeholder' | translate}}</md-checkbox>
+  <button md-raised-button [disabled]="!createUpdateProductForm.form.valid">
+    {{ isCreate? 'create' : 'update' }}
+  </button>
+</form>

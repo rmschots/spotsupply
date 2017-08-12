@@ -1,0 +1,36 @@
+<form #createUpdateProductCategoryForm="ngForm" (ngSubmit)="submit()">
+  <table class="full-width" cellspacing="8px">
+    <tr>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput [placeholder]="'form.productCategoryNameEnglish.placeholder' | translate"
+                 name="productCategoryNameEnglish"
+                 [(ngModel)]="data.name.en" required/>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput [placeholder]="'form.productCategoryNameDutch.placeholder' | translate"
+                 name="productCategoryNameDutch"
+                 [(ngModel)]="data.name.nl" required/>
+        </md-input-container>
+      </td>
+      <td>
+        <md-input-container class="full-width">
+          <input mdInput [placeholder]="'form.productCategoryNameFrench.placeholder' | translate"
+                 name="productCategoryNameFrench"
+                 [(ngModel)]="data.name.fr" required/>
+        </md-input-container>
+      </td>
+    </tr>
+  </table>
+  <md-input-container class="input-padding">
+    <input mdInput [placeholder]="'form.sortingOrder.placeholder' | translate"
+           name="sortingOrder"
+           type="number"
+           [(ngModel)]="data.sortingOrder" required/>
+  </md-input-container>
+  <button md-raised-button [disabled]="!createUpdateProductCategoryForm.form.valid">
+    {{ isCreate? 'create' : 'update' }}
+  </button>
+</form>
