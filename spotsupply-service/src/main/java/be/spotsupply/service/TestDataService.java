@@ -27,6 +27,8 @@ import java.util.stream.LongStream;
 @Service
 public class TestDataService {
 
+    private static final Random random = new Random(System.currentTimeMillis());
+
     @Autowired
     private BeachRepository beachRepository;
     @Autowired
@@ -60,19 +62,9 @@ public class TestDataService {
         List<User> users = userRepository.findAll();
         List<Beach> beaches = beachRepository.findAll();
         List<Product> products = productRepository.findAll();
-        Random random = new Random(System.currentTimeMillis());
 
         LongStream.range(0, amount).forEach(id -> {
-            ShoppingCart shoppingCart = ShoppingCart.builder()
-                    .user(users.get(random.nextInt(users.size())))
-                    .beach(beaches.get(random.nextInt(beaches.size())))
-                    .deliveredDateTime(LocalDateTime.now().minusDays(random.nextInt(5000)))
-                    .orderDateTime(LocalDateTime.now().minusDays(random.nextInt(5000)))
-                    .requestedTime(LocalDateTime.now().minusDays(random.nextInt(5000)).toString())
-                    .price(Math.round(random.nextDouble() * 100) / 10.0)
-                    .status(CartStatus.ARCHIVED)
-                    .items(new ArrayList<>())
-                    .build();
+            ShoppingCart shoppingCart = createShoppingCart(users, beaches);
             shoppingCartRepository.saveAndFlush(shoppingCart);
             IntStream.rangeClosed(1, random.nextInt(10) + 1).forEach(am -> {
                 CartItem item = CartItem.builder()
@@ -86,5 +78,18 @@ public class TestDataService {
             shoppingCartService.recalculateCartPrice(shoppingCart);
             shoppingCartRepository.saveAndFlush(shoppingCart);
         });
+    }
+
+    private ShoppingCart createShoppingCart(List<User> users, List<Beach> beaches) {
+        return ShoppingCart.builder()
+                .user(users.get(random.nextInt(users.size())))
+                .beach(beaches.get(random.nextInt(beaches.size())))
+                .deliveredDateTime(LocalDateTime.now().minusDays(random.nextInt(5000)))
+                .orderDateTime(LocalDateTime.now().minusDays(random.nextInt(5000)))
+                .requestedTime(LocalDateTime.now().minusDays(random.nextInt(5000)).toString())
+                .price(Math.round(random.nextDouble() * 100) / 10.0)
+                .status(CartStatus.ARCHIVED)
+                .items(new ArrayList<>())
+                .build();
     }
 }
