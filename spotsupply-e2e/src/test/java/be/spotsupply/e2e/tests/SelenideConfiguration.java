@@ -2,6 +2,8 @@ package be.spotsupply.e2e.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +20,12 @@ public class SelenideConfiguration {
         Configuration.browser = "chrome";
         System.setProperty("selenide.browser", "chrome");
         getChromeDriverLocationFromEnvironment().ifPresent((location) -> System.setProperty("webdriver.chrome.driver", location));
-        WebDriverRunner.getAndCheckWebDriver().manage().window().maximize();
+//        WebDriverRunner.getAndCheckWebDriver().manage().window().maximize();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("headless","disable-gpu");
+        Configuration.startMaximized = false;
+        ChromeDriver chromeDriver = new ChromeDriver(chromeOptions);
+        WebDriverRunner.setWebDriver(chromeDriver);
         resetSelenideTimeouts();
     }
 
