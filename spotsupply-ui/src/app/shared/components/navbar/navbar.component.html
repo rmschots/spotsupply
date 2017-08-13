@@ -12,21 +12,21 @@
         </button>
       </md-menu>
     </div>
-    <a class="menu-item" md-list-item [routerLink]="['/']" [routerLinkActive]="['router-link-active']"
+    <a id="home-nav-button" class="menu-item" md-list-item [routerLink]="['/']" [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}" (click)="navigated()">{{'NAVBAR.items.home' | translate}}</a>
-    <a class="menu-item" md-list-item [routerLink]="['/products']" [routerLinkActive]="['router-link-active']"
+    <a id="products-nav-button" class="menu-item" md-list-item [routerLink]="['/products']" [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}"
        (click)="navigated()">{{'NAVBAR.items.products' | translate}}</a>
-    <a class="menu-item" md-list-item [routerLink]="['/faq']" [routerLinkActive]="['router-link-active']"
+    <a id="faq-nav-button" class="menu-item" md-list-item [routerLink]="['/faq']" [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}"
        (click)="navigated()">{{'NAVBAR.items.faq' | translate}}</a>
-    <a *ngIf="isLoggedIn | async" class="menu-item" md-list-item [routerLink]="['/settings']"
+    <a id="settings-nav-button" *ngIf="isLoggedIn | async" class="menu-item" md-list-item [routerLink]="['/settings']"
        [routerLinkActive]="['router-link-active']" (click)="navigated()">{{'NAVBAR.items.settings' | translate}}</a>
-    <a *ngIf="isAdmin | async" class="menu-item" md-list-item [routerLink]="['/admin']"
+    <a id="admin-nav-button" *ngIf="isAdmin | async" class="menu-item" md-list-item [routerLink]="['/admin']"
        [routerLinkActive]="['router-link-active']" (click)="navigated()">{{'NAVBAR.items.admin' | translate}}</a>
-    <md-list-item *ngIf="isLoggedIn | async" (click)="logOut()">{{'NAVBAR.items.logOut' | translate}}</md-list-item>
-    <md-list-item *ngIf="!(isLoggedIn | async)" (click)="logIn()">{{'NAVBAR.items.logIn' | translate}}</md-list-item>
-    <a *ngIf="!(isLoggedIn | async)" class="menu-item" md-list-item [routerLink]="['/create-account']"
+    <md-list-item id="logout-nav-button" *ngIf="isLoggedIn | async" (click)="logOut()">{{'NAVBAR.items.logOut' | translate}}</md-list-item>
+    <md-list-item id="login-nav-button" *ngIf="!(isLoggedIn | async)" (click)="logIn()">{{'NAVBAR.items.logIn' | translate}}</md-list-item>
+    <a id="createaccount-nav-button" *ngIf="!(isLoggedIn | async)" class="menu-item" md-list-item [routerLink]="['/create-account']"
        [routerLinkActive]="['router-link-active']"
        [routerLinkActiveOptions]="{exact:true}"
        (click)="navigated()">{{'NAVBAR.items.createAccount' | translate}}</a>

@@ -1,16 +1,16 @@
-<div class="text-center">
+<div class="text-center" id="login-dialog">
   <form>
     <md-input-container class="full-width" floatPlaceholder="always">
-      <input mdInput [placeholder]="'form.phoneOrEmail.placeholder' | translate" name="email" [(ngModel)]="loginDetails.phoneOrEmail" required/>
+      <input id="login-emailphone-input" mdInput [placeholder]="'form.phoneOrEmail.placeholder' | translate" name="email" [(ngModel)]="loginDetails.phoneOrEmail" required/>
     </md-input-container>
     <md-input-container class="full-width" floatPlaceholder="always">
-      <input mdInput [placeholder]="'form.password.placeholder' | translate" name="password" [(ngModel)]="loginDetails.password" required/>
+      <input id="login-password-input" mdInput [placeholder]="'form.password.placeholder' | translate" name="password" [(ngModel)]="loginDetails.password" required/>
     </md-input-container>
     <div *ngIf="errorMessage" class="warn-text">{{errorMessage}}</div>
-    <button md-raised-button color="primary" class="top-bot-margin-default" (click)="login()" (blur)="errorMessage = undefined">
+    <button id="login-loginbutton" md-raised-button color="primary" class="top-bot-margin-default" (click)="login()" (blur)="errorMessage = undefined">
       {{'form.actions.logIn' | translate}}
     </button>
-    <button md-button color="primary" class="top-bot-margin-default" (click)="forgotPassword()">
+    <button id="login-forgotpasswordbutton" md-button color="primary" class="top-bot-margin-default" (click)="forgotPassword()">
       {{'LOGIN.forgotPassword' | translate}}
     </button>
   </form>

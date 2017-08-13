@@ -11,5 +11,68 @@
 
     <artifactId>spotsupply-e2e</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>be.spotsupply</groupId>
+            <artifactId>spotsupply-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>be.spotsupply</groupId>
+            <artifactId>spotsupply-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>be.spotsupply</groupId>
+            <artifactId>spotsupply-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>be.spotsupply</groupId>
+            <artifactId>spotsupply-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>be.spotsupply</groupId>
+            <artifactId>spotsupply-jar</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>be.spotsupply</groupId>
+            <artifactId>spotsupply-ui</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- testing -->
+
+        <!-- restassured -->
+        <dependency>
+            <groupId>com.jayway.restassured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.jayway.restassured</groupId>
+            <artifactId>spring-mock-mvc</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- proxy -->
+        <dependency>
+            <groupId>org.littleshoot</groupId>
+            <artifactId>littleproxy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+        </dependency>
+
+        <!-- selenide -->
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
