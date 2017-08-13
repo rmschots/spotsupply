@@ -62,10 +62,7 @@ public class UserService {
                 .build();
         user = userRepository.saveAndFlush(user);
 
-        if ("dev".matches(environment)) {
-            user.setVerified(true);
-            userRepository.saveAndFlush(user);
-        } else if ("prod".matches(environment)) {
+        if ("prod".matches(environment)) {
             Verification verification = Verification.builder()
                     .verificationCode(UUID.randomUUID().toString())
                     .type(VERIFY_EMAIL)
@@ -73,6 +70,9 @@ public class UserService {
                     .build();
             verification = verificationRepository.saveAndFlush(verification);
             mailService.sendVerificationMail(command.getEmail(), verification.getVerificationCode(), "Spotsupply verification code", "verify-email/");
+        }else {
+            user.setVerified(true);
+            userRepository.saveAndFlush(user);
         }
     }
 
