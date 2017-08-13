@@ -11,5 +11,57 @@
 
   <artifactId>spotsupply-ui</artifactId>
 
-
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>install-node-and-npm</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>install-node-and-npm</goal>
+            </goals>
+            <configuration>
+              <nodeVersion>${node.version}</nodeVersion>
+              <npmVersion>${npm.version}</npmVersion>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm install</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>install</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm lint</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run lint</arguments>
+              <failOnError>true</failOnError>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm build</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run build</arguments>
+              <failOnError>true</failOnError>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
