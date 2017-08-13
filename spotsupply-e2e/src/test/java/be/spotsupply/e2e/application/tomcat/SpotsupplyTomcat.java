@@ -8,7 +8,7 @@ public class SpotsupplyTomcat {
 
     private static SpotsupplyTomcat instance;
 
-    private final int port = 8090;
+    private final int port = 8085;
     private final String contextPath = "";
     private boolean started = false;
     private ConfigurableApplicationContext applicationContext;

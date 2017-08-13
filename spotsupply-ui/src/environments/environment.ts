@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   ENV: 'DEV',
-  REST_API: 'http://localhost:8090'
+  REST_API: 'http://localhost:8085'
 };
