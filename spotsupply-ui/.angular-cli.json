@@ -5,8 +5,9 @@
   },
   "apps": [
     {
+      "name": "app-dev",
       "root": "src",
-      "outDir": "dist",
+      "outDir": "dist-dev",
       "assets": [
         "assets"
       ],
@@ -23,7 +24,28 @@
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
-        "dev": "environments/environment.ts",
+        "dev": "environments/environment.ts"
+      }
+    },{
+      "name": "app-prod",
+      "root": "src",
+      "outDir": "dist-prod",
+      "assets": [
+        "assets"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "tsconfig": "tsconfig.app.json",
+      "prefix": "ss",
+      "styles": [
+        "styles.css",
+        "deeppurple-amber.css",
+        "main.css"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
         "prod": "environments/environment.prod.ts"
       }
     }
