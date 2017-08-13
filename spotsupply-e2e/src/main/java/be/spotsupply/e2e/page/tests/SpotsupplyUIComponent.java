@@ -12,8 +12,9 @@ public interface SpotsupplyUIComponent {
 
     default void sendKeys(SelenideElement el, CharSequence text) {
         text.chars().mapToObj(i -> (char) i).forEachOrdered(character -> {
+            sleep(50);
             el.sendKeys(String.valueOf(character));
-            sleep(20);
+            sleep(50);
         });
 
     }

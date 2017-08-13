@@ -6,12 +6,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Optional;
 
 public class SelenideConfiguration {
     private static Logger LOGGER = LoggerFactory.getLogger(SelenideConfiguration.class);
     public static final int SELENIDE_TIMEOUT = 10000;
+
+    @Value("${envTarget:dev}")
+    private String environment;
+
 
     private SelenideConfiguration() {
     }
@@ -20,12 +25,15 @@ public class SelenideConfiguration {
         Configuration.browser = "chrome";
         System.setProperty("selenide.browser", "chrome");
         getChromeDriverLocationFromEnvironment().ifPresent((location) -> System.setProperty("webdriver.chrome.driver", location));
-//        WebDriverRunner.getAndCheckWebDriver().manage().window().maximize();
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("headless","disable-gpu");
-        Configuration.startMaximized = false;
-        ChromeDriver chromeDriver = new ChromeDriver(chromeOptions);
-        WebDriverRunner.setWebDriver(chromeDriver);
+        if(System.getProperty("os.name").toLowerCase().contains("windows")) {
+            WebDriverRunner.getAndCheckWebDriver().manage().window().maximize();
+        }else{
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.addArguments("headless","disable-gpu");
+            Configuration.startMaximized = false;
+            ChromeDriver chromeDriver = new ChromeDriver(chromeOptions);
+            WebDriverRunner.setWebDriver(chromeDriver);
+        }
         resetSelenideTimeouts();
     }
 
