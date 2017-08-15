@@ -9,7 +9,7 @@
   <span class="toolbar-title-fill-remaining-space"></span>
 
   <div *ngIf="isNotAtBeach | async" class="action-parent">
-    <md-icon class="btn-action" (click)="clickNotAtBeach()">
+    <md-icon id="toolbar-warning-button" class="btn-action" (click)="clickNotAtBeach()">
       warning
     </md-icon>
   </div>

@@ -11,7 +11,7 @@
 
 .product-parent {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   line-height: 25px;
 }
 
@@ -26,6 +26,8 @@
 
 .product-control {
   flex-basis: 80px;
+  display: flex;
+  align-items: center;
 }
 
 .product-extra-info {
@@ -40,4 +42,10 @@
 
 .action-disabled {
   opacity: 0.2;
+}
+
+.addremove-product-icon {
+  flex-grow: 1;
+  cursor: pointer;
+  user-select: none;
 }

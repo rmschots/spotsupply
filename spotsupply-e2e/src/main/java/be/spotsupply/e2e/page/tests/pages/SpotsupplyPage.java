@@ -5,7 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.visible;
 
-public abstract class SpotsupplyPage<S extends SpotsupplyPage<S>> implements PageWithSidenav<S>, SpotsupplyUIComponent {
+public abstract class SpotsupplyPage<S extends SpotsupplyPage<S>> implements PageWithSidenav<S>, PageWithToolbar<S>, SpotsupplyUIComponent {
 
     public abstract SelenideElement pageIdentifier();
 
@@ -15,8 +15,15 @@ public abstract class SpotsupplyPage<S extends SpotsupplyPage<S>> implements Pag
 
     public S loginAsAdmin() {
         return openSidenav()
-                .sidenavClickLogin()
-                .loginAsAdmin()
-                .assertSidenavIsClosed();
+            .sidenavClickLogin()
+            .loginAsAdmin()
+            .assertSidenavIsClosed();
+    }
+
+    public S loginAsCustomer() {
+        return openSidenav()
+            .sidenavClickLogin()
+            .loginAsCustomer()
+            .assertSidenavIsClosed();
     }
 }

@@ -2,7 +2,8 @@
 
   <div *ngIf="!isChecking()" class="flex-container padded-row-xl text-center">
     <h3 class="centered-title">{{'HOME.lookForSupplyAtSpot'|translate}}</h3>
-    <button md-raised-button color="primary" (click)="checkIt()">{{'HOME.checkIt'|translate}}</button>
+    <button md-raised-button id="checkit-button" color="primary" (click)="checkIt()">{{'HOME.checkIt'|translate}}
+    </button>
   </div>
 
   <div *ngIf="isNotAtBeach | async" class="flex-container padded-row-xl text-center">
@@ -11,9 +12,11 @@
 
   <div class="padded-row-xl">
     <md-accordion>
-      <md-expansion-panel *ngFor="let spot of (beaches|async)" (opened)="selectSpot(spot)" (closed)="deselectSpot(spot)" [id]="spot.name"
+      <md-expansion-panel *ngFor="let spot of (beaches|async)" (opened)="selectSpot(spot)" (closed)="deselectSpot(spot)"
+                          [id]="spot.name"
                           [ngClass]="{'at-beach-card': atBeach && atBeach.id === spot.id}">
-        <md-expansion-panel-header style="color: white" [ngStyle]="{'background-image': 'url(/assets/img/oostende.jpg)', 'background-size': '100%'}">
+        <md-expansion-panel-header style="color: white"
+                                   [ngStyle]="{'background-image': 'url(/assets/img/oostende.jpg)', 'background-size': '100%'}">
           <md-panel-title class="spot-title">
             <b>{{spot.name | translate}}</b>
             <small *ngIf="distanceToBeachAvailable | async">{{getBeachDistance(spot.id)}}</small>
@@ -21,9 +24,9 @@
         </md-expansion-panel-header>
         <div class="map-parent" *ngIf="selectedSpot == spot.id" style="padding-top: 16px">
           <ngui-map
-            center="51.23135408102922, 2.9106473500000902"
-            disableDefaultUI="true"
-            (mapReady$)="onMapReady($event)">
+              center="51.23135408102922, 2.9106473500000902"
+              disableDefaultUI="true"
+              (mapReady$)="onMapReady($event)">
           </ngui-map>
         </div>
       </md-expansion-panel>
@@ -36,6 +39,7 @@
     </div>
   </div>
   <button md-fab
+          id="shopat-button"
           *ngIf="!(hasCart | async) && atBeach && !(ordered | async)"
           class="hover-button"
           (click)="goToStore()">

@@ -94,8 +94,3 @@ VALUES
   (1, 3),
   (1, 5),
   (1, 7);
-
-INSERT INTO `shopping_cart`
-(id, created, updated, session_id, status, beach_id, user_id, price)
-VALUES
-  (1, NOW(), NOW(), NULL, 'IN_PROGRESS', 1, 1, 0);

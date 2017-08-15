@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, HostBinding, OnDestroy } from '@angular/core';
 import { NavigationService } from '../../shared/services/navigation/navigation.service';
 import { Router } from '@angular/router';
 import { MdDialog, MdSnackBar, MdSnackBarRef, SimpleSnackBar } from '@angular/material';
@@ -20,6 +20,8 @@ import { LoginModel } from '../../shared/framework/models/login.model';
   styleUrls: ['order-info.component.css']
 })
 export class OrderInfoComponent extends Unsubscribable implements OnDestroy {
+
+  @HostBinding('id') id = 'orderinfopage';
 
   cart: ShoppingCart;
 

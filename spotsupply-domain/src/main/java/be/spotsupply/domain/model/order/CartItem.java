@@ -1,7 +1,7 @@
 package be.spotsupply.domain.model.order;
 
-import be.spotsupply.domain.model.product.Product;
 import be.spotsupply.domain.model.common.VersionedEntity;
+import be.spotsupply.domain.model.product.Product;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.Tolerate;
@@ -18,7 +18,7 @@ public class CartItem extends VersionedEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ShoppingCart cart;
 
     @Enumerated(EnumType.STRING)

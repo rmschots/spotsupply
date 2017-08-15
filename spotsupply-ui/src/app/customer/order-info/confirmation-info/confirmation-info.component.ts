@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
 
 @Component({
@@ -8,6 +8,8 @@ import { MdDialogRef } from '@angular/material';
   styleUrls: ['confirmation-info.component.css']
 })
 export class ConfirmationInfoComponent {
+
+  @HostBinding('id') id = 'orderconfirmation-dialog';
 
   constructor(public dialogRef: MdDialogRef<ConfirmationInfoComponent>) {
   }

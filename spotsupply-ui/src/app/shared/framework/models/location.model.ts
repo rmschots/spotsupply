@@ -146,7 +146,7 @@ export class LocationModel extends Model {
       this._dialogRef = this.dialog.open(LocationLoadingComponent, LocationModel.dialogOptions);
     }
     this._watchId = navigator.geolocation.watchPosition((location) => {
-        console.log('success location');
+        console.log('success location', location);
         this._store.dispatch(SpotSupplyActions.locationPermissionUpdated(LocationPermissionStatus.GRANTED));
         this._store.dispatch(SpotSupplyActions.userPositionUpdated(location));
         if (useDialog) {

@@ -8,7 +8,8 @@
     <input mdInput [placeholder]="'form.phone.placeholder' | translate" name="phoneNumber"
            [value]="phoneNumber | async" disabled/>
   </md-input-container>
-  <md-select [placeholder]="'ORDER-INFO.deliveryTime' | translate" class="full-width mat-input-wrapper"
+  <md-select id="deliverytime-select" [placeholder]="'ORDER-INFO.deliveryTime' | translate"
+             class="full-width mat-input-wrapper"
              [(ngModel)]="cart.requestedTime" [ngClass]="{'warn-color': hasNoPossibleTimes}"
              name="deliveryTime" floatPlaceholder="always" required [disabled]="hasNoPossibleTimes">
     <md-option *ngFor="let time of (possibleTimes | async)" [value]="time">
@@ -23,7 +24,7 @@
   <ss-cart [cart]="cart"></ss-cart>
   <div *ngIf="errorMessage" class="warn-text">{{errorMessage}}</div>
   <div class="bring-it-button-parent">
-    <button md-raised-button color="primary" class="bring-it-button" (click)="placeOrder()"
+    <button md-raised-button id="bringit-button" color="primary" class="bring-it-button" (click)="placeOrder()"
             [disabled]="(isNotAtBeachYet | async) || !orderInfoForm.form.valid">
       {{'ORDER-INFO.bringIt' | translate}}
     </button>

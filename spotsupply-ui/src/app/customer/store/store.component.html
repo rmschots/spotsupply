@@ -1,14 +1,18 @@
 <ss-product-list [shop]="true" class="product-list"></ss-product-list>
 <div class="store-bar primary-color">
   <div class="store-bar-left">
-    <div [ngClass]="{'actions-opaque': productTotal < 1}" (click)="onClearCartClicked()">
+    <div id="store-clearcart-button" [ngClass]="{'actions-opaque': productTotal < 1}" (click)="onClearCartClicked()">
       <md-icon class="delete-icon">delete</md-icon>
       <div>{{'STORE.clearCart' | translate}}</div>
     </div>
   </div>
-  <div class="store-bar-middle">{{'STORE.total' | translate}} &#8364; {{productTotal}}</div>
+  <div class="store-bar-middle">
+    <span>{{'STORE.total' | translate}} &#8364;</span>
+    <span id="store-product-total">{{productTotal}}</span>
+  </div>
   <div class="store-bar-right">
-    <div [ngClass]="{'actions-opaque': productTotal < 1 || (isNotAtBeach | async)}" (click)="onNextClicked()">
+    <div id="store-next-button" [ngClass]="{'actions-opaque': productTotal < 1 || (isNotAtBeach | async)}"
+         (click)="onNextClicked()">
       <div>{{'STORE.next' | translate}}</div>
       <md-icon class="next-icon">keyboard_arrow_right</md-icon>
     </div>

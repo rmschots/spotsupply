@@ -9,6 +9,7 @@ import com.codeborne.selenide.Selenide;
 import com.jayway.restassured.specification.RequestSpecification;
 import org.hamcrest.CoreMatchers;
 
+import static com.codeborne.selenide.Selenide.page;
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -67,39 +68,39 @@ public class RunApplication {
 
     private void waitUntilStarted() {
         Poller.aPoller()
-                .doAssert((Assertion) () ->
-                        givenAuthenticatedRequest()
-                                .when()
-                                .get(contextPath() + "/health")
-                                .then()
-                                .assertThat()
-                                .statusCode(not(NOT_FOUND.value()))
-                );
+            .doAssert((Assertion) () ->
+                givenAuthenticatedRequest()
+                    .when()
+                    .get(contextPath() + "/health")
+                    .then()
+                    .assertThat()
+                    .statusCode(not(NOT_FOUND.value()))
+            );
     }
 
     private void verifyHealth() {
         System.out.println("Verifying health...");
         givenAuthenticatedRequest()
-                .when()
-                .get(contextPath() + "/health")
-                .then()
-                .assertThat()
-                .statusCode(OK.value())
-                .contentType(JSON)
-                .body(CoreMatchers.not(containsString("DOWN")));
+            .when()
+            .get(contextPath() + "/health")
+            .then()
+            .assertThat()
+            .statusCode(OK.value())
+            .contentType(JSON)
+            .body(CoreMatchers.not(containsString("DOWN")));
         System.out.println("Health OK!");
     }
 
     private RequestSpecification givenAuthenticatedRequest() {
         return given()
 //                .header(TimTamPreAuthenticatedProcessingFilter.VDABAUTHORIZATION_HEADER_NAME, "cn=CONSULENT,ou=users,ou=intern,o=vdab")
-                .baseUri(baseUri())
-                .port(port());
+            .baseUri(baseUri())
+            .port(port());
     }
 
     public HomePage openSpotsupply() {
         Selenide.open(spotsupplyUrl());
-        return new HomePage();
+        return page(HomePage.class);
     }
 
     public static RunApplication getInstance() {

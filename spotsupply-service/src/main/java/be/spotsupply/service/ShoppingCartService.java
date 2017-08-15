@@ -2,9 +2,9 @@ package be.spotsupply.service;
 
 import be.spotsupply.domain.commands.order.CreateShoppingCartCommand;
 import be.spotsupply.domain.commands.order.PlaceOrderCommand;
-import be.spotsupply.domain.dao.order.CartItemRepository;
-import be.spotsupply.domain.dao.product.ProductRepository;
+import be.spotsupply.domain.dao.order.ShoppingCartPessimisticRepository;
 import be.spotsupply.domain.dao.order.ShoppingCartRepository;
+import be.spotsupply.domain.dao.product.ProductRepository;
 import be.spotsupply.domain.model.order.CartItem;
 import be.spotsupply.domain.model.order.CartItemStatus;
 import be.spotsupply.domain.model.order.CartStatus;
@@ -24,12 +24,13 @@ import static be.spotsupply.domain.model.order.CartStatus.IN_PROGRESS;
 import static java.util.Collections.singletonList;
 
 @Service
+@Transactional
 public class ShoppingCartService {
 
     @Autowired
     private ShoppingCartRepository shoppingCartRepository;
     @Autowired
-    private CartItemRepository cartItemRepository;
+    private ShoppingCartPessimisticRepository shoppingCartPessimisticRepository;
     @Autowired
     private AuthenticationService authenticationService;
     @Autowired
@@ -41,7 +42,6 @@ public class ShoppingCartService {
         return fetchCart();
     }
 
-    @Transactional
     public ShoppingCart createShoppingCart(CreateShoppingCartCommand command) {
         ShoppingCart shoppingCart = fetchCart();
         if (shoppingCart != null) {
@@ -49,57 +49,52 @@ public class ShoppingCartService {
             return shoppingCart;
         }
         shoppingCart = ShoppingCart.builder()
-                .beach(command.getBeach())
-                .sessionId(authenticationService.isAnonymous() ? authenticationService.getSessionId() : null)
-                .items(new ArrayList<>())
-                .user(authenticationService.getUser())
-                .status(IN_PROGRESS)
-                .price(0.0)
-                .build();
+            .beach(command.getBeach())
+            .sessionId(authenticationService.isAnonymous() ? authenticationService.getSessionId() : null)
+            .items(new HashSet<>())
+            .user(authenticationService.getUser())
+            .status(IN_PROGRESS)
+            .price(0.0)
+            .build();
         shoppingCart = shoppingCartRepository.saveAndFlush(shoppingCart);
         return shoppingCart;
     }
 
-    @Transactional
     public ShoppingCart addProduct(Long productId) {
         ShoppingCart cart = fetchCartWithLock();
         Product product = productRepository.findProductByIdAndActive(productId, true);
         CartItem cartItem = CartItem.builder()
-                .cart(cart)
-                .product(product)
-                .status(CartItemStatus.IN_CART)
-                .build();
-        cartItemRepository.saveAndFlush(cartItem);
+            .cart(cart)
+            .product(product)
+            .status(CartItemStatus.IN_CART)
+            .build();
+        cart.addCartItem(cartItem);
         recalculateCartPrice(cart);
-        cart = shoppingCartRepository.saveAndFlush(cart);
         return cart;
     }
 
-    @Transactional
     public ShoppingCart removeProduct(Long productId) {
         ShoppingCart cart = fetchCartWithLock();
         Optional<CartItem> itemOpt = cart.getItems().stream()
-                .filter(cartItem -> cartItem.getProduct().getId().equals(productId))
-                .findAny();
+            .filter(cartItem -> cartItem.getProduct().getId().equals(productId))
+            .findAny();
         if (!itemOpt.isPresent()) {
             return null;
         }
-        cart.getItems().remove(itemOpt.get());
+        cart.removeCartItem(itemOpt.get());
         recalculateCartPrice(cart);
         cart = shoppingCartRepository.save(cart);
         return cart;
     }
 
-    @Transactional
     public ShoppingCart removeAllProducts() {
         ShoppingCart cart = fetchCartWithLock();
-        cart.getItems().clear();
+        cart.clearCart();
         recalculateCartPrice(cart);
         cart = shoppingCartRepository.save(cart);
         return cart;
     }
 
-    @Transactional
     public ShoppingCart placeOrder(PlaceOrderCommand command, LocalDateTime version) {
         deliveryService.validateDeliveryTime(command.getRequestedTime());
         ShoppingCart cart = fetchCartWithLock(version);
@@ -115,7 +110,6 @@ public class ShoppingCartService {
         return cart;
     }
 
-    @Transactional
     public void completeOrder() {
         ShoppingCart cart = fetchCartWithLock();
         cart.setStatus(CartStatus.ARCHIVED);
@@ -123,7 +117,6 @@ public class ShoppingCartService {
         shoppingCartRepository.saveAndFlush(cart);
     }
 
-    @Transactional
     public ShoppingCart migrateShoppingCartOfSessionToUser(String sessionId, User user) {
         ShoppingCart shoppingCart = shoppingCartRepository.findBySessionId(sessionId);
         ShoppingCart existing = shoppingCartRepository.findByUserAndStatusIn(user, Arrays.asList(CartStatus.IN_PROGRESS, CartStatus.ORDERED));
@@ -162,8 +155,7 @@ public class ShoppingCartService {
             throw new NotLoggedInException();
         }
         User user = authenticationService.getUser();
-        List<ShoppingCart> carts = shoppingCartRepository.findAllByUserAndStatusIsIn(user, singletonList(CartStatus.ARCHIVED));
-        return carts;
+        return shoppingCartRepository.findAllByUserAndStatusIsIn(user, singletonList(CartStatus.ARCHIVED));
     }
 
     public ShoppingCart fetchCartWithLock() {
@@ -171,24 +163,18 @@ public class ShoppingCartService {
     }
 
     public ShoppingCart fetchCartWithLock(LocalDateTime version) {
-        ShoppingCart cart;
-        if (authenticationService.isAnonymous()) {
-            String sessionId = authenticationService.getSessionId();
-            cart = shoppingCartRepository.findBySessionIdWithLock(sessionId);
-        } else {
-            User user = authenticationService.getUser();
-            cart = shoppingCartRepository.findByUserAndStatusInWithLock(user, Arrays.asList(CartStatus.IN_PROGRESS, CartStatus.ORDERED));
-        }
-        if (version != null) {
-            if (!version.equals(cart.getUpdated())) {
-                throw new IllegalArgumentException("Cart is outdated");
-            }
+        ShoppingCart cart = getCartFromRepo(shoppingCartPessimisticRepository);
+        if (version != null && !version.equals(cart.getUpdated())) {
+            throw new IllegalArgumentException("Cart is outdated");
         }
         return cart;
     }
 
-    @Transactional
     public ShoppingCart fetchCart() {
+        return getCartFromRepo(shoppingCartRepository);
+    }
+
+    public ShoppingCart getCartFromRepo(ShoppingCartRepository shoppingCartRepository) {
         ShoppingCart cart;
         if (authenticationService.isAnonymous()) {
             String sessionId = authenticationService.getSessionId();
@@ -200,28 +186,27 @@ public class ShoppingCartService {
         return cart;
     }
 
-    @Transactional
     public void recalculateCartPrice(ShoppingCart cart) {
         cart.setPrice(
-                cart.getItems().stream()
-                        .map(cartItem -> cartItem.getProduct().getPrice())
-                        .reduce(0.0, Double::sum)
+            cart.getItems().stream()
+                .map(cartItem -> cartItem.getProduct().getPrice())
+                .reduce(0.0, Double::sum)
         );
     }
 
     private boolean cartsEqual(ShoppingCart cart1, ShoppingCart cart2) {
         return Objects.equals(cart1.getPrice(), cart2.getPrice())
-                && cart1.getId().equals(cart2.getId())
-                && cart1.getItems().stream()
-                .map(item1 -> cart2.getItems().stream()
-                        .filter(item2 ->
-                                Objects.equals(item1.getId(), item2.getId())
-                                        && Objects.equals(item1.getProduct().getId(), item2.getProduct().getId())
-                                        && Objects.equals(item1.getStatus(), item2.getStatus())
-                        ).count() == 1
+            && cart1.getId().equals(cart2.getId())
+            && cart1.getItems().stream()
+            .map(item1 -> cart2.getItems().stream()
+                .filter(item2 ->
+                    Objects.equals(item1.getId(), item2.getId())
+                        && Objects.equals(item1.getProduct().getId(), item2.getProduct().getId())
+                        && Objects.equals(item1.getStatus(), item2.getStatus())
+                ).count() == 1
 
-                )
-                .reduce((aBoolean, aBoolean2) -> aBoolean && aBoolean2)
-                .orElse(false);
+            )
+            .reduce((aBoolean, aBoolean2) -> aBoolean && aBoolean2)
+            .orElse(false);
     }
 }

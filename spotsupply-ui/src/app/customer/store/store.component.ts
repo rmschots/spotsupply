@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { NavigationService } from '../../shared/services/navigation/navigation.service';
 import { Router } from '@angular/router';
 import { ShoppingCartModel } from '../../shared/framework/models/shopping-cart.model';
@@ -14,6 +14,8 @@ import { LocationModel } from '../../shared/framework/models/location.model';
   styleUrls: ['store.component.css']
 })
 export class StoreComponent extends Unsubscribable {
+
+  @HostBinding('id') id = 'storepage';
 
   productTotal: number;
 

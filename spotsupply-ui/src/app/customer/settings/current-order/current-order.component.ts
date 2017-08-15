@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { ShoppingCartModel } from '../../../shared/framework/models/shopping-cart.model';
 import { Beach } from '../../../shared/objects/beach/beach';
 import { LocationModel } from '../../../shared/framework/models/location.model';
@@ -12,6 +12,8 @@ import { BeachModel } from '../../../shared/framework/models/beach.model';
   styleUrls: ['current-order.component.css']
 })
 export class CurrentOrderComponent extends Unsubscribable {
+
+  @HostBinding('id') id = 'currentorderpage';
 
   map: google.maps.Map;
   atBeach: Beach;

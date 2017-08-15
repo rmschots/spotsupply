@@ -1,10 +1,12 @@
 <md-tab-group [selectedIndex]="selectedTabIndex" (selectedIndexChange)="tabSelected($event)"
               [ngStyle]="{height: '100%'}" md-stretch-tabs [dynamicHeight]="true">
-  <md-tab *ngFor="let category of (categories | async)" [label]="category.name | ssTranslate | async">
+  <md-tab *ngFor="let category of (categories | async)" [label]="category.name | ssTranslate | async"
+          [id]="'category-'+category.id+'-tab'">
     <div class="tab-content">
       <div *ngFor="let type of category.types" class="md-elevation-z6">
-        <h4 *ngIf="type.hasTitle" class="header-small-margin product-list-title primary-text">{{ type.name |
-          ssTranslate | async}}</h4>
+        <h4 *ngIf="type.hasTitle" class="header-small-margin product-list-title primary-text">
+          {{ type.name | ssTranslate | async}}
+        </h4>
         <div>
           <div *ngFor="let product of type.products | ssActive" class="product-parent">
             <div class="product-name">
@@ -15,12 +17,16 @@
             </div>
             <div class="product-price">&#8364; {{product.price}}</div>
             <div class="product-control" *ngIf="shop">
-              <md-icon fontSet="fa" fontIcon="fa-minus" class="text-center primary-text"
+              <md-icon [id]="'product-remove-'+product.id+'-button'"
+                       class="text-center primary-text addremove-product-icon"
                        [ngClass]="{'action-disabled': getProductAmount(product) < 1}"
-                       (click)="removeProduct(product)"></md-icon>
-              <div class="amount-text">{{getProductAmount(product)}}</div>
-              <md-icon fontSet="fa" fontIcon="fa-plus" class="text-center primary-text"
-                       (click)="addProduct(product)"></md-icon>
+                       (click)="removeProduct(product)">remove
+              </md-icon>
+              <div [id]="'product-amount-'+product.id" class="amount-text">{{getProductAmount(product)}}</div>
+              <md-icon [id]="'product-add-'+product.id+'-button'"
+                       class="text-center primary-text addremove-product-icon"
+                       (click)="addProduct(product)">add
+              </md-icon>
             </div>
           </div>
         </div>

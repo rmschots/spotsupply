@@ -4,10 +4,6 @@ import be.spotsupply.e2e.application.proxy.rules.common.SpotsupplyUiFileSystemPr
 import io.netty.handler.codec.http.DefaultHttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 
-import java.util.Set;
-
-import static com.google.common.collect.Sets.newHashSet;
-
 public class SpotsupplyUiAssetsProxyRule extends SpotsupplyUiFileSystemProxyRule {
 
     @Override
@@ -23,8 +19,10 @@ public class SpotsupplyUiAssetsProxyRule extends SpotsupplyUiFileSystemProxyRule
     @Override
     public HttpResponse proxy(DefaultHttpRequest httpRequest) {
         HttpResponse httpResponse = super.proxy(httpRequest);
-        if(httpRequest.uri().endsWith(".css")){
-            httpResponse.headers().add("Content-Type","text/css");
+        if (httpRequest.uri().endsWith(".css")) {
+            httpResponse.headers().add("Content-Type", "text/css");
+        } else if (httpRequest.uri().endsWith(".svg")) {
+            httpResponse.headers().add("Content-Type", "image/svg+xml");
         }
         return httpResponse;
     }

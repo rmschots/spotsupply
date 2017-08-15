@@ -1,7 +1,7 @@
 package be.spotsupply.domain.model.order;
 
-import be.spotsupply.domain.model.common.VersionedEntity;
 import be.spotsupply.domain.model.beach.Beach;
+import be.spotsupply.domain.model.common.VersionedEntity;
 import be.spotsupply.domain.model.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,14 +11,20 @@ import org.hibernate.annotations.OptimisticLocking;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+import static java.util.Collections.unmodifiableList;
+import static javax.persistence.FetchType.EAGER;
+import static org.hibernate.validator.internal.util.CollectionHelper.newHashSet;
 
 @Entity
 @OptimisticLocking
 @Table(name = "shopping_cart", indexes = {
-        @Index(columnList = "status"),
-        @Index(columnList = "session_id"),
-        @Index(columnList = "user_id")
+    @Index(columnList = "status"),
+    @Index(columnList = "session_id"),
+    @Index(columnList = "user_id")
 })
 @Getter
 @Setter
@@ -38,8 +44,8 @@ public class ShoppingCart extends VersionedEntity {
     @ManyToOne(optional = false)
     private Beach beach;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItem> items;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = EAGER, orphanRemoval = true)
+    private Set<CartItem> items = newHashSet();
 
     @Enumerated(EnumType.STRING)
     private CartStatus status;
@@ -61,6 +67,10 @@ public class ShoppingCart extends VersionedEntity {
         // required by hibernate
     }
 
+    public List<CartItem> getItems() {
+        return unmodifiableList(new ArrayList<>(items));
+    }
+
     public boolean isInProgress() {
         return status.equals(CartStatus.IN_PROGRESS);
     }
@@ -75,5 +85,17 @@ public class ShoppingCart extends VersionedEntity {
 
     public boolean isCancelled() {
         return status.equals(CartStatus.CANCELLED);
+    }
+
+    public void addCartItem(CartItem cartItem) {
+        items.add(cartItem);
+    }
+
+    public void removeCartItem(CartItem cartItem) {
+        items.remove(cartItem);
+    }
+
+    public void clearCart() {
+        items.clear();
     }
 }
