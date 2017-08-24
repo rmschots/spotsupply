@@ -9,10 +9,10 @@ import static com.codeborne.selenide.Selenide.page;
 
 public class HomePage extends SpotsupplyPage<HomePage> {
 
-    @FindBy(css = "#checkit-button")
+    @FindBy(id = "checkit-button")
     private SelenideElement checkitButton;
 
-    @FindBy(css = "#shopat-button")
+    @FindBy(id = "shopat-button")
     private SelenideElement shopatButton;
 
     @Override

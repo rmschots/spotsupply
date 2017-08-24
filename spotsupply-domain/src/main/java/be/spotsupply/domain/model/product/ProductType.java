@@ -11,6 +11,8 @@ import lombok.experimental.Tolerate;
 import javax.persistence.*;
 import java.util.List;
 
+import static org.hibernate.validator.internal.util.CollectionHelper.newArrayList;
+
 @Entity
 @Table(name = "product_type")
 @Getter
@@ -32,7 +34,7 @@ public class ProductType extends VersionedEntity {
     @JoinTable(name = "product_type_product",
             joinColumns = @JoinColumn(name = "product_type_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products;
+    private List<Product> products = newArrayList();
 
     @ManyToOne
     @Setter

@@ -12,7 +12,7 @@ import { LoginUser } from '../../shared/objects/account/login-user';
 import { RestGatewayService } from '../../shared/services/gateway/rest-gateway.service';
 import { UsersSearchResult } from '../../shared/objects/search/users-search-result';
 import { URLSearchParams } from '@angular/http';
-import { DataSource } from '@angular/cdk';
+import { DataSource } from '@angular/cdk/table';
 
 @Component({
   moduleId: module.id,

@@ -1,5 +1,6 @@
 <nav md-tab-nav-bar>
   <a md-tab-link
+     id="current-order-tab"
      [routerLink]="'./current-order'"
      [routerLinkActive] #rla="routerLinkActive"
      [routerLinkActiveOptions]="{exact:true}"
@@ -8,6 +9,7 @@
     {{'SETTINGS.CURRENT_ORDER.title'|translate}}
   </a>
   <a md-tab-link
+     id="order-history-tab"
      [routerLink]="'./order-history'"
      [routerLinkActive] #rla2="routerLinkActive"
      [routerLinkActiveOptions]="{exact:true}"
@@ -16,6 +18,7 @@
     {{'SETTINGS.ORDER_HISTORY.title'|translate}}
   </a>
   <a md-tab-link
+     id="preferences-tab"
      [routerLink]="'./preferences'"
      [routerLinkActive] #rla3="routerLinkActive"
      [routerLinkActiveOptions]="{exact:true}"

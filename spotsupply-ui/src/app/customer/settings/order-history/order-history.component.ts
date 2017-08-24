@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { ShoppingCartModel } from '../../../shared/framework/models/shopping-cart.model';
 import { BeachModel } from '../../../shared/framework/models/beach.model';
 import { Observable } from 'rxjs/Observable';
@@ -11,6 +11,8 @@ import { ShoppingCart } from '../../../shared/objects/cart/shopping-cart';
   styleUrls: ['order-history.component.css']
 })
 export class OrderHistoryComponent implements OnInit {
+
+  @HostBinding('id') id = 'orderhistorypage';
 
   selectedOrderId: number;
 

@@ -11,6 +11,8 @@ import lombok.experimental.Tolerate;
 import javax.persistence.*;
 import java.util.Set;
 
+import static org.hibernate.validator.internal.util.CollectionHelper.newHashSet;
+
 @Entity
 @Table(name = "product")
 @Getter
@@ -23,18 +25,18 @@ public class Product extends VersionedEntity {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="name_id", nullable = false)
+    @JoinColumn(name = "name_id", nullable = false)
     private Translation name;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="extra_info_id")
+    @JoinColumn(name = "extra_info_id")
     private Translation extraInfo;
 
     private Double price;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "product_type_product", joinColumns = { @JoinColumn(name = "product_id") }, inverseJoinColumns = { @JoinColumn(name = "product_type_id") })
-    private Set<ProductType> productTypes;
+    @JoinTable(name = "product_type_product", joinColumns = {@JoinColumn(name = "product_id")}, inverseJoinColumns = {@JoinColumn(name = "product_type_id")})
+    private Set<ProductType> productTypes = newHashSet();
 
     private boolean active = false;
 

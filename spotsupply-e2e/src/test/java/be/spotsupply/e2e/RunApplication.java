@@ -39,6 +39,10 @@ public class RunApplication {
         return proxy.port();
     }
 
+    public int backendPort() {
+        return tomcat.getPort();
+    }
+
     public String contextPath() {
         return tomcat.contextPath();
     }
@@ -95,7 +99,7 @@ public class RunApplication {
         return given()
 //                .header(TimTamPreAuthenticatedProcessingFilter.VDABAUTHORIZATION_HEADER_NAME, "cn=CONSULENT,ou=users,ou=intern,o=vdab")
             .baseUri(baseUri())
-            .port(port());
+            .port(backendPort());
     }
 
     public HomePage openSpotsupply() {

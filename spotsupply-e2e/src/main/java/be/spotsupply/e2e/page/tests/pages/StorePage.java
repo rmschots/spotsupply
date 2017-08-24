@@ -12,11 +12,17 @@ import static com.codeborne.selenide.Selenide.page;
 
 public class StorePage extends SpotsupplyPage<StorePage> {
 
-    @FindBy(css = "#store-product-total")
+    @FindBy(id = "store-product-total")
     private SelenideElement productTotal;
 
-    @FindBy(css = "#store-next-button")
+    @FindBy(id = "store-next-button")
     private SelenideElement nextButton;
+
+    @FindBy(className = "mat-tab-header-pagination-before")
+    private SelenideElement tabLeftButton;
+
+    @FindBy(className = "mat-tab-header-pagination-after")
+    private SelenideElement tabRightButton;
 
     @Override
     public SelenideElement pageIdentifier() {
@@ -47,9 +53,9 @@ public class StorePage extends SpotsupplyPage<StorePage> {
     }
 
     public OrderInfoPage clickNextButton() {
-        sleep(1000);
+        sleep(200);
         nextButton.click();
-        sleep(1000);
+        sleep(200);
         return page(OrderInfoPage.class);
     }
 }

@@ -51,7 +51,7 @@ public class SelenideConfiguration {
         WebDriverRunner.setWebDriver(chromeDriver);
 
         if (withUI) {
-            chromeDriver.manage().window().maximize();
+//            chromeDriver.manage().window().maximize();
         } else {
             Configuration.startMaximized = false;
         }

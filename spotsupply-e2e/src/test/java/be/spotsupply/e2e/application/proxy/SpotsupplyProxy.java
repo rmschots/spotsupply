@@ -2,6 +2,8 @@ package be.spotsupply.e2e.application.proxy;
 
 import org.littleshoot.proxy.impl.DefaultHttpProxyServer;
 
+import java.net.InetSocketAddress;
+
 public class SpotsupplyProxy {
 
     private static SpotsupplyProxy instance = null;
@@ -25,6 +27,8 @@ public class SpotsupplyProxy {
 
     private void startProxy() {
         DefaultHttpProxyServer.bootstrap()
+            .withAllowLocalOnly(true)
+            .withAddress(InetSocketAddress.createUnresolved("localhost", port))
             .withPort(port)
             .withFiltersSource(new SpotsupplyFiltersSource())
             .start();

@@ -101,6 +101,34 @@
                 <artifactId>spotsupply-jar</artifactId>
                 <version>0.1.0</version>
             </dependency>
+            <dependency>
+                <groupId>be.spotsupply</groupId>
+                <artifactId>spotsupply-service</artifactId>
+                <version>0.1.0</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>be.spotsupply</groupId>
+                <artifactId>spotsupply-domain</artifactId>
+                <version>0.1.0</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>be.spotsupply</groupId>
+                <artifactId>spotsupply-rest</artifactId>
+                <version>0.1.0</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>be.spotsupply</groupId>
+                <artifactId>spotsupply-security</artifactId>
+                <version>0.1.0</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>

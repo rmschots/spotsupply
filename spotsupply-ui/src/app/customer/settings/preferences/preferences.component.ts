@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { Unsubscribable } from '../../../shared/components/unsubscribable';
 import { LoginModel } from '../../../shared/framework/models/login.model';
 import { MdDialog } from '@angular/material';
@@ -11,6 +11,8 @@ import { EditPreferenceComponent } from './edit-preference/edit-preference.compo
   styleUrls: ['preferences.component.css']
 })
 export class PreferencesComponent extends Unsubscribable {
+
+  @HostBinding('id') id = 'preferencespage';
 
   email = 'email';
   phoneNumber = 'phoneNumber';

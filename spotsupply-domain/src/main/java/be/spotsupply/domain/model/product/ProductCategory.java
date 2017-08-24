@@ -6,9 +6,13 @@ import be.spotsupply.domain.model.common.VersionedEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.Tolerate;
+import org.hibernate.validator.internal.util.CollectionHelper;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.hibernate.validator.internal.util.CollectionHelper.newArrayList;
 
 @Entity
 @Table(name = "product_category")
@@ -26,7 +30,7 @@ public class ProductCategory extends VersionedEntity {
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @OrderBy("sorting_order")
-    private List<ProductType> types;
+    private List<ProductType> types = newArrayList();
 
     @Column(name = "sorting_order")
     private int sortingOrder;

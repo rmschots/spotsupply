@@ -13,13 +13,13 @@ import static com.codeborne.selenide.Selenide.page;
 
 public class OrderInfoPage extends SpotsupplyPage<OrderInfoPage> {
 
-    @FindBy(css = "#cart-total-amount")
+    @FindBy(id = "cart-total-amount")
     private SelenideElement totalPriceElement;
 
-    @FindBy(css = "#bringit-button")
+    @FindBy(id = "bringit-button")
     private SelenideElement bringitButton;
 
-    @FindBy(css = "#deliverytime-select")
+    @FindBy(id = "deliverytime-select")
     private SelenideElement deliverytimeSelect;
 
     @Override
@@ -39,7 +39,7 @@ public class OrderInfoPage extends SpotsupplyPage<OrderInfoPage> {
     }
 
     public OrderConfirmationDialog<OrderInfoPage> clickBringitButton() {
-        sleep(2000);
+        sleep(200);
         bringitButton.click();
         return page(new OrderConfirmationDialog<>(this));
     }

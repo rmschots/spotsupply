@@ -8,13 +8,15 @@
     disableDefaultUI="true"
     (mapReady$)="onMapReady($event)">
   </ngui-map>
-  <div class="overlay-time-text">{{'CURRENT-ORDER.estimated' | translate}}: {{cartRequestedTime | async | translate}}</div>
+  <div class="overlay-time-text">{{'CURRENT-ORDER.estimated' | translate}}: {{cartRequestedTime | async | translate}}
+  </div>
   <md-icon [mdMenuTriggerFor]="menu" class="overlay-info-button">shopping_cart</md-icon>
   <md-menu #menu="mdMenu">
     <ss-cart [cart]="cart | async"></ss-cart>
   </md-menu>
 
-  <button class="text-center overlay-confirm-button" md-raised-button (click)="completeOrder()">
+  <button id="current-order-complete-order-button" class="text-center overlay-confirm-button" md-raised-button
+          (click)="completeOrder()">
     Complete order
   </button>
 </div>
