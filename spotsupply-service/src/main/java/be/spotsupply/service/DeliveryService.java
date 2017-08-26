@@ -3,7 +3,6 @@ package be.spotsupply.service;
 import be.spotsupply.service.exceptions.CannotDeliverAtThisTimeException;
 import be.spotsupply.service.exceptions.InvalidDeliveryTimeException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
