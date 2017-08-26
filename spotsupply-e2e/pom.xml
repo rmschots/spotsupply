@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>be.spotsupply</groupId>
-            <artifactId>spotsupply-domain</artifactId>
+            <artifactId>spotsupply-rest</artifactId>
         </dependency>
         <dependency>
             <groupId>be.spotsupply</groupId>
@@ -22,7 +22,7 @@
         </dependency>
         <dependency>
             <groupId>be.spotsupply</groupId>
-            <artifactId>spotsupply-rest</artifactId>
+            <artifactId>spotsupply-domain</artifactId>
         </dependency>
         <dependency>
             <groupId>be.spotsupply</groupId>

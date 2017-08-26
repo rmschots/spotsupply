@@ -37,7 +37,7 @@ import { ResetPasswordComponent } from './components/login/reset-password.compon
 import { SSTranslatePipe } from './pipes/ss-translation.pipe';
 import { SSActivePipe } from './pipes/ss-active.pipe';
 import { LoadingDialogComponent } from './components/loading/loading-dialog.component';
-import { CdkTableModule } from '@angular/cdk/table';
+import { CdkTableModule } from '@angular/cdk';
 import { HttpClient } from '@angular/common/http';
 import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
 import { SSSanitizePipe } from './pipes/ss-sanitize.pipe';

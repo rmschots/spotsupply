@@ -13,7 +13,7 @@ import { URLSearchParams } from '@angular/http';
 import { OrdersSearchResult } from '../../shared/objects/search/orders-search-result';
 import { Order } from '../../shared/objects/order/order';
 import { BeachModel } from '../../shared/framework/models/beach.model';
-import { DataSource } from '@angular/cdk/table';
+import { DataSource } from '@angular/cdk';
 
 @Component({
   moduleId: module.id,
