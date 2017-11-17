@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Selenide.page;
 
 public interface PageWithDialog<S extends PageWithDialog<S>> extends SpotsupplyUIComponent {
 
+    @SuppressWarnings("unchecked")
     default LoginDialog<S> openLoginDialog() {
         return page(new LoginDialog<>((S) this));
     }

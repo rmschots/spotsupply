@@ -34,7 +34,7 @@ public class ProductType extends VersionedEntity {
     @JoinTable(name = "product_type_product",
             joinColumns = @JoinColumn(name = "product_type_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products = newArrayList();
+    private List<Product> products;
 
     @ManyToOne
     @Setter

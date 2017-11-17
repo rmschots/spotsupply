@@ -12,7 +12,7 @@ import { LoginUser } from '../../shared/objects/account/login-user';
 import { RestGatewayService } from '../../shared/services/gateway/rest-gateway.service';
 import { UsersSearchResult } from '../../shared/objects/search/users-search-result';
 import { URLSearchParams } from '@angular/http';
-import { DataSource } from '@angular/cdk';
+import { DataSource } from '@angular/cdk/table';
 
 @Component({
   moduleId: module.id,
@@ -136,7 +136,7 @@ export class ExampleDataSource extends DataSource<any> {
     console.log('connect datasource');
     const displayDataChanges = [
       this._filterChange,
-      this._sort.mdSortChange,
+      this._sort.sortChange,
       this._paginator.page
     ];
 

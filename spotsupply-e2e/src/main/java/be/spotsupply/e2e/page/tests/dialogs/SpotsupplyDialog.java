@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
-public abstract class SpotsupplyDialog<S extends SpotsupplyDialog, D extends PageWithDialog<D>> implements SpotsupplyUIComponent {
+public abstract class SpotsupplyDialog<D extends PageWithDialog<D>> implements SpotsupplyUIComponent {
 
     final D pageWithDialog;
 

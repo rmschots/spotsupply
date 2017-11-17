@@ -2,7 +2,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MaterialModule, MdTableModule } from '@angular/material';
+import { MdTableModule } from '@angular/material';
 import { NavigationService } from './services/navigation/index';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -37,10 +37,11 @@ import { ResetPasswordComponent } from './components/login/reset-password.compon
 import { SSTranslatePipe } from './pipes/ss-translation.pipe';
 import { SSActivePipe } from './pipes/ss-active.pipe';
 import { LoadingDialogComponent } from './components/loading/loading-dialog.component';
-import { CdkTableModule } from '@angular/cdk';
+import { CdkTableModule } from '@angular/cdk/table';
 import { HttpClient } from '@angular/common/http';
 import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
 import { SSSanitizePipe } from './pipes/ss-sanitize.pipe';
+import { SpotsupplyMaterialModule } from './spotsupply-material.module';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -57,7 +58,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
+    SpotsupplyMaterialModule,
     CdkTableModule,
     MdTableModule,
     PasswordStrengthBarModule,
@@ -81,8 +82,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [ToolbarComponent, NavbarComponent, ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent,
     LocationLoadingComponent, PasswordValidatorDirective, PhoneNumberValidatorDirective, ResetPasswordComponent, SSTranslatePipe,
     SSActivePipe, SSSanitizePipe, LoadingDialogComponent],
-  exports: [ToolbarComponent, NavbarComponent, TranslateModule, CommonModule, FormsModule, RouterModule, MaterialModule, CdkTableModule,
-    MdTableModule, ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent, LocationLoadingComponent,
+  exports: [ToolbarComponent, NavbarComponent, TranslateModule, CommonModule, FormsModule, RouterModule, SpotsupplyMaterialModule,
+    CdkTableModule, MdTableModule, ProductListComponent, CartComponent, LoginComponent, LoginOptionsComponent, LocationLoadingComponent,
     ResetPasswordComponent, PasswordValidatorDirective, PhoneNumberValidatorDirective, SSTranslatePipe,
     SSActivePipe, SSSanitizePipe, LoadingDialogComponent, PasswordStrengthBarModule],
   entryComponents: [LocationLoadingComponent, LoadingDialogComponent]

@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public interface PageWithSidenav<S extends PageWithSidenav<S>> extends SpotsupplyUIComponent, PageWithDialog<S> {
 
+    @SuppressWarnings("unchecked")
     default S openSidenav() {
         $("#sidenav").shouldBe(hidden);
         click($("#sidenav-button"));
@@ -22,6 +23,7 @@ public interface PageWithSidenav<S extends PageWithSidenav<S>> extends Spotsuppl
         return openLoginDialog();
     }
 
+    @SuppressWarnings("unchecked")
     default S assertSidenavIsClosed() {
         $("#sidenav").shouldBe(hidden);
         return (S) this;

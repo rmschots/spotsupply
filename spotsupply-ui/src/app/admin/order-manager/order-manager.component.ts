@@ -13,7 +13,7 @@ import { URLSearchParams } from '@angular/http';
 import { OrdersSearchResult } from '../../shared/objects/search/orders-search-result';
 import { Order } from '../../shared/objects/order/order';
 import { BeachModel } from '../../shared/framework/models/beach.model';
-import { DataSource } from '@angular/cdk';
+import { DataSource } from '@angular/cdk/table';
 
 @Component({
   moduleId: module.id,
@@ -131,7 +131,7 @@ export class ExampleDataSource extends DataSource<any> {
     console.log('connect datasource');
     const displayDataChanges = [
       this._filterChange,
-      this._sort.mdSortChange,
+      this._sort.sortChange,
       this._paginator.page
     ];
 

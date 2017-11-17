@@ -6,7 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Selenide.$;
 
-public class LoginDialog<S extends PageWithDialog<S>> extends SpotsupplyDialog<LoginDialog, S> {
+public class LoginDialog<S extends PageWithDialog<S>> extends SpotsupplyDialog<S> {
 
     private static final String ADMIN_USERNAME = "admin";
     private static final String ADMIN_PASSWORD = "admin";

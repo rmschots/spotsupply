@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public interface PageWithToolbar<S extends PageWithToolbar<S>> extends SpotsupplyUIComponent {
 
+    @SuppressWarnings("unchecked")
     default S assertToolbarHasWarningButton() {
         $("#toolbar-warning-button").shouldBe(visible);
         return (S) this;

@@ -36,9 +36,9 @@ public class Product extends VersionedEntity {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "product_type_product", joinColumns = {@JoinColumn(name = "product_id")}, inverseJoinColumns = {@JoinColumn(name = "product_type_id")})
-    private Set<ProductType> productTypes = newHashSet();
+    private Set<ProductType> productTypes;
 
-    private boolean active = false;
+    private boolean active;
 
     @Tolerate
     public Product() {

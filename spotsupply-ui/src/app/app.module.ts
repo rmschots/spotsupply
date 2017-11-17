@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { CustomerModule } from './customer/customer.module';
-import { MaterialModule } from '@angular/material';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 
@@ -23,6 +22,7 @@ import 'rxjs/add/operator/distinct';
 import 'rxjs/add/operator/concatMap';
 import 'rxjs/add/operator/catch';
 import { HttpClientModule } from '@angular/common/http';
+import { SpotsupplyMaterialModule } from './shared/spotsupply-material.module';
 
 @NgModule({
   imports: [
@@ -34,7 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     CustomerModule,
     AdminModule,
-    MaterialModule,
+    SpotsupplyMaterialModule,
     SharedModule.forRoot()
   ],
   declarations: [AppComponent],

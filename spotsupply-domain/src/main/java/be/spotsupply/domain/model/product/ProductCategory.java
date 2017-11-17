@@ -30,7 +30,7 @@ public class ProductCategory extends VersionedEntity {
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @OrderBy("sorting_order")
-    private List<ProductType> types = newArrayList();
+    private List<ProductType> types;
 
     @Column(name = "sorting_order")
     private int sortingOrder;

@@ -45,7 +45,7 @@ public class ShoppingCart extends VersionedEntity {
     private Beach beach;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = EAGER, orphanRemoval = true)
-    private Set<CartItem> items = newHashSet();
+    private Set<CartItem> items;
 
     @Enumerated(EnumType.STRING)
     private CartStatus status;
@@ -54,13 +54,13 @@ public class ShoppingCart extends VersionedEntity {
     private Double price;
 
     @Column(name = "order_datetime")
-    private LocalDateTime orderDateTime = null;
+    private LocalDateTime orderDateTime;
 
     @Column(name = "requested_time")
-    private String requestedTime = null;
+    private String requestedTime;
 
     @Column(name = "delivered_datetime")
-    private LocalDateTime deliveredDateTime = null;
+    private LocalDateTime deliveredDateTime;
 
     @Tolerate
     public ShoppingCart() {

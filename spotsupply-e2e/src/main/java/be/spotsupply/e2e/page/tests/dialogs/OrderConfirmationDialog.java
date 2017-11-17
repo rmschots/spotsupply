@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class OrderConfirmationDialog<S extends PageWithDialog<S>> extends SpotsupplyDialog<OrderConfirmationDialog, S> {
+public class OrderConfirmationDialog<S extends PageWithDialog<S>> extends SpotsupplyDialog<S> {
 
     @FindBy(css = "#orderconfirmation-button")
     private SelenideElement orderConfirmationButton;
